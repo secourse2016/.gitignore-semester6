@@ -1,0 +1,100 @@
+
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <title> Austrian - airlines </title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+
+      <!-- Custom CSS -->
+      <link href="css/business-casual.css" rel="stylesheet">
+      <link href="css/index.css" rel="stylesheet">
+      <!-- angular-->
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
+
+</head>
+
+<div class="container">
+
+
+            <div class="row bs-wizard" style="border-bottom:0;">
+
+                <div class="col-xs-3 bs-wizard-step complete">
+                  <div class="text-center bs-wizard-stepnum">Select flight</div>
+                  <div class="progress"><div class="progress-bar"></div></div>
+                  <a href="#" class="bs-wizard-dot"></a>
+                  <!-- <div class="bs-wizard-info text-center">Lorem ipsum dolor sit amet.</div> -->
+                </div>
+
+                <div class="col-xs-3 bs-wizard-step active"><!-- complete -->
+                  <div class="text-center bs-wizard-stepnum">Confirmation</div>
+                  <div class="progress"><div class="progress-bar"></div></div>
+                  <a href="#" class="bs-wizard-dot"></a>
+                  <!-- <div class="bs-wizard-info text-center">Nam mollis tristique erat vel tristique. Aliquam erat volutpat. Mauris et vestibulum nisi. Duis molestie nisl sed scelerisque vestibulum. Nam placerat tristique placerat</div> -->
+                </div>
+
+                <div class="col-xs-3 bs-wizard-step disabled"><!-- complete -->
+                  <div class="text-center bs-wizard-stepnum">Payment</div>
+                  <div class="progress"><div class="progress-bar"></div></div>
+                  <a href="#" class="bs-wizard-dot"></a>
+                  <!-- <div class="bs-wizard-info text-center">Integer semper dolor ac auctor rutrum. Duis porta ipsum vitae mi bibendum bibendum</div> -->
+                </div>
+
+                <div class="col-xs-3 bs-wizard-step disabled"><!-- active -->
+                  <div class="text-center bs-wizard-stepnum">Complete!</div>
+                  <div class="progress"><div class="progress-bar"></div></div>
+                  <a href="#" class="bs-wizard-dot"></a>
+                  <!-- <div class="bs-wizard-info text-center"> Curabitur mollis magna at blandit vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae</div> -->
+                </div>
+            </div>
+
+
+
+
+
+ </div>
+</div>
+
+<div class="container" ng-app="myApp" ng-controller="formCtrl">
+
+<h1> Passenger 1 </h1>
+<form role="form" name="form" id="contact-form" ng-submit="submitForm()" novalidate>
+ <div class="form-group col-md-6">
+   <label for="FirstName">First Name</label>
+   <input type="text" class="form-control" name="FirstName" id="FirstName" placeholder="First Name" ng-model="firstName" required>
+ </div>
+
+ <div class="form-group col-md-6">
+   <label for="LastName">Last Name</label>
+   <input type="text" class="form-control" name="LastName" id="LastName" placeholder="Last Name" ng-model="lastName" required>
+ </div>
+
+ <div class="form-group col-md-6">
+   <label for="EmailAddress">Email </label>
+   <input type="email" class="form-control" id="EmailAddress" name="EmailAddress" placeholder="Email" ng-model="emailAddress" ng-model-options="{ updateOn: 'blur' }" required>
+ </div>
+
+ <div class="form-group col-md-6">
+   <label for="LastName">Passport Number</label>
+   <input type="text" class="form-control" name="PassportNumber" id="PassportNumber" placeholder="Passport Number" ng-model="PassportNumber" required>
+ </div>
+
+ <div class="form-group col-md-6">
+   <label for="LastName">Nationality</label>
+   <input type="text" class="form-control" name="Nationality" id="Nationality" placeholder="Nationality" ng-model="Nationality" required>
+ </div>
+ <div class="form-group col-md-6">
+   <label for="LastName">Birth Date</label>
+   <input type="text" class="form-control" name="BirthDate" id="BirthDate" placeholder="YY\MM\DD" ng-model="BirthDate" required>
+ </div>
+
+ <button type="submit" class="btn btn-success" ng-disabled="form.$invalid" ng-model="submitButton">Continue</button>
+
+</form>
+
+</div>

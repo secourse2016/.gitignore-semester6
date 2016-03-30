@@ -76,3 +76,19 @@ footer {
 .bs-wizard > .bs-wizard-step:last-child  > .progress {width: 50%;}
 .bs-wizard > .bs-wizard-step.disabled a.bs-wizard-dot{ pointer-events: none; }
 /*END Form Wizard*/
+
+
+[type="text"].ng-dirty.ng-valid {
+  background: #ECFFEC;
+  position: relative;
+}
+
+[type="text"].ng-dirty.ng-invalid {
+  background: #FFCFD0;
+}
+
+.bg-danger {
+  color: #fff;
+  padding: 1em;
+  margin-top: 1em;
+}
