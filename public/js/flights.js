@@ -7,16 +7,29 @@ app.factory('flights', [function(){
     ],
     ingoing: [
     	{dep: "10 AM",arr: "1PM", stops: 1, economy: 500, bussiness: 1000}
-    ]
+    ],
+    indexOut: 0,
+    ClassOut:0,
+    indexIn: 0,
+    classIn: 0
   };
   return o;
 }]);
 
-app.controller('FlightsCtrl', [
-'$scope',
-'flights',
+app.controller('FlightsCtrl', 
+
 function($scope,flights){
   $scope.outgoingFlights = flights.outgoing;
   $scope.ingoingFlights = flights.ingoing;
+  $scope.info = [];
+  $scope.moveForward = function(){
+    $scope.classOut=parseInt($scope.info[0].substring(0,1));
+    $scope.classIn=parseInt($scope.info[1].substring(0,1));
+    $scope.indexOut=parseInt($scope.info[0].substring(2));
+    $scope.indexIn=parseInt($scope.info[1].substring(2));
+   
+    $scope.info=[];
+  };
+  
 
-}]);
+});
