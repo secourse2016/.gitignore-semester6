@@ -22,6 +22,8 @@ function($scope,flights){
   $scope.outgoingFlights = flights.outgoing;
   $scope.ingoingFlights = flights.ingoing;
   $scope.info = [];
+  $scope.trans ={id: -1};
+  console.log($scope.outgoingFlights.length);
   $scope.moveForward = function(){
     $scope.classOut=parseInt($scope.info[0].substring(0,1));
     $scope.classIn=parseInt($scope.info[1].substring(0,1));
@@ -30,6 +32,7 @@ function($scope,flights){
    
     $scope.info=[];
   };
+  
   
 
 });

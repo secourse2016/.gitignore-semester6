@@ -7,6 +7,7 @@
   		<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
   		<script src="../js/flights.js"></script>
  		<style> .glyphicon-plane { cursor:pointer } </style>
+ 		<style> .glyphicon-info-sign { cursor:pointer } </style>
 </head>
 <body ng-app="austrian" ng-controller="FlightsCtrl">
 	<div class="row">
@@ -24,7 +25,15 @@
    							 <th>bussiness class</th>
   						</tr>
   						<tr ng-repeat="flight in outgoingFlights">
-  							<th>{{flight.dep}} - {{flight.arr}}</th>
+  							<th>
+  								<div>
+  									{{flight.dep}} - {{flight.arr}}
+  								</div>
+  								<div>
+  									<span class="glyphicon glyphicon-info-sign" ng-hide="trans.id == $index" ng-click = "trans.id = $index"></span>
+  									<span ng-show="trans.id == $index">bla</span>
+  								</div>
+  							</th>
     						 <th>{{flight.stops}}</th> 
    							 <th>
    							 	<div class="form-group">
@@ -45,6 +54,7 @@
 				</div>
 				
 			</div>
+
 			<div class="form-group">
 				<h2 class="glyphicon glyphicon-plane"> ingoing flights</h2>
 				<div>
@@ -56,12 +66,20 @@
    							 <th>bussiness class</th>
   						</tr>
   						<tr ng-repeat="flight in ingoingFlights">
-  							<th>{{flight.dep}} - {{flight.arr}}</th>
+  							<th>
+  								<div>
+  									{{flight.dep}} - {{flight.arr}}
+  								</div>
+  								<div>
+  									<span class="glyphicon glyphicon-info-sign" ng-hide="trans.id == $index+outgoingFlights.length" ng-click = "trans.id = $index+outgoingFlights.length"></span>
+  									<span ng-show="trans.id == $index+outgoingFlights.length">bla</span>
+  								</div>
+  							</th>
     						 <th>{{flight.stops}}</th> 
    							 <th>
    							 	<div class="form-group">
    							 		<label class="radio-inline">
- 								<input type="radio" name="inlineRadioOptionsIn"  value="0/{{$index}}" ng-model="info[1]"> {{flight.economy}}
+ 								<input type="radio" name="inlineRadioOptionsIn"  value="0/{{$index}}" ng-model="info[1 ]"> {{flight.economy}}
  								</label>
    							 	</div>
  							</th>
@@ -83,5 +101,10 @@
 			
 		</div>
 	</div>
+	<script type="text/ng-template" id="popover.html">
+    <div>
+        Popover content
+    </div>
+</script>
 </body>
 </html>
