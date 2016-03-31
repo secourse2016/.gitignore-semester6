@@ -1,8 +1,5 @@
-
-
-
 <!DOCTYPE html>
-<html>
+<html ng-app="mainApp" ng-controller="confirmController">
 
 <head>
 
@@ -15,9 +12,12 @@
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
-
+  <script src="./js/controllers.js"></script>
 </head>
 
+
+
+<!-- Steps div -->
 <div class="container">
 
 
@@ -51,49 +51,92 @@
                   <!-- <div class="bs-wizard-info text-center"> Curabitur mollis magna at blandit vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae</div> -->
                 </div>
             </div>
+          </div>
+
+
+          <!-- End of steps div -->
+
+
+            <!-- Flights info -->
+<div class="panel panel-primary col-md-8" style="margin-left:20%">
+   <div class="panel-heading">Flight Info</div>
+   <div class="panel-body">
+
+ <div ng-repeat="flight in flights">
+     <h1> {{flight.from}} - {{flight.to}} </h1>
+     <div ng-repeat="Info in flight.FlightInfo">
+     <p>  <span class="label label-info">Date</span> {{Info.Date}}
+        <span class="label label-info">From:</span> {{Info.Airport}}
+         <span class="label label-info">Duration:</span> {{Info.Duration}}
+         <span class="label label-info">Class</span> {{Info.class}}
+          <span class="label label-info">Seat</span> {{Info.seatMap}} </p>
+        </div>
+  </div>
+  </div>
+
+  <div class="panel-body">
 
 
 
 
-
+ </div>
  </div>
 </div>
 
-<div class="container" ng-app="myApp" ng-controller="formCtrl">
+        <!-- End of flights info div -->
 
-<h1> Passenger 1 </h1>
-<form role="form" name="form" id="contact-form" ng-submit="submitForm()" novalidate>
- <div class="form-group col-md-6">
-   <label for="FirstName">First Name</label>
-   <input type="text" class="form-control" name="FirstName" id="FirstName" placeholder="First Name" ng-model="firstName" required>
- </div>
 
- <div class="form-group col-md-6">
-   <label for="LastName">Last Name</label>
-   <input type="text" class="form-control" name="LastName" id="LastName" placeholder="Last Name" ng-model="lastName" required>
- </div>
+ <div class="panel panel-primary col-md-8" style="margin-left:20%">
+    <div class="panel-heading">Passengers Info</div>
+  <div class="panel-body">
 
- <div class="form-group col-md-6">
-   <label for="EmailAddress">Email </label>
-   <input type="email" class="form-control" id="EmailAddress" name="EmailAddress" placeholder="Email" ng-model="emailAddress" ng-model-options="{ updateOn: 'blur' }" required>
- </div>
 
- <div class="form-group col-md-6">
-   <label for="LastName">Passport Number</label>
-   <input type="text" class="form-control" name="PassportNumber" id="PassportNumber" placeholder="Passport Number" ng-model="PassportNumber" required>
- </div>
+  <div ng-controller="confirmController">
+	<form  ng-submit="submitForm()">
+    <div class="container"  ng-repeat="passenger in passengers track by $index">
+      <!-- Open panel -->
+      <div class="panel panel-info col-md-12" >
+         <div class="panel-heading">{{passenger.type}}</div>
+       <div class="panel-body">
 
- <div class="form-group col-md-6">
-   <label for="LastName">Nationality</label>
-   <input type="text" class="form-control" name="Nationality" id="Nationality" placeholder="Nationality" ng-model="Nationality" required>
- </div>
- <div class="form-group col-md-6">
-   <label for="LastName">Birth Date</label>
-   <input type="text" class="form-control" name="BirthDate" id="BirthDate" placeholder="YY\MM\DD" ng-model="BirthDate" required>
- </div>
+         <div class="form-group col-md-6">
+           <label for="FirstName">First Name</label>
+           <input type="text" class="form-control" name="FirstName" id="FirstName" placeholder="First Name" ng-model="formData[$index].firstName" required>
+         </div>
 
- <button type="submit" class="btn btn-success" ng-disabled="form.$invalid" ng-model="submitButton">Continue</button>
+         <div class="form-group col-md-6">
+           <label for="LastName">Last Name</label>
+           <input type="text" class="form-control" name="LastName" id="LastName" placeholder="Last Name" ng-model="formData[$index].lastName" required>
+         </div>
 
-</form>
+         <div class="form-group col-md-6">
+           <label for="EmailAddress">Email </label>
+           <input type="email" class="form-control" id="EmailAddress" name="EmailAddress" placeholder="Email" ng-model="formData[$index].emailAddress" ng-model-options="{ updateOn: 'blur' }" required>
+           <div ng-show="form.EmailAddress.$dirty && form.EmailAddress.$invalid" class="bg-danger">Invalid:
+               <span ng-show="form.EmailAddress.$error.required">Tell us your email.</span>
+               <span ng-show="form.EmailAddress.$error.email">This is not a valid email.</span>
+         </div>
+        </div>
 
+
+         <div class="form-group col-md-6">
+           <label for="LastName">Passport Number</label>
+           <input type="text" class="form-control" name="PassportNumber" id="PassportNumber" placeholder="Passport Number" ng-model="formData[$index].PassportNumber" required>
+         </div>
+
+         <div class="form-group col-md-6">
+           <label for="LastName">Nationality</label>
+           <input type="text" class="form-control" name="Nationality" id="Nationality" placeholder="Nationality" ng-model="formData[$index].Nationality" required>
+         </div>
+
+  </div>
+</div>
+<!--  End of panel  -->
+  </div>
+  <div class="form-group">
+    <button type="submit">Submit</button>
+  </div>
+	</form>
+</div>
+</div>
 </div>
