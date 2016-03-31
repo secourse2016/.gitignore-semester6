@@ -1,0 +1,64 @@
+     
+      <link type="text/css" rel="stylesheet" href="css/formColors.css"/>
+
+     <script type="text/javascript" src="js/controllers/paymentController.js"></script>
+      <script type="text/javascript" src="js/date-picker.js"></script>
+
+
+      <br/>
+      <br/>
+
+      <div class="center-block" style="width: 500px;">
+        
+        <div>
+          <h3 class="red-text text-darken-4"><strong>Payment Form</strong></h3>  
+        </div>        
+        <hr style="border-color: #9e9e9e">
+        <div class="card-panel grey lighten-3" style="border: 1.5px solid grey" >
+          <img src="assets/images/creditcards.png" alt="" class="responsive-img">
+          <hr style="border-color:#b71c1c">
+          <div> 
+            <form class="col s12">
+      
+              <div class="row">
+                <div class="input-field col s6">
+                  <input id="cardNo" type="text" class="validate">
+                  <label for="cardNo">Card No.</label>
+                </div>
+              </div>
+              
+              <div class="row">
+                <div class="input-field col s6">
+                  <input id="cvv" type="text" class="validate">
+                  <label for="cvv">CVV</label>
+                </div>
+              </div>
+
+              <div class="row">
+                
+                <div class="input-field col s6">
+                  <label for="expirydate">Expiry Date</label>
+                  <input type="date" class="datepicker">
+                </div>
+                
+                <div class="input-field col s6" style="position: absolute; right: -100px;">
+                  <button class="btn waves-effect waves-light red" type="submit" name="buy">Buy Now
+                  <i class="material-icons right">payment</i>
+                  </button>  
+                </div>
+              
+              </div>
+
+            </form>
+          </div>
+        </div>  
+
+        <br/>
+
+        <div ng-controller="PaymentController as payment">
+        <h3 class="red-text text-darken-4">
+        <strong>Total Price: ${{payment.totalPrice}}</strong>
+        </h3>
+        </div>
+
+      </div>
