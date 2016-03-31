@@ -8,7 +8,7 @@
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="css/landing.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/master.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 
   <!--Angularjs-->
   <script src="js/angular.min"></script>
@@ -18,12 +18,13 @@
   <link rel="icon" type="image/ico" href="assets/images/favicon.ico"/>
 </head>
 <body>
-  <nav class="deep-purple lighten-3 lighten-1" role="navigation">
+  <!--nav bar-->
+  <nav class="deep-purple" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo"><img class="logo" src="assets/images/logo.png"/></a>
       <ul class="right hide-on-med-and-down">
         <li><a href="#">Contact</a></li>
         <li><a href="#">Help/FQA</a></li>
-        <li><a href="#">Book</a></li>
+        <li><a href="#">About</a></li>
 
       </ul>
 
@@ -33,5 +34,40 @@
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
   </nav>
+    <footer class="page-footer deep-orange accent-3">
+      <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text ">Newsletter</h5>
+            <div class="input-field">
+              <input id="email" type="email" class="validate">
+              <label for="email" class="grey-text text-darken-3">Email</label>
+            </div>
+            <button class="btn waves-effect waves-light deep-purple" type="submit" name="action">Send
+              <i class="material-icons right">send</i>
+            </button>
+          </div>
+          <div class="col l3 s16">
+            <ul>
+              <li><a class="grey-text text-darken-3" href="#!">Contact Us</a></li>
+              <li><a class="grey-text text-darken-3" href="#!">Terms & Conditions</a></li>
+              <li><a class="grey-text text-darken-3" href="#!">Privacy Policy</a></li>
+            </ul>
+          </div>
+          <div class="col l3 s12">
+            <ul>
+              <li><a class="grey-text text-darken-3" href="#!">Book a Flight</a></li>
+              <li><a class="grey-text text-darken-3" href="#!">Offers</a></li>
+              <li><a class="grey-text text-darken-3" href="#!">Pricing</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="container">
+         <a class="orange-text text-lighten-3" href="#"></a>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
