@@ -31,7 +31,12 @@
   								</div>
   								<div>
   									<span class="glyphicon glyphicon-info-sign" ng-hide="trans.id == $index" ng-click = "trans.id = $index"></span>
-  									<span ng-show="trans.id == $index">bla</span>
+  									<span  class="panel panel-default" ng-show="trans.id == $index">
+  										<div  ng-repeat="trans in ingoingFlights[$index].flights">
+  											<div class="panel-heading"style="font-size: 15px">{{trans.src}} - {{trans.dest}}</div>
+  											<div class="panel-body" style="font-size: 12px">{{trans.dep}} - {{trans.arr}}</div>
+  										</div>
+  									</span>
   								</div>
   							</th>
     						 <th>{{flight.stops}}</th> 
@@ -72,7 +77,15 @@
   								</div>
   								<div>
   									<span class="glyphicon glyphicon-info-sign" ng-hide="trans.id == $index+outgoingFlights.length" ng-click = "trans.id = $index+outgoingFlights.length"></span>
-  									<span ng-show="trans.id == $index+outgoingFlights.length">bla</span>
+  									
+  										<span  class="panel panel-default" ng-show="trans.id == $index+outgoingFlights.length">
+  										<div  ng-repeat="trans in ingoingFlights[$index].flights">
+  											<div class="panel-heading"style="font-size: 15px">{{trans.src}} - {{trans.dest}}</div>
+  											<div class="panel-body" style="font-size: 12px">{{trans.dep}} - {{trans.arr}}</div>
+  										</div>
+  									</span>
+  									
+  									
   								</div>
   							</th>
     						 <th>{{flight.stops}}</th> 

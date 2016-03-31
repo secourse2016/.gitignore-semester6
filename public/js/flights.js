@@ -2,11 +2,13 @@ var app = angular.module('austrian', ['ui.router']);
 app.factory('flights', [function(){
   var o = {
     outgoing: [
-    	{dep: "10 AM",arr: "1PM", stops: 1, economy: 500, bussiness: 1000},
-    	{dep: "10 AM",arr: "1PM", stops: 1, economy: 500, bussiness: 1000}
+    	{dep: "10 AM",arr: "1PM", stops: 1, economy: 500, bussiness: 1000, flights: [{src: "cairo",dest:"munich",dep: "10 AM",arr: "1PM"},{src: "cairo",dest:"munich",dep: "10 AM",arr: "1PM"}]},
+    	{dep: "10 AM",arr: "1PM", stops: 1, economy: 500, bussiness: 1000, flights: [{src: "cairo",dest:"munich",dep: "10 AM",arr: "1PM"},{src: "cairo",dest:"munich",dep: "10 AM",arr: "1PM"}]}
     ],
     ingoing: [
-    	{dep: "10 AM",arr: "1PM", stops: 1, economy: 500, bussiness: 1000}
+      {dep: "10 AM",arr: "1PM", stops: 1, economy: 500, bussiness: 1000, flights: [{src: "cairo",dest:"munich",dep: "10 AM",arr: "1PM"},{src: "cairo",dest:"munich",dep: "10 AM",arr: "1PM"}]},
+      {dep: "10 AM",arr: "1PM", stops: 1, economy: 500, bussiness: 1000, flights: [{src: "cairo",dest:"munich",dep: "10 AM",arr: "1PM"},{src: "cairo",dest:"munich",dep: "10 AM",arr: "1PM"}]}
+
     ],
     indexOut: 0,
     ClassOut:0,
