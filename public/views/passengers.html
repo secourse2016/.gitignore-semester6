@@ -1,6 +1,36 @@
 <div ng-app="passengerViewApp" ng-controller="passengerViewCtrl">
 
 
+  <!-- Steps div -->
+  <div class="container">
+    <div class="row bs-wizard" style="border-bottom:0;">
+      <div class="col-xs-3 bs-wizard-step complete">
+          <div class="text-center bs-wizard-stepnum">Select flight</div>
+          <div class="progress"><div class="progress-bar"></div></div>
+                    <a href="#flights" class="bs-wizard-dot"></a>
+      </div>
+
+    <div class="col-xs-3 bs-wizard-step active">
+      <div class="text-center bs-wizard-stepnum">Passengers details</div>
+      <div class="progress">
+        <div class="progress-bar"></div>
+      </div>
+    <a href="#" class="bs-wizard-dot"></a>
+    </div>
+
+    <div class="col-xs-3 bs-wizard-step disabled">
+      <div class="text-center bs-wizard-stepnum">Payment</div>
+      <div class="progress"><div class="progress-bar"></div></div>
+    <a href="#" class="bs-wizard-dot"></a>
+    </div>
+
+    <div class="col-xs-3 bs-wizard-step disabled">
+      <div class="text-center bs-wizard-stepnum">Complete!</div>
+      <div class="progress"><div class="progress-bar"></div></div>
+    <a href="#" class="bs-wizard-dot"></a>
+    </div>
+    </div>
+  </div>
 
 
 </div>
