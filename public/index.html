@@ -15,7 +15,10 @@
   <script src="js/angular.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
 
-
+  <!--  Scripts-->
+  <script src="js/jquery-1.11.2.min.js"></script>
+  <script src="js/materialize.min.js"></script>
+  <script src="js/init.js"></script>
   <!--Main app-->
   <script src="js/app.js"></script>
   <!-- controllers -->
@@ -29,20 +32,20 @@
   <nav class="deep-purple" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo"><img class="logo" src="assets/images/logo.png"/></a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="#/contact">Contact</a></li>
-        <li><a href="#/help">Help/FQA</a></li>
-        <li><a href="#/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/help">Help/FQA</a></li>
+        <li><a href="/about">About</a></li>
       </ul>
 
       <ul id="nav-mobile" class="side-nav">
-        <li><a href="#/contact">Contact</a></li>
-        <li><a href="#/help">Help/FQA</a></li>
-        <li><a href="#/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/help">Help/FQA</a></li>
+        <li><a href="/about">About</a></li>
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
   </nav>
-  <div id="mainContainer">
+  <div id="mainContainer" class="mainContainer">
     <!-- angular templating -->
     <!-- this is where content will be injected -->
     <div ng-view></div>
@@ -63,16 +66,16 @@
           </div>
           <div class="col l3 s16">
             <ul>
-              <li><a class="grey-text text-darken-3" href="#/contact">Contact Us</a></li>
-              <li><a class="grey-text text-darken-3" href="#/termsAndConditions">Terms &amp; Conditions</a></li>
-              <li><a class="grey-text text-darken-3" href="#/privacypolicy">Privacy Policy</a></li>
+              <li><a class="grey-text text-darken-3" href="/contact">Contact Us</a></li>
+              <li><a class="grey-text text-darken-3" href="/termsAndConditions">Terms &amp; Conditions</a></li>
+              <li><a class="grey-text text-darken-3" href="/privacypolicy">Privacy Policy</a></li>
             </ul>
           </div>
           <div class="col l3 s12">
             <ul>
-              <li><a class="grey-text text-darken-3" href="#/bookAFlight">Book a Flight</a></li>
-              <li><a class="grey-text text-darken-3" href="#/offers">Offers</a></li>
-              <li><a class="grey-text text-darken-3" href="#/pricing">Pricing</a></li>
+              <li><a class="grey-text text-darken-3" href="/bookAFlight">Book a Flight</a></li>
+              <li><a class="grey-text text-darken-3" href="/offers">Offers</a></li>
+              <li><a class="grey-text text-darken-3" href="/pricing">Pricing</a></li>
             </ul>
           </div>
         </div>
