@@ -7,6 +7,10 @@ app.config(function($routeProvider , $locationProvider) {
     $routeProvider.when('/', {
             templateUrl : 'views/landing.html'
         })
+        // route for payment page
+        .when('/payment', {
+            templateUrl : 'views/payment.html'
+        })
         // route for the about page
         .when('/about', {
             templateUrl : 'views/about.html'
