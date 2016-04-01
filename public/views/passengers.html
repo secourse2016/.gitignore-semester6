@@ -1,36 +1,58 @@
 <div ng-app="passengerViewApp" ng-controller="passengerViewCtrl">
 
+<!-- Form goes here  -->
+  <ul class="collection with-header">
+     <li class="collection-header"> <h3> Passengers Information </h3></li>
 
-  <!-- Steps div -->
-  <div class="container">
-    <div class="row bs-wizard" style="border-bottom:0;">
-      <div class="col-xs-3 bs-wizard-step complete">
-          <div class="text-center bs-wizard-stepnum">Select flight</div>
-          <div class="progress"><div class="progress-bar"></div></div>
-                    <a href="#flights" class="bs-wizard-dot"></a>
-      </div>
 
-    <div class="col-xs-3 bs-wizard-step active">
-      <div class="text-center bs-wizard-stepnum">Passengers details</div>
-      <div class="progress">
-        <div class="progress-bar"></div>
-      </div>
-    <a href="#" class="bs-wizard-dot"></a>
-    </div>
+  <div ng-controller="passengerViewCtrl">
+  <div class="row">
+     <form class="col s12" ng-submit="submitForm()">
+      <ul class="collection with-header" ng-repeat="passenger in passengers track by $index">
+         <li class="collection-header"><h4>{{passenger.type}}</h4></li>
+        <li  class="collection-item">
+         <div class="container">
+       <div class="row">
+         <div class="input-field col s6">
+           <input id="first_name" type="text" class="validate" ng-model="formData[$index].firstName" required>
+           <label for="first_name">First Name</label>
+         </div>
+         <div class="input-field col s6">
+           <input id="last_name" type="text" class="validate" ng-model="formData[$index].lastName" required>
+           <label for="last_name">Last Name</label>
+         </div>
+       </div>
+       <div class="row">
+         <div class="input-field col s6">
+           <input id="Email" type="text" class="validate" ng-model="formData[$index].emailAddress">
+           <label for="Email">Email</label>
+         </div>
+         <div class="input-field col s6">
+           <input id="PassportNumber" type="text" class="validate" ng-model="formData[$index].PassportNumber" required>
+           <label for="PassportNumber">Passport Number</label>
+         </div>
+       </div>
+       <div class="row">
+         <div class="input-field col s6">
+           <input id="Nationality" type="text" class="validate" ng-model="formData[$index].Nationality" required>
+           <label for="Nationality">Nationality</label>
+         </div>
+         <div class="input-field col s6">
 
-    <div class="col-xs-3 bs-wizard-step disabled">
-      <div class="text-center bs-wizard-stepnum">Payment</div>
-      <div class="progress"><div class="progress-bar"></div></div>
-    <a href="#" class="bs-wizard-dot"></a>
-    </div>
+           <input id="BirthDate" type="text" class="validate" ng-model="formData[$index].BirthDate" required>
+           <label for="BirthDate">Birthdate</label>
+         </div>
+       </div>
+     </div>
 
-    <div class="col-xs-3 bs-wizard-step disabled">
-      <div class="text-center bs-wizard-stepnum">Complete!</div>
-      <div class="progress"><div class="progress-bar"></div></div>
-    <a href="#" class="bs-wizard-dot"></a>
-    </div>
-    </div>
+  </li>
+  </ul>
+  <button class="btn waves-effect waves-light" type="submit" name="action"> Continue
+  </button>
+     </form>
+   </div>
   </div>
+  </ul>
 
 
 </div>
