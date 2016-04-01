@@ -1,5 +1,7 @@
 var express = require("express");
 var path    = require('path');
+var morgan = require('morgan');
+
 var app = express();
 app.set('views', path.join(__dirname, 'public'));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -37,4 +39,4 @@ app.route('/offers').get(function(req, res) {
 app.route('/pricing').get(function(req, res) { 
     return res.sendFile(__dirname + '/public/index.html'); 
 });
-app.listen(80);
+app.listen(8000);
