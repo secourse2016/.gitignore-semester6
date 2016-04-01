@@ -47,7 +47,13 @@
         // route for the Pricing page
         .when('/pricing', {
             templateUrl : 'views/pricing.html'
-        });
+        })
+        //route for end of journy :v
+        .when('/successful', {
+            templateUrl : 'views/successful-payment.html'
+        })
+        
+        ;
         // use the HTML5 History API
         $locationProvider.html5Mode(true);
 
