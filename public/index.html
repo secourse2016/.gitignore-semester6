@@ -12,13 +12,15 @@
   <link href="css/master.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 
 
-  <script src="js/jquery-1.11.2.min.js"></script>
+
   <!--Angularjs-->
+  <script src="js/jquery-1.11.2.min.js"></script>
   <script src="js/angular.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
+  <script src="js/angular-materialize.js"></script>
+  <script src="js/angular-jquery.js"></script>
 
   <!--  Scripts-->
-  <!-- <script src="js/jquery-1.11.2.min.js"></script> -->
   <script src="js/materialize.min.js"></script>
   <script src="js/init.js"></script>
 
@@ -49,29 +51,11 @@
     </div>
   </nav>
   <div id="mainContainer" class="mainContainer">
+
     <!-- angular templating -->
     <!-- this is where content will be injected -->
+  <div ng-view></div>
 
-    <script src="js/landing.js"></script>
-    <link rel="stylesheet" href="css/landing.css" media="screen" charset="utf-8">
-
-
-
-    <h1 class="center-align">Austrian Airlines</h1>
-    <div class="slider" ng-controller="sliderController as sliderCtrl">
-    <ul class="slides">
-      <li ng-repeat="slide in sliderCtrl.slides">
-        <img ng-src="{{ slide.image }}">
-        <div class="caption {{slide.entrance}}">
-          <h2><span>{{ slide.text }}</span></h2>
-        </div>
-      </li>
-    </ul>
-  </div>
-
-    <div ng-view>
-
-    </div>
   </div>
     <footer class="page-footer deep-red accent-3">
       <div class="container">

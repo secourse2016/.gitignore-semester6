@@ -1,5 +1,5 @@
 (function(){
-var app = angular.module('austrianAirlinesApp', ['ngRoute']);
+var app = angular.module('austrianAirlinesApp', ['ngRoute', 'ui.materialize', 'jquery-alt']);
 /**
  * configure master page routes
  * @controller need to be added
@@ -52,7 +52,7 @@ app.config(function($routeProvider , $locationProvider) {
  */
 app.controller('masterController', function($scope) {
     $scope.subscribe = function() {
-      // $http.post("api/subscrib",$scope.subscriberMail)
+      // $http.post("api/subscribe",$scope.subscriberMail)
       // .success(function() {
       //         $scope.subscriberMail = {};
       //         console.log('Done: ' + data);
@@ -65,25 +65,27 @@ app.controller('masterController', function($scope) {
 });
 
 
-    app.controller('sliderController', function(){
+    app.controller('sliderController', function($scope){
         this.slides = landingSlides;
     });
 
     var landingSlides = [
             {
                 image: './assets/images/landing/landing_1.jpg',
-                text : 'Feel the comfort and luxury.',
+                text : 'Feel the Comfort and Luxury.',
                 entrance: 'left-align'
             },
             {
                 image: './assets/images/landing/landing_2.jpg',
-                text : 'Have a safe flight.',
+                text : 'Have Safe Flights.',
                 entrance: 'center-align'
             },
             {
                 image: './assets/images/landing/landing_3.jpg',
-                text : 'Technology everywhere.',
+                text : 'High Technology Airplanes.',
                 entrance: 'right-align'
             }
     ];
+
+
 })();
