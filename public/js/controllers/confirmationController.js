@@ -1,10 +1,12 @@
 angular.module('austrianAirlinesApp').
 controller('flightController',['flightInfo',function(flightInfo){
-	this.flight = flightInfo.getFlightInfo();
-
+	/* flightInfo is service that allow us to pass FlightInfo between different Controllers */
+	this.getFlights = flightInfo.getFlightInfo();
+	this.addFlight = function (currObj){flightInfo.addFlightInfo(currObj)};
 
 	}])
 		.controller('passengerController',['passengerInfo', function(passengerInfo){
+			/*passengerInfo is service that allow us to pass passengerInfo between different Controllers */
 
 				this.getPassengers = passengerInfo.getPassengerInfo();
 
@@ -12,4 +14,4 @@ controller('flightController',['flightInfo',function(flightInfo){
 
 
 
-		}])
+		}]);

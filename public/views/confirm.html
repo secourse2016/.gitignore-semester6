@@ -1,77 +1,31 @@
-<!DOCTYPE html>
-  <html ng-app = 'austrianAirlinesApp'>
-    <head>
-      <!--Import Google Icon Font-->
-      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
-      <link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css"/>
-      <link type="text/css" rel="stylesheet" href="../css/formColors.css"/>
 
-      <!--Let browser know website is optimized for mobile-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-
-      <!--Import jQuery before materialize.js-->
-             <script type="text/javascript" src="../js/angular.min.js"></script>
-
-      <script type="text/javascript" src="../js/jquery-1.11.2.min.js"></script>
-      <script type="text/javascript" src="../js/materialize.min.js"></script>
-       <script type="text/javascript" src="../js/app.js"></script>
-        <script type="text/javascript" src="../js/services/FlightInfoService.js"></script>
-       <script type="text/javascript" src="../js/services/passengerInfoService.js"></script>
-              <script type="text/javascript" src="../js/controllers/confirmationController.js"></script>
-
- 
-
-   
-
-     
-
-
-     
-
-<!-- Steps div -->
-<div class="container">
-<!-- 
-
-            <div class="row bs-wizard" style="border-bottom:0;">
-
-                <div class="col-xs-3 bs-wizard-step complete">
-                  <div class="text-center bs-wizard-stepnum">Select flight</div>
-                  <div class="progress"><div class="progress-bar"></div></div>
-                  <a href="#" class="bs-wizard-dot"></a>
-
-
-
-          <!-- End of steps div -->
-
- 
             <!-- Flights info -->
-<div class="panel panel-primary col-md-8" style="margin-left:20%" ng-controller = 'flightController as app' >
+<div class="panel panel-primary col-md-8" style="margin-left:20%" ng-controller = "flightController as app">
    <div class="panel-heading">Flight Info</div>
    <div class="panel-body">
- </div>
-    <h1>
-     <h1> {{app.flight.name}} </h1>
-     <div ng-repeat="Info in flight.FlightInfo">
-     <p>  <span class="label label-info">Date</span> 
-        <span class="label label-info">From:</span> 
-         <span class="label label-info">Duration:{{flight.duration}}</span> 
-         <span class="label label-info">Class</span> 
-          <span class="label label-info">Seat</span> </p>
+    <div>{{ app.addFlight({name:"cairo - berlin",departure_time:"4-4-2016  17.00",arrival_time:"4-4-2016  20.00",seat:"22" ,class:"economic"}) }} </div>
+
+
+     <h1> {{app.getFlights[0].name}}</h1>
+     <div>
+     
+         <h3 class="label label-info"> departure_time
+          {{ app.getFlights[0].departure_time}}
+         </h3>
+         </span> 
+        <h3 class="label label-info">      ArrivalTime
+          {{ app.getFlights[0].arrival_time}}
+         </h3> 
+         <h3 class="label label-info">Class
+          {{ app.getFlights[0].class}}
+         
+         </h3>
+          <span class="label label-info">Seat {{app.getFlights[0].seat}}</span> 
         </div>
-  </div>
-  </div>
-
-  <div class="panel-body">
-
-
-
-
+ 
  </div>
  </div>
-</div>
+
 
         <!-- End of flights info div -->
 
@@ -81,46 +35,55 @@
   <div class="panel-body">
  <div>
 <div >
-<div>{{pass.addPassenger({name:"kkly"})}}</div>
+<div>{{pass.addPassenger({firstname:"khly",lastname:"khaaled",email:"mohamedkhly@gmail.com",passportnumber:"2020202020",nationality:"Egyptian",Birthdate:"30-4-1995",telephone:"01000049213"})}}</div>
 
   <div class="panel panel-info col-md-12" >
      <div class="panel-heading"></div>
    <div class="panel-body">
- <div class="form-group col-md-6" ng-repeat = "passenger in pass.getPassengers">
-   <label for="FirstName">First Name + {{passenger.name}}</label>
+ <div class="form-group col-md-6">
+   <label for="FirstName">First Name</label>
+      <h3> {{pass.getPassengers[0].firstname}} </h3>
+
  </div>
 
  <div class="form-group col-md-6">
    <label for="LastName">Last Name</label>
+   <h3>{{pass.getPassengers[0].lastname}}</h3>
  </div>
 
  <div class="form-group col-md-6">
    <label for="EmailAddress">Email </label>
+      <h3>{{pass.getPassengers[0].email}}</h3>
+
  </div>
  </div>
   
  <div class="form-group col-md-6">
    <label for="LastName">Passport Number</label>
+      <h3>{{pass.getPassengers[0].passportnumber}}</h3>
+
  </div>
 
  <div class="form-group col-md-6">
    <label for="LastName">Nationality</label>
+    <h3>{{pass.getPassengers[0].nationality}}</h3>
+
+
  </div>
  <div class="form-group col-md-6">
    <label for="LastName">Birth Date</label>
+   <h3>{{pass.getPassengers[0].Birthdate}}</h3>
+
  </div>
 
  <div>         
   <label for="icon_telephone">Telephone</label>
+  <h3> {{pass.getPassengers[0].telephone}}</h3>
   </div>
 </div>
+<button type="submit" class="btn btn-primary col-md-4"ng-model="submitButton">Continue
+</button>
 </div>
 </div>
 </div>
 </div>
-<button type="submit" class="btn btn-primary col-md-4" ng-disabled="form.$invalid" ng-model="submitButton">Continue</button>
-</div>
-
-
-      
-      </html>
