@@ -22,5 +22,5 @@ app.route('/contact	').get(function(req, res) {
     return res.sendFile(__dirname + '/public/index.html');
 });
 
-// app.listen(8080);
-app.listen(80);
+app.listen(8080);
+// app.listen(80);
