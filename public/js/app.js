@@ -1,4 +1,4 @@
-var app = angular.module('austrianAirlinesApp', ['ngRoute']);
+var app = angular.module('austrianAirlinesApp', ['ngRoute','ui.materialize']);
 /**
  * configure master page routes
  * @controller need to be added

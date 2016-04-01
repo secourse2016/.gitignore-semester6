@@ -2,3 +2,6 @@
   width: 170px;
   height: 60px;
 }
+.mainContainer{
+  min-height: 350px;
+}
