@@ -1,3 +1,7 @@
+	
+
+
+var app = angular.module('austrianAirlinesApp', ['ngRoute']);
 
     var app = angular.module('austrianAirlinesApp', ['ngRoute', 'ui.materialize', 'jquery-alt']);
 
@@ -41,6 +45,10 @@
         // route for the Pricing page
         .when('/pricing', {
             templateUrl : 'views/pricing.html'
+        })
+        //route for the confirmation page
+		.when('/confirmation',{
+        	templateUrl : 'views/confirm.html'
         });
         // use the HTML5 History API
         $locationProvider.html5Mode(true);
