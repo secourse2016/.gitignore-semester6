@@ -1,16 +1,22 @@
-var app = angular.module('austrianAirlinesApp', ['ngRoute','ui.materialize']);
+
+    var app = angular.module('austrianAirlinesApp', ['ngRoute', 'ui.materialize', 'jquery-alt']);
+
 /**
  * configure master page routes
  * @controller need to be added
  */
-app.config(function($routeProvider , $locationProvider) {
+ app.config(function($routeProvider , $locationProvider) {
     $routeProvider.when('/', {
             templateUrl : 'views/landing.html'
         })
+
         // route for payment page
         .when('/payment', {
             templateUrl : 'views/payment.html'
         })
+        templateUrl : 'views/landing.html'
+    })
+
         // route for the about page
         .when('/about', {
             templateUrl : 'views/about.html'
@@ -47,15 +53,16 @@ app.config(function($routeProvider , $locationProvider) {
         // use the HTML5 History API
         $locationProvider.html5Mode(true);
 
-});
+    });
 /**
  * take the mail from the view and make
  * post request to add the mail to Newsletter
  * @uncomment after creat the Post rout
  */
-app.controller('masterController', function($scope) {
-    $scope.subscrib = function() {
+ app.controller('masterController', function($scope) {
+    $scope.subscribe = function() {
       // $http.post("api/subscrib",$scope.subscriberMail)
+      // $http.post("api/subscribe",$scope.subscriberMail)
       // .success(function() {
       //         $scope.subscriberMail = {};
       //         console.log('Done: ' + data);
@@ -64,5 +71,36 @@ app.controller('masterController', function($scope) {
       // .error(function() {
       //         console.log('Error: ' + data);
       // });
+<<<<<<< HEAD
     };
 });
+=======
+  };
+});
+
+
+app.controller('sliderController', function($scope){
+    this.slides = landingSlides;
+
+});
+
+var landingSlides = [
+     {
+        image: './assets/images/landing/landing_1.jpg',
+        text : 'Feel the Comfort and Luxury.',
+        entrance: 'left-align'
+    },
+    {
+        image: './assets/images/landing/landing_2.jpg',
+        text : 'Have Safe Flights.',
+        entrance: 'center-align'
+    },
+    {
+        image: './assets/images/landing/landing_3.jpg',
+        text : 'High Technology Airplanes.',
+        entrance: 'right-align'
+    }
+];
+
+
+>>>>>>> 25dcbaa7f62df38822d6968dc119a533e0ca68b3
