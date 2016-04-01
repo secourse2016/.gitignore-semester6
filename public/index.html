@@ -66,13 +66,15 @@
       <div class="row">
         <div class="col l6 s12">
           <h5 class="orange-text text-lighten-3">Newsletter</h5>
-          <div class="input-field">
-            <input id="email" type="email" class="validate">
-            <label for="email" class="grey-text text-lighten-2" ng-model="subscriberMail" >Email</label>
-          </div>
-          <button ng-click="subscribe()" class="btn waves-effect waves-light red darken-4" >Send
+          <form ng-submit="subscribe()">
+          <input-field>
+            <input required id="email" type="email" class="validate" ng-model="subscribeData.email">
+            <label for="email" class="grey-text text-lighten-2"  >Email</label>
+          </input-field>
+          <button type="submit" class="btn waves-effect waves-light red darken-4" >Send
             <i class="material-icons right">send</i>
           </button>
+          </form>
         </div>
         <div class="col l3 s16">
           <ul>
@@ -94,6 +96,7 @@
       <div class="container">
          © 2015
         <a class="orange-text text-lighten-3" href="/">Austrian Airlines</a>, All Rights Reserved
+        <img style="float:right; margin-top: 15px;" src="/assets/images/logo_staralliance.png">
      </div>
    </div>
  </footer>
