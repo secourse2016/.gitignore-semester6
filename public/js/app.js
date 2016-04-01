@@ -14,8 +14,6 @@
         .when('/payment', {
             templateUrl : 'views/payment.html'
         })
-        templateUrl : 'views/landing.html'
-    })
 
         // route for the about page
         .when('/about', {
@@ -71,13 +69,8 @@
       // .error(function() {
       //         console.log('Error: ' + data);
       // });
-<<<<<<< HEAD
     };
 });
-=======
-  };
-});
-
 
 app.controller('sliderController', function($scope){
     this.slides = landingSlides;
@@ -101,6 +94,3 @@ var landingSlides = [
         entrance: 'right-align'
     }
 ];
-
-
->>>>>>> 25dcbaa7f62df38822d6968dc119a533e0ca68b3
