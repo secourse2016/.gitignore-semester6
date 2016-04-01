@@ -10,14 +10,17 @@
           <table class="striped">
             <tr>
                  <th>flight</th>
-                 <th>stops</th> 
                  <th>economy class</th>
                  <th>bussiness class</th>
+
               </tr>
-              <tr ng-repeat="flight in outgoingFlights">
+              <tr ng-repeat="flight in booking.outgoing_flights">
                 <th>
                   <div>
-                    {{flight.dep}} - {{flight.arr}}
+                    {{flight.f[0].departure_time}}-{{flight.f[flight.f.length-1].arrival_time}}<br>
+                    <span style="font-size: 10px">
+                    	{{flight.f[0].origin_app}}-{{flight.f[flight.f.length-1].destination_app}} {{flight.f.length-1}} stop(s)
+                    </span>
                   </div>
                   <div>
                     <div class="divider"></div>
@@ -25,15 +28,15 @@
                   <div class="section">
                     <span ng-hide="trans.id == $index" ><i class="material-icons" ng-click = "trans.id = $index">info_outline</i></span>
                     <span  class="section" ng-show="trans.id == $index">
-                      <div class="card blue-grey darken-1" ng-repeat="trans in outgoingFlights[$index].flights">
+                      <div class="card-panel blue-grey darken-1" ng-repeat="trans in booking.outgoing_flights[$index].f">
                         <div class="card-content white-text">
-                        <div class="panel-heading"style="font-size: 15px">{{trans.src}} - {{trans.dest}}</div>
-                        <div class="panel-body" style="font-size: 12px">{{trans.dep}} - {{trans.arr}}</div>
+                        <div style="font-size: 15px">Lufthanse Flight: {{trans.flightNumber}}</div>
+                        <div class="divider"></div>
+                        <div  style="font-size: 12px">{{trans.departure_time}} {{trans.origin}} ({{trans.origin_app}}) ,Terminal {{trans.origin_term}}<br>{{trans.arrival_time}} {{trans.destination}} ({{trans.destination_app}}) ,Terminal {{trans.destination_term}}<br>Aircraft: {{trans.aircraft_code}}</div>
                       </div>
                     </span>
                   </div>
-                </th>
-                 <th>{{flight.stops}}</th> 
+                </th> 
                   <th>
                   <div >
                 <input class="with-gap" name="group1" type="radio" id="test5/2/{{$index}}" value="0/{{$index}}" ng-model="info[0]"/>
@@ -59,32 +62,34 @@
           <table class="striped">
             <tr>
                  <th>flight</th>
-                 <th>stops</th> 
                  <th>economy class</th>
                  <th>bussiness class</th>
               </tr>
-              <tr ng-repeat="flight in ingoingFlights">
+              <tr ng-repeat="flight in booking.ingoing_flights">
                 <th>
                   <div>
-                    {{flight.dep}} - {{flight.arr}}
+                    {{flight.f[0].departure_time}} - {{flight.f[flight.f.length-1].arrival_time}}<br>
+                    <span style="font-size: 10px">
+                    	{{flight.f[0].origin_app}}-{{flight.f[flight.f.length-1].destination_app}} {{flight.f.length-1}} stop(s)
+                    </span>
                   </div>
                   <div class="divider"></div>
 
                   <div class="section">
-                    <span ng-hide="trans.id == $index+outgoingFlights.length" ><i class="material-icons" ng-click = "trans.id = $index+outgoingFlights.length">info_outline</i></span>
+                    <span ng-hide="trans.id == $index+booking.outgoing_flights.length" ><i class="material-icons" ng-click = "trans.id = $index+booking.outgoing_flights.length">info_outline</i></span>
                     
-                      <span  class="section" ng-show="trans.id == $index+outgoingFlights.length">
-                      <div class="card blue-grey darken-1" ng-repeat="trans in ingoingFlights[$index].flights">
-                        <div class="card-content white-text">
-                        <div class="panel-heading"style="font-size: 15px">{{trans.src}} - {{trans.dest}}</div>
-                        <div class="panel-body" style="font-size: 12px">{{trans.dep}} - {{trans.arr}}</div>
+                      <span  class="section" ng-show="trans.id == $index+booking.outgoing_flights.length">
+                      <div class="card blue-grey darken-1" ng-repeat="trans in booking.ingoing_flights[$index].f">
+                       <div class="card-content white-text">
+                        <div class="panel-heading"style="font-size: 15px">Lufthanse Flight: {{trans.flightNumber}}</div>
+                        <div class="divider"></div>
+                        <div class="panel-body" style="font-size: 12px">{{trans.departure_time}} {{trans.origin}} ({{trans.origin_app}}) ,Terminal {{trans.origin_term}}<br>{{trans.arrival_time}} {{trans.destination}} ({{trans.destination_app}}) ,Terminal {{trans.destination_term}}<br>{{trans.aircraft_code}}</div>
                       </div>
                     </span>
                     
                     
                   </div>
                 </th>
-                 <th>{{flight.stops}}</th> 
                  <th>
                   <div >
                 <input class="with-gap" name="group3" type="radio" id="test5/{{$index}}" value="0/{{$index}}" ng-model="info[1]"/>
