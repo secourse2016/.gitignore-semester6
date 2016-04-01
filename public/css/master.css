@@ -1,6 +1,7 @@
 .logo {
-  width: 170px;
-  height: 60px;
+  width: 300px;
+  height: 45px;
+  margin-top: 10px;
 }
 .mainContainer{
   min-height: 350px;
