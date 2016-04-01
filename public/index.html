@@ -19,7 +19,7 @@
   <script src="js/angular-jquery.js"></script>
 
   <!--  Scripts-->
-  
+
   <script src="js/materialize.min.js"></script>
   <script src="js/angular-materialize.js"></script>
 
@@ -35,10 +35,10 @@
 </head>
 <body ng-controller="masterController" >
   <!--nav bar-->
-  <nav class="red" role="navigation">
+  <nav class="red accent-4" role="navigation">
     <div class="nav-wrapper container">
       <a id="logo-container" href="/" class="brand-logo">
-        <img style="width: 300px; height: 45px; margin-top: 10px;" class="logo" src="assets/images/logo.png"/>
+        <img class="logo" src="assets/images/logo.png"/>
       </a>
       <ul class="right hide-on-med-and-down">
         <li><a href="/contact">Contact</a></li>
@@ -61,16 +61,16 @@
     <div ng-view></div>
 
   </div>
-  <footer class="page-footer red">
+  <footer class="page-footer red accent-4">
     <div class="container">
       <div class="row">
         <div class="col l6 s12">
-          <h5 class="grey-text  text-lighten-4">Newsletter</h5>
+          <h5 class="orange-text text-lighten-3">Newsletter</h5>
           <div class="input-field">
             <input id="email" type="email" class="validate">
             <label for="email" class="grey-text text-lighten-2" ng-model="subscriberMail" >Email</label>
           </div>
-          <button ng-click="subscribe()" class="btn waves-effect waves-light red darken-4" >Send
+          <button ng-click="subscribe()" class="btn waves-effect waves-light orange accent-4" >Send
             <i class="material-icons right">send</i>
           </button>
         </div>
@@ -92,7 +92,8 @@
     </div>
     <div class="footer-copyright">
       <div class="container">
-       <a class="orange-text text-lighten-3" href="#gitignore-semester6"></a>
+         © 2015
+        <a class="orange-text text-lighten-3" href="/">Austrian Airlines</a>, All Rights Reserved
      </div>
    </div>
  </footer>
