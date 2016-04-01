@@ -1,89 +1,91 @@
-
-            <!-- Flights info -->
-<div class="panel panel-primary col-md-8" style="margin-left:20%" ng-controller = "flightController as app">
-   <div class="panel-heading">Flight Info</div>
-   <div class="panel-body">
-    <div>{{ app.addFlight({name:"cairo - berlin",departure_time:"4-4-2016  17.00",arrival_time:"4-4-2016  20.00",seat:"22" ,class:"economic"}) }} </div>
+<link href="../css/passengers.css" rel="stylesheet">
+<div>
 
 
-     <h1> {{app.getFlights[0].name}}</h1>
-     <div>
-     
-         <h3 class="label label-info"> departure_time
-          {{ app.getFlights[0].departure_time}}
-         </h3>
-         </span> 
-        <h3 class="label label-info">      ArrivalTime
-          {{ app.getFlights[0].arrival_time}}
-         </h3> 
-         <h3 class="label label-info">Class
-          {{ app.getFlights[0].class}}
-         
-         </h3>
-          <span class="label label-info">Seat {{app.getFlights[0].seat}}</span> 
+<!-- Flights Info goes here -->
+
+
+<ul class="collection with-header" id="flightsInfo" ng-controller = "passengerViewCtrl">
+   <li class="collection-header"> <h3> Flight Information </h3></li>
+   <div ng-repeat="flight in outgoingFlight">
+   <li class="collection-header"><h4>{{flight.origin}} - {{flight.destination}}</h4></li>
+    <li  class="collection-item" ng-repeat="interFlight in flight.flights">
+      <i class="material-icons" style="margin-right:5px">date_range</i>  {{interFlight.date}}
+        <i class="material-icons " style="margin-right:5px ; margin-left:5px">local_airport</i>  {{interFlight.airport}}
+        <i class="material-icons" style="margin-right:5px ; margin-left:5px">access_time</i>  {{interFlight.duration}} hours
+        <i class="material-icons" style="margin-right:5px ; margin-left:5px">attach_money</i>  {{interFlight.class}}
+        <i class="material-icons" style="margin-right:5px ; margin-left:5px">airline_seat_recline_normal</i>  {{interFlight.seat}}
+      </li>
+</div>
+
+<div ng-repeat="flight in returnFlight">
+<li class="collection-header"><h4>{{flight.origin}} - {{flight.destination}}</h4></li>
+ <li  class="collection-item" ng-repeat="interFlight in flight.flights">
+   <i class="material-icons" style="margin-right:5px">date_range</i>  {{interFlight.date}}
+     <i class="material-icons " style="margin-right:5px ; margin-left:5px">local_airport</i>  {{interFlight.airport}}
+     <i class="material-icons" style="margin-right:5px ; margin-left:5px">access_time</i>  {{interFlight.duration}} hours
+     <i class="material-icons" style="margin-right:5px ; margin-left:5px">attach_money</i>  {{interFlight.class}}
+     <i class="material-icons" style="margin-right:5px ; margin-left:5px">airline_seat_recline_normal</i>  {{interFlight.seat}}
+   </li>
+</div>
+</ul>
+
+
+<!-- Form goes here  -->
+  <ul class="collection with-header" id="passnegerInfo" ng-controller = "passengerController as pass">
+     <li class="collection-header"> <h3> Passengers Information </h3></li>
+
+
+  <div>
+  <div class="row">
+      <ul class="collection with-header" ng-repeat="passenger in pass.getPassengers track by $index">
+         <li class="collection-header"><h4>{{passenger.type}}</h4></li>
+        <li  class="collection-item">
+         <div class="container">
+       <div class="row">
+         <div class="input-field col s6">
+         <h5>First Name</h5>
+           <h6>{{passenger.firstName}}</h6>
+           </h5>
+         </div>
+         <div class="input-field col s6">
+         <h5>
+           Last Name
+           </h5>
+           <h6>{{passenger.lastName}}</h6>
+         </div>
+       </div>
+       <div class="row">
+         <div class="input-field col s6">
+         <h5>Email</h5>
+           <h6>
+             {{passenger.Email}}
+           </h6>
+         </div>
+         <div class="input-field col s6">
+           <h5>Passport Number</h5>
+           <h6>{{passenger.passportNumber}}</h6>
+         </div>
+       </div>
+       <div class="row">
+         <div class="input-field col s6">
+           <h5>Nationality</h5>
+           <h6>{{passenger.nationality}}</h6>
+         </div>
+         <div class="input-field col s6">
+           <h5>Birthdate</h5>
+           <h6>{{passenger.birthdate}}</h6>
         </div>
- 
- </div>
- </div>
+       </div>
+     </div>
 
-
-        <!-- End of flights info div -->
-
-
- <div class="panel panel-primary col-md-8" style="margin-left:20%" ng-controller = "passengerController as pass">
-    <div class="panel-heading"></div>
-  <div class="panel-body">
- <div>
-<div >
-<div>{{pass.addPassenger({firstname:"khly",lastname:"khaaled",email:"mohamedkhly@gmail.com",passportnumber:"2020202020",nationality:"Egyptian",Birthdate:"30-4-1995",telephone:"01000049213"})}}</div>
-
-  <div class="panel panel-info col-md-12" >
-     <div class="panel-heading"></div>
-   <div class="panel-body">
- <div class="form-group col-md-6">
-   <label for="FirstName">First Name</label>
-      <h3> {{pass.getPassengers[0].firstname}} </h3>
-
- </div>
-
- <div class="form-group col-md-6">
-   <label for="LastName">Last Name</label>
-   <h3>{{pass.getPassengers[0].lastname}}</h3>
- </div>
-
- <div class="form-group col-md-6">
-   <label for="EmailAddress">Email </label>
-      <h3>{{pass.getPassengers[0].email}}</h3>
-
- </div>
- </div>
-  
- <div class="form-group col-md-6">
-   <label for="LastName">Passport Number</label>
-      <h3>{{pass.getPassengers[0].passportnumber}}</h3>
-
- </div>
-
- <div class="form-group col-md-6">
-   <label for="LastName">Nationality</label>
-    <h3>{{pass.getPassengers[0].nationality}}</h3>
-
-
- </div>
- <div class="form-group col-md-6">
-   <label for="LastName">Birth Date</label>
-   <h3>{{pass.getPassengers[0].Birthdate}}</h3>
-
- </div>
-
- <div>         
-  <label for="icon_telephone">Telephone</label>
-  <h3> {{pass.getPassengers[0].telephone}}</h3>
+  </li>
+  </ul>
+  <button class="btn waves-effect waves-light" type="submit" name="action"> Confirm
+  </button>
+   </div>
   </div>
-</div>
-<button type="submit" class="btn btn-primary col-md-4"ng-model="submitButton">Continue
-</button>
-</div>
-</div>
-</div>
+  </ul>
+
+
 </div>

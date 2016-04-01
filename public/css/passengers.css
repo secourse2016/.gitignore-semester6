@@ -1,0 +1,38 @@
+#passengerInfo {
+  width:70% ;
+  margin: 0 auto ;
+  margin-top:10px;
+  margin-bottom:10px;
+  border : solid ;
+  border-color:grey;
+}
+
+#passengerInfo ul {
+  width: 90%;
+  margin: 0 auto ;
+ margin-top:10px;
+ margin-bottom:10px;
+ border-color:grey;
+}
+
+
+#passengerInfo button {
+  margin-left: 78%;
+}
+
+#flightsInfo {
+  width:70% ;
+  margin: 0 auto ;
+  margin-top:10px;
+  margin-bottom:10px;
+  border : solid ;
+  border-color:grey;
+}
+
+#flightsInfo ul {
+  width: 90%;
+  margin: 0 auto ;
+ margin-top:10px;
+ margin-bottom:10px;
+ border-color:grey;
+}
