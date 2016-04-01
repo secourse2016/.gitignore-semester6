@@ -1,5 +1,5 @@
 
-angular.module('confirmationPage').service('passengerInfo', function() {
+angular.module('austrianAirlinesApp').service('passengerInfo', function() {
     this.passenger = [];
 
   this.addPassengerInfo = function(newObj) {

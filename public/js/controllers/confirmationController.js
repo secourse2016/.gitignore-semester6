@@ -1,4 +1,4 @@
-angular.module('confirmationPage').
+angular.module('austrianAirlinesApp').
 controller('flightController',['flightInfo',function(flightInfo){
 	this.flight = flightInfo.getFlightInfo();
 

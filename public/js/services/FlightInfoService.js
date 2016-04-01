@@ -1,4 +1,4 @@
-angular.module('confirmationController').service('flightInfo',function(){
+angular.module('austrianAirlinesApp').service('flightInfo',function(){
 
 
 	this.flight = [];
