@@ -14,8 +14,27 @@ app.route('/help').get(function(req, res) {
     return res.sendFile(__dirname + '/public/index.html'); 
 });
 
-app.route('/contact	').get(function(req, res) { 
+app.route('/contact').get(function(req, res) { 
     return res.sendFile(__dirname + '/public/index.html'); 
 });
 
-app.listen(80);
+app.route('/termsAndConditions').get(function(req, res) { 
+    return res.sendFile(__dirname + '/public/index.html'); 
+});
+
+app.route('/privacypolicy').get(function(req, res) { 
+    return res.sendFile(__dirname + '/public/index.html'); 
+});
+
+app.route('/bookAFlight').get(function(req, res) { 
+    return res.sendFile(__dirname + '/public/index.html'); 
+});
+
+app.route('/offers').get(function(req, res) { 
+    return res.sendFile(__dirname + '/public/index.html'); 
+});
+
+app.route('/pricing').get(function(req, res) { 
+    return res.sendFile(__dirname + '/public/index.html'); 
+});
+app.listen(8000);
