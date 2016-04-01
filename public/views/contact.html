@@ -1,0 +1,17 @@
+<div class="container" style="margin-top: 50px; width: 50%;" ng-controller="contactUsCtrl">
+	<form ng-submit="send()">
+		<input-field>
+		    <input required type="email" ng-model="formData.email">
+		    <label>Email</label>
+		</input-field>
+		<input-field>
+		    <input required type="text" ng-model="formData.subject">
+		    <label>Subject</label>
+		</input-field>
+		<input-field>
+	    	<textarea required ng-model="formData.body" class="materialize-textarea"></textarea>
+	    	<label>Body</label>
+		</input-field>
+		<button style="float:right" type="submit" class="waves-effect waves-light red lighten-1 btn">Send</button>
+	</form>
+</div>
