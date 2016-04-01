@@ -84,11 +84,7 @@ var app = angular.module('austrianAirlinesApp', ['ngRoute']);
       // .error(function() {
       //         console.log('Error: ' + data);
       // });
-<<<<<<< HEAD
-    };
-});
 
-=======
     if($scope.subscribeData.email){
         Materialize.toast('You have been added to our mailing list.', 4000)
         $scope.subscribeData.email = '';   
@@ -109,7 +105,6 @@ var app = angular.module('austrianAirlinesApp', ['ngRoute']);
  });
 
 
->>>>>>> bcf0d1d5aa30ca9762ad76ceda95322f1710057d
 app.controller('sliderController', function($scope){
     this.slides = landingSlides;
 
