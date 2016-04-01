@@ -1,9 +1,10 @@
      
+  <link href="css/formColors.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 
       <br/>
       <br/>
 
-      <div class="center-block" style="width: 500px;">
+      <div class="center-block" style="width: 500px;" ng-controller="PaymentController as payment">
         
         <div>
           <h5 class="red-text text-darken-4" style="font-weight: bold;">Payment Form</h5>  
@@ -31,8 +32,8 @@
                 </div>
 
                 <div class="input-field col s6">
+                  <input style="color: red" ng-model="date" input-date type="date"  select-years="15">
                   <label for="expirydate">Expiry Date</label>
-                  <input type="date" class="datepicker">
                 </div>
 
               </div>
@@ -54,7 +55,7 @@
           </div>
         </div>  
 
-        <div ng-controller="PaymentController as payment">
+        <div>
           <h5 class="red-text text-darken-4" style="font-weight: bold;">
             Total Price: ${{payment.totalPrice}}
           </h5>
