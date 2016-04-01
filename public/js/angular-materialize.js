@@ -287,6 +287,7 @@
                 }
             };
         }]);
+
     /*
      Example usage, notice the empty dropdown tag in the dropdown trigger.
      <!-- Dropdown Trigger -->
@@ -1006,8 +1007,10 @@
     /*     example usage:
     <!-- normal materialboxed -->
     <img materialboxed class="materialboxed responsive-img" width="650" src="images/sample-1.jpg">
+
     <!-- caption materialboxed -->
     <img materialboxed class="materialboxed" data-caption="A picture of some deer and tons of trees" width="250" src="iamges/nature_portrait_by_pw_fotografie-d63tx0n.jpg">
+
      */
     angular.module("ui.materialize.materialboxed", [])
         .directive("materialboxed", ["$timeout", function($timeout){
