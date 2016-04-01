@@ -37,4 +37,4 @@ app.route('/offers').get(function(req, res) {
 app.route('/pricing').get(function(req, res) { 
     return res.sendFile(__dirname + '/public/index.html'); 
 });
-app.listen(8000);
+app.listen(80);
