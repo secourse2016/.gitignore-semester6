@@ -50,7 +50,7 @@ app.config(function($routeProvider , $locationProvider) {
  * @uncomment after creat the Post rout
  */
 app.controller('masterController', function($scope) {
-    $scope.subscrib = function() {
+    $scope.subscribe = function() {
       // $http.post("api/subscrib",$scope.subscriberMail)
       // .success(function() {
       //         $scope.subscriberMail = {};
