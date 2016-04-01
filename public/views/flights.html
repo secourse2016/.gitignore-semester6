@@ -1,123 +1,113 @@
-<<!DOCTYPE html>
-<html>
-<head>
-		<title>Flights</title>
-		<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
-  		<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
-  		<script src="../js/flights.js"></script>
- 		<style> .glyphicon-plane { cursor:pointer } </style>
- 		<style> .glyphicon-info-sign { cursor:pointer } </style>
-</head>
-<body ng-app="austrian" ng-controller="FlightsCtrl">
-	<div class="row">
-		<div class = "col-md-8 col-md-offset-1">
-		<form ng-submit="moveForward()">
-			<div >
+<!-- <script type="text/ng-template" id="/flights.html"> -->
+      
+        <div class="container">
+    <div class="col s12 m6">
+    <form >
+      <div >
 
-				<h2 class="glyphicon glyphicon-plane"> outgoing flights</h2>
-				<div>
-					<table class="table table-striped">
-						<tr>
-    						 <th>flight</th>
-    						 <th>stops</th> 
-   							 <th>economy class</th>
-   							 <th>bussiness class</th>
-  						</tr>
-  						<tr ng-repeat="flight in outgoingFlights">
-  							<th>
-  								<div>
-  									{{flight.dep}} - {{flight.arr}}
-  								</div>
-  								<div>
-  									<span class="glyphicon glyphicon-info-sign" ng-hide="trans.id == $index" ng-click = "trans.id = $index"></span>
-  									<span  class="panel panel-default" ng-show="trans.id == $index">
-  										<div  ng-repeat="trans in ingoingFlights[$index].flights">
-  											<div class="panel-heading"style="font-size: 15px">{{trans.src}} - {{trans.dest}}</div>
-  											<div class="panel-body" style="font-size: 12px">{{trans.dep}} - {{trans.arr}}</div>
-  										</div>
-  									</span>
-  								</div>
-  							</th>
-    						 <th>{{flight.stops}}</th> 
-   							 <th>
-   							 	<div class="form-group">
-   							 		<label class="radio-inline">
- 								<input type="radio" name="inlineRadioOptionsOut" value="0/{{$index}}" ng-model="info[0]"> {{flight.economy}}
- 								</label>
-   							 	</div>
- 							</th>
-   							 <th>
-   							 <div class="form-group">
-   							 	<label class="radio-inline">
- 								<input type="radio" name="inlineRadioOptionsOut"  value="1/{{$index}}" ng-model="info[0]"> {{flight.bussiness}}
- 								</label>
-   							 </div>
-							</th>
-  						</tr>
-					</table>
-				</div>
-				
-			</div>
+        <h2><i class="medium material-icons">call_made</i> outgoing flights</h2>
+        <div>
+          <table class="striped">
+            <tr>
+                 <th>flight</th>
+                 <th>stops</th> 
+                 <th>economy class</th>
+                 <th>bussiness class</th>
+              </tr>
+              <tr ng-repeat="flight in outgoingFlights">
+                <th>
+                  <div>
+                    {{flight.dep}} - {{flight.arr}}
+                  </div>
+                  <div>
+                    <div class="divider"></div>
 
-			<div class="form-group">
-				<h2 class="glyphicon glyphicon-plane"> ingoing flights</h2>
-				<div>
-					<table class="table table-striped">
-						<tr>
-    						 <th>flight</th>
-    						 <th>stops</th> 
-   							 <th>economy class</th>
-   							 <th>bussiness class</th>
-  						</tr>
-  						<tr ng-repeat="flight in ingoingFlights">
-  							<th>
-  								<div>
-  									{{flight.dep}} - {{flight.arr}}
-  								</div>
-  								<div>
-  									<span class="glyphicon glyphicon-info-sign" ng-hide="trans.id == $index+outgoingFlights.length" ng-click = "trans.id = $index+outgoingFlights.length"></span>
-  									
-  										<span  class="panel panel-default" ng-show="trans.id == $index+outgoingFlights.length">
-  										<div  ng-repeat="trans in ingoingFlights[$index].flights">
-  											<div class="panel-heading"style="font-size: 15px">{{trans.src}} - {{trans.dest}}</div>
-  											<div class="panel-body" style="font-size: 12px">{{trans.dep}} - {{trans.arr}}</div>
-  										</div>
-  									</span>
-  									
-  									
-  								</div>
-  							</th>
-    						 <th>{{flight.stops}}</th> 
-   							 <th>
-   							 	<div class="form-group">
-   							 		<label class="radio-inline">
- 								<input type="radio" name="inlineRadioOptionsIn"  value="0/{{$index}}" ng-model="info[1 ]"> {{flight.economy}}
- 								</label>
-   							 	</div>
- 							</th>
-   							 <th>
-   							 	<div class="form-group">
-   							 		<label class="radio-inline">
- 								<input type="radio" name="inlineRadioOptionsIn"  value="1/{{$index}}" ng-model="info[1]"> {{flight.bussiness}}
- 								</label>
-   							 	</div>
+                  <div class="section">
+                    <span ng-hide="trans.id == $index" ><i class="material-icons" ng-click = "trans.id = $index">info_outline</i></span>
+                    <span  class="section" ng-show="trans.id == $index">
+                      <div class="card blue-grey darken-1" ng-repeat="trans in outgoingFlights[$index].flights">
+                        <div class="card-content white-text">
+                        <div class="panel-heading"style="font-size: 15px">{{trans.src}} - {{trans.dest}}</div>
+                        <div class="panel-body" style="font-size: 12px">{{trans.dep}} - {{trans.arr}}</div>
+                      </div>
+                    </span>
+                  </div>
+                </th>
+                 <th>{{flight.stops}}</th> 
+                  <th>
+                  <div >
+                <input class="with-gap" name="group1" type="radio" id="test5/2/{{$index}}" value="0/{{$index}}" ng-model="info[0]"/>
+                <label for="test5/2/{{$index}}">{{flight.economy}}</label>
+                  </div>
+              </th>
+                 <th>
+                  <div >
+                <input class="with-gap" name="group1" type="radio" id="test6/2/{{$index}}"  value="1/{{$index}}" ng-model="info[0]">
+                <label for="test6/2/{{$index}}">{{flight.bussiness}}</label>
+                  </div>
 
-							</th>
-  						</tr>
-					</table>
-				</div>
-				
-			</div>
-			<button type="submit" class="btn btn-primary">Reserve</button>
-		</form>
-			
-		</div>
-	</div>
-	<script type="text/ng-template" id="popover.html">
-    <div>
-        Popover content
+              </th>
+              </tr>
+          </table>
+        </div>
+        
+      </div>
+
+      <div >
+        <h2 ><i class="medium material-icons">call_received</i>ingoing flights</h2>
+        <div>
+          <table class="striped">
+            <tr>
+                 <th>flight</th>
+                 <th>stops</th> 
+                 <th>economy class</th>
+                 <th>bussiness class</th>
+              </tr>
+              <tr ng-repeat="flight in ingoingFlights">
+                <th>
+                  <div>
+                    {{flight.dep}} - {{flight.arr}}
+                  </div>
+                  <div class="divider"></div>
+
+                  <div class="section">
+                    <span ng-hide="trans.id == $index+outgoingFlights.length" ><i class="material-icons" ng-click = "trans.id = $index+outgoingFlights.length">info_outline</i></span>
+                    
+                      <span  class="section" ng-show="trans.id == $index+outgoingFlights.length">
+                      <div class="card blue-grey darken-1" ng-repeat="trans in ingoingFlights[$index].flights">
+                        <div class="card-content white-text">
+                        <div class="panel-heading"style="font-size: 15px">{{trans.src}} - {{trans.dest}}</div>
+                        <div class="panel-body" style="font-size: 12px">{{trans.dep}} - {{trans.arr}}</div>
+                      </div>
+                    </span>
+                    
+                    
+                  </div>
+                </th>
+                 <th>{{flight.stops}}</th> 
+                 <th>
+                  <div >
+                <input class="with-gap" name="group3" type="radio" id="test5/{{$index}}" value="0/{{$index}}" ng-model="info[1]"/>
+                <label for="test5/{{$index}}">{{flight.economy}}</label>
+                  </div>
+              </th>
+                 <th>
+                  <div >
+                <input class="with-gap" name="group3" type="radio" id="test6/{{$index}}"  value="1/{{$index}}" ng-model="info[1]">
+                <label for="test6/{{$index}}">{{flight.bussiness}}</label>
+                  </div>
+
+              </th>
+              </tr>
+          </table>
+        </div>
+        
+      </div>
+      <a class="waves-effect waves-light btn" ng-click="moveForward()" href="">reserve</a>
+      
+    </form>
+      
     </div>
-</script>
-</body>
-</html>
+  </div>
+       
+     <!-- </script> -->

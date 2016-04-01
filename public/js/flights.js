@@ -1,4 +1,4 @@
-var app = angular.module('austrian', ['ui.router']);
+var app=angular.module('austrianAirlinesApp');
 app.factory('flights', [function(){
   var o = {
     outgoing: [
