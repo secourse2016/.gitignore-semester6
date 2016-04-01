@@ -1,7 +1,38 @@
+<link href="css/passengers.css" rel="stylesheet">
 <div ng-app="passengerViewApp" ng-controller="passengerViewCtrl">
 
+
+<!-- Flights Info goes here -->
+
+
+<ul class="collection with-header" id="flightsInfo">
+   <li class="collection-header"> <h3> Flight Information </h3></li>
+   <div ng-repeat="flight in outgoingFlight">
+   <li class="collection-header"><h4>{{flight.origin}} - {{flight.destination}}</h4></li>
+    <li  class="collection-item" ng-repeat="interFlight in flight.flights">
+      <i class="material-icons" style="margin-right:5px">date_range</i>  {{interFlight.date}}
+        <i class="material-icons " style="margin-right:5px ; margin-left:5px">local_airport</i>  {{interFlight.airport}}
+        <i class="material-icons" style="margin-right:5px ; margin-left:5px">access_time</i>  {{interFlight.duration}} hours
+        <i class="material-icons" style="margin-right:5px ; margin-left:5px">attach_money</i>  {{interFlight.class}}
+        <i class="material-icons" style="margin-right:5px ; margin-left:5px">airline_seat_recline_normal</i>  {{interFlight.seat}}
+      </li>
+</div>
+
+<div ng-repeat="flight in returnFlight">
+<li class="collection-header"><h4>{{flight.origin}} - {{flight.destination}}</h4></li>
+ <li  class="collection-item" ng-repeat="interFlight in flight.flights">
+   <i class="material-icons" style="margin-right:5px">date_range</i>  {{interFlight.date}}
+     <i class="material-icons " style="margin-right:5px ; margin-left:5px">local_airport</i>  {{interFlight.airport}}
+     <i class="material-icons" style="margin-right:5px ; margin-left:5px">access_time</i>  {{interFlight.duration}} hours
+     <i class="material-icons" style="margin-right:5px ; margin-left:5px">attach_money</i>  {{interFlight.class}}
+     <i class="material-icons" style="margin-right:5px ; margin-left:5px">airline_seat_recline_normal</i>  {{interFlight.seat}}
+   </li>
+</div>
+</ul>
+
+
 <!-- Form goes here  -->
-  <ul class="collection with-header">
+  <ul class="collection with-header" id="passnegerInfo">
      <li class="collection-header"> <h3> Passengers Information </h3></li>
 
 
