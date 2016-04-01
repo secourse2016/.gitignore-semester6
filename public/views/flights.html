@@ -1,0 +1,113 @@
+<!-- <script type="text/ng-template" id="/flights.html"> -->
+      
+        <div class="container">
+    <div class="col s12 m6">
+    <form >
+      <div >
+
+        <h2><i class="medium material-icons">call_made</i> outgoing flights</h2>
+        <div>
+          <table class="striped">
+            <tr>
+                 <th>flight</th>
+                 <th>stops</th> 
+                 <th>economy class</th>
+                 <th>bussiness class</th>
+              </tr>
+              <tr ng-repeat="flight in outgoingFlights">
+                <th>
+                  <div>
+                    {{flight.dep}} - {{flight.arr}}
+                  </div>
+                  <div>
+                    <div class="divider"></div>
+
+                  <div class="section">
+                    <span ng-hide="trans.id == $index" ><i class="material-icons" ng-click = "trans.id = $index">info_outline</i></span>
+                    <span  class="section" ng-show="trans.id == $index">
+                      <div class="card blue-grey darken-1" ng-repeat="trans in outgoingFlights[$index].flights">
+                        <div class="card-content white-text">
+                        <div class="panel-heading"style="font-size: 15px">{{trans.src}} - {{trans.dest}}</div>
+                        <div class="panel-body" style="font-size: 12px">{{trans.dep}} - {{trans.arr}}</div>
+                      </div>
+                    </span>
+                  </div>
+                </th>
+                 <th>{{flight.stops}}</th> 
+                  <th>
+                  <div >
+                <input class="with-gap" name="group1" type="radio" id="test5/2/{{$index}}" value="0/{{$index}}" ng-model="info[0]"/>
+                <label for="test5/2/{{$index}}">{{flight.economy}}</label>
+                  </div>
+              </th>
+                 <th>
+                  <div >
+                <input class="with-gap" name="group1" type="radio" id="test6/2/{{$index}}"  value="1/{{$index}}" ng-model="info[0]">
+                <label for="test6/2/{{$index}}">{{flight.bussiness}}</label>
+                  </div>
+
+              </th>
+              </tr>
+          </table>
+        </div>
+        
+      </div>
+
+      <div >
+        <h2 ><i class="medium material-icons">call_received</i>ingoing flights</h2>
+        <div>
+          <table class="striped">
+            <tr>
+                 <th>flight</th>
+                 <th>stops</th> 
+                 <th>economy class</th>
+                 <th>bussiness class</th>
+              </tr>
+              <tr ng-repeat="flight in ingoingFlights">
+                <th>
+                  <div>
+                    {{flight.dep}} - {{flight.arr}}
+                  </div>
+                  <div class="divider"></div>
+
+                  <div class="section">
+                    <span ng-hide="trans.id == $index+outgoingFlights.length" ><i class="material-icons" ng-click = "trans.id = $index+outgoingFlights.length">info_outline</i></span>
+                    
+                      <span  class="section" ng-show="trans.id == $index+outgoingFlights.length">
+                      <div class="card blue-grey darken-1" ng-repeat="trans in ingoingFlights[$index].flights">
+                        <div class="card-content white-text">
+                        <div class="panel-heading"style="font-size: 15px">{{trans.src}} - {{trans.dest}}</div>
+                        <div class="panel-body" style="font-size: 12px">{{trans.dep}} - {{trans.arr}}</div>
+                      </div>
+                    </span>
+                    
+                    
+                  </div>
+                </th>
+                 <th>{{flight.stops}}</th> 
+                 <th>
+                  <div >
+                <input class="with-gap" name="group3" type="radio" id="test5/{{$index}}" value="0/{{$index}}" ng-model="info[1]"/>
+                <label for="test5/{{$index}}">{{flight.economy}}</label>
+                  </div>
+              </th>
+                 <th>
+                  <div >
+                <input class="with-gap" name="group3" type="radio" id="test6/{{$index}}"  value="1/{{$index}}" ng-model="info[1]">
+                <label for="test6/{{$index}}">{{flight.bussiness}}</label>
+                  </div>
+
+              </th>
+              </tr>
+          </table>
+        </div>
+        
+      </div>
+      <a class="waves-effect waves-light btn" ng-click="moveForward()" href="">reserve</a>
+      
+    </form>
+      
+    </div>
+  </div>
+       
+     <!-- </script> -->
