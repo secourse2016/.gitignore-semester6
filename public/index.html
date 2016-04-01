@@ -35,7 +35,7 @@
 </head>
 <body ng-controller="masterController" >
   <!--nav bar-->
-  <nav class="red accent-4" role="navigation">
+  <nav class="red" role="navigation">
     <div class="nav-wrapper container">
       <a id="logo-container" href="/" class="brand-logo">
         <img class="logo" src="assets/images/logo.png"/>
@@ -61,7 +61,7 @@
     <div ng-view></div>
 
   </div>
-  <footer class="page-footer red accent-4">
+  <footer class="page-footer red">
     <div class="container">
       <div class="row">
         <div class="col l6 s12">
@@ -70,7 +70,7 @@
             <input id="email" type="email" class="validate">
             <label for="email" class="grey-text text-lighten-2" ng-model="subscriberMail" >Email</label>
           </div>
-          <button ng-click="subscribe()" class="btn waves-effect waves-light orange accent-4" >Send
+          <button ng-click="subscribe()" class="btn waves-effect waves-light red darken-4" >Send
             <i class="material-icons right">send</i>
           </button>
         </div>
