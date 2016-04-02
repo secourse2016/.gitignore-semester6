@@ -11,14 +11,14 @@ angular.module('austrianAirlinesApp').service('global', function() {
 			{
 				airport : 'CAI',
 				date : 'March 25',
-				duration: '5 hours',
+				duration: '5',
 				class: 'Economy',
 				seat : '23B'
 			},
 			{
 				airport : 'Tegel',
 				date : 'March 26',
-				duration: '1 hour',
+				duration: '1',
 				class: 'Economy',
 				seat : '22E'
 			}
@@ -34,14 +34,14 @@ angular.module('austrianAirlinesApp').service('global', function() {
 			{
 				airport : 'JKA',
 				date : 'April 1',
-				duration: '4 hours',
+				duration: '4',
 				class: 'Economy',
 				seat : '23B'
 			},
 			{
 				airport : 'Tegel',
 				date : 'March 26',
-				duration: '1 hour',
+				duration: '1',
 				class: 'Economy',
 				seat : '22E'
 			}

@@ -1,4 +1,4 @@
-<link href="../css/passengers.css" rel="stylesheet">
+<link href="../css/confirm.css" rel="stylesheet">
 <div class="container" style="margin-bottom: 100px; margin-top: 50px;" ng-controller="confirmationCtrl">
 
 
@@ -10,22 +10,66 @@
    <div>
      <li class="collection-item"><h4>{{outGoingTrip.origin}} - {{outGoingTrip.destination}}</h4></li>
      <li  class="collection-item" ng-repeat="interFlight in outGoingTrip.flights">
-      <i class="material-icons" style="margin-right:5px">date_range</i>  {{interFlight.date}}
-      <i class="material-icons " style="margin-right:5px ; margin-left:5px">local_airport</i>  {{interFlight.airport}}
-      <i class="material-icons" style="margin-right:5px ; margin-left:5px">access_time</i>  {{interFlight.duration}} hours
-      <i class="material-icons" style="margin-right:5px ; margin-left:5px">attach_money</i>  {{interFlight.class}}
-      <i class="material-icons" style="margin-right:5px ; margin-left:5px">airline_seat_recline_normal</i>  {{interFlight.seat}}
+      <div class="row">
+        <div class="col s10 m5 l2">
+          <p>
+            <i class="material-icons" style="margin-right:5px">date_range</i>  {{interFlight.date}}
+          </p>
+        </div>
+        <div class="col s10 m5 l2">
+          <p>
+            <i class="material-icons " style="margin-right:5px ; margin-left:5px">local_airport</i>  {{interFlight.airport}}
+          </p>
+        </div>
+        <div class="col s10 m5 l2">
+          <p>
+            <i class="material-icons" style="margin-right:5px ; margin-left:5px">access_time</i>  {{interFlight.duration}} hours
+          </p>
+        </div>
+        <div class="col s10 m5 l2">
+          <p>
+            <i class="material-icons" style="margin-right:5px ; margin-left:5px">attach_money</i>  {{interFlight.class}}
+          </p>
+        </div>
+        <div class="col s10 m5 l2">
+          <p>
+           <i class="material-icons" style="margin-right:5px ; margin-left:5px">airline_seat_recline_normal</i>  {{interFlight.seat}}
+          </p>
+        </div>
+      </div>
     </li>
   </div>
 
   <div>
     <li class="collection-item"><h4>{{returnTrip.origin}} - {{returnTrip.destination}}</h4></li>
     <li  class="collection-item" ng-repeat="interFlight in returnTrip.flights">
-     <i class="material-icons" style="margin-right:5px">date_range</i>  {{interFlight.date}}
-     <i class="material-icons " style="margin-right:5px ; margin-left:5px">local_airport</i>  {{interFlight.airport}}
-     <i class="material-icons" style="margin-right:5px ; margin-left:5px">access_time</i>  {{interFlight.duration}} hours
-     <i class="material-icons" style="margin-right:5px ; margin-left:5px">attach_money</i>  {{interFlight.class}}
-     <i class="material-icons" style="margin-right:5px ; margin-left:5px">airline_seat_recline_normal</i>  {{interFlight.seat}}
+     <div class="row">
+        <div class="col s10 m5 l2">
+          <p>
+            <i class="material-icons" style="margin-right:5px">date_range</i>  {{interFlight.date}}
+          </p>
+        </div>
+        <div class="col s10 m5 l2">
+          <p>
+            <i class="material-icons " style="margin-right:5px ; margin-left:5px">local_airport</i>  {{interFlight.airport}}
+          </p>
+        </div>
+        <div class="col s10 m5 l2">
+          <p>
+            <i class="material-icons" style="margin-right:5px ; margin-left:5px">access_time</i>  {{interFlight.duration}} hours
+          </p>
+        </div>
+        <div class="col s10 m5 l2">
+          <p>
+            <i class="material-icons" style="margin-right:5px ; margin-left:5px">attach_money</i>  {{interFlight.class}}
+          </p>
+        </div>
+        <div class="col s10 m5 l2">
+          <p>
+           <i class="material-icons" style="margin-right:5px ; margin-left:5px">airline_seat_recline_normal</i>  {{interFlight.seat}}
+          </p>
+        </div>
+      </div>
    </li>
  </div>
 </ul>
@@ -38,11 +82,11 @@
   <div class="row">
     <div class="col s12"><p>{{passenger.firstName}}</p></div>
     <div class="col s12"><p>{{passenger.lastName}}</p></div>
-    <div class="col s12"><p>{{passenger.email}}</p></div>
+    <div class="col s12"><p>{{passenger.emailAddress}}</p></div>
     <div class="col s12"><p>{{passenger.passportNumber}}</p></div>
   </div>
   <div class="row">
-    <div class="col s12 m6 l3"><p>{{passenger.birthdate}}</p></div>
+    <div class="col s12 m6 l3"><p>{{passenger.birthDate}}</p></div>
     <div class="col s12 m6 l3"><p>{{passenger.nationality}}</p></div>
     
   </div>
