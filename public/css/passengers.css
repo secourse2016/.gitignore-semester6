@@ -1,38 +1,32 @@
 #passengerInfo {
-  width:70% ;
-  margin: 0 auto ;
-  margin-top:10px;
-  margin-bottom:10px;
-  border : solid ;
-  border-color:grey;
-}
-
-#passengerInfo ul {
-  width: 90%;
-  margin: 0 auto ;
- margin-top:10px;
- margin-bottom:10px;
- border-color:grey;
+  margin-bottom: 30px;
+  border : 2px solid grey;
+  padding: 30px;
 }
 
 
-#passengerInfo button {
-  margin-left: 78%;
+
+
+#confirmInfo {
+  float: right;
+
+
 }
 
 #flightsInfo {
-  width:70% ;
-  margin: 0 auto ;
-  margin-top:10px;
-  margin-bottom:10px;
-  border : solid ;
-  border-color:grey;
+  margin-bottom:40px;
+  border : 2px solid grey;
+  padding: 30px;
 }
 
-#flightsInfo ul {
-  width: 90%;
-  margin: 0 auto ;
- margin-top:10px;
- margin-bottom:10px;
- border-color:grey;
+
+
+#flightsInfo h3, #passengerInfo h3
+{
+  font-size: 25px;
+}
+
+#flightsInfo h4, #passengerInfo h4
+{
+  font-size: 23px;
 }
