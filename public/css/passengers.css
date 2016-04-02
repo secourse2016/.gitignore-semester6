@@ -26,17 +26,8 @@
   font-size: 25px;
 }
 
-<<<<<<< HEAD
-#flightsInfo ul {
-  width: 90%;
-  margin: 0 auto ;
- margin-top:10px;
- margin-bottom:10px;
- border-color:grey;
-}
-=======
 #flightsInfo h4, #passengerInfo h4
 {
   font-size: 23px;
 }
->>>>>>> 38489546ef30219c07ac16c1263c228d066c48a2
+
