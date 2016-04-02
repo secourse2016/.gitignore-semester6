@@ -1,22 +1,7 @@
 angular.module('austrianAirlinesApp').service('global', function() {
 	// A list of passengers whose info are entered by the user
-	this.passengers = [
-	{"firstName" : 'Mohamed',
-	"lastName" : 'Khale',
-	"type" : 'Adult',
-	"email" : 'mohamedkhly@gmail.com',
-	"birthdate" : '30/4/1995',
-	"passportNumber" : 'A13216548',
-	"nationality" : 'Egyptian'},
-	{"firstName" : 'Mostafa',
-	"lastName" : 'Abdullah',
-	"type" : 'Child',
-	"email" : 'mostafaabdullahahmed@gmail.com',
-	"birthdate" : '30/4/1995',
-	"passportNumber" : 'A8791653',
-	"nationality" : 'Egyptian'}
-	];
-
+	
+ this.passengers = [];
 	// the outgoing trip selected by the user
 	this.outGoingTrip =
 	{
@@ -26,14 +11,14 @@ angular.module('austrianAirlinesApp').service('global', function() {
 			{
 				airport : 'CAI',
 				date : 'March 25',
-				duration: '5 hours',
+				duration: '5',
 				class: 'Economy',
 				seat : '23B'
 			},
 			{
 				airport : 'Tegel',
 				date : 'March 26',
-				duration: '1 hour',
+				duration: '1',
 				class: 'Economy',
 				seat : '22E'
 			}
@@ -49,20 +34,20 @@ angular.module('austrianAirlinesApp').service('global', function() {
 			{
 				airport : 'JKA',
 				date : 'April 1',
-				duration: '4 hours',
+				duration: '4',
 				class: 'Economy',
 				seat : '23B'
 			},
 			{
 				airport : 'Tegel',
 				date : 'March 26',
-				duration: '1 hour',
+				duration: '1',
 				class: 'Economy',
 				seat : '22E'
 			}
 		]
 	};
-	
+
 
 	/**
 	* Set the passengers array

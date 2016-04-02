@@ -22,5 +22,7 @@ app.route('/privacypolicy').get(sendIndex);
 app.route('/bookAFlight').get(sendIndex);
 app.route('/offers').get(sendIndex);
 app.route('/pricing').get(sendIndex);
+app.route('/passengers').get(sendIndex);
+app.route('/confirmation').get(sendIndex);
 
 app.listen(80);
