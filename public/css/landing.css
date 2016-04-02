@@ -1,7 +1,7 @@
 .slides span{
     color: black ;
-    text-shadow: 0 0 2px black;
-    box-shadow:0px 0px 30px 30px rgba(255, 255, 255, 0.7);
+    /*text-shadow: 0 0 2px black;*/
+    box-shadow:0px 0px 15px 15px rgba(255, 255, 255, 0.7);
     background-color: rgba(255, 255, 255, 0.7);
     border-radius: 5px;
 

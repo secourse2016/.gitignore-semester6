@@ -1,0 +1,91 @@
+<link href="../css/passengers.css" rel="stylesheet">
+<div>
+
+
+<!-- Flights Info goes here -->
+
+
+<ul class="collection with-header" id="flightsInfo" ng-controller = "passengerViewCtrl">
+   <li class="collection-header"> <h3> Flight Information </h3></li>
+   <div ng-repeat="flight in outgoingFlight">
+   <li class="collection-header"><h4>{{flight.origin}} - {{flight.destination}}</h4></li>
+    <li  class="collection-item" ng-repeat="interFlight in flight.flights">
+      <i class="material-icons" style="margin-right:5px">date_range</i>  {{interFlight.date}}
+        <i class="material-icons " style="margin-right:5px ; margin-left:5px">local_airport</i>  {{interFlight.airport}}
+        <i class="material-icons" style="margin-right:5px ; margin-left:5px">access_time</i>  {{interFlight.duration}} hours
+        <i class="material-icons" style="margin-right:5px ; margin-left:5px">attach_money</i>  {{interFlight.class}}
+        <i class="material-icons" style="margin-right:5px ; margin-left:5px">airline_seat_recline_normal</i>  {{interFlight.seat}}
+      </li>
+</div>
+
+<div ng-repeat="flight in returnFlight">
+<li class="collection-header"><h4>{{flight.origin}} - {{flight.destination}}</h4></li>
+ <li  class="collection-item" ng-repeat="interFlight in flight.flights">
+   <i class="material-icons" style="margin-right:5px">date_range</i>  {{interFlight.date}}
+     <i class="material-icons " style="margin-right:5px ; margin-left:5px">local_airport</i>  {{interFlight.airport}}
+     <i class="material-icons" style="margin-right:5px ; margin-left:5px">access_time</i>  {{interFlight.duration}} hours
+     <i class="material-icons" style="margin-right:5px ; margin-left:5px">attach_money</i>  {{interFlight.class}}
+     <i class="material-icons" style="margin-right:5px ; margin-left:5px">airline_seat_recline_normal</i>  {{interFlight.seat}}
+   </li>
+</div>
+</ul>
+
+
+<!-- Form goes here  -->
+  <ul class="collection with-header" id="passnegerInfo" ng-controller = "passengerController as pass">
+     <li class="collection-header"> <h3> Passengers Information </h3></li>
+
+
+  <div>
+  <div class="row">
+      <ul class="collection with-header" ng-repeat="passenger in pass.getPassengers track by $index">
+         <li class="collection-header"><h4>{{passenger.type}}</h4></li>
+        <li  class="collection-item">
+         <div class="container">
+       <div class="row">
+         <div class="input-field col s6">
+         <h5>First Name</h5>
+           <h6>{{passenger.firstName}}</h6>
+           </h5>
+         </div>
+         <div class="input-field col s6">
+         <h5>
+           Last Name
+           </h5>
+           <h6>{{passenger.lastName}}</h6>
+         </div>
+       </div>
+       <div class="row">
+         <div class="input-field col s6">
+         <h5>Email</h5>
+           <h6>
+             {{passenger.Email}}
+           </h6>
+         </div>
+         <div class="input-field col s6">
+           <h5>Passport Number</h5>
+           <h6>{{passenger.passportNumber}}</h6>
+         </div>
+       </div>
+       <div class="row">
+         <div class="input-field col s6">
+           <h5>Nationality</h5>
+           <h6>{{passenger.nationality}}</h6>
+         </div>
+         <div class="input-field col s6">
+           <h5>Birthdate</h5>
+           <h6>{{passenger.birthdate}}</h6>
+        </div>
+       </div>
+     </div>
+
+  </li>
+  </ul>
+  <button class="btn waves-effect waves-light" type="submit" name="action"> Confirm
+  </button>
+   </div>
+  </div>
+  </ul>
+
+
+</div>

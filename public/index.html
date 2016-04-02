@@ -11,84 +11,104 @@
   <link href="css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="css/master.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 
-  <!--Angularjs-->
+
   <script src="js/jquery-1.11.2.min.js"></script>
+
+  <!--Angularjs-->
   <script src="js/angular.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
-  <script src="js/angular-materialize.js"></script>
   <script src="js/angular-jquery.js"></script>
 
   <!--  Scripts-->
+
   <script src="js/materialize.min.js"></script>
   <script src="js/angular-materialize.js"></script>
+
   <script src="js/init.js"></script>
 
   <!--Main app-->
   <script src="js/app.js"></script>
+
+  <script src="js/flights.js"></script>
+
   <!-- controllers -->
+  <script type="text/javascript" src="js/services/flightInfoService.js"></script>
+ <script type="text/javascript" src="js/services/passengerInfoService.js"></script>
+   <script type="text/javascript" src="js/controllers/passengerViewCtrl.js"></script>
+  <script type="text/javascript" src="js/controllers/confirmationController.js"></script>
+  <script src="js/controllers/paymentController.js"></script>
+  
   <!-- <script src="js/controllers/master-page"></script> -->
 
   <!--favicon image-->
   <link rel="icon" type="image/ico" href="assets/images/favicon.ico"/>
 </head>
-<body ng-controller="masterController" class="red lighten-5">
+<body ng-controller="masterController" >
   <!--nav bar-->
-  <nav class="deep-red" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo"><img class="logo" src="assets/images/logo.png"/></a>
+  <nav class="red" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="/" class="brand-logo">
+        <img class="logo" src="assets/images/logo.png"/>
+      </a>
       <ul class="right hide-on-med-and-down">
         <li><a href="/contact">Contact</a></li>
-        <li><a href="/help">Help/FQA</a></li>
+        <li><a href="/help">Help/FAQ</a></li>
         <li><a href="/about">About</a></li>
       </ul>
 
       <ul id="nav-mobile" class="side-nav">
         <li><a href="/contact">Contact</a></li>
-        <li><a href="/help">Help/FQA</a></li>
+        <li><a href="/help">Help/FAQ</a></li>
         <li><a href="/about">About</a></li>
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
   </nav>
   <div id="mainContainer" class="mainContainer">
-
     <!-- angular templating -->
     <!-- this is where content will be injected -->
-  <div ng-view></div>
 
-    <footer class="page-footer deep-red accent-3">
+    <div ng-view></div>
+
+  </div>
+  <footer class="page-footer red">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="orange-text text-lighten-3">Newsletter</h5>
+          <form ng-submit="subscribe()">
+          <input-field>
+            <input required id="email" type="email" class="validate" ng-model="subscribeData.email">
+            <label for="email" class="grey-text text-lighten-2"  >Email</label>
+          </input-field>
+          <button type="submit" class="btn waves-effect waves-light red darken-4" >Send
+            <i class="material-icons right">send</i>
+          </button>
+          </form>
+        </div>
+        <div class="col l3 s16">
+          <ul>
+            <li><a class="grey-text text-lighten-3" href="/contact">Contact Us</a></li>
+            <li><a class="grey-text text-lighten-3" href="/termsAndConditions">Terms &amp; Conditions</a></li>
+            <li><a class="grey-text text-lighten-3" href="/privacypolicy">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="col l3 s12">
+          <ul>
+            <li><a class="grey-text text-lighten-3" href="/bookAFlight">Book a Flight</a></li>
+            <li><a class="grey-text text-lighten-3" href="/offers">Offers</a></li>
+            <li><a class="grey-text text-lighten-3" href="/pricing">Pricing</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
       <div class="container">
-        <div class="row">
-          <div class="col l6 s12">
-            <h5 class="white-text ">Newsletter</h5>
-            <div class="input-field">
-              <input id="email" type="email" class="validate">
-              <label for="email" class="grey-text text-darken-3" ng-model="subscriberMail" >Email</label>
-            </div>
-            <button ng-click="subscribe()" class="btn waves-effect waves-light red darken-4" >Send
-              <i class="material-icons right">send</i>
-            </button>
-          </div>
-          <div class="col l3 s16">
-            <ul>
-              <li><a class="grey-text text-darken-3" href="/contact">Contact Us</a></li>
-              <li><a class="grey-text text-darken-3" href="/termsAndConditions">Terms &amp; Conditions</a></li>
-              <li><a class="grey-text text-darken-3" href="/privacypolicy">Privacy Policy</a></li>
-            </ul>
-          </div>
-          <div class="col l3 s12">
-            <ul>
-              <li><a class="grey-text text-darken-3" href="/bookAFlight">Book a Flight</a></li>
-              <li><a class="grey-text text-darken-3" href="/offers">Offers</a></li>
-              <li><a class="grey-text text-darken-3" href="/pricing">Pricing</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="footer-copyright">
-        <div class="container">
-         <a class="orange-text text-lighten-3" href="#gitignore-semester6"></a>
-        </div>
-      </div>
-    </footer>
-  </body>
+         © 2015
+        <a class="orange-text text-lighten-3" href="/">Austrian Airlines</a>, All Rights Reserved
+        <img style="float:right; margin-top: 15px;" src="/assets/images/logo_staralliance.png">
+     </div>
+   </div>
+ </footer>
+</body>
 </html>
