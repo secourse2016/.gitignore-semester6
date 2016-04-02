@@ -1,22 +1,7 @@
 angular.module('austrianAirlinesApp').service('global', function() {
 	// A list of passengers whose info are entered by the user
-	this.passengers = [
-	{"firstName" : 'Mohamed',
-	"lastName" : 'Khale',
-	"type" : 'Adult',
-	"email" : 'mohamedkhly@gmail.com',
-	"birthdate" : '30/4/1995',
-	"passportNumber" : 'A13216548',
-	"nationality" : 'Egyptian'},
-	{"firstName" : 'Mostafa',
-	"lastName" : 'Abdullah',
-	"type" : 'Child',
-	"email" : 'mostafaabdullahahmed@gmail.com',
-	"birthdate" : '30/4/1995',
-	"passportNumber" : 'A8791653',
-	"nationality" : 'Egyptian'}
-	];
-
+	
+ this.passengers = [];
 	// the outgoing trip selected by the user
 	this.outGoingTrip =
 	{
@@ -62,7 +47,7 @@ angular.module('austrianAirlinesApp').service('global', function() {
 			}
 		]
 	};
-	
+
 
 	/**
 	* Set the passengers array
