@@ -24,7 +24,6 @@ app.route('/termsAndConditions').get(function(req, res) {
     return res.sendFile(__dirname + '/public/index.html');
 });
 
-app.listen(8080);
 app.route('/privacypolicy').get(function(req, res) {
     return res.sendFile(__dirname + '/public/index.html');
 });
@@ -44,3 +43,4 @@ app.route('/pricing').get(function(req, res) {
 app.route('/passengers').get(function(req, res) {
     return res.sendFile(__dirname + '/public/index.html');
 });
+app.listen(80);
