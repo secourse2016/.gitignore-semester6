@@ -23,4 +23,4 @@ app.route('/bookAFlight').get(sendIndex);
 app.route('/offers').get(sendIndex);
 app.route('/pricing').get(sendIndex);
 
-app.listen(8080);
+app.listen(80);
