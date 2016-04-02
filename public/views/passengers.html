@@ -1,7 +1,4 @@
-<link href="css/passengers.css" rel="stylesheet">
-<div ng-app="passengerViewApp" ng-controller="passengerViewCtrl">
-
-
+<div>
 <!-- Flights Info goes here -->
 
 
@@ -36,9 +33,9 @@
      <li class="collection-header"> <h3> Passengers Information </h3></li>
 
 
-  <div ng-controller="passengerViewCtrl">
+  <div>
   <div class="row">
-     <form class="col s12" ng-submit="submitForm()">
+     <form class="col s12">
       <ul class="collection with-header" ng-repeat="passenger in passengers track by $index">
          <li class="collection-header"><h4>{{passenger.type}}</h4></li>
         <li  class="collection-item">
