@@ -1,5 +1,8 @@
 
-    var app = angular.module('austrianAirlinesApp', ['ngRoute', 'ui.materialize', 'jquery-alt']);
+
+
+
+var app = angular.module('austrianAirlinesApp', ['ngRoute', 'ui.materialize', 'jquery-alt']);
 
 /**
  * configure master page routes
@@ -7,8 +10,14 @@
  */
  app.config(function($routeProvider , $locationProvider) {
     $routeProvider.when('/', {
-        templateUrl : 'views/landing.html'
-    })
+            templateUrl : 'views/landing.html'
+        })
+
+        // route for payment page
+        .when('/payment', {
+            templateUrl : 'views/payment.html'
+        })
+
         // route for the about page
         .when('/about', {
             templateUrl : 'views/about.html'
@@ -41,6 +50,22 @@
         // route for the Pricing page
         .when('/pricing', {
             templateUrl : 'views/pricing.html'
+        })
+
+        //route for end of journy :v
+        .when('/successful', {
+            templateUrl : 'views/successful-payment.html'
+        })
+
+        // route for passenger details view
+        .when('/passengers', {
+            templateUrl : 'views/passengers.html' ,
+            controller  : 'passengerViewCtrl'
+        })
+
+        //route for the confirmation page
+		.when('/confirmation',{
+        	templateUrl : 'views/confirm.html'
         });
         // use the HTML5 History API
         $locationProvider.html5Mode(true);
@@ -64,13 +89,13 @@
       // .error(function() {
       //         console.log('Error: ' + data);
       // });
+
     if($scope.subscribeData.email){
         Materialize.toast('You have been added to our mailing list.', 4000)
-        $scope.subscribeData.email = '';   
+        $scope.subscribeData.email = '';
     }
   };
 });
-
 
  app.controller('contactUsCtrl',function($scope,$location){
     $scope.formData = {};
@@ -106,5 +131,3 @@ var landingSlides = [
         entrance: 'right-align'
     }
 ];
-
-
