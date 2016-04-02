@@ -70,26 +70,12 @@
       <div class="input-field col s6 form-left">
         <label for="departure" class="white-text">Departure</label>
         <input input-date
-             type="text" name="departure" id="departure"
-             ng-model="currentTime" format="dd/mm/yyyy"
-             months-full="{{ monthFr }}" months-short="{{ monthShortFr }}"
-             weekdays-full="{{ weekdaysFullFr }}" weekdays-short="{{ weekdaysShortFr }}"
-             weekdays-letter="{{ weekdaysLetterFr }}" disable="disable"
-             today="today" clear="clear" close="close" on-start="onStart()"
-             on-render="onRender()" on-open="onOpen()" on-close="onClose()"
-             on-set="onSet()" on-stop="onStop()" />
+             type="text" name="departure" id="departure" ng-model="currentTime"/>
       </div>
 
       <div class="input-field col s6 form-right" ng-show="tripType===2">
         <input input-date
-             type="text" name="return" id="return"
-             ng-model="currentTime" format="dd/mm/yyyy"
-             months-full="{{ monthFr }}" months-short="{{ monthShortFr }}"
-             weekdays-full="{{ weekdaysFullFr }}" weekdays-short="{{ weekdaysShortFr }}"
-             weekdays-letter="{{ weekdaysLetterFr }}" disable="disable"
-             today="today" clear="clear" close="close" on-start="onStart()"
-             on-render="onRender()" on-open="onOpen()" on-close="onClose()"
-             on-set="onSet()" on-stop="onStop()" />
+             type="text" name="return" id="return" ng-model="currentTime" />
           <label for="return" class="white-text">Return</label>
       </div>
 
