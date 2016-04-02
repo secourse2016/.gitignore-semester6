@@ -1,14 +1,30 @@
 <link rel="stylesheet" href="css/landing.css" media="screen" charset="utf-8">
 
+
+
+
 <div ng-controller="sliderController as sliderCtrl">
   <div class="slider" slider>
-    <ul class="slides" slider-mouse>
+    <ul class="slides black" slider-mouse>
       <li ng-repeat="slide in sliderCtrl.slides">
         <img ng-src="{{ slide.image }}">
-          <div class="caption {{slide.entrance}}">
+          <div class="caption left-align">
             <h2><span>{{ slide.text }}</span></h2>
           </div>
       </li>
     </ul>
+  </div>
+</div>
+
+<div class="flight">
+  <div class="card red darken-1">
+    <div class="card-content white-text">
+      <span class="card-title">Find Flights</span>
+      <br>
+      From, To, Dates, Adults, Children, Class
+    </div>
+    <div class="card-action">
+      <a href="#">Submit</a>
+    </div>
   </div>
 </div>
