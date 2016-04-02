@@ -63,4 +63,8 @@ app.controller('passengerViewCtrl' , function($scope){
       }
     ]
     }];
+
+    $scope.submitForm = function() {
+      // handling adding data to passenger service by @khlly
+    }
 });
