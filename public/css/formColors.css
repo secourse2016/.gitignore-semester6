@@ -1,52 +1,76 @@
 
-  /* label color */
-   .input-field label {
-     color: #000;
-     font-size: 40;
-   }
-   /* label focus color */
-   .input-field input[type=text]:focus + label {
-     color: #b71c1c;
-   }
-   /* label underline focus color */
-   .input-field input[type=text]:focus {
-     border-bottom: 1px solid #b71c1c;
-     box-shadow: 0 1px 0 0 #b71c1c;
-     border-color: #b71c1c;
-   }
-   /* valid color */
-   .input-field input[type=text].valid {
-     border-bottom: 1px solid green;
-     box-shadow: 0 1px 0 0 green;
-   }
-   /* invalid color */
-   .input-field input[type=text].invalid {
-     border-bottom: 1px solid red;
-     box-shadow: 0 1px 0 0 red;
-   }
-   /* icon prefix focus color */
-   .input-field .prefix.active {
-     color: #b71c1c;
-   }
+/* label underline color */
+.input-field input[type=text] {
+  border-bottom: 1px solid white;
+  box-shadow: 0 1px 0 0 white;
+}
 
-   .picker__date-display
-    {
-      background-color: #e53935;
-    }
-   .picker__weekday-display
-    {
-      background-color: #e53935;
-    }
-   .picker__day--selected
-    {
-      background-color: #e53935 !important;
-    }
+/* label underline focus color */
+.input-field input[type=text]:focus {
+  border-bottom: 1px solid white;
+  box-shadow: 0 1px 0 0 white;
+}
 
-   .picker__close
-    {
-      color: red;
-    } 
-   .picker__today
-    {
-      color: red;
-    }
+/* label color */
+.input-field label {
+  color: #000;
+  font-size: 40;
+}
+/* label focus color */
+.input-field input[type=text]:focus + label {
+  color: #b71c1c;
+}
+/* label underline focus color */
+.input-field input[type=text]:focus {
+  border-bottom: 1px solid #b71c1c;
+  box-shadow: 0 1px 0 0 #b71c1c;
+  border-color: #b71c1c;
+}
+/* valid color */
+.input-field input[type=text].valid {
+  border-bottom: 1px solid green;
+  box-shadow: 0 1px 0 0 green;
+}
+/* invalid color */
+.input-field input[type=text].invalid {
+  border-bottom: 1px solid red;
+  box-shadow: 0 1px 0 0 red;
+}
+/* icon prefix focus color */
+.input-field .prefix.active {
+  color: #b71c1c;
+}
+
+/* Radio buttons colors */
+[type="radio"]:not(:checked) + label:before,
+[type="radio"]:not(:checked) + label:after,
+[type="radio"]:checked + label:before {
+border: 2px solid white;
+}
+
+[type="radio"]:checked + label:after{
+border: 2px solid white;
+background: white;
+}
+
+.picker__date-display
+ {
+   background-color: #e53935;
+ }
+.picker__weekday-display
+ {
+   background-color: #e53935;
+ }
+.picker__day--selected
+ {
+   background-color: #e53935 !important;
+ }
+
+.picker__close
+ {
+   color: red;
+ }
+.picker__today
+ {
+   color: red;
+ }

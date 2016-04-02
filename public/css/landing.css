@@ -17,5 +17,39 @@
    top: 80px;
    z-index: 1000;
    width: 500px;
-   
+}
+
+/* label color */
+.input-field label {
+  color: white;
+
+}
+.input-field input[type=text] {
+  border-bottom: 1px solid white;
+  box-shadow: 0 1px 0 0 white;
+}
+/* label focus color */
+.input-field input[type=text]:focus + label {
+  color: white;
+}
+
+/* label underline focus color */
+.input-field input[type=text]:focus {
+  border-bottom: 1px solid white;
+  box-shadow: 0 1px 0 0 white;
+}
+
+.form-left{
+  margin: auto;
+  padding: 0px;
+  display: inline-block;
+  width: 200px;
+
+}
+
+.form-right{
+  margin: auto;
+  margin-left: 50px;
+  display: inline-block;
+  width: 200px;
 }
