@@ -25,8 +25,4 @@ app.route('/pricing').get(sendIndex);
 app.route('/passengers').get(sendIndex);
 app.route('/confirmation').get(sendIndex);
 
-app.route('/confirmation').get(function(req, res) { 
-    return res.sendFile(__dirname + '/public/index.html'); 
-});
-
 app.listen(80);
