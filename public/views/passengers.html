@@ -1,11 +1,11 @@
-<div>
+<div class="container col s12 m6">
 <!-- Flights Info goes here -->
 
 
-<ul class="collection with-header" id="flightsInfo">
-   <li class="collection-header"> <h3> Flight Information </h3></li>
+<ul class="collection with-header">
+   <li class="collection-header "> <h3> Flight Information </h3></li>
    <div ng-repeat="flight in outgoingFlight">
-   <li class="collection-header"><h4>{{flight.origin}} - {{flight.destination}}</h4></li>
+   <li class="collection-header red"><h4>{{flight.origin}} - {{flight.destination}}</h4></li>
     <li  class="collection-item" ng-repeat="interFlight in flight.flights">
       <i class="material-icons" style="margin-right:5px">date_range</i>  {{interFlight.date}}
         <i class="material-icons " style="margin-right:5px ; margin-left:5px">local_airport</i>  {{interFlight.airport}}
@@ -16,7 +16,7 @@
 </div>
 
 <div ng-repeat="flight in returnFlight">
-<li class="collection-header"><h4>{{flight.origin}} - {{flight.destination}}</h4></li>
+<li class="collection-header red darken-1"><h4>{{flight.origin}} - {{flight.destination}}</h4></li>
  <li  class="collection-item" ng-repeat="interFlight in flight.flights">
    <i class="material-icons" style="margin-right:5px">date_range</i>  {{interFlight.date}}
      <i class="material-icons " style="margin-right:5px ; margin-left:5px">local_airport</i>  {{interFlight.airport}}
@@ -29,20 +29,20 @@
 
 
 <!-- Form goes here  -->
-  <ul class="collection with-header" id="passnegerInfo">
+<!-- <div class="container col s12 m6"> -->
+  <ul class="collection with-header">
      <li class="collection-header"> <h3> Passengers Information </h3></li>
 
 
-  <div>
   <div class="row">
-     <form class="col s12" ng-submit="submitForm()>
+     <form  ng-submit="submitForm()">
       <ul class="collection with-header" ng-repeat="passenger in passengers track by $index">
-         <li class="collection-header"><h4>{{passenger.type}}</h4></li>
+         <li class="collection-header red darken-1"><h4>{{passenger.type}}</h4></li>
         <li  class="collection-item">
          <div class="container">
        <div class="row">
          <div class="input-field col s6">
-           <input id="first_name" type="text" class="validate" ng-model="formData[$index].firstName" required>
+           <input id="first_name" type="text" class="validate " ng-model="formData[$index].firstName" required>
            <label for="first_name">First Name</label>
          </div>
          <div class="input-field col s6">
@@ -75,12 +75,11 @@
 
   </li>
   </ul>
-  <button class="btn waves-effect waves-light" type="submit" name="action"> Continue
+  <button class="btn waves-effect waves-light red" type="submit" name="action"> Continue
   </button>
      </form>
    </div>
-  </div>
   </ul>
-
+<!-- </div> -->
 
 </div>
