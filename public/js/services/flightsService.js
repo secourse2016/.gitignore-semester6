@@ -3,15 +3,15 @@ angular.module('austrianAirlinesApp').service('flights',function(){
   origin:"Cairo",
   destination:"Berlin",
       ingoing_flights:[
-      {f:[
+      {flights:[
          {
           flightNumber: "LH173",
           aircraft_code : "A321",
           origin : "Berlin-Tegel",
-          origin_app : "TXL",
+          origin_abb : "TXL",
           origin_term :  1,
           destination : "Frankfurt/Main International Airport",
-          destination_app :"FRA",
+          destination_abb :"FRA",
           destination_term : 1,
           departure_time : "6:45",
           arrival_time : "7:55"
@@ -21,10 +21,10 @@ angular.module('austrianAirlinesApp').service('flights',function(){
           flightNumber: "LH582",
           aircraft_code : "A321",
           origin : "Frankfurt/Main International Airport",
-          origin_app : "FRA",
+          origin_abb : "FRA",
           origin_term :  1,
           destination : "Cairo Internationall",
-          destination_app :"CAI",
+          destination_abb :"CAI",
           destination_term : 3,
           departure_time : "10:00",
           arrival_time : "15:05"
@@ -32,16 +32,16 @@ angular.module('austrianAirlinesApp').service('flights',function(){
           }
       ],
      economy: 400, bussiness: 1200},
-      {f:[
+      {flights:[
       
          {
           flightNumber: "LX963",
           aircraft_code : "A320",
           origin : "Berlin-Tegel",
-          origin_app : "TXL",
+          origin_abb : "TXL",
           origin_term :  1,
           destination : "Zurich",
-          destination_app :"ZRH",
+          destination_abb :"ZRH",
           destination_term : 1,
           departure_time : "6:50",
           arrival_time : "8:20"
@@ -51,10 +51,10 @@ angular.module('austrianAirlinesApp').service('flights',function(){
           flightNumber: "LX236",
           aircraft_code : "A320",
           origin : "Zurich",
-          origin_app : "FRA",
+          origin_abb : "FRA",
           origin_term :  1,
           destination : "Cairo Internationall",
-          destination_app :"CAI",
+          destination_abb :"CAI",
           destination_term : 3,
           departure_time : "9:5",
           arrival_time : "14:05"
@@ -65,15 +65,15 @@ angular.module('austrianAirlinesApp').service('flights',function(){
      economy: 500, bussiness: 1300}
       ],
       outgoing_flights:[
-      {f:[
+      {flights:[
         {
           flightNumber: "LH578",
           aircraft_code : "A320",
           origin : "Cairo International",
-          origin_app : "CAI",
+          origin_abb : "CAI",
           origin_term :  3,
           destination : "Munich-Frans Josef trauss",
-          destination_app :"MUC",
+          destination_abb :"MUC",
           destination_term : 2,
           departure_time : "3:10",
           arrival_time : "6:00"
@@ -83,10 +83,10 @@ angular.module('austrianAirlinesApp').service('flights',function(){
           flightNumber: "LH2030",
           aircraft_code : "A319",
           origin : "Munich-Frans Josef trauss",
-          origin_app : "MUC",
+          origin_abb : "MUC",
           origin_term :  2,
           destination : "Berlin-Tegel",
-          destination_app :"TXL",
+          destination_abb :"TXL",
           destination_term : 1,
           departure_time : "7:00",
           arrival_time : "8:05"
@@ -94,16 +94,16 @@ angular.module('austrianAirlinesApp').service('flights',function(){
           }
       ],
      economy: 600, bussiness: 1500},
-      {f:[
+      {flights:[
       
         {
           flightNumber: "LH578",
           aircraft_code : "A320",
           origin : "Cairo International",
-          origin_app : "CAI",
+          origin_abb : "CAI",
           origin_term :  3,
           destination : "Munich-Frans Josef trauss",
-          destination_app :"MUC",
+          destination_abb :"MUC",
           destination_term : 2,
           departure_time : "3:10",
           arrival_time : "6:00"
@@ -113,10 +113,10 @@ angular.module('austrianAirlinesApp').service('flights',function(){
           flightNumber: "LH2032",
           aircraft_code : "A320",
           origin : "Munich-Frans Josef trauss(MUC)",
-          origin_app : "MUC",
+          origin_abb : "MUC",
           origin_term :  2,
           destination : "Berlin-Tegel",
-          destination_app :"TAX",
+          destination_abb :"TAX",
           destination_term : 1,
           departure_time : "8:00",
           arrival_time : "9:05"
@@ -124,15 +124,15 @@ angular.module('austrianAirlinesApp').service('flights',function(){
           }
       ],
       economy: 700, bussiness: 2000},
-      {f:[
+      {flights:[
         {
           flightNumber: "LH585",
           aircraft_code : "A321",
           origin : "Cairo International",
-          origin_app : "CAI",
+          origin_abb : "CAI",
           origin_term :  3,
           destination : "Frankfurt/Main International Airport",
-          destination_app :"FRA",
+          destination_abb :"FRA",
           destination_term : 1,
           departure_time : "5:10",
           arrival_time : "8:35"
@@ -142,10 +142,10 @@ angular.module('austrianAirlinesApp').service('flights',function(){
           flightNumber: "LH178",
           aircraft_code : "A320",
           origin : "Frankfurt/Main International Airport",
-          origin_app : "FRA",
+          origin_abb : "FRA",
           origin_term :  1,
           destination : "Berlin-Tegel",
-          destination_app :"TAX",
+          destination_abb :"TAX",
           destination_term : 1,
           departure_time : "9:45",
           arrival_time : "10:55"
