@@ -11,7 +11,8 @@ var app = angular.module('austrianAirlinesApp', ['ngRoute']);
  */
  app.config(function($routeProvider , $locationProvider) {
     $routeProvider.when('/', {
-            templateUrl : 'views/landing.html'
+            templateUrl : 'views/flights.html',
+            controller: 'FlightsCtrl'
         })
 
         // route for payment page

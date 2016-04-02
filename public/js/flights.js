@@ -2,6 +2,8 @@ var app=angular.module('austrianAirlinesApp');
 app.factory('flights', [function(){
   var o = 
 {booking:{
+  origin:"Cairo",
+  destination:"Berlin",
   passengers: [],
       ingoing_flights:[
       {f:[
