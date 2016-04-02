@@ -1,4 +1,4 @@
-	
+
 
 
 var app = angular.module('austrianAirlinesApp', ['ngRoute']);
@@ -11,8 +11,14 @@ var app = angular.module('austrianAirlinesApp', ['ngRoute']);
  */
  app.config(function($routeProvider , $locationProvider) {
     $routeProvider.when('/', {
-        templateUrl : 'views/landing.html'
-    })
+            templateUrl : 'views/landing.html'
+        })
+
+        // route for payment page
+        .when('/payment', {
+            templateUrl : 'views/payment.html'
+        })
+
         // route for the about page
         .when('/about', {
             templateUrl : 'views/about.html'
@@ -46,6 +52,12 @@ var app = angular.module('austrianAirlinesApp', ['ngRoute']);
         .when('/pricing', {
             templateUrl : 'views/pricing.html'
         })
+
+        //route for end of journy :v
+        .when('/successful', {
+            templateUrl : 'views/successful-payment.html'
+        })
+        
         //route for the confirmation page
 		.when('/confirmation',{
         	templateUrl : 'views/confirm.html'
@@ -72,6 +84,7 @@ var app = angular.module('austrianAirlinesApp', ['ngRoute']);
       // .error(function() {
       //         console.log('Error: ' + data);
       // });
+
     if($scope.subscribeData.email){
         Materialize.toast('You have been added to our mailing list.', 4000)
         $scope.subscribeData.email = '';   
@@ -114,5 +127,3 @@ var landingSlides = [
         entrance: 'right-align'
     }
 ];
-
-
