@@ -8,7 +8,7 @@
                         link: function(scope, element, attrs){
 
                                 element.mouseenter(function(){
-                                    angular.element(".slider img").fadeTo("slow", 0.8);
+                                    angular.element(".slider img").fadeTo("slow", 0.5);
                                 });
 
                                 element.mouseleave(function(){
