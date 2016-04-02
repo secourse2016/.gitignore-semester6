@@ -4,9 +4,9 @@
 
 <ul class="collection with-header">
    <li class="collection-header "> <h3> Flight Information </h3></li>
-   <div ng-repeat="flight in outgoingFlight">
-   <li class="collection-header red"><h4>{{flight.origin}} - {{flight.destination}}</h4></li>
-    <li  class="collection-item" ng-repeat="interFlight in flight.flights">
+   <div>
+   <li class="collection-header red"><h4>{{outgoingFlight.origin}} - {{outgoingFlight.destination}}</h4></li>
+    <li  class="collection-item" ng-repeat="interFlight in outgoingFlight.flights">
       <i class="material-icons" style="margin-right:5px">date_range</i>  {{interFlight.date}}
         <i class="material-icons " style="margin-right:5px ; margin-left:5px">local_airport</i>  {{interFlight.airport}}
         <i class="material-icons" style="margin-right:5px ; margin-left:5px">access_time</i>  {{interFlight.duration}} hours
@@ -15,9 +15,9 @@
       </li>
 </div>
 
-<div ng-repeat="flight in returnFlight">
-<li class="collection-header red darken-1"><h4>{{flight.origin}} - {{flight.destination}}</h4></li>
- <li  class="collection-item" ng-repeat="interFlight in flight.flights">
+<div>
+<li class="collection-header red darken-1"><h4>{{returnFlight.origin}} - {{returnFlight.destination}}</h4></li>
+ <li  class="collection-item" ng-repeat="interFlight in returnFlight.flights">
    <i class="material-icons" style="margin-right:5px">date_range</i>  {{interFlight.date}}
      <i class="material-icons " style="margin-right:5px ; margin-left:5px">local_airport</i>  {{interFlight.airport}}
      <i class="material-icons" style="margin-right:5px ; margin-left:5px">access_time</i>  {{interFlight.duration}} hours
