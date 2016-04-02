@@ -8,39 +8,35 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get("/",function(req,res){
 	res.render("index.html");
 });
-app.route('/about').get(function(req, res) { 
-    return res.sendFile(__dirname + '/public/index.html'); 
+app.route('/about').get(function(req, res) {
+    return res.sendFile(__dirname + '/public/index.html');
 });
 
-app.route('/help').get(function(req, res) { 
-    return res.sendFile(__dirname + '/public/index.html'); 
+app.route('/help').get(function(req, res) {
+    return res.sendFile(__dirname + '/public/index.html');
 });
 
-app.route('/contact').get(function(req, res) { 
-    return res.sendFile(__dirname + '/public/index.html'); 
+app.route('/contact').get(function(req, res) {
+    return res.sendFile(__dirname + '/public/index.html');
 });
 
-app.route('/termsAndConditions').get(function(req, res) { 
-    return res.sendFile(__dirname + '/public/index.html'); 
+app.route('/termsAndConditions').get(function(req, res) {
+    return res.sendFile(__dirname + '/public/index.html');
 });
 
-<<<<<<< HEAD
 app.listen(8080);
-=======
-app.route('/privacypolicy').get(function(req, res) { 
-    return res.sendFile(__dirname + '/public/index.html'); 
+app.route('/privacypolicy').get(function(req, res) {
+    return res.sendFile(__dirname + '/public/index.html');
 });
 
-app.route('/bookAFlight').get(function(req, res) { 
-    return res.sendFile(__dirname + '/public/index.html'); 
+app.route('/bookAFlight').get(function(req, res) {
+    return res.sendFile(__dirname + '/public/index.html');
 });
 
-app.route('/offers').get(function(req, res) { 
-    return res.sendFile(__dirname + '/public/index.html'); 
+app.route('/offers').get(function(req, res) {
+    return res.sendFile(__dirname + '/public/index.html');
 });
 
-app.route('/pricing').get(function(req, res) { 
-    return res.sendFile(__dirname + '/public/index.html'); 
+app.route('/pricing').get(function(req, res) {
+    return res.sendFile(__dirname + '/public/index.html');
 });
-app.listen(80);
->>>>>>> 5939e8692f6c769662cf33a3abe902df938654f3
