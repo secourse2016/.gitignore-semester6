@@ -1,12 +1,55 @@
 .slides span{
-    color: black ;
-    /*text-shadow: 0 0 2px black;*/
-    box-shadow:0px 0px 15px 15px rgba(255, 255, 255, 0.7);
-    background-color: rgba(255, 255, 255, 0.7);
-    border-radius: 5px;
+   color: black;
+}
+
+.slides .caption{
+   margin-left: -100px;
+   box-shadow: 0px 0px 45px 45px rgba(255, 255, 255, 0.7);
+   background-color: rgba(255, 255, 255, 0.7);
+   border-radius: 50px;
+   max-width: 450px;
+
+}
+.flight{
+
+   position: absolute;
+   right: 10px;
+   top: 80px;
+   z-index: 1000;
+   width: 500px;
+}
+
+/* label color */
+.input-field label {
+  color: white;
+
+}
+.input-field input[type=text] {
+  border-bottom: 1px solid white;
+  box-shadow: 0 1px 0 0 white;
+}
+/* label focus color */
+.input-field input[type=text]:focus + label {
+  color: white;
+}
+
+/* label underline focus color */
+.input-field input[type=text]:focus {
+  border-bottom: 1px solid white;
+  box-shadow: 0 1px 0 0 white;
+}
+
+.form-left{
+  margin: auto;
+  padding: 0px;
+  display: inline-block;
+  width: 200px;
 
 }
 
-.slider .indicators .indicator-item.active {
-  background-color: #A80000;
+.form-right{
+  margin: auto;
+  margin-left: 50px;
+  display: inline-block;
+  width: 200px;
 }
