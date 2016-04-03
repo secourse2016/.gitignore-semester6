@@ -16,6 +16,7 @@
   color: #000;
   font-size: 40;
 }
+
 /* label focus color */
 .input-field input[type=text]:focus + label {
   color: #b71c1c;
@@ -28,8 +29,8 @@
 }
 /* valid color */
 .input-field input[type=text].valid {
-  border-bottom: 1px solid green;
-  box-shadow: 0 1px 0 0 green;
+  border-bottom: 1px solid white;
+  box-shadow: 0 1px 0 0 white;
 }
 /* invalid color */
 .input-field input[type=text].invalid {

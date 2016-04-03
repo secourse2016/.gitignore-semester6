@@ -5,7 +5,7 @@ angular.module('austrianAirlinesApp').service('global', function() {
 	 * ==============================================================
 	 * origin, destination 		[airport]
 	 * adults, children 		[integer]
-	 * tripType					["oneWay", "roundTrip"]
+	 * tripType					[1 for one way, 2 for roundtrip]
 	 * outgoingDate, returnDate	["date"]
 	 * flightClass				["economy", :business]
 	 */

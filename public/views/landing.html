@@ -4,7 +4,7 @@
 
 <!-- Slider -->
 <div ng-controller="sliderController as sliderCtrl">
-  <div class="slider" slider height="500">
+  <div class="slider" slider height="520">
     <ul class="slides white" slider-mouse>
       <li ng-repeat="slide in sliderCtrl.slides">
         <img ng-src="{{ slide.image }}">
@@ -24,19 +24,50 @@
       <br>
 
       <!-- Flight From -->
-      <div class="input-field col s6 form-left">
-          <input id="flight_from" type="text" class="validate" ng-model="formData.origin">
-          <label for="flight_from" class="white-text"><i class="material-icons tiny">flight_takeoff</i> From</label>
+      <div class="col s6 form-left">
+        <i class="material-icons">flight_takeoff</i>
+        <div ng-controller="autoCompleteController as ctrl">
+            <md-autocomplete required
+                md-input-name="autocompleteField"
+                md-selected-item="formData.origin"
+                md-search-text="ctrl.searchText"
+                md-items="item in ctrl.querySearch(ctrl.searchText)"
+                md-item-text="item.display"
+                md-floating-label="From">
+              <md-item-template>
+                <span md-highlight-text="ctrl.searchText">{{item.display}}</span>
+              </md-item-template>
+              <md-not-found>
+                   No airports matching "{{ctrl.searchText}}" were found.
+              </md-not-found>
+            </md-autocomplete>
+          </div>
       </div>
 
       <!-- Flight To -->
-      <div class="input-field col s6 form-right">
-          <input id="flight_to" type="text" class="validate" ng-model="formData.destination">
-          <label for="flight_to" class="white-text"><i class="material-icons tiny">flight_land</i> To</label>
+      <div class="col s6 form-right">
+         <i class="material-icons">flight_land</i>
+          <div ng-controller="autoCompleteController as ctrl">
+            <md-autocomplete flex required
+                md-input-name="autocompleteField"
+                md-selected-item="formData.destination"
+                md-search-text="ctrl.searchText"
+                md-items="item in ctrl.querySearch(ctrl.searchText)"
+                md-item-text="item.display"
+                md-floating-label="To">
+              <md-item-template>
+                <span md-highlight-text="ctrl.searchText">{{item.display}}</span>
+              </md-item-template>
+              <md-not-found>
+                   No airports matching "{{ctrl.searchText}}" were found.
+              </md-not-found>
+            </md-autocomplete>
+          </div>
       </div>
 
       <!-- Adults Count -->
       <div class="input-field col s6 form-left">
+        <i class="material-icons">person</i>
            <select material-select class="white-text" ng-model="formData.adults">
              <option value="" disabled selected>Adults</option>
              <option value="1"><span style="color:black">1 adult</span></option>
@@ -46,6 +77,7 @@
 
       <!-- Children Count -->
       <div class="input-field col s6 form-right">
+        <i class="material-icons">child_care</i>
            <select material-select class="white-text" ng-model="formData.children">
              <option value="" disabled selected>Children</option>
              <option value="1">1 child</option>
@@ -54,25 +86,27 @@
         </div>
 
       <!--  Trip Type -->
-      <div class="form-left">
-        <input type="radio" id="one_way" name="trip_type" ng-model="formData.tripType" ng-value="oneWay"/>
+      <div class="form-left trip-type-left">
+        <input type="radio" id="one_way" name="trip_type" ng-model="formData.tripType" ng-value="1"/>
         <label for="one_way" class="white-text">One Way</label>
       </div>
-      <div class="form-right">
-        <input type="radio" id="round_trip" name="trip_type" ng-model="formData.tripType" ng-value="roundTrip"/>
+      <div class="form-right trip-type-right">
+        <input type="radio" id="round_trip" name="trip_type" ng-model="formData.tripType" ng-value="2" ng-checked="true"/>
         <label for="round_trip" class="white-text">Roundtrip</label>
       </div>
       <br><br>
 
       <!-- Departure Date -->
       <div class="input-field col s6 form-left">
+        <i class="material-icons">date_range</i>
         <label for="departure" class="white-text">Outgoing</label>
         <input input-date
              type="text" name="departure" id="departure" ng-model="formData.outgoingDate"/>
       </div>
 
       <!--  Return Date -->
-      <div class="input-field col s6 form-right" ng-show="tripType===roundTrip">
+      <div class="input-field col s6 form-right" ng-show="formData.tripType===2">
+        <i class="material-icons">date_range</i>
         <input input-date
              type="text" name="return" id="return" ng-model="formData.returnDate" />
           <label for="return" class="white-text">Return</label>

@@ -18,7 +18,7 @@
    opacity: 0.95;
    right: 10px;
    top: 80px;
-   z-index: 1000;
+   z-index: 100;
    width: 40%;
    max-width: 500px;
    min-width: 350px;
@@ -27,6 +27,8 @@
 /* Left input fields of the form */
 .form-left{
   margin: auto;
+  margin-left: 30px;
+
   padding: 0px;
   display: inline-block;
   width: 40%;
@@ -39,6 +41,23 @@
   margin-left: 50px;
   display: inline-block;
   width: 40%;
+}
+
+.trip-type-left{
+  margin-top: 10px;
+  margin-left: -5px;
+}
+
+
+.trip-type-right{
+  margin-top: 10px;
+  margin-left: 50px;
+}
+
+.flight i{
+  float: left;
+  margin-left:-35px;
+  margin-top:14px;
 }
 
 /* Information about Airlines section */
@@ -75,4 +94,47 @@
 		margin-left: auto;
 		margin-right: auto;
 	}
+}
+
+/*  Auto-complete Styling  */
+/* =|=|=|=|=|=|=|=|=|=|=|= */
+
+md-input-container input[type=search] {
+  border-bottom: 1px solid white;
+  box-shadow: 0 1px 0 0 white;
+}
+
+md-input-container input[type=search]:focus{
+  border-bottom: 1px solid white !important;
+  box-shadow: 0 1px 0 0 white !important;
+  border-color: white !important;
+}
+
+md-input-container label,  md-input-container .md-input {
+  font-size: 14px;
+  color: white !important;
+}
+
+md-input-container .md-input{
+  margin-top: 7px;
+}
+md-input-container label{
+  margin-left: 8px;
+}
+
+md-autocomplete{
+  min-width: inherit;
+}
+
+md-input-container{
+  margin: auto;
+  padding: 0px;
+}
+
+md-autocomplete[md-floating-label] md-input-container{
+  padding-bottom: 0px;
+}
+
+.md-errors-spacer{
+  display: none;
 }

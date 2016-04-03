@@ -1,4 +1,4 @@
-var app = angular.module('austrianAirlinesApp', ['ngRoute', 'ui.materialize', 'jquery-alt']);
+var app = angular.module('austrianAirlinesApp', ['ngRoute', 'ui.materialize', 'jquery-alt', 'ngMaterial']);
 
 /**
  * configure master page routes
