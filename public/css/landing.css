@@ -1,3 +1,4 @@
+/* Slider */
 .slides span{
    color: black;
 }
@@ -11,6 +12,7 @@
 
 }
 
+/* Search-Flight Form */
 .flight{
 
    position: absolute;
@@ -22,6 +24,7 @@
    min-width: 350px;
 }
 
+/* Left input fields of the form */
 .form-left{
   margin: auto;
   padding: 0px;
@@ -30,6 +33,7 @@
 
 }
 
+/* Right input fields of the form */
 .form-right{
   margin: auto;
   margin-left: 50px;
@@ -37,6 +41,7 @@
   width: 40%;
 }
 
+/* Information about Airlines section */
 .about-div h5{
   text-align: center;
 
@@ -46,6 +51,7 @@
   text-align: justify;
 }
 
+/* Media Queries for different viewports */
 @media (max-width: 800px){
 	.slides h2{
 		font-size: 35px;
