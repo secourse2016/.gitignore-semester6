@@ -68,7 +68,9 @@
 
 .about-div p{
   text-align: justify;
+  /*padding: 20px;*/
 }
+
 
 /* Media Queries for different viewports */
 @media (max-width: 810px){
