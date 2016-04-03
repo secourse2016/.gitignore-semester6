@@ -1,65 +1,57 @@
+<link href="css/formColors.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 
-  <link href="css/formColors.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+<br/>
+<br/>
 
-      <br/>
-      <br/>
+<div class="center-block" style="width: 500px;" ng-controller="PaymentController as payment">
 
-      <div class="center-block" style="width: 500px;" ng-controller="PaymentController as payment">
+  <div>
+    <h5 class="red-text text-darken-4" style="font-weight: bold">Payment Form</h5>
+  </div>
 
-        <div>
-          <h5 class="red-text text-darken-4" style="font-weight: bold;">Payment Form</h5>
-        </div>
+  <hr style="border-color: #9e9e9e">
 
-        <hr style="border-color: #9e9e9e">
-
-        <div class="card-panel grey lighten-3" style="border: 1.5px solid grey" id="form" >
-          <img src="assets/images/creditcards.png" alt="" class="responsive-img">
-          <hr style="border-color:#b71c1c">
-          <div>
-            <form class="col s12">
-
-              <div class="row">
-                <div class="input-field col s6">
-                  <input id="cardNo" type="text" class="validate">
-                  <label for="cardNo">Card No.</label>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="input-field col s6">
-                  <input id="cvv" type="text" class="validate">
-                  <label for="cvv">CVV</label>
-                </div>
-
-                <div class="input-field col s6">
-                  <input ng-model="date" input-date type="date"  select-years="15">
-                  <label for="expirydate">Expiry Date</label>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="input-field col s12">
-                  <a href="/successful"
-                  style="width: 435px;" class="btn waves-effect waves-light red"
-                  name="buy">Book Now
-                  <i class="material-icons right">payment</i>
-                  </a>
-
-                </div>
-
-              </div>
-
-            </form>
+  <div class="card-panel grey lighten-3" style="border: 1.5px solid grey" id="form" >
+    <img src="assets/images/creditcards.png" alt="" class="responsive-img">
+    <hr style="border-color:#b71c1c">
+    <div>
+      <form class="col s12">
+        
+        <div class="row">
+          <div class="input-field col s6">
+            <input id="cardNo" type="text" class="validate">
+            <label for="cardNo">Card No.</label>
           </div>
         </div>
 
-        <div>
-          <h5 class="red-text text-darken-4" style="font-weight: bold;">
-            Total Price: ${{payment.totalPrice}}
-          </h5>
+        <div class="row">
+          <div class="input-field col s6">
+            <input id="cvv" type="text" class="validate">
+            <label for="cvv">CVV</label>
+          </div>
+
+          <div class="input-field col s6">
+            <input id="expirydate" ng-model="date" input-date type="date"  select-years="15">
+            <label for="expirydate">Expiry Date</label>
+          </div>
         </div>
 
+        <div class="row">
+          <div class="input-field col s12">
+            <a href="/successful"
+            style="width: 435px;" class="btn waves-effect waves-light red"
+            name="buy">Book Now
+            <i class="material-icons right">payment</i>
+            </a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 
-
-
-      </div>
+  <div>
+    <h5 class="red-text text-darken-4" style="font-weight: bold;">
+      Total Price: ${{payment.totalPrice}}
+    </h5>
+  </div>
+</div>

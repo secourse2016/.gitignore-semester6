@@ -17,7 +17,7 @@
 </div>
 
 <!--  Search-Flight Form -->
-<form class="flight" >
+<form class="flight" ng-controller="searchFlightController">
   <div class="card red darken-1">
     <div class="card-content white-text">
       <span class="card-title">Find Flights</span>
@@ -25,19 +25,19 @@
 
       <!-- Flight From -->
       <div class="input-field col s6 form-left">
-          <input id="flight_from" type="text" class="validate">
+          <input id="flight_from" type="text" class="validate" ng-model="formData.origin">
           <label for="flight_from" class="white-text"><i class="material-icons tiny">flight_takeoff</i> From</label>
       </div>
 
       <!-- Flight To -->
       <div class="input-field col s6 form-right">
-          <input id="flight_to" type="text" class="validate">
+          <input id="flight_to" type="text" class="validate" ng-model="formData.destination">
           <label for="flight_to" class="white-text"><i class="material-icons tiny">flight_land</i> To</label>
       </div>
 
       <!-- Adults Count ( <= 10) -->
       <div class="input-field col s6 form-left">
-           <select material-select class="white-text">
+           <select material-select class="white-text" ng-model="formData.adults">
              <option value="0" disabled selected>Adults</option>
              <option value="1"><span style="color:black">1 adult</span></option>
              <option value="2">2 adults</option>
@@ -47,7 +47,7 @@
 
       <!-- Children Count ( <= 10) -->
       <div class="input-field col s6 form-right">
-           <select material-select class="white-text">
+           <select material-select class="white-text" ng-model="formData.children">
              <option value="0" disabled selected>Children</option>
              <option value="1">1 child</option>
              <option value="2">2 children</option>
@@ -57,32 +57,32 @@
 
       <!--  Trip Type -->
       <div class="form-left">
-        <input type="radio" id="one_way" name="trip_type" value="one_way" ng-model="tripType" ng-value="1" ng-checked="true"/>
+        <input type="radio" id="one_way" name="trip_type" ng-model="formData.tripType" ng-value="oneWay"/>
         <label for="one_way" class="white-text">One Way</label>
       </div>
       <div class="form-right">
-        <input type="radio" id="round_trip" name="trip_type" value="round_trip" ng-model="tripType" ng-value="2"/>
+        <input type="radio" id="round_trip" name="trip_type" ng-model="formData.tripType" ng-value="roundTrip"/>
         <label for="round_trip" class="white-text">Roundtrip</label>
       </div>
       <br><br>
 
       <!-- Departure Date -->
       <div class="input-field col s6 form-left">
-        <label for="departure" class="white-text">Departure</label>
+        <label for="departure" class="white-text">Outgoing</label>
         <input input-date
-             type="text" name="departure" id="departure" ng-model="departureDate"/>
+             type="text" name="departure" id="departure" ng-model="formData.outgoingDate"/>
       </div>
 
       <!--  Return Date -->
-      <div class="input-field col s6 form-right" ng-show="tripType===2">
+      <div class="input-field col s6 form-right" ng-show="tripType===roundTrip">
         <input input-date
-             type="text" name="return" id="return" ng-model="returnDate" />
+             type="text" name="return" id="return" ng-model="formData.returnDate" />
           <label for="return" class="white-text">Return</label>
       </div>
 
       <!-- Flight Class -->
       <div class="input-field col s6 ">
-           <select material-select class="white-text">
+           <select material-select class="white-text" ng-model="formData.flightClass">
              <option value="" disabled selected>Class</option>
              <option value="economy">Economy</option>
              <option value="business">Business</option>
@@ -90,10 +90,9 @@
            </select>
         </div>
     </div>
-
     <!-- Search for flights -->
     <div class="card-action right-align">
-      <a href="#" class="white-text">FIND NOW!</a>
+      <a class="waves-effect waves-light btn white red-text" ng-click="searchFlights()">FIND NOW!</a>
     </div>
   </div>
 </form>
