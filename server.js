@@ -30,4 +30,4 @@ app.route('/confirmation').get(sendIndex);
 app.route('/payment').get(sendIndex);
 app.route('/successful').get(sendIndex);
 
-app.listen(8080);
+app.listen(80);
