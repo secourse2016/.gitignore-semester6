@@ -1,7 +1,19 @@
 <link href="../css/passengers.css" rel="stylesheet">
-<div class="container" style="margin-bottom: 100px; margin-top: 50px;" ng-controller="passengerViewCtrl">
-  <!-- Flights Info goes here -->
+<link href="../css/formColors.css" rel="stylesheet">
 
+
+<div class="container" style="margin-bottom: 100px; margin-top: 50px;" ng-controller="passengerViewCtrl">
+
+
+  <!-- Progress bar goes here  -->
+  <div class="progtrckr-table" style="margin-bottom: 50px;">
+  <div class="progtrckr-done">Select Flight</div>
+  <div class="progtrckr-doing">Passengers details</div>
+  <div class="progtrckr-todo">Payement </div>
+  <div class="progtrckr-todo">Complete!</div>
+  </div>
+
+  <!-- Flights Info goes here -->
 
   <ul class="collection with-header" id="flightsInfo">
    <li class="collection-header "> <h3> Flight Information </h3></li>
@@ -31,11 +43,11 @@
           </p>
         </div>
       </div>
-      
-      
-      
-      
-      
+
+
+
+
+
     </li>
   </div>
 
@@ -84,30 +96,39 @@
        <div class="container">
          <div class="row">
            <div class="input-field col s6">
+            <i class="material-icons prefix">account_circle</i>
              <input id="first_name" type="text" class="validate" ng-model="formData[$index].firstName" required>
              <label for="first_name">First Name</label>
            </div>
            <div class="input-field col s6">
+             <i class="material-icons prefix">account_circle</i>
+
              <input id="last_name" type="text" class="validate" ng-model="formData[$index].lastName" required>
              <label for="last_name">Last Name</label>
            </div>
          </div>
          <div class="row">
            <div class="input-field col s6">
+             <i class="material-icons prefix">email</i>
              <input id="Email" type="email" class="validate" ng-model="formData[$index].emailAddress" required>
              <label for="Email">Email</label>
            </div>
            <div class="input-field col s6">
+             <i class="material-icons prefix">pan_tool</i>
+
              <input id="PassportNumber" type="text" class="validate" ng-model="formData[$index].passportNumber" required>
              <label for="PassportNumber">Passport Number</label>
            </div>
          </div>
          <div class="row">
            <div class="input-field col s6">
+             <i class="material-icons prefix">location_on</i>
              <input id="Nationality" type="text" class="validate" ng-model="formData[$index].nationality" required>
              <label for="Nationality">Nationality</label>
            </div>
           <div class="input-field col s6">
+            <i class="material-icons prefix">today</i>
+
                   <input ng-model="formData[$index].birthDate" input-date type="text"  select-years="15" required>
                   <label for="">Birth Date</label>
           </div>
