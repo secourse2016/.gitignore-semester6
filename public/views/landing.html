@@ -1,14 +1,95 @@
+<!--  CSS for Landing Page -->
 <link rel="stylesheet" href="css/landing.css" media="screen" charset="utf-8">
+<link rel="stylesheet" href="css/formColors.css" media="screen" charset="utf-8">
 
+<!-- Slider -->
 <div ng-controller="sliderController as sliderCtrl">
-  <div class="slider" slider>
-    <ul class="slides" slider-mouse>
+  <div class="slider" slider height="500">
+    <ul class="slides white" slider-mouse>
       <li ng-repeat="slide in sliderCtrl.slides">
         <img ng-src="{{ slide.image }}">
-          <div class="caption {{slide.entrance}}">
+          <div class="caption left-align">
             <h2><span>{{ slide.text }}</span></h2>
           </div>
       </li>
     </ul>
   </div>
 </div>
+
+<!--  Find Flights Form -->
+<form class="flight">
+  <div class="card red darken-1">
+    <div class="card-content white-text">
+      <span class="card-title">Find Flights</span>
+      <br>
+
+      <!-- Flight From -->
+      <div class="input-field col s6 form-left">
+          <input id="flight_from" type="text" class="validate">
+          <label for="flight_from" class="white-text"><i class="material-icons tiny">flight_takeoff</i> From</label>
+      </div>
+
+      <!-- Flight To -->
+      <div class="input-field col s6 form-right">
+          <input id="flight_to" type="text" class="validate">
+          <label for="flight_to" class="white-text"><i class="material-icons tiny">flight_land</i> To</label>
+      </div>
+
+      <!-- Adults Count (Needs more work) -->
+      <div class="input-field col s6 form-left">
+           <select material-select class="white-text">
+             <option value="" disabled selected>Adults</option>
+             <option value="1"><span style="color:black">1 adult</span></option>
+             <option value="2">2 adults</option>
+             <option value="3">3 adults</option>
+           </select>
+        </div>
+
+      <!-- Children Count (Needs more work) -->
+      <div class="input-field col s6 form-right">
+           <select material-select class="white-text">
+             <option value="" disabled selected>Children</option>
+             <option value="1">1 child</option>
+             <option value="2">2 children</option>
+             <option value="3">3 children</option>
+           </select>
+        </div>
+
+      <!--  Trip Type -->
+      <div class="form-left">
+        <input type="radio" id="one_way" name="trip_type" value="one_way" ng-model="tripType" ng-value="1" ng-checked="true"/>
+        <label for="one_way" class="white-text">One Way</label>
+      </div>
+      <div class="form-right">
+        <input type="radio" id="round_trip" name="trip_type" value="round_trip" ng-model="tripType" ng-value="2"/>
+        <label for="round_trip" class="white-text">Round-trip</label>
+      </div>
+      <br><br>
+
+      <!-- Timings -->
+      <div class="input-field col s6 form-left">
+        <label for="departure" class="white-text">Departure</label>
+        <input input-date
+             type="text" name="departure" id="departure" ng-model="currentTime"/>
+      </div>
+
+      <div class="input-field col s6 form-right" ng-show="tripType===2">
+        <input input-date
+             type="text" name="return" id="return" ng-model="currentTime" />
+          <label for="return" class="white-text">Return</label>
+      </div>
+
+      <!-- Flight Class -->
+      <div class="input-field col s6 ">
+           <select material-select class="white-text">
+             <option value="" disabled selected>Class</option>
+             <option value="economy">Economy</option>
+             <option value="business">Business</option>
+           </select>
+        </div>
+    </div>
+    <div class="card-action right-align">
+      <a href="#" class="white-text">FIND NOW!</a>
+    </div>
+  </div>
+</form>
