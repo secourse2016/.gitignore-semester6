@@ -44,13 +44,11 @@
 }
 
 .trip-type-left{
-  margin-top: 10px;
   margin-left: -5px;
 }
 
 
 .trip-type-right{
-  margin-top: 10px;
   margin-left: 50px;
 }
 
@@ -81,6 +79,10 @@
 	}
 	.form-left, .form-right{
 		width: 30%;
+	}
+	.trip-type-left, .trip-type-right
+	{
+		width: 40%;
 	}
 }
 @media (max-width: 615px){
