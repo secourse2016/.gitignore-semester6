@@ -1,9 +1,13 @@
+<<<<<<< HEAD
 <link href="../css/flights.css" rel="stylesheet">
+=======
+>>>>>>> 8cd26885db0a7105ce969a6636d5973fdd860850
 <div class="container" ng-controller="flightsCtrl">
 
   <div class="col s12 m6">
     <form >
       <div >
+<<<<<<< HEAD
 
         <h4><i class="small material-icons out" >local_airport</i>{{booking.origin}} - {{booking.destination}}</h4>
         <div >
@@ -12,6 +16,15 @@
              <th>flight</th>
              <th>economy class</th>
              <th>bussiness class</th>
+=======
+        <h3><i class="medium material-icons " style="margin-top: 10px">local_airport</i>{{booking.origin}} - {{booking.destination}}</h3>
+        <div style="border-radius: 50%">
+          <table class="striped" >
+            <tr style="background-color: #ef5350; border-radius: 5px">
+             <th style="color: white">flight</th>
+             <th style="color: white">economy class</th>
+             <th style="color: white">bussiness class</th>
+>>>>>>> 8cd26885db0a7105ce969a6636d5973fdd860850
 
            </tr >
            <tr ng-repeat="flight in booking.outgoing_flights">
@@ -31,6 +44,7 @@
                   </i>
 
                 </div>
+<<<<<<< HEAD
                   <span  class="section full_info" ng-show="trans.id == $index">
                 <div class="card red darken-1 trans_card" ng-repeat="trans in booking.outgoing_flights[$index].flights">
                  <div class="card-content white-text">
@@ -42,6 +56,10 @@
              </div> 
           </td>
               <td>
+=======
+              </th>
+              <th>
+>>>>>>> 8cd26885db0a7105ce969a6636d5973fdd860850
                 <div >
                   <input class="with-gap" name="group1" type="radio" id="test5/2/{{$index}}" value="0/{{$index}}" ng-model="info[0]"/>
                   <label for="test5/2/{{$index}}">{{flight.economy}}</label>
@@ -57,7 +75,7 @@
             </tr>
           </table>
         </div>
-        
+
       </div>
 
       <div >
@@ -123,6 +141,3 @@
 
 </div>
 </div>
-
-
-
