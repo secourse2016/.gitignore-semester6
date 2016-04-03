@@ -1,4 +1,4 @@
-	
+
 
 
 var app = angular.module('austrianAirlinesApp', ['ngRoute']);
@@ -11,28 +11,34 @@ var app = angular.module('austrianAirlinesApp', ['ngRoute']);
  */
  app.config(function($routeProvider , $locationProvider) {
     $routeProvider.when('/', {
-        templateUrl : 'views/landing.html'
-    })
+            templateUrl : 'views/landing.html'
+        })
+
+        // route for payment page
+        .when('/payment', {
+            templateUrl : 'views/payment.html'
+        })
+
         // route for the about page
         .when('/about', {
-            templateUrl : 'views/about.html'
+            templateUrl : 'views/static/about.html'
         })
 
         // route for the contact page
         .when('/contact', {
-            templateUrl : 'views/contact.html'
+            templateUrl : 'views/static/contact.html'
         })
         // route for the help page
         .when('/help', {
-            templateUrl : 'views/help.html'
+            templateUrl : 'views/static/help.html'
         })
         // route for the Terms & Conditions page
         .when('/termsAndConditions', {
-            templateUrl : 'views/termsAndConditions.html'
+            templateUrl : 'views/static/termsAndConditions.html'
         })
         // route for the Privacy Policy page
         .when('/privacypolicy', {
-            templateUrl : 'views/privacypolicy.html'
+            templateUrl : 'views/static/privacypolicy.html'
         })
         // route for the Booking a Flight page
         .when('/bookAFlight', {
@@ -46,10 +52,28 @@ var app = angular.module('austrianAirlinesApp', ['ngRoute']);
         .when('/pricing', {
             templateUrl : 'views/pricing.html'
         })
+
+        //route for end of journy :v
+        .when('/successful', {
+            templateUrl : 'views/successful-payment.html'
+        })
+        
         //route for the confirmation page
 		.when('/confirmation',{
         	templateUrl : 'views/confirm.html'
+        })
+
+        //route for the confirmation page
+        .when('/passengers',{
+            templateUrl : 'views/passengers.html'
+        })
+
+
+        //route for the flight booking page
+        .when('/flights',{
+            templateUrl : 'views/flights.html'
         });
+
         // use the HTML5 History API
         $locationProvider.html5Mode(true);
 
@@ -72,6 +96,7 @@ var app = angular.module('austrianAirlinesApp', ['ngRoute']);
       // .error(function() {
       //         console.log('Error: ' + data);
       // });
+
     if($scope.subscribeData.email){
         Materialize.toast('You have been added to our mailing list.', 4000)
         $scope.subscribeData.email = '';   
@@ -114,5 +139,3 @@ var landingSlides = [
         entrance: 'right-align'
     }
 ];
-
-
