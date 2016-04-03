@@ -42,6 +42,10 @@
 
 }
 
+.about-div p{
+  text-align: justify;
+}
+
 @media (max-width: 800px){
 	.slides h2{
 		font-size: 35px;
