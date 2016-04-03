@@ -6,14 +6,15 @@ app.controller('passengerViewCtrl' , function($scope, global, $location){
   //for filling it with passengers info .
   $scope.formData =[];
 
-    // returnFlight and outGoingTrip from the service to be put in viwe . (Working)
+    // Get all information from the global service, to be used in the view
 
-    $scope.outgoingFlight = global.outGoingTrip;
-    $scope.returnFlight = global.returnTrip;
-
-    $scope.submitForm = function() {
+      $scope.infoFlow = global;
+  
+      $scope.adults = new Array(global.searchFlight.adults);
+      $scope.children = new Array(global.searchFlight.children);
+      
+      $scope.submitForm = function() {
       // set passengers Array in service with filled passengers info .
-
       global.setPassengers($scope.formData);
       $location.path('/confirmation');
 
