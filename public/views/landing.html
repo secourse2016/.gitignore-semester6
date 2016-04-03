@@ -17,7 +17,7 @@
 </div>
 
 <!--  Search-Flight Form -->
-<form class="flight" ng-controller="searchFlightController">
+<form class="flight" ng-controller="searchFlightController as searchCtrl">
   <div class="card red darken-1">
     <div class="card-content white-text">
       <span class="card-title">Find Flights</span>
@@ -38,20 +38,18 @@
       <!-- Adults Count ( <= 10) -->
       <div class="input-field col s6 form-left">
            <select material-select class="white-text" ng-model="formData.adults">
-             <option value="0" disabled selected>Adults</option>
+             <option value="" disabled selected>Adults</option>
              <option value="1"><span style="color:black">1 adult</span></option>
-             <option value="2">2 adults</option>
-             <option value="3">3 adults</option>
+             <option value="{{n}}" ng-repeat="n in searchCtrl.range">{{n}} adults</option>
            </select>
         </div>
 
       <!-- Children Count ( <= 10) -->
       <div class="input-field col s6 form-right">
            <select material-select class="white-text" ng-model="formData.children">
-             <option value="0" disabled selected>Children</option>
+             <option value="" disabled selected>Children</option>
              <option value="1">1 child</option>
-             <option value="2">2 children</option>
-             <option value="3">3 children</option>
+             <option value="{{n}}" ng-repeat="n in searchCtrl.range">{{n}} children</option>
            </select>
         </div>
 
@@ -97,8 +95,9 @@
   </div>
 </form>
 
+
+
 <!--  Information About the Airlines -->
-<div class="row about-div">
   <div class="col s6">
       <div class="section">
         <h5>Our Environment, Our Responsibility</h5>

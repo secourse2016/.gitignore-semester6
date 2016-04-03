@@ -32,7 +32,9 @@
 	 * and redirecting to the flights view.
 	 */
 	app.controller('searchFlightController', function($scope, global, $location){
-
+		this.range = [];
+		for(var i = 2; i <= 7; ++i)
+			this.range.push(i);
 		$scope.formData = {};
 		$scope.searchFlights = function(){
 			global.setSearchFlight($scope.formData);
