@@ -4,69 +4,62 @@
   <ul class="collection with-header" id="flightsInfo">
    <li class="collection-header"> <h3>Flight Information</h3></li>
    <div>
-     <li class="collection-item"><h4>{{outGoingTrip.origin}} - {{outGoingTrip.destination}}</h4></li>
-     <li  class="collection-item" ng-repeat="interFlight in outGoingTrip.flights">
+    <li class="collection-header"><h4>{{infoFlow.getOutGoingTrip().flights[0].origin_abb}} - {{infoFlow.getOutGoingTrip().flights[infoFlow.getOutGoingTrip().flights.length - 1].destination_abb}}</h4></li>
+     <li  class="collection-item" ng-repeat="interFlight in infoFlow.getOutGoingTrip().flights">
       <div class="row">
-        <div class="col s10 m5 l2">
+        <div class="col s10 m6 l3">
           <p>
-            <i class="material-icons" style="margin-right:5px">date_range</i>  {{interFlight.date}}
+            <i class="material-icons" style="margin-right:5px">date_range</i>  {{interFlight.departure_time}}
           </p>
         </div>
-        <div class="col s10 m5 l2">
+        <div class="col s10 m6 l3">
           <p>
-            <i class="material-icons " style="margin-right:5px ; margin-left:5px">local_airport</i>  {{interFlight.airport}}
+            <i class="material-icons " style="margin-right:5px ; margin-left:5px">local_airport</i>  {{interFlight.origin_abb}}
           </p>
         </div>
-        <div class="col s10 m5 l2">
+        
+        <div class="col s10 m6 l3">
           <p>
-            <i class="material-icons" style="margin-right:5px ; margin-left:5px">access_time</i>  {{interFlight.duration}} hours
+            <i class="material-icons" style="margin-right:5px ; margin-left:5px">attach_money</i>  {{infoFlow.getOutGoingTrip().class}}
           </p>
         </div>
-        <div class="col s10 m5 l2">
+        <div class="col s10 m6 l3">
           <p>
-            <i class="material-icons" style="margin-right:5px ; margin-left:5px">attach_money</i>  {{interFlight.class}}
-          </p>
-        </div>
-        <div class="col s10 m5 l2">
-          <p>
-           <i class="material-icons" style="margin-right:5px ; margin-left:5px">airline_seat_recline_normal</i>  {{interFlight.seat}}
+           <i class="material-icons" style="margin-right:5px ; margin-left:5px">airline_seat_recline_normal</i>  32B
           </p>
         </div>
       </div>
+      
     </li>
   </div>
 
   <div>
-    <li class="collection-item"><h4>{{returnTrip.origin}} - {{returnTrip.destination}}</h4></li>
-    <li  class="collection-item" ng-repeat="interFlight in returnTrip.flights">
-     <div class="row">
-        <div class="col s10 m5 l2">
+    <li class="collection-header "><h4>{{infoFlow.getReturnTrip().flights[0].origin_abb}} - {{infoFlow.getReturnTrip().flights[infoFlow.getReturnTrip().flights.length - 1].destination_abb}}</h4></li>
+  <li  class="collection-item" ng-repeat="interFlight in infoFlow.getReturnTrip().flights">
+   <div class="row">
+        <div class="col s10 m6 l3">
           <p>
-            <i class="material-icons" style="margin-right:5px">date_range</i>  {{interFlight.date}}
+            <i class="material-icons" style="margin-right:5px">date_range</i>  {{interFlight.departure_time}}
           </p>
         </div>
-        <div class="col s10 m5 l2">
+        <div class="col s10 m6 l3">
           <p>
-            <i class="material-icons " style="margin-right:5px ; margin-left:5px">local_airport</i>  {{interFlight.airport}}
+            <i class="material-icons " style="margin-right:5px ; margin-left:5px">local_airport</i>  {{interFlight.origin_abb}}
           </p>
         </div>
-        <div class="col s10 m5 l2">
+        
+        <div class="col s10 m6 l3">
           <p>
-            <i class="material-icons" style="margin-right:5px ; margin-left:5px">access_time</i>  {{interFlight.duration}} hours
+            <i class="material-icons" style="margin-right:5px ; margin-left:5px">attach_money</i>  {{infoFlow.getOutGoingTrip().class}}
           </p>
         </div>
-        <div class="col s10 m5 l2">
+        <div class="col s10 m6 l3">
           <p>
-            <i class="material-icons" style="margin-right:5px ; margin-left:5px">attach_money</i>  {{interFlight.class}}
-          </p>
-        </div>
-        <div class="col s10 m5 l2">
-          <p>
-           <i class="material-icons" style="margin-right:5px ; margin-left:5px">airline_seat_recline_normal</i>  {{interFlight.seat}}
+           <i class="material-icons" style="margin-right:5px ; margin-left:5px">airline_seat_recline_normal</i>  32B
           </p>
         </div>
       </div>
-   </li>
+ </li>
  </div>
 </ul>
 
@@ -74,7 +67,7 @@
 
 <ul class="collection with-header" id="passengerInfo">
  <li class="collection-header"> <h3> Passengers Information </h3></li>
- <li  class="collection-item" ng-repeat="passenger in passengers">
+ <li  class="collection-item" ng-repeat="passenger in infoFlow.getPassengers()">
   <div class="row">
     <div class="col s12"><p>{{passenger.firstName}}</p></div>
     <div class="col s12"><p>{{passenger.lastName}}</p></div>
