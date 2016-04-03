@@ -12,32 +12,40 @@
   <link href="css/master.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 
 
-  <script src="js/jquery-1.11.2.min.js"></script>
+
+  <script src="js/libraries/jquery-1.11.2.min.js"></script>
 
   <!--Angularjs-->
-  <script src="js/angular.min.js"></script>
+  <script src="js/libraries/angular.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
-  <script src="js/angular-jquery.js"></script>
+  <script src="js/libraries/angular-jquery.js"></script>
+
+  <!-- Autocomplete Dependencies -->
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
 
   <!--  Scripts-->
-
-  <script src="js/materialize.min.js"></script>
-  <script src="js/angular-materialize.js"></script>
+  <script src="js/libraries/materialize.min.js"></script>
+  <script src="js/libraries/angular-materialize.js"></script>
 
   <script src="js/init.js"></script>
 
   <!--Main app-->
   <script src="js/app.js"></script>
 
-  <script src="js/flights.js"></script>
-
   <!-- controllers -->
   <script type="text/javascript" src="js/services/globalService.js"></script>
+  <script src="js/controllers/landingController.js"></script>
+  <script src="js/controllers/flightsCtrl.js"></script>
+  <script type="text/javascript" src="js/services/flightsService.js"></script>
+  <script type="text/javascript" src="js/controllers/passengerViewCtrl.js"></script>
   <script type="text/javascript" src="js/controllers/passengerViewCtrl.js"></script>
   <script type="text/javascript" src="js/controllers/confirmationController.js"></script>
   <script type="text/javascript" src="js/controllers/paymentController.js"></script>
   <script type="text/javascript" src="js/controllers/passengerViewCtrl.js"></script>
-
 
   <!--favicon image-->
   <link rel="icon" type="image/ico" href="assets/images/favicon.ico"/>
@@ -66,9 +74,7 @@
   <div id="mainContainer" class="mainContainer">
     <!-- angular templating -->
     <!-- this is where content will be injected -->
-
     <div ng-view></div>
-
   </div>
   <footer class="page-footer red">
     <div class="container">
