@@ -29,50 +29,10 @@ angular.module('austrianAirlinesApp').service('global', function() {
 	this.passengers = [];
 
 	// the outgoing trip selected by the user
-	this.outGoingTrip =
-	{
-		origin: 'CAI',
-		destination : 'JKA',
-		flights : [
-			{
-				airport : 'CAI',
-				date : 'March 25',
-				duration: '5',
-				class: 'Economy',
-				seat : '23B'
-			},
-			{
-				airport : 'Tegel',
-				date : 'March 26',
-				duration: '1',
-				class: 'Economy',
-				seat : '22E'
-			}
-		]
-	};
-
+	this.outGoingTrip = {};
+	
 	// The return trip selected by the user
-	this.returnTrip =
-	{
-		origin: 'JKA',
-		destination : 'CAI',
-		flights : [
-			{
-				airport : 'JKA',
-				date : 'April 1',
-				duration: '4',
-				class: 'Economy',
-				seat : '23B'
-			},
-			{
-				airport : 'Tegel',
-				date : 'March 26',
-				duration: '1',
-				class: 'Economy',
-				seat : '22E'
-			}
-		]
-	};
+	this.returnTrip = {};
 
 	/**
 	 * Set the search flight information from the landing-page search form.
