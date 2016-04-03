@@ -1,52 +1,61 @@
-<div class="container" ng-controller="flightsCtrl">
+
+<link href="css/flights.css" rel="stylesheet">
+
+<div class="container flights_table_container" ng-controller="flightsCtrl">
+
+<h4 style="color:#7B0A0A">Select your flights</h4>
   <div class="col s12 m6">
     <form >
       <div >
-        <h3><i class="medium material-icons " style="margin-top: 10px">local_airport</i>{{booking.origin}} - {{booking.destination}}</h3>
-        <div style="border-radius: 50%">
-          <table class="striped" >
-            <tr style="background-color: #ef5350; border-radius: 5px">
-             <th style="color: white">flight</th>
-             <th style="color: white">economy class</th>
-             <th style="color: white">bussiness class</th>
-
+        <h5><i class="small material-icons out" >local_airport</i>{{booking.origin}} - {{booking.destination}}</h5>
+        <div >
+          <table class="striped flights_table" >
+            <tr class="th">
+             <th>Flight</th>
+             <th>Economy class</th>
+             <th>Bussiness class</th>
            </tr >
            <tr ng-repeat="flight in booking.outgoing_flights">
-            <th style="width: 300px">
-              <div>
-                {{flight.flights[0].departure_time}}-{{flight.flights[flight.flights.length-1].arrival_time}}<br>
-                <span style="font-size: 10px">
+              <td>
+              <div class="row" >
+              <div class="col s7 offset-s2">
+                {{flight.flights[0].departure_time}}-{{flight.flights[flight.flights.length-1].arrival_time}}
+                <br>
+                 <span class="font10">
                  {{flight.flights[0].origin_abb}}-{{flight.flights[flight.flights.length-1].destination_abb}} {{flight.flights.length-1}} stop(s)
                </span>
-             </div>
-             <div>
-              <div class="divider"></div>
 
-              <div class="section">
-                <span ng-hide="trans.id == $index" ><i class="material-icons" style="cursor: pointer" ng-click = "trans.id = $index" >info_outline</i></span>
-                <span  class="section" ng-show="trans.id == $index">
-                  <div class="card-panel red darken-1" style="width: 300px" ng-repeat="trans in booking.outgoing_flights[$index].flights">
-                    <div class="card-content white-text">
-                      <div style="font-size: 15px">Lufthanse Flight: {{trans.flightNumber}}</div>
-                      <div class="divider"></div>
-                      <div  style="font-size: 12px">{{trans.departure_time}} <i class="tiny material-icons">flight_takeoff</i> {{trans.origin}} ({{trans.origin_abb}}) ,Terminal {{trans.origin_term}}<br>{{trans.arrival_time}} <i class="tiny material-icons">flight_land</i> {{trans.destination}} ({{trans.destination_abb}}) ,Terminal {{trans.destination_term}}<br>Aircraft: {{trans.aircraft_code}}</div>
-                    </div>
-                  </span>
                 </div>
-              </th>
-              <th>
+
+                <div class="col s12 m1 show_info" >
+                  <i class="material-icons info-icon" ng-Mouseover = "trans.id = $index" ng-Mouseleave = "trans.id = -1">info_outline
+                  </i>
+
+                </div>
+                  <span  class="section full_info" ng-show="trans.id == $index">
+                <div class="card red darken-1 trans_card" ng-repeat="trans in booking.outgoing_flights[$index].flights">
+                 <div class="card-content white-text">
+                  <div class="panel-heading font15">Lufthanse Flight: {{trans.flightNumber}}</div>
+                  <div class="divider"></div>
+                  <div class="panel-body font12">{{trans.departure_time}} <i class="tiny material-icons">flight_takeoff</i> {{trans.origin}} ({{trans.origin_abb}}) ,Terminal {{trans.origin_term}}<br>{{trans.arrival_time}} <i class="tiny material-icons">flight_land</i> {{trans.destination}} ({{trans.destination_abb}}) ,Terminal {{trans.destination_term}}<br>Aircraft: {{trans.aircraft_code}}</div>
+                </div>
+              </span>
+             </div> 
+          </td>
+              <td>
+
                 <div >
                   <input class="with-gap" name="group1" type="radio" id="test5/2/{{$index}}" value="0/{{$index}}" ng-model="info[0]"/>
-                  <label for="test5/2/{{$index}}">{{flight.economy}}</label>
+                  <label for="test5/2/{{$index}}">$ {{flight.economy}}</label>
                 </div>
-              </th>
-              <th>
+              </td>
+              <td>
                 <div >
-                  <input class="with-gap red" style="cursor: pointer;" name="group1" type="radio" id="test6/2/{{$index}}"  value="1/{{$index}}" ng-model="info[0]">
-                  <label for="test6/2/{{$index}}">{{flight.bussiness}}</label>
+                  <input class="with-gap red info_icon" name="group1" type="radio" id="test6/2/{{$index}}"  value="1/{{$index}}" ng-model="info[0]">
+                  <label for="test6/2/{{$index}}">$ {{flight.bussiness}}</label>
                 </div>
 
-              </th>
+              </td>
             </tr>
           </table>
         </div>
@@ -54,58 +63,63 @@
       </div>
 
       <div >
-        <h3 ><i class="medium material-icons" style="-webkit-transform: rotate(180deg) translateY(-12px)">local_airport</i>{{booking.destination}} - {{booking.origin}}</h3>
+        <h5 ><i class="small material-icons head1">local_airport</i>{{booking.destination}} - {{booking.origin}}</h5>
         <div>
-          <table class="striped">
-            <tr style="background-color: #ef5350; border-radius: 5px">
-             <th style="color: white">flight</th>
-             <th style="color: white">economy class</th>
-             <th style="color: white">bussiness class</th>
+          <table class="striped flights_table">
+            <tr class="thh">
+             <th>Flight</th>
+             <th>Economy Class</th>
+             <th>Bussiness Class</th>
            </tr>
            <tr ng-repeat="flight in booking.ingoing_flights">
-            <th style="width: 300px">
-              <div class="container" >
-                {{flight.flights[0].departure_time}} - {{flight.flights[flight.flights.length-1].arrival_time}}<br>
-                <span style="font-size: 10px">
+            <td>
+              <div class="row" >
+              <div class="col s7 offset-s2">
+                {{flight.flights[0].departure_time}} - {{flight.flights[flight.flights.length-1].arrival_time}}
+                <br>
+                 <span class="font10">
                  {{flight.flights[0].origin_abb}}-{{flight.flights[flight.flights.length-1].destination_abb}} {{flight.flights.length-1}} stop(s)
                </span>
-             </div>
-             <div class="divider"></div>
 
-             <div class="section" style="max-width: 300px" >
-              <span ng-hide="trans.id == $index+booking.outgoing_flights.length" ><i class="material-icons" style="cursor: pointer" ng-click = "trans.id = $index+booking.outgoing_flights.length">info_outline</i></span>
+                </div>
 
-              <span  class="section" ng-show="trans.id == $index+booking.outgoing_flights.length">
-                <div class="card red darken-1" style="max-width: 300px" ng-repeat="trans in booking.ingoing_flights[$index].flights">
+                <div class="col s12 m1 show_info" >
+                  <i class="material-icons info_icon" ng-Mouseover = "trans.id = $index+booking.outgoing_flights.length" ng-Mouseleave = "trans.id = -1">info_outline
+                  </i>
+
+                </div>
+                  <span  class="section full_info" ng-show="trans.id == $index+booking.outgoing_flights.length">
+                <div class="card red darken-1 trans_card " ng-repeat="trans in booking.ingoing_flights[$index].flights">
                  <div class="card-content white-text">
-                  <div class="panel-heading"style="font-size: 15px">Lufthanse Flight: {{trans.flightNumber}}</div>
+                  <div class="panel-heading font15">Lufthanse Flight: {{trans.flightNumber}}</div>
                   <div class="divider"></div>
-                  <div class="panel-body" style="font-size: 12px">{{trans.departure_time}} <i class="tiny material-icons">flight_takeoff</i> {{trans.origin}} ({{trans.origin_abb}}) ,Terminal {{trans.origin_term}}<br>{{trans.arrival_time}} <i class="tiny material-icons">flight_land</i> {{trans.destination}} ({{trans.destination_abb}}) ,Terminal {{trans.destination_term}}<br>Aircraft: {{trans.aircraft_code}}</div>
+                  <div class="panel-body font12">{{trans.departure_time}} <i class="tiny material-icons">flight_takeoff</i> {{trans.origin}} ({{trans.origin_abb}}) ,Terminal {{trans.origin_term}}<br>{{trans.arrival_time}} <i class="tiny material-icons">flight_land</i> {{trans.destination}} ({{trans.destination_abb}}) ,Terminal {{trans.destination_term}}<br>Aircraft: {{trans.aircraft_code}}</div>
                 </div>
               </span>
-
-
-            </div>
-          </th>
-          <th>
+             </div> 
+          </td>
+          <td>
             <div >
               <input class="with-gap" name="group3" type="radio" id="test5/{{$index}}" value="0/{{$index}}" ng-model="info[1]"/>
-              <label for="test5/{{$index}}">{{flight.economy}}</label>
+              <label for="test5/{{$index}}">$ {{flight.economy}}</label>
             </div>
-          </th>
-          <th>
+          </td>
+          <td>
             <div >
               <input class="with-gap" name="group3" type="radio" id="test6/{{$index}}"  value="1/{{$index}}" ng-model="info[1]">
-              <label for="test6/{{$index}}">{{flight.bussiness}}</label>
+              <label for="test6/{{$index}}">$ {{flight.bussiness}}</label>
             </div>
 
-          </th>
+          </td>
         </tr>
       </table>
     </div>
 
   </div>
-  <a class="waves-effect red darken-4 btn" style="margin-right: 800px" ng-click="moveForward()" href="">reserve</a>
+  <div class="button_div">
+    <a class="waves-effect red darken-4 btn reserve" ng-click="moveForward()" href="">reserve</a>
+  </div>
+  
 
 </form>
 
