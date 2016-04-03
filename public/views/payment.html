@@ -6,40 +6,41 @@
 
       <div class="center-block" style="width: 500px;" ng-controller="PaymentController as payment">
 
-        <div>
-          <h5 class="red-text text-darken-4" style="font-weight: bold;">Payment Form</h5>
-        </div>
+        <div class="card-panel grey lighten-3" style="border: 1.5px solid #eeeeee" id="form" >
 
-        <hr style="border-color: #9e9e9e">
+          <div style="margin-bottom: 20px">
+            <h5 class="red-text text-darken-1" style="font-weight: bold;">Payment Form</h5>
+          </div>
+          <hr style="border-color:red">
 
-        <div class="card-panel grey lighten-3" style="border: 1.5px solid grey" id="form" >
           <img src="assets/images/creditcards.png" alt="" class="responsive-img">
-          <hr style="border-color:#b71c1c">
+          <hr style="border-color:red">
           <div>
-            <form class="col s12">
+            
+            <form name="paymentForm" class="col s12" ng-submit="paymentForm.$valid && payment.addBoking()" novalidate>
 
               <div class="row">
                 <div class="input-field col s6">
-                  <input id="cardNo" type="text" class="validate">
+                  <input required ng-model="payment.cardNo" id="cardNo" type="text" class="validate">
                   <label for="cardNo">Card No.</label>
                 </div>
               </div>
 
               <div class="row">
                 <div class="input-field col s6">
-                  <input id="cvv" type="text" class="validate">
+                  <input required ng-model="payment.cvv" id="cvv" type="text" class="validate">
                   <label for="cvv">CVV</label>
                 </div>
 
                 <div class="input-field col s6">
-                  <input ng-model="date" input-date type="date"  select-years="15">
+                  <input required ng-model="payment.expiryDate" input-date type="text"  select-years="15">
                   <label for="expirydate">Expiry Date</label>
                 </div>
               </div>
 
               <div class="row">
                 <div class="input-field col s12">
-                  <a href="/successful"
+                  <a ng-href="{{ paymentForm.$valid ?'/successful' : '/payment'}}"
                   style="width: 435px;" class="btn waves-effect waves-light red"
                   name="buy">Book Now
                   <i class="material-icons right">payment</i>
@@ -48,13 +49,12 @@
                 </div>
 
               </div>
-
             </form>
           </div>
         </div>
 
         <div>
-          <h5 class="red-text text-darken-4" style="font-weight: bold;">
+          <h5 class="red-text text-darken-2" style="font-weight: bold;">
             Total Price: ${{payment.totalPrice}}
           </h5>
         </div>
