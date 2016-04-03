@@ -1,10 +1,9 @@
-
 (function(){
 	angular.module('austrianAirlinesApp')
 	.controller('PaymentController', function(){
 		this.booking = {}; // get all booking info from the global service
 		this.totalPrice = 3000; // = booking.totalPrice
-		
+
 		// Payment Form attributes
 		this.cardNo = null;
 		this.cvv = null;

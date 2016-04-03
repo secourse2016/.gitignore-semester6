@@ -1,6 +1,6 @@
 var app = angular.module('austrianAirlinesApp');
-app.controller('passengerViewCtrl' , function($scope, global,$location){
-  
+app.controller('passengerViewCtrl' , function($scope, global, $location){
+
   //for testing.
   $scope.passengers = [{type : 'Adult'},{type:'Child'} ];
   //for filling it with passengers info .
@@ -13,7 +13,7 @@ app.controller('passengerViewCtrl' , function($scope, global,$location){
 
     $scope.submitForm = function() {
       // set passengers Array in service with filled passengers info .
-      
+
       global.setPassengers($scope.formData);
       $location.path('/confirmation');
 
