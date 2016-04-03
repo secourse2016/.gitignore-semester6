@@ -59,10 +59,15 @@
 		margin-left: 30px;
 	}
 }
+@media (max-width: 615px){
+  .row .col.s6{
+    width: 100%;
+  }
+}
+
 @media (max-width: 550px){
 	.slides h2{
 		display: none;
-
 	}
 	.flight{
 		left: 0;
