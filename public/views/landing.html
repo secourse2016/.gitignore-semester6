@@ -4,7 +4,7 @@
 
 <!-- Slider -->
 <div ng-controller="sliderController as sliderCtrl">
-  <div class="slider" slider height="500">
+  <div class="slider" slider height="520">
     <ul class="slides white" slider-mouse>
       <li ng-repeat="slide in sliderCtrl.slides">
         <img ng-src="{{ slide.image }}">
@@ -16,80 +16,141 @@
   </div>
 </div>
 
-<!--  Find Flights Form -->
-<form class="flight">
+<!--  Search-Flight Form -->
+<form class="flight" ng-controller="searchFlightController as searchCtrl">
   <div class="card red darken-1">
     <div class="card-content white-text">
       <span class="card-title">Find Flights</span>
       <br>
 
       <!-- Flight From -->
-      <div class="input-field col s6 form-left">
-          <input id="flight_from" type="text" class="validate">
-          <label for="flight_from" class="white-text"><i class="material-icons tiny">flight_takeoff</i> From</label>
+      <div class="col s6 form-left">
+        <i class="material-icons">flight_takeoff</i>
+        <div ng-controller="autoCompleteController as ctrl">
+            <md-autocomplete required
+                md-input-name="autocompleteField"
+                md-selected-item="formData.origin"
+                md-search-text="ctrl.searchText"
+                md-items="item in ctrl.querySearch(ctrl.searchText)"
+                md-item-text="item.display"
+                md-floating-label="From">
+              <md-item-template>
+                <span md-highlight-text="ctrl.searchText">{{item.display}}</span>
+              </md-item-template>
+              <md-not-found>
+                   No airports matching "{{ctrl.searchText}}" were found.
+              </md-not-found>
+            </md-autocomplete>
+          </div>
       </div>
 
       <!-- Flight To -->
-      <div class="input-field col s6 form-right">
-          <input id="flight_to" type="text" class="validate">
-          <label for="flight_to" class="white-text"><i class="material-icons tiny">flight_land</i> To</label>
+      <div class="col s6 form-right">
+         <i class="material-icons">flight_land</i>
+          <div ng-controller="autoCompleteController as ctrl">
+            <md-autocomplete flex required
+                md-input-name="autocompleteField"
+                md-selected-item="formData.destination"
+                md-search-text="ctrl.searchText"
+                md-items="item in ctrl.querySearch(ctrl.searchText)"
+                md-item-text="item.display"
+                md-floating-label="To">
+              <md-item-template>
+                <span md-highlight-text="ctrl.searchText">{{item.display}}</span>
+              </md-item-template>
+              <md-not-found>
+                   No airports matching "{{ctrl.searchText}}" were found.
+              </md-not-found>
+            </md-autocomplete>
+          </div>
       </div>
 
-      <!-- Adults Count (Needs more work) -->
+      <!-- Adults Count -->
       <div class="input-field col s6 form-left">
-           <select material-select class="white-text">
+        <i class="material-icons">person</i>
+           <select material-select class="white-text" ng-model="formData.adults">
              <option value="" disabled selected>Adults</option>
              <option value="1"><span style="color:black">1 adult</span></option>
-             <option value="2">2 adults</option>
-             <option value="3">3 adults</option>
+             <option value="{{n}}" ng-repeat="n in searchCtrl.range">{{n}} adults</option>
            </select>
         </div>
 
-      <!-- Children Count (Needs more work) -->
+      <!-- Children Count -->
       <div class="input-field col s6 form-right">
-           <select material-select class="white-text">
+        <i class="material-icons">child_care</i>
+           <select material-select class="white-text" ng-model="formData.children">
              <option value="" disabled selected>Children</option>
              <option value="1">1 child</option>
-             <option value="2">2 children</option>
-             <option value="3">3 children</option>
+             <option value="{{n}}" ng-repeat="n in searchCtrl.range">{{n}} children</option>
            </select>
         </div>
 
       <!--  Trip Type -->
-      <div class="form-left">
-        <input type="radio" id="one_way" name="trip_type" value="one_way" ng-model="tripType" ng-value="1" ng-checked="true"/>
+      <div class="form-left trip-type-left">
+        <input type="radio" id="one_way" name="trip_type" ng-model="formData.tripType" ng-value="1"/>
         <label for="one_way" class="white-text">One Way</label>
       </div>
-      <div class="form-right">
-        <input type="radio" id="round_trip" name="trip_type" value="round_trip" ng-model="tripType" ng-value="2"/>
-        <label for="round_trip" class="white-text">Round-trip</label>
+      <div class="form-right trip-type-right">
+        <input type="radio" id="round_trip" name="trip_type" ng-model="formData.tripType" ng-value="2" ng-checked="true"/>
+        <label for="round_trip" class="white-text">Roundtrip</label>
       </div>
       <br><br>
 
-      <!-- Timings -->
+      <!-- Departure Date -->
       <div class="input-field col s6 form-left">
-        <label for="departure" class="white-text">Departure</label>
+        <i class="material-icons">date_range</i>
+        <label for="departure" class="white-text">Outgoing</label>
         <input input-date
-             type="text" name="departure" id="departure" ng-model="departureTime"/>
+             type="text" name="departure" id="departure" ng-model="formData.outgoingDate"/>
       </div>
 
-      <div class="input-field col s6 form-right" ng-show="tripType===2">
+      <!--  Return Date -->
+      <div class="input-field col s6 form-right" ng-show="formData.tripType===2">
+        <i class="material-icons">date_range</i>
         <input input-date
-             type="text" name="return" id="return" ng-model="arrivalTime" />
+             type="text" name="return" id="return" ng-model="formData.returnDate" />
           <label for="return" class="white-text">Return</label>
       </div>
 
       <!-- Flight Class -->
       <div class="input-field col s6 ">
-           <select material-select class="white-text">
+           <select material-select class="white-text" ng-model="formData.flightClass">
              <option value="" disabled selected>Class</option>
              <option value="economy">Economy</option>
              <option value="business">Business</option>
+             <!-- Add more classes here if needed -->
            </select>
         </div>
     </div>
+    <!-- Search for flights -->
     <div class="card-action right-align">
-      <a href="#" class="white-text">FIND NOW!</a>
+      <a class="waves-effect waves-light btn white red-text" ng-click="searchFlights()">FIND NOW!</a>
     </div>
   </div>
 </form>
+
+<!--  Information About the Airlines -->
+<div class="row about-div container">
+  <div class="col s6">
+      <div class="section">
+        <h5>Our Environment, Our Responsibility</h5>
+        <div class="divider"></div>
+        <p>
+          “Climate change and the extreme weather conditions associated with it are having a considerable effect on international air transport. Snowstorms and hurricanes show us how sensitively the aviation industry reacts to environmental impacts. We are therefore more convinced than ever of how important it is to make a contribution towards climate and environmental protection. We are working on new strategies together with environmental experts from the Lufthansa Group. The aim is to further expand our environmental and climate protection measures.”
+          Jaan Albrecht, CEO Austrian Airlines.
+          We are therefore engaged in implementing numerous measures to increase our resource and energy efficiency and to sustainably reduce our emissions and noise pollution.
+        </p>
+      </div>
+  </div>
+
+  <div class="col s6">
+      <div class="section">
+        <h5>Star Alliance</h5>
+        <div class="divider"></div>
+        <p>
+          The Star Alliance network is proud to have some of the world’s most respected airlines as members, offering you convenience, comfort and efficiency when travelling the globe. And the alliance continues to grow so that it can better serve your need for a smooth travel experience.
+          On March 26, 2000, Austrian Airlines joined Star Alliance, the largest airline alliance in the world, to offer you even better flight connections and more comfortable travel. Founded in 1997, the global alliance includes 28 renowned airlines serving 1.330 destinations in 192 countries and offering access to over 1000 airport lounges around the world. With more than 18.500 daily flights operated (one aircraft taking off every five seconds), there are plenty of alternatives to choose from. Youngest member of Star Alliance is Avianca Brazil.
+        </p>
+      </div>
+  </div>
+</div>

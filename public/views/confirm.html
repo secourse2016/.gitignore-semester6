@@ -1,12 +1,8 @@
-<link href="../css/confirm.css" rel="stylesheet">
+<link href="css/confirm.css" rel="stylesheet">
 <div class="container" style="margin-bottom: 100px; margin-top: 50px;" ng-controller="confirmationCtrl">
 
-
-  
-
-
   <ul class="collection with-header" id="flightsInfo">
-   <li class="collection-header"> <h3> Flight Information </h3></li>
+   <li class="collection-header"> <h3>Flight Information</h3></li>
    <div>
      <li class="collection-item"><h4>{{outGoingTrip.origin}} - {{outGoingTrip.destination}}</h4></li>
      <li  class="collection-item" ng-repeat="interFlight in outGoingTrip.flights">
@@ -91,6 +87,9 @@
     <div class="col s12 m6 l3"><h4>Nationaity</h4><p>{{passenger.nationality}}</p></div>
     <div class="col s12 m6 l3"><h4>PassportNumber</h4><p>{{passenger.passportNumber}}</p></div>
     
+    <div class="col s12 m6 l3"><p>{{passenger.birthDate}}</p></div>
+    <div class="col s12 m6 l3"><p>{{passenger.nationality}}</p></div>
+
   </div>
  </li>
 </ul>

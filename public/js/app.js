@@ -1,9 +1,4 @@
-
-
-
-var app = angular.module('austrianAirlinesApp', ['ngRoute']);
-
-    var app = angular.module('austrianAirlinesApp', ['ngRoute', 'ui.materialize', 'jquery-alt']);
+var app = angular.module('austrianAirlinesApp', ['ngRoute', 'ui.materialize', 'jquery-alt', 'ngMaterial']);
 
 /**
  * configure master page routes
@@ -12,11 +7,6 @@ var app = angular.module('austrianAirlinesApp', ['ngRoute']);
  app.config(function($routeProvider , $locationProvider) {
     $routeProvider.when('/', {
             templateUrl : 'views/landing.html'
-        })
-
-        // route for payment page
-        .when('/payment', {
-            templateUrl : 'views/payment.html'
         })
 
         // route for the about page
@@ -53,25 +43,29 @@ var app = angular.module('austrianAirlinesApp', ['ngRoute']);
             templateUrl : 'views/pricing.html'
         })
 
-        //route for end of journy :v
-        .when('/successful', {
-            templateUrl : 'views/successful-payment.html'
+        //route for the flight booking page
+        .when('/flights',{
+            templateUrl : 'views/flights.html'
         })
-        
+
+        //route for the passnegers details
+        .when('/passengers',{
+            templateUrl : 'views/passengers.html'
+        })
+
         //route for the confirmation page
 		.when('/confirmation',{
         	templateUrl : 'views/confirm.html'
         })
 
-        //route for the confirmation page
-        .when('/passengers',{
-            templateUrl : 'views/passengers.html'
+        // route for payment page
+        .when('/payment', {
+            templateUrl : 'views/payment.html'
         })
 
-
-        //route for the flight booking page
-        .when('/flights',{
-            templateUrl : 'views/flights.html'
+        //route for end of journy :v
+        .when('/successful', {
+            templateUrl : 'views/successful-payment.html'
         });
 
         // use the HTML5 History API
@@ -81,7 +75,7 @@ var app = angular.module('austrianAirlinesApp', ['ngRoute']);
 /**
  * take the mail from the view and make
  * post request to add the mail to Newsletter
- * @uncomment after creat the Post rout
+ * @uncomment after creating the Post route
  */
  app.controller('masterController', function($scope, $location) {
     $scope.subscribeData = {};
@@ -97,45 +91,20 @@ var app = angular.module('austrianAirlinesApp', ['ngRoute']);
       //         console.log('Error: ' + data);
       // });
 
-    if($scope.subscribeData.email){
-        Materialize.toast('You have been added to our mailing list.', 4000)
-        $scope.subscribeData.email = '';   
-    }
-  };
+        if($scope.subscribeData.email){
+            Materialize.toast('You have been added to our mailing list.', 4000);
+            $scope.subscribeData.email = '';
+        }
+    };
 });
 
 
- app.controller('contactUsCtrl',function($scope,$location){
+app.controller('contactUsCtrl',function($scope, $location){
     $scope.formData = {};
-    $scope.send = function()
-    {
+    $scope.send = function(){
         console.log($scope.formData);
-        Materialize.toast('We have received your message. Thank you!', 4000)
+        Materialize.toast('We have received your message. Thank you!', 4000);
         $location.path('/');
     }
 
- });
-
-
-app.controller('sliderController', function($scope){
-    this.slides = landingSlides;
-
 });
-
-var landingSlides = [
-     {
-        image: './assets/images/landing/landing_1.jpg',
-        text : 'Feel the Comfort and Luxury.',
-        entrance: 'left-align'
-    },
-    {
-        image: './assets/images/landing/landing_2.jpg',
-        text : 'Have Safe Flights.',
-        entrance: 'center-align'
-    },
-    {
-        image: './assets/images/landing/landing_3.jpg',
-        text : 'High Technology Airplanes.',
-        entrance: 'right-align'
-    }
-];

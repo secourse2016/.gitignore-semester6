@@ -19,11 +19,15 @@ app.route('/help').get(sendIndex);
 app.route('/contact').get(sendIndex);
 app.route('/termsAndConditions').get(sendIndex);
 app.route('/privacypolicy').get(sendIndex);
+
 app.route('/bookAFlight').get(sendIndex);
 app.route('/offers').get(sendIndex);
 app.route('/pricing').get(sendIndex);
+
+app.route('/flights').get(sendIndex);
 app.route('/passengers').get(sendIndex);
 app.route('/confirmation').get(sendIndex);
-app.route('/flights').get(sendIndex);
+app.route('/payment').get(sendIndex);
+app.route('/successful').get(sendIndex);
 
 app.listen(80);
