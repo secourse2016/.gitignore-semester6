@@ -14,8 +14,8 @@
 
 /* Search-Flight Form */
 .flight{
-
    position: absolute;
+   opacity: 0.95;
    right: 10px;
    top: 80px;
    z-index: 1000;

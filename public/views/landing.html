@@ -16,7 +16,7 @@
   </div>
 </div>
 
-<!--  Find Flights Form -->
+<!--  Search-Flight Form -->
 <form class="flight" >
   <div class="card red darken-1">
     <div class="card-content white-text">
@@ -35,7 +35,7 @@
           <label for="flight_to" class="white-text"><i class="material-icons tiny">flight_land</i> To</label>
       </div>
 
-      <!-- Adults Count (Needs more work) -->
+      <!-- Adults Count ( <= 10) -->
       <div class="input-field col s6 form-left">
            <select material-select class="white-text">
              <option value="0" disabled selected>Adults</option>
@@ -45,7 +45,7 @@
            </select>
         </div>
 
-      <!-- Children Count (Needs more work) -->
+      <!-- Children Count ( <= 10) -->
       <div class="input-field col s6 form-right">
            <select material-select class="white-text">
              <option value="0" disabled selected>Children</option>
@@ -62,17 +62,18 @@
       </div>
       <div class="form-right">
         <input type="radio" id="round_trip" name="trip_type" value="round_trip" ng-model="tripType" ng-value="2"/>
-        <label for="round_trip" class="white-text">Round-trip</label>
+        <label for="round_trip" class="white-text">Roundtrip</label>
       </div>
       <br><br>
 
-      <!-- Timings -->
+      <!-- Departure Date -->
       <div class="input-field col s6 form-left">
         <label for="departure" class="white-text">Departure</label>
         <input input-date
              type="text" name="departure" id="departure" ng-model="departureDate"/>
       </div>
 
+      <!--  Return Date -->
       <div class="input-field col s6 form-right" ng-show="tripType===2">
         <input input-date
              type="text" name="return" id="return" ng-model="returnDate" />
@@ -85,9 +86,12 @@
              <option value="" disabled selected>Class</option>
              <option value="economy">Economy</option>
              <option value="business">Business</option>
+             <!-- Add more classes here if needed -->
            </select>
         </div>
     </div>
+
+    <!-- Search for flights -->
     <div class="card-action right-align">
       <a href="#" class="white-text">FIND NOW!</a>
     </div>
@@ -101,9 +105,9 @@
         <h5>Our Environment, Our Responsibility</h5>
         <div class="divider"></div>
         <p>
-“Climate change and the extreme weather conditions associated with it are having a considerable effect on international air transport. Snowstorms and hurricanes show us how sensitively the aviation industry reacts to environmental impacts. We are therefore more convinced than ever of how important it is to make a contribution towards climate and environmental protection. We are working on new strategies together with environmental experts from the Lufthansa Group. The aim is to further expand our environmental and climate protection measures.”
-Jaan Albrecht, CEO Austrian Airlines.
-We are therefore engaged in implementing numerous measures to increase our resource and energy efficiency and to sustainably reduce our emissions and noise pollution.
+          “Climate change and the extreme weather conditions associated with it are having a considerable effect on international air transport. Snowstorms and hurricanes show us how sensitively the aviation industry reacts to environmental impacts. We are therefore more convinced than ever of how important it is to make a contribution towards climate and environmental protection. We are working on new strategies together with environmental experts from the Lufthansa Group. The aim is to further expand our environmental and climate protection measures.”
+          Jaan Albrecht, CEO Austrian Airlines.
+          We are therefore engaged in implementing numerous measures to increase our resource and energy efficiency and to sustainably reduce our emissions and noise pollution.
         </p>
       </div>
   </div>
@@ -114,7 +118,7 @@ We are therefore engaged in implementing numerous measures to increase our resou
         <div class="divider"></div>
         <p>
           The Star Alliance network is proud to have some of the world’s most respected airlines as members, offering you convenience, comfort and efficiency when travelling the globe. And the alliance continues to grow so that it can better serve your need for a smooth travel experience.
-On March 26, 2000, Austrian Airlines joined Star Alliance, the largest airline alliance in the world, to offer you even better flight connections and more comfortable travel. Founded in 1997, the global alliance includes 28 renowned airlines serving 1.330 destinations in 192 countries and offering access to over 1000 airport lounges around the world. With more than 18.500 daily flights operated (one aircraft taking off every five seconds), there are plenty of alternatives to choose from. Youngest member of Star Alliance is Avianca Brazil.
+          On March 26, 2000, Austrian Airlines joined Star Alliance, the largest airline alliance in the world, to offer you even better flight connections and more comfortable travel. Founded in 1997, the global alliance includes 28 renowned airlines serving 1.330 destinations in 192 countries and offering access to over 1000 airport lounges around the world. With more than 18.500 daily flights operated (one aircraft taking off every five seconds), there are plenty of alternatives to choose from. Youngest member of Star Alliance is Avianca Brazil.
         </p>
       </div>
   </div>
