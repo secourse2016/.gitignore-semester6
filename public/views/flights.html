@@ -1,18 +1,19 @@
 
-<link href="../css/flights.css" rel="stylesheet">
+<link href="css/flights.css" rel="stylesheet">
 
-<div class="container" ng-controller="flightsCtrl">
+<div class="container flights_table_container" ng-controller="flightsCtrl">
 
+<h4 style="color:#7B0A0A">Select your flights</h4>
   <div class="col s12 m6">
     <form >
       <div >
-        <h4><i class="small material-icons out" >local_airport</i>{{booking.origin}} - {{booking.destination}}</h4>
+        <h5><i class="small material-icons out" >local_airport</i>{{booking.origin}} - {{booking.destination}}</h5>
         <div >
           <table class="striped flights_table" >
             <tr class="th">
-             <th>flight</th>
-             <th>economy class</th>
-             <th>bussiness class</th>
+             <th>Flight</th>
+             <th>Economy class</th>
+             <th>Bussiness class</th>
            </tr >
            <tr ng-repeat="flight in booking.outgoing_flights">
               <td>
@@ -45,13 +46,13 @@
 
                 <div >
                   <input class="with-gap" name="group1" type="radio" id="test5/2/{{$index}}" value="0/{{$index}}" ng-model="info[0]"/>
-                  <label for="test5/2/{{$index}}">{{flight.economy}}</label>
+                  <label for="test5/2/{{$index}}">$ {{flight.economy}}</label>
                 </div>
               </td>
               <td>
                 <div >
                   <input class="with-gap red info_icon" name="group1" type="radio" id="test6/2/{{$index}}"  value="1/{{$index}}" ng-model="info[0]">
-                  <label for="test6/2/{{$index}}">{{flight.bussiness}}</label>
+                  <label for="test6/2/{{$index}}">$ {{flight.bussiness}}</label>
                 </div>
 
               </td>
@@ -62,13 +63,13 @@
       </div>
 
       <div >
-        <h4 ><i class="small material-icons head1">local_airport</i>{{booking.destination}} - {{booking.origin}}</h4>
+        <h5 ><i class="small material-icons head1">local_airport</i>{{booking.destination}} - {{booking.origin}}</h5>
         <div>
           <table class="striped flights_table">
             <tr class="thh">
-             <th>flight</th>
-             <th>economy class</th>
-             <th>bussiness class</th>
+             <th>Flight</th>
+             <th>Economy Class</th>
+             <th>Bussiness Class</th>
            </tr>
            <tr ng-repeat="flight in booking.ingoing_flights">
             <td>
@@ -100,13 +101,13 @@
           <td>
             <div >
               <input class="with-gap" name="group3" type="radio" id="test5/{{$index}}" value="0/{{$index}}" ng-model="info[1]"/>
-              <label for="test5/{{$index}}">{{flight.economy}}</label>
+              <label for="test5/{{$index}}">$ {{flight.economy}}</label>
             </div>
           </td>
           <td>
             <div >
               <input class="with-gap" name="group3" type="radio" id="test6/{{$index}}"  value="1/{{$index}}" ng-model="info[1]">
-              <label for="test6/{{$index}}">{{flight.bussiness}}</label>
+              <label for="test6/{{$index}}">$ {{flight.bussiness}}</label>
             </div>
 
           </td>
