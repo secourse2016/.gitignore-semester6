@@ -21,24 +21,24 @@ var app = angular.module('austrianAirlinesApp', ['ngRoute']);
 
         // route for the about page
         .when('/about', {
-            templateUrl : 'views/about.html'
+            templateUrl : 'views/static/about.html'
         })
 
         // route for the contact page
         .when('/contact', {
-            templateUrl : 'views/contact.html'
+            templateUrl : 'views/static/contact.html'
         })
         // route for the help page
         .when('/help', {
-            templateUrl : 'views/help.html'
+            templateUrl : 'views/static/help.html'
         })
         // route for the Terms & Conditions page
         .when('/termsAndConditions', {
-            templateUrl : 'views/termsAndConditions.html'
+            templateUrl : 'views/static/termsAndConditions.html'
         })
         // route for the Privacy Policy page
         .when('/privacypolicy', {
-            templateUrl : 'views/privacypolicy.html'
+            templateUrl : 'views/static/privacypolicy.html'
         })
         // route for the Booking a Flight page
         .when('/bookAFlight', {
