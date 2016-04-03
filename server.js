@@ -26,4 +26,4 @@ app.route('/passengers').get(sendIndex);
 app.route('/confirmation').get(sendIndex);
 app.route('/flights').get(sendIndex);
 
-app.listen(80);
+app.listen(8080);

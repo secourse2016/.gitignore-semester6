@@ -17,7 +17,7 @@
 </div>
 
 <!--  Find Flights Form -->
-<form class="flight">
+<form class="flight" >
   <div class="card red darken-1">
     <div class="card-content white-text">
       <span class="card-title">Find Flights</span>
@@ -38,7 +38,7 @@
       <!-- Adults Count (Needs more work) -->
       <div class="input-field col s6 form-left">
            <select material-select class="white-text">
-             <option value="" disabled selected>Adults</option>
+             <option value="0" disabled selected>Adults</option>
              <option value="1"><span style="color:black">1 adult</span></option>
              <option value="2">2 adults</option>
              <option value="3">3 adults</option>
@@ -48,7 +48,7 @@
       <!-- Children Count (Needs more work) -->
       <div class="input-field col s6 form-right">
            <select material-select class="white-text">
-             <option value="" disabled selected>Children</option>
+             <option value="0" disabled selected>Children</option>
              <option value="1">1 child</option>
              <option value="2">2 children</option>
              <option value="3">3 children</option>
@@ -70,12 +70,12 @@
       <div class="input-field col s6 form-left">
         <label for="departure" class="white-text">Departure</label>
         <input input-date
-             type="text" name="departure" id="departure" ng-model="departureTime"/>
+             type="text" name="departure" id="departure" ng-model="departureDate"/>
       </div>
 
       <div class="input-field col s6 form-right" ng-show="tripType===2">
         <input input-date
-             type="text" name="return" id="return" ng-model="arrivalTime" />
+             type="text" name="return" id="return" ng-model="returnDate" />
           <label for="return" class="white-text">Return</label>
       </div>
 

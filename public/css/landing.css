@@ -10,6 +10,7 @@
    max-width: 450px;
 
 }
+
 .flight{
 
    position: absolute;
@@ -19,27 +20,6 @@
    width: 40%;
    max-width: 500px;
    min-width: 350px;
-   /*width: 500px;*/
-}
-
-/* label color */
-.input-field label {
-  color: white;
-
-}
-.input-field input[type=text] {
-  border-bottom: 1px solid white;
-  box-shadow: 0 1px 0 0 white;
-}
-/* label focus color */
-.input-field input[type=text]:focus + label {
-  color: white;
-}
-
-/* label underline focus color */
-.input-field input[type=text]:focus {
-  border-bottom: 1px solid white;
-  box-shadow: 0 1px 0 0 white;
 }
 
 .form-left{
@@ -57,28 +37,27 @@
   width: 40%;
 }
 
-@media (max-width: 800px)
-{
-	.slides h2
-	{
+.about-div h5{
+  text-align: center;
+
+}
+
+@media (max-width: 800px){
+	.slides h2{
 		font-size: 35px;
 		width: 250px;
 		margin-left: 30px;
 	}
 }
-@media (max-width: 550px)
-{
-	.slides h2
-	{
+@media (max-width: 550px){
+	.slides h2{
 		display: none;
 
 	}
-	.flight
-	{
+	.flight{
 		left: 0;
 		right: 0;
 		margin-left: auto;
 		margin-right: auto;
 	}
 }
-

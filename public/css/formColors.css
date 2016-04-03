@@ -52,25 +52,30 @@ border: 2px solid white;
 border: 2px solid white;
 background: white;
 }
+/* Select Arrow */
+.select-wrapper span.caret{
+ color: white;
+}
 
-.picker__date-display
- {
+/* Select Options */
+.dropdown-content li>a, .dropdown-content li>span{
+  color: #ef5350;
+}
+
+/* Date Picker Styling */
+.picker__date-display,
+.picker__weekday-display{
    background-color: #e53935;
- }
-.picker__weekday-display
- {
-   background-color: #e53935;
- }
-.picker__day--selected
- {
+}
+
+.picker__day--selected{
    background-color: #e53935 !important;
+}
+.picker__today, .picker__close,
+.picker__day.picker__day--today{
+   color: red;
  }
 
-.picker__close
- {
-   color: red;
- }
-.picker__today
- {
-   color: red;
- }
+.picker__nav--prev:hover, .picker__nav--next:hover {
+background-color: #ffebee;
+}
