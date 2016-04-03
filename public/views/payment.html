@@ -5,10 +5,6 @@
 
 <div class="center-block" style="width: 500px;" ng-controller="PaymentController as payment">
 
-  <div>
-    <h5 class="red-text text-darken-4" style="font-weight: bold">Payment Form</h5>
-  </div>
-
         <div class="card-panel grey lighten-3" style="border: 1.5px solid #eeeeee" id="form" >
 
           <div style="margin-bottom: 20px">
@@ -20,23 +16,23 @@
           <hr style="border-color:red">
           <div>
 
-            <form name="paymentForm" class="col s12" ng-submit="paymentForm.$valid && payment.addBoking()" novalidate>
+            <form name="paymentForm" class="col s12" ng-submit="paymentForm.$valid && payment.addBoking()">
 
               <div class="row">
                 <div class="input-field col s6">
-                  <input required ng-model="payment.cardNo" id="cardNo" type="text" class="validate">
+                  <input  ng-model="payment.cardNo" id="cardNo" type="text" class="validate" required>
                   <label for="cardNo">Card No.</label>
                 </div>
               </div>
 
               <div class="row">
                 <div class="input-field col s6">
-                  <input required ng-model="payment.cvv" id="cvv" type="text" class="validate">
+                  <input  ng-model="payment.cvv" id="cvv" type="text" class="validate" required>
                   <label for="cvv">CVV</label>
                 </div>
 
                 <div class="input-field col s6">
-                  <input required ng-model="payment.expiryDate" input-date type="text"  select-years="15">
+                  <input  ng-model="payment.expiryDate" input-date type="text"  select-years="15" class="validate" required>
                   <label for="expirydate">Expiry Date</label>
                 </div>
               </div>
@@ -66,8 +62,5 @@
   </div>
 
   <div>
-    <h5 class="red-text text-darken-4" style="font-weight: bold;">
-      Total Price: ${{payment.totalPrice}}
-    </h5>
   </div>
 </div>
