@@ -13,6 +13,7 @@ app.controller('passengerViewCtrl' , function($scope, global,$location){
 
     $scope.submitForm = function() {
       // set passengers Array in service with filled passengers info .
+      
       global.setPassengers($scope.formData);
       $location.path('/confirmation');
 

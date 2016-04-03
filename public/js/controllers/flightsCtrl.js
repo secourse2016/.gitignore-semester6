@@ -1,7 +1,7 @@
 var app=angular.module('austrianAirlinesApp');
-app.controller('FlightsCtrl', 
+app.controller('flightsCtrl', 
 
-function($scope,flights,global){
+function($scope,flights,global,$location){
 
   $scope.booking=flights.booking;
   $scope.info = [];
@@ -12,6 +12,7 @@ function($scope,flights,global){
     global.outGoingTrip.flights=$scope.booking.outgoing_flights[parseInt($scope.info[0].substring(2))].flights;
     global.returnTrip.flights=$scope.booking.ingoing_flights[parseInt($scope.info[1].substring(2))].flights;
   $scope.info=[];
+  $location.path('/passengers');
 
   };
  

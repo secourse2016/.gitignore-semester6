@@ -61,7 +61,19 @@ var app = angular.module('austrianAirlinesApp', ['ngRoute']);
         //route for the confirmation page
 		.when('/confirmation',{
         	templateUrl : 'views/confirm.html'
+        })
+
+        //route for the confirmation page
+        .when('/passengers',{
+            templateUrl : 'views/passengers.html'
+        })
+
+
+        //route for the flight booking page
+        .when('/flights',{
+            templateUrl : 'views/flights.html'
         });
+
         // use the HTML5 History API
         $locationProvider.html5Mode(true);
 
