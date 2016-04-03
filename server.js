@@ -44,7 +44,7 @@ app.route('/passengers').get(function(req, res) {
     return res.sendFile(__dirname + '/public/index.html');
 });
 
-app.route('/confirmation').get(function(req, res) { 
-    return res.sendFile(__dirname + '/public/index.html'); 
+app.route('/confirmation').get(function(req, res) {
+    return res.sendFile(__dirname + '/public/index.html');
 });
-app.listen(80);
+app.listen(8080);
