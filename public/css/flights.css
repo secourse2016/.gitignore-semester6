@@ -9,13 +9,11 @@
     border-color: #ef5350;
   }
 
-  .show_info i
-  {
-
-  }
+ 
   .flights_table td, .flights_table th
   {
     text-align: center;
+
   }
   .flights_table th
   {
@@ -31,6 +29,12 @@
     border-radius: 15px;
     box-shadow: 0px 0px 30px 5px rgba(0, 0, 0, 0.6);
     background-color: #E53935;
+  }
+
+  .flights_table_container
+  {
+    margin-top: 20px;
+    margin-bottom: 80px;
   }
   .show_info i {
     color: #ef5350;

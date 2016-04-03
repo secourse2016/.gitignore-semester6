@@ -21,7 +21,7 @@
    z-index: 100;
    width: 40%;
    max-width: 500px;
-   min-width: 350px;
+   min-width: 300px;
 }
 
 /* Left input fields of the form */
@@ -31,7 +31,7 @@
 
   padding: 0px;
   display: inline-block;
-  width: 40%;
+  width: 35%;
 
 }
 
@@ -40,17 +40,15 @@
   margin: auto;
   margin-left: 50px;
   display: inline-block;
-  width: 40%;
+  width: 35%;
 }
 
 .trip-type-left{
-  margin-top: 10px;
   margin-left: -5px;
 }
 
 
 .trip-type-right{
-  margin-top: 10px;
   margin-left: 50px;
 }
 
@@ -68,14 +66,23 @@
 
 .about-div p{
   text-align: justify;
+  /*padding: 20px;*/
 }
 
+
 /* Media Queries for different viewports */
-@media (max-width: 800px){
+@media (max-width: 810px){
 	.slides h2{
 		font-size: 35px;
 		width: 250px;
 		margin-left: 30px;
+	}
+	.form-left, .form-right{
+		width: 30%;
+	}
+	.trip-type-left, .trip-type-right
+	{
+		width: 40%;
 	}
 }
 @media (max-width: 615px){
@@ -94,6 +101,7 @@
 		margin-left: auto;
 		margin-right: auto;
 	}
+	
 }
 
 /*  Auto-complete Styling  */
