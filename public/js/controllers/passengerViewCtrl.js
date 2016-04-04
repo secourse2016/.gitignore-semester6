@@ -7,7 +7,10 @@ app.controller('passengerViewCtrl' , function($scope, global, $location){
   $scope.formData =[];
 
     // Get all information from the global service, to be used in the view
-
+      if(!global.adults)
+        global.searchFlight.adults = 1;
+      if(!global.children)
+        global.searchFlight.children = 0;
       $scope.infoFlow = global;
 
       $scope.adults = new Array(parseInt(global.searchFlight.adults));
