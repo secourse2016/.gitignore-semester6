@@ -1,9 +1,9 @@
 (function(){
 	angular.module('austrianAirlinesApp')
-	.controller('PaymentController', function(){
+	.controller('PaymentController', function($scope){
 		this.booking = {}; // get all booking info from the global service
 		this.totalPrice = 3000; // = booking.totalPrice
-
+		$scope.step = 4; // View number in the stepper
 		// Payment Form attributes
 		this.cardNo = null;
 		this.cvv = null;

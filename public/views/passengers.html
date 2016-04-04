@@ -12,9 +12,44 @@
   <div class="progtrckr-todo">Payement </div>
   <div class="progtrckr-todo">Complete!</div>
   </div> -->
-  <ng-include
-    src="'views/partials/stepper.html'">
-  </ng-include>
+  <link href="css/stepper.css" rel="stylesheet">
+  <div class="mdl-card mdl-shadow--2dp">
+
+    <div class="mdl-card__supporting-text">
+
+      <div class="mdl-stepper-horizontal-alternative">
+        <div class="mdl-stepper-step active-step step-done">
+          <a href="/flights">
+          <div class="mdl-stepper-circle"><span>1</span></div>
+          <div class="mdl-stepper-title">Select Flight</div>
+          <div class="mdl-stepper-bar-left"></div>
+          <div class="mdl-stepper-bar-right"></div>
+        </a>
+        </div>
+        <div class="mdl-stepper-step active-step">
+          <div class="mdl-stepper-circle"><span>2</span></div>
+          <div class="mdl-stepper-title">Passengers Details</div>
+          <div class="mdl-stepper-bar-left"></div>
+          <div class="mdl-stepper-bar-right"></div>
+        </div>
+        <div class="mdl-stepper-step">
+          <div class="mdl-stepper-circle"><span>3</span></div>
+          <div class="mdl-stepper-title">Confirm Information</div>
+          <div class="mdl-stepper-bar-left"></div>
+          <div class="mdl-stepper-bar-right"></div>
+        </div>
+        <div class="mdl-stepper-step">
+          <div class="mdl-stepper-circle"><span>4</span></div>
+          <div class="mdl-stepper-title">Payment</div>
+          <div class="mdl-stepper-bar-left"></div>
+          <div class="mdl-stepper-bar-right"></div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
   <!-- Flights Info goes here -->
   <ul class="collection with-header z-depth-3" id="flightsInfo">
    <li class="collection-header red darken-1"> <h3 class="white-text" > Flight Information </h3></li>
@@ -69,7 +104,7 @@
 
         <div class="col s10 m6 l3">
           <p>
-            <i class="material-icons" style="margin-right:5px ; margin-left:5px">attach_money</i>  {{infoFlow.getOutGoingTrip().class}}
+            <i class="material-icons" style="margin-right:5px ; margin-left:5px">attach_money</i>  {{infoFlow.getReturnTrip().class}}
           </p>
         </div>
         <div class="col s10 m6 l3">
@@ -138,7 +173,7 @@
 
 
    <ul class="collection with-header" ng-repeat="child in children track by $index">
-    <li class="collection-header  grey lighten-3 "><h4>Passenger {{($index) + 1}} - Child</h4></li>
+    <li class="collection-header  grey lighten-3 "><h4>Passenger {{($index + adults.length) + 1}} - Child</h4></li>
     <li  class="collection-item">
       <div class="container">
         <div class="row">

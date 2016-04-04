@@ -23,11 +23,12 @@ app.route('/privacypolicy').get(sendIndex);
 app.route('/bookAFlight').get(sendIndex);
 app.route('/offers').get(sendIndex);
 app.route('/pricing').get(sendIndex);
+app.route('/error').get(sendIndex);
 
-app.route('/flights').get(sendIndex);
-app.route('/passengers').get(sendIndex);
-app.route('/confirmation').get(sendIndex);
-app.route('/payment').get(sendIndex);
-app.route('/successful').get(sendIndex);
+
+app.use(function(req, res, next){
+  res.status(404);
+	 res.send('404 Not Found');
+});
 
 app.listen(80);

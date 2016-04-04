@@ -1,6 +1,46 @@
 <link href="css/confirm.css" rel="stylesheet">
 <div class="container" style="margin-bottom: 100px; margin-top: 50px;" ng-controller="confirmationCtrl">
 
+  <link href="css/stepper.css" rel="stylesheet">
+  <div class="mdl-card mdl-shadow--2dp">
+
+    <div class="mdl-card__supporting-text">
+
+      <div class="mdl-stepper-horizontal-alternative">
+        <div class="mdl-stepper-step active-step step-done">
+          <a href="/flights">
+            <div class="mdl-stepper-circle"><span>1</span></div>
+            <div class="mdl-stepper-title">Select Flight</div>
+            <div class="mdl-stepper-bar-left"></div>
+            <div class="mdl-stepper-bar-right"></div>
+          </a>
+        </div>
+        <div class="mdl-stepper-step active-step step-done">
+          <a href="/passengers">
+            <div class="mdl-stepper-circle"><span>2</span></div>
+            <div class="mdl-stepper-title">Passengers Details</div>
+            <div class="mdl-stepper-bar-left"></div>
+            <div class="mdl-stepper-bar-right"></div>
+          </a>
+        </div>
+        <div class="mdl-stepper-step active-step">
+          <div class="mdl-stepper-circle"><span>3</span></div>
+          <div class="mdl-stepper-title">Confirm Information</div>
+          <div class="mdl-stepper-bar-left"></div>
+          <div class="mdl-stepper-bar-right"></div>
+        </div>
+        <div class="mdl-stepper-step">
+          <div class="mdl-stepper-circle"><span>4</span></div>
+          <div class="mdl-stepper-title">Payment</div>
+          <div class="mdl-stepper-bar-left"></div>
+          <div class="mdl-stepper-bar-right"></div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
   <ul class="collection with-header" id="flightsInfo">
    <li class="collection-header"> <h3>Flight Information</h3></li>
    <div>
@@ -17,7 +57,7 @@
             <i class="material-icons " style="margin-right:5px ; margin-left:5px">local_airport</i>  {{interFlight.origin_abb}}
           </p>
         </div>
-        
+
         <div class="col s10 m6 l3">
           <p>
             <i class="material-icons" style="margin-right:5px ; margin-left:5px">attach_money</i>  {{infoFlow.getOutGoingTrip().class}}
@@ -29,7 +69,7 @@
           </p>
         </div>
       </div>
-      
+
     </li>
   </div>
 
@@ -47,10 +87,10 @@
             <i class="material-icons " style="margin-right:5px ; margin-left:5px">local_airport</i>  {{interFlight.origin_abb}}
           </p>
         </div>
-        
+
         <div class="col s10 m6 l3">
           <p>
-            <i class="material-icons" style="margin-right:5px ; margin-left:5px">attach_money</i>  {{infoFlow.getOutGoingTrip().class}}
+            <i class="material-icons" style="margin-right:5px ; margin-left:5px">attach_money</i>  {{infoFlow.getReturnTrip().class}}
           </p>
         </div>
         <div class="col s10 m6 l3">
