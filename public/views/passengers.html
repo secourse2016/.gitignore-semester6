@@ -6,13 +6,15 @@
 
 
   <!-- Progress bar goes here  -->
-  <div class="progtrckr-table" style="margin-bottom: 50px;">
+  <!-- <div class="progtrckr-table" style="margin-bottom: 50px;">
   <div class="progtrckr-done">Select Flight</div>
   <div class="progtrckr-doing">Passengers details</div>
   <div class="progtrckr-todo">Payement </div>
   <div class="progtrckr-todo">Complete!</div>
-  </div>
-
+  </div> -->
+  <ng-include
+    src="'views/partials/stepper.html'">
+  </ng-include>
   <!-- Flights Info goes here -->
 
   <ul class="collection with-header" id="flightsInfo">
@@ -31,7 +33,7 @@
             <i class="material-icons " style="margin-right:5px ; margin-left:5px">local_airport</i>  {{interFlight.origin_abb}}
           </p>
         </div>
-        
+
         <div class="col s10 m6 l3">
           <p>
             <i class="material-icons" style="margin-right:5px ; margin-left:5px">attach_money</i>  {{infoFlow.getOutGoingTrip().class}}
@@ -65,7 +67,7 @@
             <i class="material-icons " style="margin-right:5px ; margin-left:5px">local_airport</i>  {{interFlight.origin_abb}}
           </p>
         </div>
-        
+
         <div class="col s10 m6 l3">
           <p>
             <i class="material-icons" style="margin-right:5px ; margin-left:5px">attach_money</i>  {{infoFlow.getOutGoingTrip().class}}
@@ -129,7 +131,7 @@
           <div class="input-field col s6">
             <i class="material-icons prefix">today</i>
 
-                  <input ng-model="formData[$index].birthDate" input-date type="text"  select-years="15" required>
+                  <input ng-model="formData[$index].birthDate" input-date type="text"  select-years="60" required>
                   <label for="">Birth Date</label>
           </div>
          </div>
