@@ -1,12 +1,12 @@
 
 /* label underline color */
-.input-field input[type=text] {
+.input-field input[type=text] , input[type=email]{
   border-bottom: 1px solid white;
   box-shadow: 0 1px 0 0 white;
 }
 
 /* label underline focus color */
-.input-field input[type=text]:focus {
+.input-field input[type=text]:focus , input[type=email]:focus {
   border-bottom: 1px solid white;
   box-shadow: 0 1px 0 0 white;
 }
@@ -21,8 +21,19 @@
 .input-field input[type=text]:focus + label {
   color: #b71c1c;
 }
+
+/* label focus color for email type */
+.input-field input[type=email]:focus + label {
+  color: #b71c1c;
+}
 /* label underline focus color */
 .input-field input[type=text]:focus {
+  border-bottom: 1px solid #b71c1c;
+  box-shadow: 0 1px 0 0 #b71c1c;
+  border-color: #b71c1c;
+}
+/* label underline focus color for email type*/
+.input-field input[type=email]:focus {
   border-bottom: 1px solid #b71c1c;
   box-shadow: 0 1px 0 0 #b71c1c;
   border-color: #b71c1c;
