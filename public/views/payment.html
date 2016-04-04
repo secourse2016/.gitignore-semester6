@@ -60,6 +60,7 @@
 
               <div class="row">
                 <div class="input-field col s6">
+                <i class="material-icons prefix">payment</i>
                   <input  ng-model="payment.cardNo" id="cardNo" type="text" class="validate" required>
                   <label for="cardNo">Card No.</label>
                 </div>
@@ -67,13 +68,15 @@
 
               <div class="row">
                 <div class="input-field col s6">
+                <i class="material-icons prefix">payment</i>
                   <input  ng-model="payment.cvv" id="cvv" type="text" class="validate" required>
                   <label for="cvv">CVV</label>
                 </div>
 
                 <div class="input-field col s6">
-                  <input  ng-model="payment.expiryDate" input-date type="text"  select-years="15" class="validate" required>
+                  <i class="material-icons prefix">date_range</i>
                   <label for="expirydate">Expiry Date</label>
+                  <input  ng-model="payment.expiryDate" input-date type="text"  select-years="15"required>
                 </div>
               </div>
 
@@ -82,7 +85,7 @@
                   <a ng-href="{{ paymentForm.$valid ?'/successful' : '/payment'}}"
                   style="width: 100%" class="btn waves-effect waves-light red"
                   name="buy">Book Now
-                  <i class="material-icons right">payment</i>
+                  <i class="material-icons right">send</i>
                   </a>
 
                 </div>
