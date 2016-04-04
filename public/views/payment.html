@@ -6,8 +6,8 @@
 <!--container div-->
 <div class="container" style="min-width: 300px;" ng-controller="PaymentController as payment">
     <link href="css/stepper.css" rel="stylesheet">
- 
-  <!--progress bar-->  
+
+  <!--progress bar-->
   <div class="mdl-card mdl-shadow--2dp">
 
     <div class="mdl-card__supporting-text">
@@ -50,7 +50,7 @@
   </div>
 
         <!--Payment block-->
-        <div class="card-panel grey lighten-3" style="margin-left:auto; margin-right:auto; width: 50%; border: 1.5px solid #eeeeee" id="form" >
+        <div class="card-panel grey lighten-3" style="margin-left:auto; margin-right:auto; min-width:300px; width: 50%; border: 1.5px solid #eeeeee" id="form" >
 
           <div style="margin-bottom: 20px">
             <h5 class="red-text text-darken-1" style="font-weight: bold;">Payment Form</h5>
@@ -59,14 +59,13 @@
 
           <img src="assets/images/creditcards.png" alt="" class="responsive-img">
           <hr style="border-color:red">
-         
+
           <div>
             <!--Form-->
             <form name="paymentForm" class="col s12" ng-submit="paymentForm.$valid && payment.addBoking()">
-
               <!--cardNo-->
               <div class="row">
-                <div class="input-field col s6">
+                <div class="input-field col s12">
                 <i class="material-icons prefix">payment</i>
                   <input  ng-model="payment.cardNo" id="cardNo" type="text" class="validate" required>
                   <label for="cardNo">Card No.</label>
@@ -84,8 +83,8 @@
                 <!--Expiry date-->
                 <div class="input-field col s6">
                   <i class="material-icons prefix">date_range</i>
+                  <input id="expirydate" name="expirydate" ng-model="payment.expiryDate" input-date type="text"  select-years="15"required>
                   <label for="expirydate">Expiry Date</label>
-                  <input  ng-model="payment.expiryDate" input-date type="text"  select-years="15"required>
                 </div>
               </div>
 
