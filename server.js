@@ -30,7 +30,6 @@ app.route('/confirmation').get(sendIndex);
 app.route('/payment').get(sendIndex);
 app.route('/successful').get(sendIndex);
 
-<<<<<<< HEAD
 app.route('/passengers').get(function(req, res) {
     return res.sendFile(__dirname + '/public/index.html');
 });
@@ -38,7 +37,5 @@ app.route('/passengers').get(function(req, res) {
 app.route('/confirmation').get(function(req, res) {
     return res.sendFile(__dirname + '/public/index.html');
 });
-app.listen(8080);
-=======
+// app.listen(8080);
 app.listen(80);
->>>>>>> 8cd26885db0a7105ce969a6636d5973fdd860850
