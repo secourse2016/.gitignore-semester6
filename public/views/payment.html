@@ -3,8 +3,11 @@
 <br/>
 <br/>
 
+<!--container div-->
 <div class="container" style="min-width: 300px;" ng-controller="PaymentController as payment">
     <link href="css/stepper.css" rel="stylesheet">
+ 
+  <!--progress bar-->  
   <div class="mdl-card mdl-shadow--2dp">
 
     <div class="mdl-card__supporting-text">
@@ -45,6 +48,8 @@
     </div>
 
   </div>
+
+        <!--Payment block-->
         <div class="card-panel grey lighten-3" style="margin-left:auto; margin-right:auto; width: 50%; border: 1.5px solid #eeeeee" id="form" >
 
           <div style="margin-bottom: 20px">
@@ -54,10 +59,12 @@
 
           <img src="assets/images/creditcards.png" alt="" class="responsive-img">
           <hr style="border-color:red">
+         
           <div>
-
+            <!--Form-->
             <form name="paymentForm" class="col s12" ng-submit="paymentForm.$valid && payment.addBoking()">
 
+              <!--cardNo-->
               <div class="row">
                 <div class="input-field col s6">
                 <i class="material-icons prefix">payment</i>
@@ -66,6 +73,7 @@
                 </div>
               </div>
 
+              <!--CVV-->
               <div class="row">
                 <div class="input-field col s6">
                 <i class="material-icons prefix">payment</i>
@@ -73,6 +81,7 @@
                   <label for="cvv">CVV</label>
                 </div>
 
+                <!--Expiry date-->
                 <div class="input-field col s6">
                   <i class="material-icons prefix">date_range</i>
                   <label for="expirydate">Expiry Date</label>
@@ -80,6 +89,7 @@
                 </div>
               </div>
 
+              <!--Submition button-->
               <div class="row">
                 <div class="input-field col s12">
                   <a ng-href="{{ paymentForm.$valid ?'/successful' : '/payment'}}"
@@ -87,23 +97,16 @@
                   name="buy">Book Now
                   <i class="material-icons right">send</i>
                   </a>
-
                 </div>
-
               </div>
             </form>
           </div>
         </div>
 
+        <!--Total price-->
         <div>
           <h5 class="center-align red-text text-darken-2" style="font-weight: bold;">
             Total Price: ${{payment.totalPrice}}
           </h5>
         </div>
-      </form>
     </div>
-  </div>
-
-  <div>
-  </div>
-</div>
