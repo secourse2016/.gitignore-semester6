@@ -30,12 +30,4 @@ app.route('/confirmation').get(sendIndex);
 app.route('/payment').get(sendIndex);
 app.route('/successful').get(sendIndex);
 
-app.route('/passengers').get(function(req, res) {
-    return res.sendFile(__dirname + '/public/index.html');
-});
-
-app.route('/confirmation').get(function(req, res) {
-    return res.sendFile(__dirname + '/public/index.html');
-});
-// app.listen(8080);
 app.listen(80);
