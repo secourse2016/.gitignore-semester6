@@ -7,20 +7,20 @@ app.controller('passengerViewCtrl' , function($scope, global, $location){
   $scope.formData =[];
 
     // Get all information from the global service, to be used in the view
-      if(!global.adults)
+      if(!global.searchFlight.adults)
         global.searchFlight.adults = 1;
-      if(!global.children)
+      if(!global.searchFlight.children)
         global.searchFlight.children = 0;
       $scope.infoFlow = global;
 
       $scope.adults = new Array(parseInt(global.searchFlight.adults));
       $scope.children = new Array(parseInt(global.searchFlight.children));
-      console.log($scope.adults);
-      console.log($scope.children);
+      $scope.step = 2;
+
       $scope.submitForm = function() {
       // set passengers Array in service with filled passengers info .
-      global.setPassengers($scope.formData);
-      $location.path('/confirmation');
+        global.setPassengers($scope.formData);
+        $location.path('/confirmation');
 
       // for testing (Working)
       // console.log(global.getPassengers());
