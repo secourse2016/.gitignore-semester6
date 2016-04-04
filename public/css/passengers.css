@@ -1,6 +1,5 @@
 #passengerInfo {
   margin-bottom: 30px;
-  border : 2px solid grey;
   padding: 30px;
 }
 
@@ -15,7 +14,6 @@
 
 #flightsInfo {
   margin-bottom:40px;
-  border : 2px solid grey;
   padding: 30px;
 }
 

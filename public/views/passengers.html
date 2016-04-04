@@ -16,8 +16,7 @@
     src="'views/partials/stepper.html'">
   </ng-include>
   <!-- Flights Info goes here -->
-
-  <ul class="collection with-header" id="flightsInfo">
+  <ul class="collection with-header z-depth-3" id="flightsInfo">
    <li class="collection-header "> <h3> Flight Information </h3></li>
    <div>
      <li class="collection-header"><h4>{{infoFlow.getOutGoingTrip().flights[0].origin_abb}} - {{infoFlow.getOutGoingTrip().flights[infoFlow.getOutGoingTrip().flights.length - 1].destination_abb}}</h4></li>
