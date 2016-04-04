@@ -3,9 +3,49 @@
 <br/>
 <br/>
 
-<div class="center-block" style="width: 500px;" ng-controller="PaymentController as payment">
+<div class="container" style="min-width: 300px;" ng-controller="PaymentController as payment">
+    <link href="css/stepper.css" rel="stylesheet">
+  <div class="mdl-card mdl-shadow--2dp">
 
-        <div class="card-panel grey lighten-3" style="border: 1.5px solid #eeeeee" id="form" >
+    <div class="mdl-card__supporting-text">
+
+      <div class="mdl-stepper-horizontal-alternative">
+        <div class="mdl-stepper-step active-step step-done">
+          <a href="/flights">
+          <div class="mdl-stepper-circle"><span>1</span></div>
+          <div class="mdl-stepper-title">Select Flight</div>
+          <div class="mdl-stepper-bar-left"></div>
+          <div class="mdl-stepper-bar-right"></div>
+          </a>
+        </div>
+        <div class="mdl-stepper-step active-step step-done">
+          <a href="/passengers">
+            <div class="mdl-stepper-circle"><span>2</span></div>
+            <div class="mdl-stepper-title">Passengers Details</div>
+            <div class="mdl-stepper-bar-left"></div>
+            <div class="mdl-stepper-bar-right"></div>
+          </a>
+        </div>
+        <div class="mdl-stepper-step active-step step-done">
+          <a href="/confirmation">
+            <div class="mdl-stepper-circle"><span>3</span></div>
+            <div class="mdl-stepper-title">Confirm Information</div>
+            <div class="mdl-stepper-bar-left"></div>
+            <div class="mdl-stepper-bar-right"></div>
+          </a>
+        </div>
+        <div class="mdl-stepper-step active-step">
+          <div class="mdl-stepper-circle"><span>4</span></div>
+          <div class="mdl-stepper-title">Payment</div>
+          <div class="mdl-stepper-bar-left"></div>
+          <div class="mdl-stepper-bar-right"></div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+        <div class="card-panel grey lighten-3" style="margin-left:auto; margin-right:auto; width: 50%; border: 1.5px solid #eeeeee" id="form" >
 
           <div style="margin-bottom: 20px">
             <h5 class="red-text text-darken-1" style="font-weight: bold;">Payment Form</h5>
@@ -40,7 +80,7 @@
               <div class="row">
                 <div class="input-field col s12">
                   <a ng-href="{{ paymentForm.$valid ?'/successful' : '/payment'}}"
-                  style="width: 435px;" class="btn waves-effect waves-light red"
+                  style="width: 100%" class="btn waves-effect waves-light red"
                   name="buy">Book Now
                   <i class="material-icons right">payment</i>
                   </a>
@@ -53,7 +93,7 @@
         </div>
 
         <div>
-          <h5 class="red-text text-darken-2" style="font-weight: bold;">
+          <h5 class="center-align red-text text-darken-2" style="font-weight: bold;">
             Total Price: ${{payment.totalPrice}}
           </h5>
         </div>

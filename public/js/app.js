@@ -54,7 +54,7 @@ var app = angular.module('austrianAirlinesApp', ['ngRoute', 'ui.materialize', 'j
         })
 
         //route for the confirmation page
-		.when('/confirmation',{
+		    .when('/confirmation',{
         	templateUrl : 'views/confirm.html'
         })
 
@@ -63,9 +63,13 @@ var app = angular.module('austrianAirlinesApp', ['ngRoute', 'ui.materialize', 'j
             templateUrl : 'views/payment.html'
         })
 
-        //route for end of journy :v
+        // route for successful payment
         .when('/successful', {
             templateUrl : 'views/successful-payment.html'
+        })
+
+        .when('/error', {
+            templateUrl : 'views/static/error404.html'
         });
 
         // use the HTML5 History API

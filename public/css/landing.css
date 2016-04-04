@@ -59,6 +59,13 @@
 }
 
 /* Information about Airlines section */
+
+.about-div.container
+{
+  
+  width:85%;
+}
+
 .about-div h5{
   text-align: center;
 
@@ -101,7 +108,7 @@
 		margin-left: auto;
 		margin-right: auto;
 	}
-	
+
 }
 
 /*  Auto-complete Styling  */
