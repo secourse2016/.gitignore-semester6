@@ -1,4 +1,5 @@
-<link href="css/confirm.css" rel="stylesheet">
+<link href="../css/confirm.css" rel="stylesheet">
+
 <div class="container" style="margin-bottom: 100px; margin-top: 50px;" ng-controller="confirmationCtrl">
 
   <link href="css/stepper.css" rel="stylesheet">
@@ -41,7 +42,7 @@
 
   </div>
 
-  <ul class= "collection with-header z-depth-3"id="flightsInfo">
+  <ul class= "collection with-header z-depth-3"id="flightsInfo" style="padding: 0px">
    <li class="collection-header red darken-1"> <h3 class="white-text" > Flight Information </h3></li>
    <div>
     <li class="collection-header  grey lighten-3"><h4>{{infoFlow.getOutGoingTrip().flights[0].origin_abb}} - {{infoFlow.getOutGoingTrip().flights[infoFlow.getOutGoingTrip().flights.length - 1].destination_abb}}</h4></li>
@@ -104,7 +105,7 @@
 
 
 
-    <ul class="collection with-header  z-depth-3" id="passengerInfo" >
+    <ul class="collection with-header  z-depth-3" id="passengerInfo" style="padding: 0px" >
  <li class="collection-header red darken-1"> <h3 class="white-text"> Passengers Information </h3></li>
 
    <div class="row">
