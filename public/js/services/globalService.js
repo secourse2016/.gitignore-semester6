@@ -12,17 +12,13 @@ angular.module('austrianAirlinesApp').service('global', function() {
 	this.searchFlight = {};
 
 	// A list of passengers whose info are entered by the user
-<<<<<<< HEAD
-=======
-	
-	
->>>>>>> 3373d24836c147bc115ffa1b5cea283e58a21c18
+
 
 	this.passengers = [];
 
 	// the outgoing trip selected by the user
 	this.outGoingTrip = {};
-	
+
 	// The return trip selected by the user
 	this.returnTrip = {};
 
