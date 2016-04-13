@@ -38,19 +38,16 @@ app.route('/offers').get(sendIndex);
 app.route('/pricing').get(sendIndex);
 app.route('/error').get(sendIndex);
 
+/**
+* App Routes go here
+*/
 app.route('/api/airports').get(function(req, res){
   res.json(JSON.parse(fs.readFileSync('./app/data/airports.json', 'UTF-8')));
 });
+
 app.use(function(req, res, next){
   res.status(404);
    res.send('404 Not Found');
 });
-
-
-/**
-* App Routes go here
-*/
-
-
 
 module.exports = app;
