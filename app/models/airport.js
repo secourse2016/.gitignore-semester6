@@ -14,4 +14,4 @@ var airportSchema = new Schema({
 });
 
 
-var Airport = mongoose.model('Airport', airportSchema);
+module.exports = mongoose.model('Airport', airportSchema);
