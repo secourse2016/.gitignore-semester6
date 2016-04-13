@@ -1,41 +1,36 @@
-var db = new require('./db.js');
+require("dotenv").config();
+var mongoose = require('mongoose');
+mongoose.connect(process.env.mongoURL);
+var flight = require('./app/models/flight');
 
 
-var getOneDirectionFlights=module.exports.getOneDirectionFlights=function (cb, origin, destination, class, date)
+
+/*
+	this function returns all flights from origin to destination in the specefic date with the specific class given in the arguments
+*/
+
+var getOneDirectionFlights=module.exports.getOneDirectionFlights=function (cb, origin, destination, class1, date)
 {
-	// get the database from db.js
-	var dataBase=db.db();
-
-	// get flights collection from database
-	var flights = dataBase.get('flights');
-
 	// find documents in flights collection
-	flights.find({},{},function(err,docs){
+	flight.find({"origin": origin, "destination": destination, "class": class1},{},function(err,resultFlights){
 
 		// throw error if find returns an error
 		if(err)
 			throw err;
 		else
 		{
-			// create empty array as the result and counter to count how many flights have been added
-			var result = [];
-			var count = 0;
-
-			// looping on all flights in the collection and add the flight if it has the same origin, destination and date as the arguments
-			for (var i = 0; i < docs.length; i++) {
-				if(docs[i].origin == origin && docs[i].destination == destination && docs[i].departureDate == date && docs[i].class == class)
-				{
-					result[count++] = docs[i];
-				}
-			}
 			// call the call back function with the result
-			cb(result);
+			cb(resultFlights);
 		}
 	});
 	
 }
 
-var getFlights=module.exports.getFlights=function (cb, origin, destination, class, departureDate, arrivalDate)
+/*
+	this function returns all flights from origin to destination in the specefic departure date and return flights in the arrival time (in case of round trips) with the specific class given in the arguments
+*/
+
+var getFlights=module.exports.getFlights=function (cb, origin, destination, class1, departureDate, arrivalDate)
 {
 	// get the flights in the outgoing flights
 	getOneDirectionFlights(function(outgoingFlights)
@@ -52,8 +47,8 @@ var getFlights=module.exports.getFlights=function (cb, origin, destination, clas
 			{
 				// return both outgoing flights and return flights as one array
 				cb(outgoingFlights.concat(returnFlights));
-			}, destination, origin, class, arrivalDate);
+			}, destination, origin, class1, arrivalDate);
 
 		}
-	}, origin, destination, class, departureDate);
+	}, origin, destination, class1, departureDate);
 }
