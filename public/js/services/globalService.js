@@ -18,7 +18,7 @@ angular.module('austrianAirlinesApp').service('global', function() {
 
 	// the outgoing trip selected by the user
 	this.outGoingTrip = {};
-	
+
 	// The return trip selected by the user
 	this.returnTrip = {};
 

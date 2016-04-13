@@ -5,6 +5,7 @@ function($scope, flights, global, $location){
   $scope.booking=flights.booking;
   $scope.info = [];
   $scope.trans = {id: -1};
+  $scope.step = 1; //View number in the stepper
   $scope.moveForward = function(){
     global.outGoingTrip.class   = parseInt($scope.info[0].substring(0,1));
     global.returnTrip.class     = parseInt($scope.info[1].substring(0,1));

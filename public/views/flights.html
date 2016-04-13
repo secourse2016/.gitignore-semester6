@@ -1,7 +1,5 @@
 
 <link href="css/flights.css" rel="stylesheet">
-
-
 <div class="container" ng-controller="flightsCtrl">
   <div class="progtrckr-table" style="margin-bottom: 50px;">
    <div class="progtrckr-doing">Select Flight</div>
@@ -9,8 +7,6 @@
    <div class="progtrckr-todo">Payement </div>
    <div class="progtrckr-todo">Complete!</div>
    </div>
-
-
 <h4 style="color:#7B0A0A">Select your flights</h4>
 
   <div class="col s12 m6">
@@ -49,7 +45,7 @@
                   <div class="panel-body font12">{{trans.departure_time}} <i class="tiny material-icons">flight_takeoff</i> {{trans.origin}} ({{trans.origin_abb}}) ,Terminal {{trans.origin_term}}<br>{{trans.arrival_time}} <i class="tiny material-icons">flight_land</i> {{trans.destination}} ({{trans.destination_abb}}) ,Terminal {{trans.destination_term}}<br>Aircraft: {{trans.aircraft_code}}</div>
                 </div>
               </span>
-             </div> 
+             </div>
           </td>
               <td>
 
@@ -105,7 +101,7 @@
                   <div class="panel-body font12">{{trans.departure_time}} <i class="tiny material-icons">flight_takeoff</i> {{trans.origin}} ({{trans.origin_abb}}) ,Terminal {{trans.origin_term}}<br>{{trans.arrival_time}} <i class="tiny material-icons">flight_land</i> {{trans.destination}} ({{trans.destination_abb}}) ,Terminal {{trans.destination_term}}<br>Aircraft: {{trans.aircraft_code}}</div>
                 </div>
               </span>
-             </div> 
+             </div>
           </td>
           <td>
             <div >
@@ -128,7 +124,7 @@
   <div class="button_div">
     <a class="waves-effect red darken-4 btn reserve" ng-click="moveForward()" href="">reserve</a>
   </div>
-  
+
 
 </form>
 

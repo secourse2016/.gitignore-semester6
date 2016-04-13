@@ -1,9 +1,17 @@
 
+<link href="css/payment.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 
 
-<div class="center-block" style="width: 500px; margin-top: 142px">
-	<div class="card-panel white lighten-1">
-	<h2>Congratulations</h2>
-	<p style="margin-left: 20px">You have successfully booked your ticket, Have a nice trip!</p>
-	</div>
+<div class="card-panel grey lighten-3 congratulations">
+	<h4>Congratulations</h4>
+	<p class="paragraph">You have successfully booked your ticket, Have a nice trip!</p>
+	<div class="row">
+        <div class="input-field col s12">
+            <a ng-href="{{ '/'}}"
+             class="btn waves-effect waves-light red home-button"
+             name="buy">Back to Home
+            <i class="material-icons right">replay</i>
+            </a>
+        </div>
+    </div>
 </div>

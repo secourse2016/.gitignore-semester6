@@ -1,66 +1,112 @@
 <link href="css/formColors.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+<link href="css/payment.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 
-<br/>
-<br/>
 
-<div class="center-block" style="width: 500px;" ng-controller="PaymentController as payment">
+<!--container div-->
+<div class="container bar" ng-controller="PaymentController as payment">
+    <link href="css/stepper.css" rel="stylesheet">
 
-        <div class="card-panel grey lighten-3" style="border: 1.5px solid #eeeeee" id="form" >
+  <!--progress bar-->
+  <div class="mdl-card mdl-shadow--2dp">
 
-          <div style="margin-bottom: 20px">
-            <h5 class="red-text text-darken-1" style="font-weight: bold;">Payment Form</h5>
+    <div class="mdl-card__supporting-text">
+
+      <div class="mdl-stepper-horizontal-alternative">
+        <div class="mdl-stepper-step active-step step-done">
+          <a href="/flights">
+          <div class="mdl-stepper-circle"><span>1</span></div>
+          <div class="mdl-stepper-title">Select Flight</div>
+          <div class="mdl-stepper-bar-left"></div>
+          <div class="mdl-stepper-bar-right"></div>
+          </a>
+        </div>
+        <div class="mdl-stepper-step active-step step-done">
+          <a href="/passengers">
+            <div class="mdl-stepper-circle"><span>2</span></div>
+            <div class="mdl-stepper-title">Passengers Details</div>
+            <div class="mdl-stepper-bar-left"></div>
+            <div class="mdl-stepper-bar-right"></div>
+          </a>
+        </div>
+        <div class="mdl-stepper-step active-step step-done">
+          <a href="/confirmation">
+            <div class="mdl-stepper-circle"><span>3</span></div>
+            <div class="mdl-stepper-title">Confirm Information</div>
+            <div class="mdl-stepper-bar-left"></div>
+            <div class="mdl-stepper-bar-right"></div>
+          </a>
+        </div>
+        <div class="mdl-stepper-step active-step">
+          <div class="mdl-stepper-circle"><span>4</span></div>
+          <div class="mdl-stepper-title">Payment</div>
+          <div class="mdl-stepper-bar-left"></div>
+          <div class="mdl-stepper-bar-right"></div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <br/>
+
+        <!--Payment block-->
+        <div class="card-panel grey lighten-3 payment-block" id="form" >
+
+          <div class="form-header">
+            <h5 class="red-text text-darken-2">Payment Form</h5>
           </div>
-          <hr style="border-color:red">
+          <hr class="hr">
 
           <img src="assets/images/creditcards.png" alt="" class="responsive-img">
-          <hr style="border-color:red">
+          <hr class="hr">
+
           <div>
-
+            <!--Form-->
             <form name="paymentForm" class="col s12" ng-submit="paymentForm.$valid && payment.addBoking()">
-
+              <!--cardNo-->
               <div class="row">
-                <div class="input-field col s6">
+                <div class="input-field col s12">
+                <i class="material-icons prefix">payment</i>
                   <input  ng-model="payment.cardNo" id="cardNo" type="text" class="validate" required>
                   <label for="cardNo">Card No.</label>
                 </div>
               </div>
 
+              <!--CVV-->
               <div class="row">
                 <div class="input-field col s6">
+                <i class="material-icons prefix">payment</i>
                   <input  ng-model="payment.cvv" id="cvv" type="text" class="validate" required>
                   <label for="cvv">CVV</label>
                 </div>
 
+                <!--Expiry date-->
                 <div class="input-field col s6">
-                  <input  ng-model="payment.expiryDate" input-date type="text"  select-years="15" class="validate" required>
+                  <i class="material-icons prefix">date_range</i>
+                  <input id="expirydate" name="expirydate" ng-model="payment.expiryDate" input-date type="text"  select-years="15"required>
                   <label for="expirydate">Expiry Date</label>
                 </div>
               </div>
 
+              <!--Submition button-->
               <div class="row">
                 <div class="input-field col s12">
                   <a ng-href="{{ paymentForm.$valid ?'/successful' : '/payment'}}"
-                  style="width: 435px;" class="btn waves-effect waves-light red"
+                  class="btn waves-effect waves-light red book-button"
                   name="buy">Book Now
-                  <i class="material-icons right">payment</i>
+                  <i class="material-icons right">send</i>
                   </a>
-
                 </div>
-
               </div>
             </form>
           </div>
         </div>
-
+        <br/>
+        <!--Total price-->
         <div>
-          <h5 class="red-text text-darken-2" style="font-weight: bold;">
+          <h5 class="center-align red-text text-darken-2">
             Total Price: ${{payment.totalPrice}}
           </h5>
         </div>
-      </form>
     </div>
-  </div>
-
-  <div>
-  </div>
-</div>
+    <br/>
