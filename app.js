@@ -2,7 +2,6 @@ var express       = require('express');
 var path          = require('path');
 var mongoose      = require('mongoose');
 var bodyParser    = require('body-parser');
-var configDB      = require('./database/config');
 var app           = express();
 require('dotenv').config();
 
