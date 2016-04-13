@@ -1,12 +1,17 @@
 var express       = require('express');
 var path          = require('path');
+var mongoose      = require('mongoose');
 var bodyParser    = require('body-parser');
+var configDB      = require('db.js');
 var app           = express();
 require('dotenv').config();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+// configuration ===============================================================
+mongoose.connect(configDB.url); // connect to our database
 
 /*
 * Default route
