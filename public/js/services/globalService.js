@@ -3,7 +3,7 @@ angular.module('austrianAirlinesApp').service('global', function() {
 	/**
 	 * Information passed from the landing page to search for flights
 	 * ==============================================================
-	 * origin, destination 		[airport]
+	 * origin, destination 		[airport IATA]
 	 * adults, children 		[integer]
 	 * tripType					[1 for one way, 2 for roundtrip]
 	 * outgoingDate, returnDate	["date"]

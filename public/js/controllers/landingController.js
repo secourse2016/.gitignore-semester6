@@ -38,9 +38,9 @@
 		$scope.formData = {tripType:2};
 		$scope.searchFlights = function(){
 			if($scope.formData.origin)
-				$scope.formData.origin = $scope.formData.origin.value;
+				$scope.formData.origin = $scope.formData.origin.iata;
 			if($scope.formData.destination)
-				$scope.formData.destination = $scope.formData.destination.value;
+				$scope.formData.destination = $scope.formData.destination.iata;
 			global.setSearchFlight($scope.formData);
 			$location.path("/flights");
 		};
@@ -51,6 +51,7 @@
 		ctrl.airports      = [];
 		ctrl.searchText    = null;
 		ctrl.querySearch   = querySearch;
+
 		function querySearch (query) {
 		   var results = query ? ctrl.airports.filter(createFilterFor(query) ) : [];
 		   console.log(results);
@@ -75,11 +76,13 @@
 		   };
 		}
 
-		$http.get('/api/airports').success(function(data){
-			ctrl.airports = loadAll(data);
-		}).error(function(data){
-            console.log('Error: can\'t fetch airports');
-        });;
+		$http.get('/api/airports')
+			 .success(function(data){
+				 ctrl.airports = loadAll(data);
+			 })
+			 .error(function(data){
+            	 console.log('Error: can\'t fetch airports');
+        	});
 	});
 
 })();
