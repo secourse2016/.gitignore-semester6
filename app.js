@@ -2,6 +2,7 @@ var express       = require('express');
 var path          = require('path');
 var mongoose      = require('mongoose');
 var bodyParser    = require('body-parser');
+var fs            = require('fs');
 var app           = express();
 require('dotenv').config();
 
@@ -37,7 +38,9 @@ app.route('/offers').get(sendIndex);
 app.route('/pricing').get(sendIndex);
 app.route('/error').get(sendIndex);
 
-
+app.route('/api/airports').get(function(req, res){
+  res.json(JSON.parse(fs.readFileSync('./app/data/airports.json', 'UTF-8')));
+});
 app.use(function(req, res, next){
   res.status(404);
    res.send('404 Not Found');
