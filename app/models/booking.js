@@ -7,21 +7,21 @@ var booking = new schema ({
 	passengers :
 		[
 			{
-				first_name : String,
-				last_name : String,
+				firstName : String,
+				lastName : String,
 				email : String,
 				passport_number : String,
 				nationality : String,
-				birth_date : Date
+				birthDate : Date
 			}
 		],
-	outgoing_flights :{ type:Number, ref: 'Flight' },		
+	outgoingFlights :{ type:Number, ref: 'Flight' },		
 			
-	return_flights :{type:Number , ref:'Flight'},
+	returnFlight :{type:Number , ref:'Flight'},
 		
-	total_price : Number,
-	booking_date : Date,
-	is_successful : Boolean		
+	totalPrice : Number,
+	bookingDate : Date,
+	isSuccessful : Boolean		
 });
 
 module.exports = mongoose.model('Booking', booking);
