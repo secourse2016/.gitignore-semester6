@@ -1,10 +1,21 @@
-var express = require("express");
-var path    = require('path');
-var app = express();
-app.set('views', path.join(__dirname, 'public'));
-app.use(express.static(path.join(__dirname, 'public')));
-app.get("/",function(req,res){
-	res.render("index.html");
-});
 
-app.listen(80);
+/**
+* Require express main app
+*/
+var app = require('./app');
+
+/**
+* Require http
+*/
+var http = require('http');
+
+/**
+* Create a server
+*/
+var server = http.createServer(app);
+
+/**
+* Get port number from .env file
+*/
+var port = process.env.PORT;
+server.listen(port);

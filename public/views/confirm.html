@@ -1,0 +1,242 @@
+<link href="../css/confirm.css" rel="stylesheet">
+
+<div class="container" style="margin-bottom: 100px; margin-top: 50px;" ng-controller="confirmationCtrl">
+
+  <link href="css/stepper.css" rel="stylesheet">
+  <div class="mdl-card mdl-shadow--2dp">
+
+    <div class="mdl-card__supporting-text">
+
+      <div class="mdl-stepper-horizontal-alternative">
+        <div class="mdl-stepper-step active-step step-done">
+          <a href="/flights">
+            <div class="mdl-stepper-circle"><span>1</span></div>
+            <div class="mdl-stepper-title">Select Flight</div>
+            <div class="mdl-stepper-bar-left"></div>
+            <div class="mdl-stepper-bar-right"></div>
+          </a>
+        </div>
+        <div class="mdl-stepper-step active-step step-done">
+          <a href="/passengers">
+            <div class="mdl-stepper-circle"><span>2</span></div>
+            <div class="mdl-stepper-title">Passengers Details</div>
+            <div class="mdl-stepper-bar-left"></div>
+            <div class="mdl-stepper-bar-right"></div>
+          </a>
+        </div>
+        <div class="mdl-stepper-step active-step">
+          <div class="mdl-stepper-circle"><span>3</span></div>
+          <div class="mdl-stepper-title">Confirm Information</div>
+          <div class="mdl-stepper-bar-left"></div>
+          <div class="mdl-stepper-bar-right"></div>
+        </div>
+        <div class="mdl-stepper-step">
+          <div class="mdl-stepper-circle"><span>4</span></div>
+          <div class="mdl-stepper-title">Payment</div>
+          <div class="mdl-stepper-bar-left"></div>
+          <div class="mdl-stepper-bar-right"></div>
+        </div>
+      </div>
+
+    </div>
+    
+  </div>
+
+  <ul class= "collection with-header z-depth-3"id="flightsInfo" style="padding: 0px">
+   <li class="collection-header red darken-1"> <h3 class="white-text" > Flight Information </h3></li>
+   <div>
+    <li class="collection-header  grey lighten-3"><h4>{{infoFlow.getOutGoingTrip().flights[0].origin_abb}} - {{infoFlow.getOutGoingTrip().flights[infoFlow.getOutGoingTrip().flights.length - 1].destination_abb}}</h4></li>
+    <li  class="collection-item" ng-repeat="interFlight in infoFlow.getOutGoingTrip().flights">
+      <div class="row">
+        <div class="col s10 m6 l3">
+          <p>
+            <i class="material-icons" style="margin-right:5px">date_range</i>  {{interFlight.departure_time}}
+          </p>
+        </div>
+        <div class="col s10 m6 l3">
+          <p>
+            <i class="material-icons " style="margin-right:5px ; margin-left:5px">local_airport</i>  {{interFlight.origin_abb}}
+          </p>
+        </div>
+
+        <div class="col s10 m6 l3">
+          <p>
+            <i class="material-icons" style="margin-right:5px ; margin-left:5px">attach_money</i>  {{infoFlow.getOutGoingTrip().class}}
+          </p>
+        </div>
+        <div class="col s10 m6 l3">
+          <p>
+           <i class="material-icons" style="margin-right:5px ; margin-left:5px">airline_seat_recline_normal</i>  32B
+         </p>
+       </div>
+     </div>
+
+   </li>
+ </div>
+
+ <li class="collection-header  grey lighten-3"><h4>{{infoFlow.getReturnTrip().flights[0].origin_abb}} - {{infoFlow.getReturnTrip().flights[infoFlow.getReturnTrip().flights.length - 1].destination_abb}}</h4></li>
+ <li  class="collection-item" ng-repeat="interFlight in infoFlow.getReturnTrip().flights">
+   <div class="row">
+    <div class="col s10 m6 l3">
+      <p>
+        <i class="material-icons" style="margin-right:5px">date_range</i>  {{interFlight.departure_time}}
+      </p>
+    </div>
+    <div class="col s10 m6 l3">
+      <p>
+        <i class="material-icons " style="margin-right:5px ; margin-left:5px">local_airport</i>  {{interFlight.origin_abb}}
+      </p>
+    </div>
+
+    <div class="col s10 m6 l3">
+      <p>
+        <i class="material-icons" style="margin-right:5px ; margin-left:5px">attach_money</i>  {{infoFlow.getReturnTrip().class}}
+      </p>
+    </div>
+    <div class="col s10 m6 l3">
+      <p>
+       <i class="material-icons" style="margin-right:5px ; margin-left:5px">airline_seat_recline_normal</i>  32B
+     </p>
+   </div>
+ </div>
+</li>
+
+</ul>
+
+
+
+<ul class="collection with-header  z-depth-3" id="passengerInfo" style="padding: 0px" >
+  <li class="collection-header red darken-1"> <h3 class="white-text"> Passengers Information </h3></li>
+
+  <div class="row">
+    <ul class="collection with-header" ng-repeat="passenger in infoFlow.getPassengers()">
+     <li class="collection-header  grey lighten-3 "><h4>Passenger- Adult</h4></li>
+     <li  class="collection-item">
+       <div class="container">
+         <div class="row" >
+
+           <div class="col s12 m6">
+             <h4>
+               <i class="material-icons">account_circle</i>
+               First Name</h4>
+               <p style="">
+                {{passenger.firstName}}
+              </p>
+            </div>
+
+            <div class="col s12 m6">
+             <h4>
+               <i class="material-icons">account_circle</i>
+               Last Name</h4>
+               <p style="">
+                {{passenger.lastName}}
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col s12 m6">
+             <h4>
+               <i class="material-icons">email</i>
+               Email Address</h4>
+               <p style="">
+                {{passenger.emailAddress}}
+              </p>
+            </div>
+            <div class="col s12 m6">
+             <h4>
+               <i class="material-icons">pan_tool</i>
+               Passport Number</h4>
+               <p style="">
+                {{passenger.passportNumber}}
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col s12 m6">
+             <h4>
+               <i class="material-icons">location_on</i>
+               Nationality</h4>
+               <p style="">
+                {{passenger.nationality}}
+              </p>
+            </div>
+            <div class="col s12 m6" ng-show = "passenger.birthDate">
+             <h4>
+               <i class="material-icons">today</i>
+               Birth Date</h4>
+               <p style="">
+                {{passenger.birthDate}}
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </li>
+    </ul>
+  </div>
+
+
+  <ul class="collection with-header" ng-repeat="passenger in infoFlow.getPassengers()" ng-show = "passenger.firstNameC" >
+   <li class="collection-header  grey lighten-3 " ><h4>Passenger- Child</h4></li>
+   <li  class="collection-item">
+     <div class="container">
+       <div class="row" >
+
+         <div class="col s12 m6">
+           <h4>
+             <i class="material-icons">account_circle</i>
+             First Name</h4>
+             <p style="margin-left: 30px">
+              {{passenger.firstNameC}}
+            </p>
+          </div>
+
+          <div class="col s12 m6">
+           <h4>
+             <i class="material-icons">account_circle</i>
+             Last Name</h4>
+             <p style="margin-left: 30px">
+              {{passenger.lastNameC}}
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12 m6">
+           <h4>
+             <i class="material-icons">pan_tool</i>
+             Passport Number</h4>
+             <p style="margin-left: 30px">
+              {{passenger.passportNumberC}}
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12 m6">
+           <h4>
+             <i class="material-icons">location_on</i>
+             Nationality</h4>
+             <p style="margin-left: 30px">
+              {{passenger.nationalityC}}
+            </p>
+          </div>
+          <div class="col s12 m6" ng-show = "passenger.birthDateC">
+           <h4>
+             <i class="material-icons">today</i>
+             Birth Date</h4>
+             <p style="margin-left: 30px">
+              {{passenger.birthDateC}}
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </li>
+  </ul>
+  </ul>
+  <button ng-click="confirm()" id="confirmInfo"class="btn waves-effect waves-light red darken-2" type="submit" name="action"> Confirm
+  </button>
+</div>
+</ul>
+</div>
+
+

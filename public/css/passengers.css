@@ -1,0 +1,42 @@
+
+
+
+#confirmInfo {
+  float: right;
+
+
+}
+
+
+
+#flightsInfo h3, #passengerInfo h3
+{
+  font-size: 25px;
+}
+
+#flightsInfo h4, #passengerInfo h4
+{
+  font-size: 23px;
+}
+
+.picker__date-display
+{
+  background-color: #e53935;
+}
+.picker__weekday-display
+{
+  background-color: #e53935;
+}
+.picker__day--selected
+{
+  background-color: #e53935 !important;
+}
+
+.picker__close
+{
+  color: red;
+}
+.picker__today
+{
+  color: red;
+}
