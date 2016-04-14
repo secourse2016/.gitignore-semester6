@@ -1,7 +1,7 @@
 var moment = require('moment');
 var flight = require('./app/models/flight');
-var flight = require('./app/models/airport');
-var flight = require('./app/models/booking');
+var airport = require('./app/models/airport');
+var booking = require('./app/models/booking');
 
 
 /*
@@ -51,4 +51,18 @@ var getFlights=module.exports.getFlights=function (cb, origin, destination, flig
 		
 		}
 	}, origin, destination, flightClass, departureDate);
+}
+
+var addBooking = module.exports.addBooking = function(bookingInfo){
+
+	var newBooking = new booking();
+	newBooking.passengers = bookingInfo.passengers ; 
+	newBooking.outgoingFlights = bookingInfo.outgoingFlights;
+	newBooking.returnFlight = bookingInfo.returnFlights; 
+	newBooking.totalPrice = bookingInfo.bookingCost;
+	newBooking.bookingDate = Date.now();
+	newBooking.isSuccessful = true ;
+	newBooking.save(function (err) {
+  	if (err) return handleError(err);
+  });
 }

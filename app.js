@@ -3,6 +3,7 @@ var path          = require('path');
 var mongoose      = require('mongoose');
 var bodyParser    = require('body-parser');
 var app           = express();
+var functions 	  = require('flights.js');
 require('dotenv').config();
 
 app.use(bodyParser.json());
@@ -47,6 +48,13 @@ app.use(function(req, res, next){
 /**
 * App Routes go here
 */
+app.post('/api/addBooking',function(req,res){
+	functions.addBooking(req.body.bookingInfo);
+	
+	
+
+});
+
 
 
 
