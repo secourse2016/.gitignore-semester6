@@ -31,10 +31,7 @@ var airport            = require('../app/models/airport');
         cb(err);
       else {
         removeFlights(function(err){
-          if(err)
-            cb(err);
-          else
-            cb(err);
+          cb(err);
       });
      }
   });
