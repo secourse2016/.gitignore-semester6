@@ -40,9 +40,12 @@ app.route('/offers').get(sendIndex);
 app.route('/pricing').get(sendIndex);
 app.route('/error').get(sendIndex);
 
+
+// App Routes go here ==========================================================
+
 /**
-* App Routes go here
-*/
+ * API route that returns all airports available for flight search
+ */
 app.get('/api/airports', function(req, res){
     flights.getAirports(function(err, airports){
         if(err)

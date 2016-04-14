@@ -1,7 +1,7 @@
 var moment = require('moment');
 var flight = require('./app/models/flight');
-var flight = require('./app/models/airport');
-var flight = require('./app/models/booking');
+var airport = require('./app/models/airport');
+var booking = require('./app/models/booking');
 
 
 /*
@@ -53,8 +53,10 @@ var getFlights=module.exports.getFlights=function (cb, origin, destination, flig
 	}, origin, destination, flightClass, departureDate);
 }
 
-var airport = require('./app/models/airport');
-
+/**
+ * Get all airports that can be available for flight search
+ * @param  {Function} cb will be called with (err, airports)
+ */
 module.exports.getAirports = function(cb){
     airport.find(function(err, airports){
         cb(err, airports);
