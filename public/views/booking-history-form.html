@@ -1,44 +1,50 @@
 
+<link href="css/payment.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 
-<div class="card-panel grey lighten-3 payment-block" id="form"  ng-controller="bookingHistoryFormController as bookingHistoryFormCtrl">
 
-  <div class="form-header">
-    <h5 class="red-text text-darken-2">Booking History</h5>
-  </div>
-  <hr class="hr">
+<div id="history_form" style="position:absolute; left:0px; right:0px; margin-left:auto; margin-right:auto;width:50%; min-width:200px; display:none;" ng-controller="historyFormController as historyFormCtrl">
+  <div class="modal-content">
+    <div class="card-panel grey lighten-3" id="form" >
 
-  <div>
-    <!--Form-->
-    <form name="bookingHistoryForm" class="col s12" ng-submit="bookingHistoryForm.$valid && bookingHistoryFormCtrl.searchBooking()">
-
-      <!--Booking Number-->
-      <div class="row">
-        <div class="input-field col s12">
-        <i class="material-icons prefix">payment</i>
-          <input  ng-model="bookingHistoryFormCtrl.bookingNo" type="text" class="validate" required>
-          <label for="bookingNo">Booking No.</label>
-        </div>
+      <div class="form-header">
+        <h5 class="red-text text-darken-2">Booking History</h5>
       </div>
+      <hr class="hr">
 
-      <!--Passport Number-->
-      <div class="row">
-        <div class="input-field col s12">
-        <i class="material-icons prefix">payment</i>
-          <input  ng-model="bookingHistoryFormCtrl.passportNo" type="text" class="validate" required>
-          <label for="passportNo">Passport No.</label>
-        </div>
-      </div>
+      <div>
+        <!--Form-->
+        <form name="bookingHistoryForm" class="col s12" ng-submit="bookingHistoryForm.$valid && historyFormCtrl.searchBooking()">
 
-      <!--Submition button-->
-      <div class="row">
-        <div class="input-field col s12">
-          <a ng-href="{{ bookingHistoryForm.$valid ?'/booking-history' : '/booking-history-form'}}"
-          class="btn waves-effect waves-light red book-button"
-          name="showHistory">View Booking
-          <i class="material-icons right">send</i>
-          </a>
-        </div>
+          <!--Booking Number-->
+          <div class="row">
+            <div class="input-field col s12">
+            <i class="material-icons prefix">payment</i>
+              <input  ng-model="historyFormCtrl.bookingNo" type="text" class="validate" required>
+              <label for="bookingNo">Booking No.</label>
+            </div>
+          </div>
+
+          <!--Passport Number-->
+          <div class="row">
+            <div class="input-field col s12">
+            <i class="material-icons prefix">payment</i>
+              <input  ng-model="historyFormCtrl.passportNo" type="text" class="validate" required>
+              <label for="passportNo">Passport No.</label>
+            </div>
+          </div>
+
+          <!--Submition button-->
+          <div class="row">
+            <div class="input-field col s12">
+              <a ng-href="{{ bookingHistoryForm.$valid ?'/booking-history' : '/history-form'}}"
+              class="btn waves-effect waves-light red book-button"
+              name="showHistory">View Booking
+              <i class="material-icons right">send</i>
+              </a>
+            </div>
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
   </div>
 </div>
