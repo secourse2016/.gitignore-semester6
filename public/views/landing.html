@@ -80,6 +80,7 @@
         <i class="material-icons">child_care</i>
            <select material-select class="white-text" ng-model="formData.children">
              <option value="" disabled selected>Children</option>
+             <option value="0">no children</option>
              <option value="1">1 child</option>
              <option value="{{n}}" ng-repeat="n in searchCtrl.range">{{n}} children</option>
            </select>
