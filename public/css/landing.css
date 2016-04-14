@@ -147,6 +147,10 @@ li > md-autocomplete-parent-scope > span{
 	{
 		width: 40%;
 	}
+
+  .trip-type-right{
+    margin-left: 8%;
+  }
 }
 @media (max-width: 615px){
   .row .col.s6{
