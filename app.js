@@ -54,6 +54,17 @@ app.get('/api/airports', function(req, res){
     });
 });
 
+/*
+* API route to get a certain booking from the database
+*/
+app.post('/api/booking-history', function(req, res){
+    flights.getBooking(req , function(err, booking){
+        if(err)
+            res.send(err);
+        res.json(booking);
+    });
+});
+
 app.use(function(req, res, next){
   res.status(404);
    res.send('404 Not Found');
