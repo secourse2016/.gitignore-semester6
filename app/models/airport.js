@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+var schema = mongoose.Schema;
 
-var airportSchema = new Schema({
+var airportSchema = new schema({
   iata         :    { type: String, maxlength: 3,uppercase: true },
   lon          :  Number,
   iso          :  { type: String, maxlength: 2,uppercase: true },

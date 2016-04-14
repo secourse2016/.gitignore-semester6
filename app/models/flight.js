@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+var schema = mongoose.Schema;
 
-var flightSchema = new Schema({
+var flightSchema = new schema({
   flightNumber      :  String,
   aircraftType      :  { type: String ,default: 'Boeing'},
   aircraftModel     :  { type: Number ,default: 747},
