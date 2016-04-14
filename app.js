@@ -41,8 +41,12 @@ app.route('/error').get(sendIndex);
 /**
 * App Routes go here
 */
-app.route('/api/airports').get(function(req, res){
-  res.json(JSON.parse(fs.readFileSync('./app/data/airports.json', 'UTF-8')));
+app.get('/api/airports', function(req, res){
+    flights.getAirports(function(err, airports){
+        if(err)
+            res.send(err);
+        res.json(airports);
+    });
 });
 
 app.use(function(req, res, next){
