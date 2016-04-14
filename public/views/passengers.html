@@ -121,7 +121,7 @@
 
 
  <div class="row">
-   <form  ng-submit="submitForm()">
+   <form  ng-submit="submitForm()" novalidate>
     <ul class="collection with-header" ng-repeat="adult in adults track by $index">
      <li class="collection-header  grey lighten-3 "><h4>Passenger {{$index + 1}} - Adult</h4></li>
      <li  class="collection-item">
