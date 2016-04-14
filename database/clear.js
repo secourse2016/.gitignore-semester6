@@ -17,18 +17,35 @@ var airport            = require('../app/models/airport');
   });
  }
 
-  /**
-   * remove flights from flight if the collection was not empty .
-   */
-   exports.removeFlights = function removeAirports(cb){
-     flight.count(function(err,count){
-       if(count == 0){
-          cb(err,false);
-      }
-      else {
-        flight.remove(function(err,removed){
+/**
+* remove flights from flight if the collection was not empty .
+*/
+ exports.removeFlights = function removeAirports(cb){
+   flight.count(function(err,count){
+     if(count == 0){
+        cb(err,false);
+    }
+    else {
+      flight.remove(function(err,removed){
+        cb(err,removed);
+      });
+    }
+  });
+ }
+
+/**
+* delete both flights and airpors.
+* clear database.
+*/
+ exports.clearDB = function clearDB(cb){
+    var removeFlights = this.removeFlights;
+    this.removeAirports(function(err, removed){
+      if(err)
+        cb(err,removed);
+      removeFlights(function(err, removed){
+        if(err)
           cb(err,removed);
-        });
-      }
+        cb(err,removed);
+      });
     });
-   }
+  }
