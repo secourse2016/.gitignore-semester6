@@ -5,6 +5,9 @@ var bodyParser    = require('body-parser');
 var app           = express();
 require('dotenv').config();
 
+// models ===============================================================
+var flights       = require('./flights');
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -38,16 +41,22 @@ app.route('/pricing').get(sendIndex);
 app.route('/error').get(sendIndex);
 
 
+// App Routes go here ==========================================================
+
+/**
+ * API route that returns all airports available for flight search
+ */
+app.get('/api/airports', function(req, res){
+    flights.getAirports(function(err, airports){
+        if(err)
+            res.send(err);
+        res.json(airports);
+    });
+});
+
 app.use(function(req, res, next){
   res.status(404);
    res.send('404 Not Found');
 });
-
-
-/**
-* App Routes go here
-*/
-
-
 
 module.exports = app;
