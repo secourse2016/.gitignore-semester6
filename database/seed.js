@@ -35,7 +35,7 @@ exports.seedFlights = function seedFlights(cb){
  */
 exports.seed = function seed(cb){
     var seedFlights = this.seedFlights;
-    this.seedAirports(function(err, chk){
+    this.seedAirports(function(err, check){
       if(err)
         cb(err,check);
       seedFlights(function(err, check){
