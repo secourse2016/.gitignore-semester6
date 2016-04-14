@@ -41,7 +41,7 @@ app.controller('passengerViewCtrl' , function($scope, global, $location){
           }
         }
         // if error(s) found isValid is set to false.
-        if(countErrors > 0 )
+        if(countErrors > 0 || $scope.formData.length == 0)
         isValid = false;
 
       // check validity of the form .
