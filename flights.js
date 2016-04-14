@@ -9,8 +9,8 @@ var booking = require('./app/models/booking');
 */
 
 var getOneDirectionFlights=module.exports.getOneDirectionFlights=function (cb, origin, destination, flightClass, date) {
-	var startDate = moment(date,"x").toDate();
-	var endDate = moment(date,"x").add(1,"days").toDate();
+	var startDate = moment(date,"x").toDate().getTime();
+	var endDate = moment(date,"x").add(1,"days").toDate().getTime();
 
 	// find documents in flights collection
 	flight.find({"origin": origin, "destination": destination, "class": flightClass, departureDateTime : {"$gte" : startDate, "$lt": endDate}},{},function(err,resultFlights){

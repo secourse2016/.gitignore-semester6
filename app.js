@@ -55,20 +55,55 @@ app.get('/api/airports', function(req, res){
     });
 });
 
-app.get('/api/flights/search/:origin/:destination/:departingDate/:returningDate/:class', function(req, res) {
- 	// retrieve params from req.params.{{origin | departingDate | ...}}
-        // return this exact format
-      var origin =  req.params.origin;
-      var destination =  req.params.destination;
-      var departingDate =  req.params.departingDate;
-      var returningDate =  req.params.returningDate;
-      var flightClass =  req.params.class;
-      
- 	flights.getFlights(function(resultFlights){
- 		res.json(resultFlights);
+ /**
+	     * ROUND-TRIP SEARCH REST ENDPOINT
+	     * @param origin - Flight Origin Location
+	     * @param destination - Flight Destination Location
+	     * @param departingDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
+	     * @param returningDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
+	     * @param class - economy or business only
+	     * @returns {Array}
+	     */   
+	app.get('/api/flights/search/:origin/:destination/:departingDate/:returningDate/:class', function(req, res) {
+	 	// retrieve params 
+	      var origin =  req.params.origin;
+	      var destination =  req.params.destination;
+	      var departingDate =  req.params.departingDate;
+	      var returningDate =  req.params.returningDate;
+	      var flightClass =  req.params.class;
+	      
+	 	flights.getFlights(function(resultFlights){
+	 		res.json(resultFlights);
 
- 	}, origin, destination, flightClass, moment(departingDate,"x"), moment(returningDate,"x"));
- });
+	 	}, origin, destination, flightClass, moment(departingDate,"x"), moment(returningDate,"x"));
+	 });
+
+	 /**
+	     * ONE-WAY SEARCH REST ENDPOINT 
+	     * @param origin - Flight Origin Location
+	     * @param DepartingDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
+	     * @param class - economy or business only
+	     * @returns {Array}
+	     */ 
+	     
+	 app.get('/api/flights/search/:origin/:destination/:departingDate/:class', function(req, res) {
+	        // retrieve params 
+	      var origin =  req.params.origin;
+	      var destination =  req.params.destination;
+	      var departingDate =  req.params.departingDate;
+	      var flightClass =  req.params.class;
+	      
+	 	flights.getFlights(function(resultFlights){
+	 		res.json(resultFlights);
+
+	 	}, origin, destination, flightClass, moment(departingDate,"x"));
+	    });   
+
+	app.use(function(req, res, next){
+	  res.status(404);
+	   res.send('404 Not Found');
+	});
+
 
 app.use(function(req, res, next){
   res.status(404);
