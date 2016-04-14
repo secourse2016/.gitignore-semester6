@@ -1,7 +1,7 @@
 var moment = require('moment');
 var flight = require('./app/models/flight');
-var flight = require('./app/models/airport');
-var flight = require('./app/models/booking');
+var airport = require('./app/models/airport');
+var booking = require('./app/models/booking');
 
 
 /*
@@ -23,7 +23,7 @@ var getOneDirectionFlights=module.exports.getOneDirectionFlights=function (cb, o
 			cb(resultFlights);
 		}
 	});
-	
+
 }
 
 /*
@@ -39,16 +39,26 @@ var getFlights=module.exports.getFlights=function (cb, origin, destination, flig
 		// check if it is oneway trip
 		if(arrivalDate == null) {
 			// return result
-			cb(result);	
-		} 
+			cb(result);
+		}
 		else {
 			// get the return flights as it is round trip
 			getOneDirectionFlights(function(returnFlights){
 				// add return flights to the result in case of round trip and return result
 				result.returnFlights = returnFlights;
-				cb(result);		
+				cb(result);
 			}, destination, origin, flightClass, arrivalDate);
-		
+
 		}
 	}, origin, destination, flightClass, departureDate);
 }
+
+/**
+ * Get all airports that can be available for flight search
+ * @param  {Function} cb will be called with (err, airports)
+ */
+module.exports.getAirports = function(cb){
+    airport.find(function(err, airports){
+        cb(err, airports);
+    });
+};

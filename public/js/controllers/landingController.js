@@ -38,47 +38,51 @@
 		$scope.formData = {tripType:2};
 		$scope.searchFlights = function(){
 			if($scope.formData.origin)
-				$scope.formData.origin = $scope.formData.origin.value;
+				$scope.formData.origin = $scope.formData.origin.iata;
 			if($scope.formData.destination)
-				$scope.formData.destination = $scope.formData.destination.value;
+				$scope.formData.destination = $scope.formData.destination.iata;
 			global.setSearchFlight($scope.formData);
 			$location.path("/flights");
 		};
 	});
 
-	app.controller('autoCompleteController', function($timeout, $q) {
-    this.airports      = loadAll();
-    this.searchText    = null;
-    this.querySearch   = querySearch;
+	app.controller('autoCompleteController', function($http, $timeout, $q) {
+		var ctrl = this;
+		ctrl.airports      = [];
+		ctrl.searchText    = null;
+		ctrl.querySearch   = querySearch;
 
-    function querySearch (query) {
-      var results = query ? this.airports.filter(createFilterFor(query) ) : [];
-      return results;
-    }
+		function querySearch (query) {
+		   var results = query ? ctrl.airports.filter(createFilterFor(query) ) : [];
+		   return results;
+		}
 
-    function loadAll() {
-		// var airports = AIRPORTS FROM SERVER
-     	// var airportNames = [];
-		// for(var i = 0; i < airports.length; ++i)
-		// airportNames.push(airports[i]);
-		var airportNames = ['Cairo International Airport (CIA)',
-		'Minya International Airport (MIA)', 'Vnukovo International Airport (VKO)',
-		'Chicago Meigs Airport (CGX)'
-		];
-	    return airportNames.map( function (airport) {
-	    	return 	{
-				          value: airport.toLowerCase(),
-				          display: airport
-	    			};
-	      });
-	}
+		function loadAll(airports) {
+		   return airports.map(function (airport) {
+			   var displayValue = airport.name + " (" + airport.iata + ")";
+			   return 	{
+							 iata: airport.iata,
+							 value: displayValue.toLowerCase(),
+							 display: displayValue
+						};
+			 });
+		}
 
-    function createFilterFor(query) {
-      var lowercaseQuery = angular.lowercase(query);
-      return function filterFn(airport) {
-        return (airport.value.indexOf(lowercaseQuery) === 0);
-      };
-    }
-  });
+		function createFilterFor(query) {
+		   var lowercaseQuery = angular.lowercase(query);
+		   return function filterFn(airport) {
+			   return (airport.value.indexOf(lowercaseQuery) === 0
+			   			|| airport.iata.indexOf(lowercaseQuery) === 0);
+		   };
+		}
+
+		$http.get('/api/airports')
+			 .success(function(data){
+				 ctrl.airports = loadAll(data);
+			 })
+			 .error(function(data){
+            	 console.log('Error: can\'t fetch airports');
+        	});
+	});
 
 })();
