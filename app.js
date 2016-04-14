@@ -2,17 +2,21 @@ var express       = require('express');
 var path          = require('path');
 var mongoose      = require('mongoose');
 var bodyParser    = require('body-parser');
+var jwt           = require('jsonwebtoken');
 var app           = express();
 require('dotenv').config();
 
-// models ===============================================================
+// middlewares ============================================================
+var verifyToken   = require('./app/middlewares/tokenMiddleware');
+
+// functions ==============================================================
 var flights       = require('./flights');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// configuration ===============================================================
+// configuration ==========================================================
 mongoose.connect(process.env.mongoURL); // connect to our database
 
 /*
