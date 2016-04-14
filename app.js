@@ -2,6 +2,7 @@ var express       = require('express');
 var path          = require('path');
 var mongoose      = require('mongoose');
 var bodyParser    = require('body-parser');
+var seed          = require('./database/seed');
 var app           = express();
 require('dotenv').config();
 
@@ -39,6 +40,24 @@ app.route('/bookAFlight').get(sendIndex);
 app.route('/offers').get(sendIndex);
 app.route('/pricing').get(sendIndex);
 app.route('/error').get(sendIndex);
+
+/**
+ *	seed database and return error if
+ *	the operation don't complete.
+ */
+ app.get('/db/seed', function(req, res) {
+     seed.seed(function (err ,chk){
+         if(err){
+             res.send(err);
+         }
+         if(!chk){
+             res.send("database was seeded");
+         }else{
+             res.send("database seeded successfuly");
+         }
+     });
+ });
+
 
 
 // App Routes go here ==========================================================
