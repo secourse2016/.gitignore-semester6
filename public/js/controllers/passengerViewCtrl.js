@@ -27,6 +27,7 @@ app.controller('passengerViewCtrl' , function($scope, global, $location){
 
       // loop in formData submitted to check fields.
         for (var i = 0; i < $scope.formData.length; i++) {
+
           if(!$scope.formData[i].firstName) {
             if(!$scope.errors[i])
               $scope.errors[i] = {};
@@ -37,6 +38,13 @@ app.controller('passengerViewCtrl' , function($scope, global, $location){
             if(!$scope.errors[i])
               $scope.errors[i] = {};
             $scope.errors[i].lastName = true;
+            countErrors++;
+          }
+
+          if(!$scope.formData[i].nationality) {
+            if(!$scope.errors[i])
+              $scope.errors[i] = {};
+            $scope.errors[i].nationality = true;
             countErrors++;
           }
         }
