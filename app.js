@@ -2,6 +2,7 @@ var express       = require('express');
 var path          = require('path');
 var mongoose      = require('mongoose');
 var bodyParser    = require('body-parser');
+var moment		  = require('moment');
 var app           = express();
 require('dotenv').config();
 
@@ -54,9 +55,26 @@ app.get('/api/airports', function(req, res){
     });
 });
 
+app.get('/api/flights/search/:origin/:destination/:departingDate/:returningDate/:class', function(req, res) {
+ 	// retrieve params from req.params.{{origin | departingDate | ...}}
+        // return this exact format
+      var origin =  req.params.origin;
+      var destination =  req.params.destination;
+      var departingDate =  req.params.departingDate;
+      var returningDate =  req.params.returningDate;
+      var flightClass =  req.params.class;
+      
+ 	flights.getFlights(function(resultFlights){
+ 		res.json(resultFlights);
+
+ 	}, origin, destination, flightClass, moment(departingDate,"x"), moment(returningDate,"x"));
+ });
+
 app.use(function(req, res, next){
   res.status(404);
    res.send('404 Not Found');
 });
+
+
 
 module.exports = app;
