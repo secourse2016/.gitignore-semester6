@@ -7,7 +7,7 @@ var airport            = require('../app/models/airport');
  * seed airport from airpors.json file if collection is empty
  */
 exports.seedAirports = function seedAirports(cb){
-    airport.collection.count( function ( err , c) { //check thier count
+    airport.count( function ( err , c) { //check thier count
       if(c == 0)
         airport.create(airports, function(err, result) {cb(err,true)});
       else
@@ -19,7 +19,7 @@ exports.seedAirports = function seedAirports(cb){
  * seed flight from data in flights.json if collection is empty
  */
 exports.seedFlights = function seedFlights(cb){
-    flight.collection.count( function (err , c) { //check thier count
+    flight.count( function (err , c) { //check thier count
       if(c == 0)
         flight.create(flights, function(err, result) {cb(err,true)});
       else
