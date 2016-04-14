@@ -3,7 +3,7 @@ var schema       = mongoose.Schema;
 
 var booking = new schema ({
 
-	id : String,
+	bookingNumber: {type:String , unique:true},
 	passengers :
 		[
 			{
@@ -15,9 +15,9 @@ var booking = new schema ({
 				birthDate : Date
 			}
 		],
-	outgoingFlights :{ type:Number, ref: 'Flight' },		
+	outgoingFlights :{ type:String, ref: 'Flight' },		
 			
-	returnFlight :{type:Number , ref:'Flight'},
+	returnFlight :{type:String , ref:'Flight'},
 		
 	totalPrice : Number,
 	bookingDate : Date,

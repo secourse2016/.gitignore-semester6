@@ -56,10 +56,10 @@ var getFlights=module.exports.getFlights=function (cb, origin, destination, flig
 var addBooking = module.exports.addBooking = function(bookingInfo){
 
 	var newBooking = new booking();
-	newBooking.passengers = bookingInfo.passengers ; 
+	newBooking.passengers = bookingInfo.passengers;
 	newBooking.outgoingFlights = bookingInfo.outgoingFlights;
 	newBooking.returnFlight = bookingInfo.returnFlights; 
-	newBooking.totalPrice = bookingInfo.bookingCost;
+	newBooking.totalPrice = bookingInfo.cost;
 	newBooking.bookingDate = Date.now();
 	newBooking.isSuccessful = true ;
 	newBooking.save(function (err) {
