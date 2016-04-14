@@ -2,12 +2,8 @@ var express       = require('express');
 var path          = require('path');
 var mongoose      = require('mongoose');
 var bodyParser    = require('body-parser');
-var jwt           = require('jsonwebtoken');
 var app           = express();
 require('dotenv').config();
-
-// middlewares ============================================================
-var verifyToken   = require('./app/middlewares/tokenMiddleware');
 
 // functions ==============================================================
 var flights       = require('./flights');
@@ -44,8 +40,15 @@ app.route('/offers').get(sendIndex);
 app.route('/pricing').get(sendIndex);
 app.route('/error').get(sendIndex);
 
+// middlewares ============================================================
+var verifyToken   = require('./app/middlewares/tokenMiddleware');
 
-// App Routes go here ==========================================================
+/**
+ * Token Verification Middleware
+ */
+app.use(verifyToken);
+
+// App Routes go here (Protected routess) =================================
 
 /**
  * API route that returns all airports available for flight search
