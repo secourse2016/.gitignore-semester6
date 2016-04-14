@@ -8,8 +8,8 @@ describe('Airports API Route', function() {
     it('/api/airports should return an array of 6726 airports as JSON objects when I visit',
     function(done){
         var attributes = ["iata", "lon", "iso", "status", "continent", "type", "lat"];
-        request.get('/api/airports').expect('Content-Type', /json/)
-        .expect(function(res){
+        request.get('/api/airports').set('x-access-token', process.env.TOKEN)
+        .expect('Content-Type', /json/).expect(function(res){
             var airports = res.body;
             assert.isArray(airports, "Returned object is an array");
             assert.equal(airports.length, 6726, "Number of airports");
