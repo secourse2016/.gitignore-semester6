@@ -42,10 +42,13 @@ var airport            = require('../app/models/airport');
     this.removeAirports(function(err, removed){
       if(err)
         cb(err,removed);
-      removeFlights(function(err, removed){
-        if(err)
-          cb(err,removed);
-        cb(err,removed);
+      else {
+        removeFlights(function(err, removed){
+          if(err)
+            cb(err,removed);
+          else
+            cb(err,removed);
       });
-    });
-  }
+     }
+  });
+ }
