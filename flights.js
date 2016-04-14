@@ -53,6 +53,22 @@ var getFlights=module.exports.getFlights=function (cb, origin, destination, flig
 	}, origin, destination, flightClass, departureDate);
 }
 
+
+var getAllFlights = module.exports.getAllFlights() = function(cb, origin, destination, flightClass, departureDate, arrivalDate, allAirlines)
+{
+	// get flights from Austrian airlines
+	this.getFlights(function(austrianFlights){
+		if(allAirlines){
+			// get flights from other airlines
+		}
+		else
+		{
+			cb(austrianFlights);
+		}
+
+	},origin, destination, flightClass, departureDate, arrivalDate);
+}
+
 /**
  * Get all airports that can be available for flight search
  * @param  {Function} cb will be called with (err, airports)
