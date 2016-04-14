@@ -2,6 +2,10 @@ var app = require('../app.js');
 var assert = require('chai').assert;
 var request = require('supertest');
 
+// JWT Token Generation
+var jwt = require('jsonwebtoken');
+var token = jwt.sign({}, process.env.SECRET_KEY);
+
 describe('JWT Middleware', function() {
     request = request(app);
 
@@ -22,7 +26,7 @@ describe('JWT Middleware', function() {
     });
 
     it('/api/airports should return 200 when token is provided correctly', function(done){
-        request.get('/api/airports').set('x-access-token', process.env.TOKEN)
+        request.get('/api/airports').set('x-access-token', token)
                .expect(200, done);
     });
 });
