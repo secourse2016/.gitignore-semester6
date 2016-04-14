@@ -7,9 +7,11 @@ var airport            = require('../app/models/airport');
  * seed airport from airpors.json file if collection is empty
  */
 exports.seedAirports = function seedAirports(cb){
-    airport.count( function ( err , c) { //check thier count
-      if(c == 0)
-        airport.create(airports, function(err, result) {cb(err,true)});
+    airport.count(function(err, count){
+      if(count == 0)
+        airport.create(airports, function(err, result){
+             cb(err, true);
+         });
       else
           cb(err, false);
     });
@@ -19,9 +21,11 @@ exports.seedAirports = function seedAirports(cb){
  * seed flight from data in flights.json if collection is empty
  */
 exports.seedFlights = function seedFlights(cb){
-    flight.count( function (err , c) { //check thier count
-      if(c == 0)
-        flight.create(flights, function(err, result) {cb(err,true)});
+    flight.count(function(err, count){
+      if(count == 0)
+        flight.create(flights, function(err, result){
+            cb(err, true);
+        });
       else
           cb(err, false);
     });
@@ -33,11 +37,11 @@ exports.seed = function seed(cb){
     var seedFlights = this.seedFlights;
     this.seedAirports(function(err, chk){
       if(err)
-        cb(err,chk);
-      seedFlights(function(err, chk){
+        cb(err,check);
+      seedFlights(function(err, check){
         if(err)
-          cb(err,chk);
-        cb(err,chk);
+          cb(err,check);
+        cb(err,check);
       });
     });
 }
