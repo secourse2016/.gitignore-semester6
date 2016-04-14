@@ -68,6 +68,12 @@ var app = angular.module('austrianAirlinesApp', ['ngRoute', 'ui.materialize', 'j
             templateUrl : 'views/successful-payment.html'
         })
 
+        //route for booking history
+        .when('/booking-history', {
+            templateUrl : 'views/booking-history.html'
+        })
+
+        // route for error page
         .when('/error', {
             templateUrl : 'views/static/error404.html'
         });
