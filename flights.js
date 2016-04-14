@@ -3,12 +3,12 @@ var flight 	= require('./app/models/flight');
 var airport = require('./app/models/airport');
 var booking = require('./app/models/booking');
 var fs 		= require('fs');
+var http 	= require('http');
+
 
 /*
-	this function returns all flights from origin to destination in the specefic date with the specific class given in the arguments
-	*/
-
-
+this function returns all flights from origin to destination in the specefic date with the specific class given in the arguments
+*/
 var getOneDirectionFlights=module.exports.getOneDirectionFlights=function (cb, origin, destination, flightClass, date) {
 	var startDate = moment(date,"x").toDate().getTime();
 	var endDate = moment(date,"x").add(1,"days").toDate().getTime();
@@ -23,15 +23,13 @@ var getOneDirectionFlights=module.exports.getOneDirectionFlights=function (cb, o
 }
 
 /*
-
 *	this function returns all flights from origin to destination in the specefic departure date and return flights in the arrival time (in case of round trips) with the specific class given in the arguments
 */
-
-	var getFlights=module.exports.getFlights=function (cb, origin, destination, flightClass, departureDate, arrivalDate){
+var getFlights=module.exports.getFlights=function (cb, origin, destination, flightClass, departureDate, arrivalDate){
 	// get the flights in the outgoing flights
 	getOneDirectionFlights(function(err, outgoingFlights){
 		if(err)
-			cb(err);
+			cb(err,{});
 		var result = {};
 		// adding outgoing flights to the result
 		result.outgoingFlights = outgoingFlights;
@@ -66,37 +64,28 @@ var airlines = JSON.parse(fs.readFileSync('./app/data/airlines.json', 'utf8'));
 var getAllFlights = module.exports.getAllFlights = function(cb, allAirlines, origin, destination, flightClass, departureDate, arrivalDate)
 {
 	// get flights from Austrian airlines
-	getFlights(function(austrianFlights){
-		if(allAirlines){
+	getFlights(function(err, austrianFlights){
+		if(err)
+			cb(err,{});
+		else if(allAirlines){
 			// get flights from other airlines
 			getOtherAirlines(function(otherFlights){
 
 				// add other airlines' flights to our flights
-				austrianFlights.outgoingFlights.concat(otherFlights.outgoingFlights);
+				austrianFlights.outgoingFlights = austrianFlights.outgoingFlights.concat(otherFlights.outgoingFlights);
 
 				if(arrivalDate)
-					austrianFlights.returnFlights.concat(otherFlights.returnFlights);
-				cb(austrianFlights);
+					austrianFlights.returnFlights = austrianFlights.returnFlights.concat(otherFlights.returnFlights);
+				cb(err, austrianFlights);
 			}, 0, allAirlines, origin, destination, flightClass, departureDate, arrivalDate);
 		}
 		else {
 			// only Austrian airline flights
-			cb(austrianFlights);
+			cb(err,austrianFlights);
 		}
 
 	},origin, destination, flightClass, departureDate, arrivalDate);
 }
-
-/**
- * Get all airports that can be available for flight search
- * @param  {Function} cb will be called with (err, airports)
- */
- module.exports.getAirports = function(cb){
- 	airport.find(function(err, airports){
- 		cb(err, airports);
- 	});
- };
-
 
 /**
 * Iterates (by recursion) over all airlines and returns their flights in a callback function
@@ -104,15 +93,14 @@ var getAllFlights = module.exports.getAllFlights = function(cb, allAirlines, ori
 var getOtherAirlines = function(cb, airlineIndex, allAirlines, origin, destination, flightClass, departureDate, arrivalDate)
 {
 	// checks if there are still airlines
-	if(airlineIndex < airline.length){
-
+	if(airlineIndex < airlines.length){
 		// get the URL of the airline
 		var targetHost = airlines[airlineIndex];
 
 		// get the API route
-		var targetPath = '/api/flights/search/'+origin+'/'+destination+'/'+departingDate+'/'+flightClass;
+		var targetPath = '/api/flights/search/'+origin+'/'+destination+'/'+departureDate+'/'+flightClass;
 		if(arrivalDate)
-			targetPath = '/api/flights/search/'+origin+'/'+destination+'/'+departingDate+'/'+arrivalDate+'/'+flightClass;
+			targetPath = '/api/flights/search/'+origin+'/'+destination+'/'+departureDate+'/'+arrivalDate+'/'+flightClass;
 
 		// assign the HTTP request options: host and path
 		var options = {
@@ -131,16 +119,16 @@ var getOtherAirlines = function(cb, airlineIndex, allAirlines, origin, destinati
 
 			});
 			res.on('end',function(){
+
 				// get flights of next airline and add the result to the current airlines' flights
 				getOtherAirlines(function(otherFlights){
 					// parse the data of the flights of the current airline into JSON
 					flightsData = JSON.parse(flightsData);
 
 					// add the current flights to the flights of the next airlines
-					otherFlights.outgoingFlights.concat(flightsData.outgoingFlights);
+					otherFlights.outgoingFlights = otherFlights.outgoingFlights.concat(flightsData.outgoingFlights);
 					if(arrivalDate)
-						otherFlights.returnFlights.concat(flightsData.returnFlights);
-
+						otherFlights.returnFlights = otherFlights.returnFlights.concat(flightsData.returnFlights);
 					// return the results
 					cb(otherFlights);
 				}, airlineIndex+1, allAirlines, origin, destination, flightClass, departureDate, arrivalDate);
@@ -170,4 +158,12 @@ var getOtherAirlines = function(cb, airlineIndex, allAirlines, origin, destinati
 
 
 
-
+/**
+ * Get all airports that can be available for flight search
+ * @param  {Function} cb will be called with (err, airports)
+ */
+ module.exports.getAirports = function(cb){
+ 	airport.find(function(err, airports){
+ 		cb(err, airports);
+ 	});
+ };
