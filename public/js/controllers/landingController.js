@@ -54,7 +54,6 @@
 
 		function querySearch (query) {
 		   var results = query ? ctrl.airports.filter(createFilterFor(query) ) : [];
-		   console.log(results);
 		   return results;
 		}
 
@@ -72,7 +71,7 @@
 		function createFilterFor(query) {
 		   var lowercaseQuery = angular.lowercase(query);
 		   return function filterFn(airport) {
-			   return (airport.value.indexOf(lowercaseQuery) === 0 
+			   return (airport.value.indexOf(lowercaseQuery) === 0
 			   			|| airport.iata.indexOf(lowercaseQuery) === 0);
 		   };
 		}
