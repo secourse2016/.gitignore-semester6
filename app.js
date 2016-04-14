@@ -4,7 +4,6 @@ var mongoose      = require('mongoose');
 var bodyParser    = require('body-parser');
 var moment		  = require('moment');
 var app           = express();
-var functions 	  = require('./flights');
 require('dotenv').config();
 
 // models ===============================================================
@@ -41,10 +40,7 @@ app.route('/bookAFlight').get(sendIndex);
 app.route('/offers').get(sendIndex);
 app.route('/pricing').get(sendIndex);
 app.route('/error').get(sendIndex);
-app.post('/api/addBooking',function(req,res){
-	functions.addBooking(req.body);
-	res.status(200);
-});
+
 
 
 
@@ -108,6 +104,13 @@ app.get('/api/flights/search/:origin/:destination/:departingDate/:class', functi
 
 	}, origin, destination, flightClass, moment(departingDate,"x"));
 });   
+/**
+*USER BOOK FIGHT 
+*/
+app.post('/api/addBooking',function(req,res){
+	flights.addBooking(req.body);
+	res.status(200);
+});
 
 app.use(function(req, res, next){
   res.status(404);
