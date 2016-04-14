@@ -2,9 +2,11 @@ var express       = require('express');
 var path          = require('path');
 var mongoose      = require('mongoose');
 var bodyParser    = require('body-parser');
-var fs            = require('fs');
 var app           = express();
 require('dotenv').config();
+
+// models ===============================================================
+var flights       = require('./flights');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
