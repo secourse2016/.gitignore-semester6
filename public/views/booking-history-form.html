@@ -1,0 +1,44 @@
+
+
+<div class="card-panel grey lighten-3 payment-block" id="form"  ng-controller="bookingHistoryFormController as bookingHistoryFormCtrl">
+
+  <div class="form-header">
+    <h5 class="red-text text-darken-2">Booking History</h5>
+  </div>
+  <hr class="hr">
+
+  <div>
+    <!--Form-->
+    <form name="bookingHistoryForm" class="col s12" ng-submit="bookingHistoryForm.$valid && bookingHistoryFormCtrl.searchBooking()">
+
+      <!--Booking Number-->
+      <div class="row">
+        <div class="input-field col s12">
+        <i class="material-icons prefix">payment</i>
+          <input  ng-model="bookingHistoryFormCtrl.bookingNo" type="text" class="validate" required>
+          <label for="bookingNo">Booking No.</label>
+        </div>
+      </div>
+
+      <!--Passport Number-->
+      <div class="row">
+        <div class="input-field col s12">
+        <i class="material-icons prefix">payment</i>
+          <input  ng-model="bookingHistoryFormCtrl.passportNo" type="text" class="validate" required>
+          <label for="passportNo">Passport No.</label>
+        </div>
+      </div>
+
+      <!--Submition button-->
+      <div class="row">
+        <div class="input-field col s12">
+          <a ng-href="{{ bookingHistoryForm.$valid ?'/booking-history' : '/booking-history-form'}}"
+          class="btn waves-effect waves-light red book-button"
+          name="showHistory">View Booking
+          <i class="material-icons right">send</i>
+          </a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
