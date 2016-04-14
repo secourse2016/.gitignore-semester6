@@ -10,7 +10,7 @@ module.exports = function(req, res, next){
     if(token){
         jwt.verify(token, process.env.SECRET_KEY, function(err, decoded){
             if(err){
-                return res.json({ message: 'Token Mismatch. Unauthorized Access.'});
+                return res.status(403).json({ message: 'Token Mismatch. Unauthorized Access.'});
             }
             else {
                 req.decoded = decoded;
