@@ -5,32 +5,19 @@ var airport            = require('../app/models/airport');
  * remove airports from airport if the collection was not empty .
  */
  exports.removeAirports = function removeAirports(cb){
-   airport.count(function(err,count){
-     if(count == 0){
-        cb(err,false);
-    }
-    else {
-      airport.remove(function(err,removed){
-        cb(err,removed);
-      });
-    }
-  });
+   airport.remove(function(err){
+     cb(err);
+   });
  }
 
 /**
 * remove flights from flight if the collection was not empty .
 */
- exports.removeFlights = function removeAirports(cb){
-   flight.count(function(err,count){
-     if(count == 0){
-        cb(err,false);
-    }
-    else {
-      flight.remove(function(err,removed){
-        cb(err,removed);
+ exports.removeFlights = function removeFlights(cb){
+
+      flight.remove(function(err){
+        cb(err);
       });
-    }
-  });
  }
 
 /**
@@ -39,15 +26,15 @@ var airport            = require('../app/models/airport');
 */
  exports.clearDB = function clearDB(cb){
     var removeFlights = this.removeFlights;
-    this.removeAirports(function(err, removed){
+    this.removeAirports(function(err){
       if(err)
-        cb(err,removed);
+        cb(err);
       else {
-        removeFlights(function(err, removed){
+        removeFlights(function(err){
           if(err)
-            cb(err,removed);
+            cb(err);
           else
-            cb(err,removed);
+            cb(err);
       });
      }
   });
