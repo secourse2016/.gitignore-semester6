@@ -45,8 +45,8 @@ app.route('/error').get(sendIndex);
 // App Routes go here ==========================================================
 
 /**
- * API route that returns all airports available for flight search
- */
+* API route that returns all airports available for flight search
+*/
 app.get('/api/airports', function(req, res){
     flights.getAirports(function(err, airports){
         if(err)
@@ -55,61 +55,57 @@ app.get('/api/airports', function(req, res){
     });
 });
 
- /**
-	     * ROUND-TRIP SEARCH REST ENDPOINT
-	     * @param origin - Flight Origin Location
-	     * @param destination - Flight Destination Location
-	     * @param departingDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
-	     * @param returningDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
-	     * @param class - economy or business only
-	     * @returns {Array}
-	     */   
-	app.get('/api/flights/search/:origin/:destination/:departingDate/:returningDate/:class', function(req, res) {
-	 	// retrieve params 
-	      var origin =  req.params.origin;
-	      var destination =  req.params.destination;
-	      var departingDate =  req.params.departingDate;
-	      var returningDate =  req.params.returningDate;
-	      var flightClass =  req.params.class;
-	      
-	 	flights.getFlights(function(resultFlights){
-	 		res.json(resultFlights);
+/**
+* ROUND-TRIP SEARCH REST ENDPOINT
+* @param origin - Flight Origin Location
+* @param destination - Flight Destination Location
+* @param departingDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
+* @param returningDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
+* @param class - economy or business only
+* @returns {Array}
+*/   
+app.get('/api/flights/search/:origin/:destination/:departingDate/:returningDate/:class', function(req, res) {
+	// retrieve params 
+	var origin =  req.params.origin;
+	var destination =  req.params.destination;
+	var departingDate =  req.params.departingDate;
+	var returningDate =  req.params.returningDate;
+	var flightClass =  req.params.class;
 
-	 	}, origin, destination, flightClass, moment(departingDate,"x"), moment(returningDate,"x"));
-	 });
+	flights.getFlights(function(err, resultFlights){
+		if(err)
+			res.send(err);
+		res.json(resultFlights);
 
-	 /**
-	     * ONE-WAY SEARCH REST ENDPOINT 
-	     * @param origin - Flight Origin Location
-	     * @param DepartingDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
-	     * @param class - economy or business only
-	     * @returns {Array}
-	     */ 
+	}, origin, destination, flightClass, moment(departingDate,"x"), moment(returningDate,"x"));
+});
+
+/**
+* ONE-WAY SEARCH REST ENDPOINT 
+* @param origin - Flight Origin Location
+* @param DepartingDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
+* @param class - economy or business only
+* @returns {Array}
+*/ 
 	     
-	 app.get('/api/flights/search/:origin/:destination/:departingDate/:class', function(req, res) {
-	        // retrieve params 
-	      var origin =  req.params.origin;
-	      var destination =  req.params.destination;
-	      var departingDate =  req.params.departingDate;
-	      var flightClass =  req.params.class;
-	      
-	 	flights.getFlights(function(resultFlights){
-	 		res.json(resultFlights);
+app.get('/api/flights/search/:origin/:destination/:departingDate/:class', function(req, res) {
+    // retrieve params 
+    var origin 			=  req.params.origin;
+    var destination 	=  req.params.destination;
+    var departingDate 	=  req.params.departingDate;
+    var flightClass 	=  req.params.class;
+  
+	flights.getFlights(function(err, resultFlights){
+		if(err)
+			res.send(err);
+		res.json(resultFlights);
 
-	 	}, origin, destination, flightClass, moment(departingDate,"x"));
-	    });   
-
-	app.use(function(req, res, next){
-	  res.status(404);
-	   res.send('404 Not Found');
-	});
-
+	}, origin, destination, flightClass, moment(departingDate,"x"));
+});   
 
 app.use(function(req, res, next){
   res.status(404);
    res.send('404 Not Found');
 });
-
-
 
 module.exports = app;
