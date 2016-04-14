@@ -1,5 +1,5 @@
-var airports           = require("./airports.json");
-var flights            = require("./flights.json");
+var airports           = require("../app/data/airports.json");
+var flights            = require("../app/data/flights.json");
 var Flight             = require('../app/models/flight');
 var Airport            = require('../app/models/airport');
 
@@ -14,10 +14,10 @@ exports.seedAirports = function seedAirports(cb){
           cb(err, false);
     });
 }
+
 /**
  * seed flight from data in flights.json if collection is empty
  */
-
 exports.seedFlights = function seedFlights(cb){
     Flight.collection.count( function (err , c) { //check thier count
       if(c == 0)
