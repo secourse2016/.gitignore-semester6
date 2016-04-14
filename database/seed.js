@@ -26,3 +26,17 @@ exports.seedFlights = function seedFlights(cb){
           cb(err, false);
     });
 }
+/**
+ * seed both flights and airpors
+ */
+exports.seed = function seed(){
+    this.seedFlights(function(err, chk){
+      if(err)
+        throw err;
+    });
+    this.seedAirports(function(err, chk){
+      if(err)
+        throw err;
+
+    });
+}
