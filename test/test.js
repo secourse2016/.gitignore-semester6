@@ -5,8 +5,6 @@ var flight             = require('../app/models/flight');
 var airport            = require('../app/models/airport');
 
 
-
-
 describe("clearDB", function() {
     // seed and then clear.
     seed.seed(function(err, check) {
@@ -16,6 +14,7 @@ describe("clearDB", function() {
         if(err) throw err;
       });
     });
+    // it should find the db empty.
     it("should clear flights and airports , find all empty", function() {
       var zero = true;
         airport.count(function(err, count){
