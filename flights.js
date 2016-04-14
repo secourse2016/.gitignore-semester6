@@ -1,4 +1,9 @@
 var moment = require('moment');
+var flight = require('./app/models/flight');
+var flight = require('./app/models/airport');
+var flight = require('./app/models/booking');
+
+
 /*
 	this function returns all flights from origin to destination in the specefic date with the specific class given in the arguments
 */
