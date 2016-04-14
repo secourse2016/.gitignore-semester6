@@ -62,3 +62,13 @@ module.exports.getAirports = function(cb){
         cb(err, airports);
     });
 };
+
+
+/*
+* Search for a certain booking in the database and return it
+*/
+module.exports.getBooking = function(req , cb){
+    booking.find({"bookingNo":req.bookingNo},function(err, booking){
+        cb(err, booking);
+    });
+};
