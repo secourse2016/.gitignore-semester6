@@ -51,7 +51,8 @@ app.get('/api/airports', function(req, res){
     flights.getAirports(function(err, airports){
         if(err)
             res.send(err);
-        res.json(airports);
+        else
+          res.json(airports);
     });
 });
 
@@ -75,7 +76,8 @@ app.get('/api/flights/search/:origin/:destination/:departingDate/:returningDate/
 	flights.getFlights(function(err, resultFlights){
 		if(err)
 			res.send(err);
-		res.json(resultFlights);
+    else
+		  res.json(resultFlights);
 
 	}, origin, destination, flightClass, moment(departingDate,"x"), moment(returningDate,"x"));
 });
@@ -98,7 +100,8 @@ app.get('/api/flights/search/:origin/:destination/:departingDate/:class', functi
 	flights.getFlights(function(err, resultFlights){
 		if(err)
 			res.send(err);
-		res.json(resultFlights);
+    else
+		  res.json(resultFlights);
 
 	}, origin, destination, flightClass, moment(departingDate,"x"));
 }); 
@@ -118,8 +121,8 @@ app.post('/api/flights/search/roundtrip', function(req, res){
     // Get the request parameters
     var origin        =  req.body.origin;
     var destination   =  req.body.destination;
-    var departureDate =  moment(req.body.departureDate,['LLLL','L','l','x','X','YYYY-MM-DD']).format('x');
-    var arrivalDate   =  moment(req.body.arrivalDate,['LLLL','L','l','x','X','YYYY-MM-DD']).format('x');
+    var departureDate =  moment(req.body.departureDate,['D MMMM, YYYY','LLLL','L','l','x','X','YYYY-MM-DD']).format('x');
+    var arrivalDate   =  moment(req.body.arrivalDate,['D MMMM, YYYY','LLLL','L','l','x','X','YYYY-MM-DD']).format('x');
     var flightClass   =  req.body.flightClass;
     var allAirlines   =  req.body.allAirlines;
 
@@ -127,7 +130,8 @@ app.post('/api/flights/search/roundtrip', function(req, res){
     flights.getAllFlights(function(err, resultFlights){
       if(err)
         res.send(err);
-      res.json(resultFlights);
+      else
+        res.json(resultFlights);
     }, allAirlines, origin, destination, flightClass, departureDate, arrivalDate);
 });
 
@@ -147,7 +151,7 @@ app.post('/api/flights/search/oneway', function(req, res){
     // get the request parameters
     var origin        =  req.body.origin;
     var destination   =  req.body.destination;
-    var departureDate =  moment(req.body.departureDate,['LLLL','L','l','x','X','YYYY-MM-DD']).format('x');
+    var departureDate =  moment(req.body.departureDate,['D MMMM, YYYY','LLLL','L','l','x','X','YYYY-MM-DD']).format('x');
     var flightClass   =  req.body.flightClass;
     var allAirlines   =  req.body.allAirlines;
     
@@ -156,7 +160,8 @@ app.post('/api/flights/search/oneway', function(req, res){
     flights.getAllFlights(function(err, resultFlights){
       if(err)
         res.send(err);
-      res.json(resultFlights);
+      else
+        res.json(resultFlights);
     }, allAirlines, origin, destination, flightClass, departureDate);
 });
 
