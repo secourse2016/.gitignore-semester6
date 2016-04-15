@@ -109,7 +109,7 @@ app.get('/api/flights/search/:origin/:destination/:departingDate/:class', functi
 */
 app.post('/api/addBooking',function(req,res){
 	flights.addBooking(req.body);
-	res.status(200);
+		res.status(200);
 });
 
 app.use(function(req, res, next){

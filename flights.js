@@ -71,12 +71,12 @@ module.exports.getAirports = function(cb){
 
 	var newBooking = new booking();
 	newBooking.passengers = bookingInfo.passengers;
-	newBooking.outgoingFlights = bookingInfo.outgoingFlights;
-	newBooking.returnFlight = bookingInfo.returnFlights; 
-	newBooking.totalPrice = bookingInfo.cost;
+	newBooking.outgoingFlight = bookingInfo.outgoingFlight;
+	newBooking.returnFlight = bookingInfo.returnFlight; 
+	newBooking.totalPrice = bookingInfo.totalPrice;
 	newBooking.bookingDate = Date.now();
 	newBooking.isSuccessful = true ;
 	newBooking.save(function (err) {
-  	if (err) return handleError(err);
+  	if (err) throw err;
   });
 }
