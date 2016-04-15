@@ -17,7 +17,7 @@ var getOneDirectionFlights=module.exports.getOneDirectionFlights=function (cb, o
 	flight.find({"origin": origin, "destination": destination, "class": flightClass, departureDateTime : {"$gte" : startDate, "$lt": endDate}},{},function(err,resultFlights){
 			// call the call back function with the result
 			cb(err, resultFlights);
-		
+
 	});
 
 }
@@ -67,8 +67,8 @@ module.exports.getAirports = function(cb){
 /*
 * Search for a certain booking in the database and return it
 */
-module.exports.getBooking = function(req , cb){
-    booking.find({"bookingNo":req.bookingNo},function(err, booking){
+module.exports.getBooking = function(bookingNo , passportNo , cb){
+    booking.find({"bookingNo":bookingNo , "passportNo":passportNo}, {} , function(err, booking){
         cb(err, booking);
     });
 };
