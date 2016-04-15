@@ -101,7 +101,7 @@ describe('seed route', function(){
         clear.clearDB(function(err){
             request.get("/db/seed").set("Accept", "text/html").expect(200).end(function(err,res){
                 expect(res.body).to.have.property("message");
-                assert.strictEqual(res.body.message,'database seeded successfuly','database contains 1000 Flights');
+                assert.strictEqual(res.body.message,'database seeded successfuly');
                 done();
             });
         });
@@ -118,5 +118,12 @@ describe('seed route', function(){
             assert.strictEqual(6726,count,'database contains 6726 Airport');
             done();
         });
+      });
+      it('/db/seed should not seed db', function(done){
+              request.get("/db/seed").set("Accept", "text/html").expect(200).end(function(err,res){
+                  expect(res.body).to.have.property("message");
+                  assert.strictEqual(res.body.message,'database was seeded');
+                  done();
+              });
       });
 });
