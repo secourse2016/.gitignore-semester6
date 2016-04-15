@@ -46,8 +46,8 @@ app.route('/error').get(sendIndex);
 
 
 /**
- *	seed database and return error if
- *	the operation don't complete.
+ *	Seed database and return error if
+ *	the operation doesn't complete.
  */
  app.get('/db/seed', function(req, res) {
      seed.seed(function (err ,chk){
