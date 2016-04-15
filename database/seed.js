@@ -8,8 +8,8 @@ var airport            = require('../app/models/airport');
  */
 exports.seedAirports = function seedAirports(cb){
     airport.count(function(err, count){
-      if(count == 0)
-        airport.create(airports, function(err, result){
+      if(count === 0)
+        airport.create(airports, function(err){
              cb(err, true);
          });
       else
@@ -22,8 +22,8 @@ exports.seedAirports = function seedAirports(cb){
  */
 exports.seedFlights = function seedFlights(cb){
     flight.count(function(err, count){
-      if(count == 0)
-        flight.create(flights, function(err, result){
+      if(count === 0)
+        flight.create(flights, function(err){
             cb(err, true);
         });
       else
@@ -35,13 +35,13 @@ exports.seedFlights = function seedFlights(cb){
  */
 exports.seed = function seed(cb){
     var seedFlights = this.seedFlights;
-    this.seedAirports(function(err, chk){
-      if(err)
-        cb(err,check);
-      seedFlights(function(err, check){
+    this.seedAirports(function(err, check){
         if(err)
-          cb(err,check);
-        cb(err,check);
-      });
+            cb(err,check);
+        else{
+            seedFlights(function(err, check){
+              cb(err,check);
+            });
+        }
     });
 }
