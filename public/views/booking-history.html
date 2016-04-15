@@ -1,3 +1,4 @@
+<link href="../css/confirm.css" rel="stylesheet">
 
 
   <!--Main Container-->
@@ -5,6 +6,8 @@
 
   <!--Flights information-->
   <ul class= "collection with-header z-depth-3"id="flightsInfo" style="padding: 0px">
+
+    <!--Header-->
    <li class="collection-header red darken-1"> <h3 class="white-text" > Flight Information </h3></li>
 
    <!--Outgong Flight info-->
@@ -42,11 +45,11 @@
             </p>
           </div>
 
-          <!--Total Price-->
+          <!--Cost-->
           <div class="col s10 m6 l3">
             <p>
              <i class="material-icons" style="margin-right:5px ; margin-left:5px">attach_money</i>
-             {{booking.totalPrice}}
+             {{booking.outgoingFlight.cost}}
            </p>
          </div>
        </div>
@@ -89,11 +92,11 @@
           </p>
         </div>
 
-        <!--Total Price-->
+        <!--Cost-->
         <div class="col s10 m6 l3">
           <p>
            <i class="material-icons" style="margin-right:5px ; margin-left:5px">attach_money</i>
-            {{booking.totalPrice}}
+            {{booking.returnFlight.cost}}
          </p>
        </div>
      </div>
@@ -101,5 +104,152 @@
    </div>
   </ul>
 
+  <!--Passenger Information-->
+  <ul class="collection with-header  z-depth-3" id="passengerInfo" style="padding: 0px" >
 
-   
+    <!--Header-->
+    <li class="collection-header red darken-1"> <h3 class="white-text"> Passengers Information </h3></li>
+
+    <div class="row">
+
+      <!--Repeated Passenger Info-->
+      <ul class="collection with-header" ng-repeat="passenger in booking.passengers">
+       <li class="collection-header  grey lighten-3 "><h4>Passenger- Adult</h4></li>
+
+       <!--Actual data-->
+       <li  class="collection-item">
+         <div class="container">
+
+           <!--Name-->
+           <div class="row" >
+
+             <!--First Name-->
+             <div class="col s12 m6">
+               <h4>
+                 <i class="material-icons">account_circle</i>
+                 First Name</h4>
+                 <p>
+                  {{passenger.firstName}}
+                </p>
+              </div>
+
+              <!--Last Name-->
+              <div class="col s12 m6">
+               <h4>
+                 <i class="material-icons">account_circle</i>
+                 Last Name</h4>
+                 <p>
+                  {{passenger.lastName}}
+                </p>
+              </div>
+            </div>
+
+            <!--E-mail and PassportNumber-->
+            <div class="row">
+              <!--E-mail-->
+              <div class="col s12 m6">
+               <h4>
+                 <i class="material-icons">email</i>
+                 Email Address</h4>
+                 <p>
+                  {{passenger.email}}
+                </p>
+              </div>
+              <!--PassportNumber-->
+              <div class="col s12 m6">
+               <h4>
+                 <i class="material-icons">pan_tool</i>
+                 Passport Number</h4>
+                 <p>
+                  {{passenger.passportNumber}}
+                </p>
+              </div>
+            </div>
+
+            <!--Nationality and BirthDate-->
+            <div class="row">
+              <!--Nationality-->
+              <div class="col s12 m6">
+               <h4>
+                 <i class="material-icons">location_on</i>
+                 Nationality</h4>
+                 <p>
+                  {{passenger.nationality}}
+                </p>
+              </div>
+              <!--BirthDate-->
+              <div class="col s12 m6" ng-show = "passenger.birthDate">
+               <h4>
+                 <i class="material-icons">today</i>
+                 Birth Date</h4>
+                 <p>
+                  {{passenger.birthDate}}
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </li>
+      </ul>
+    </div>
+
+    <!--Child Passenger Information-->
+    <ul class="collection with-header" ng-repeat="passenger in infoFlow.getPassengers()" ng-show = "passenger.firstNameC" >
+     <li class="collection-header  grey lighten-3 " ><h4>Passenger- Child</h4></li>
+     <li  class="collection-item">
+       <div class="container">
+         <div class="row" >
+
+           <div class="col s12 m6">
+             <h4>
+               <i class="material-icons">account_circle</i>
+               First Name</h4>
+               <p style="margin-left: 30px">
+                {{passenger.firstNameC}}
+              </p>
+            </div>
+
+            <div class="col s12 m6">
+             <h4>
+               <i class="material-icons">account_circle</i>
+               Last Name</h4>
+               <p style="margin-left: 30px">
+                {{passenger.lastNameC}}
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col s12 m6">
+             <h4>
+               <i class="material-icons">pan_tool</i>
+               Passport Number</h4>
+               <p style="margin-left: 30px">
+                {{passenger.passportNumberC}}
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col s12 m6">
+             <h4>
+               <i class="material-icons">location_on</i>
+               Nationality</h4>
+               <p style="margin-left: 30px">
+                {{passenger.nationalityC}}
+              </p>
+            </div>
+            <div class="col s12 m6" ng-show = "passenger.birthDateC">
+             <h4>
+               <i class="material-icons">today</i>
+               Birth Date</h4>
+               <p style="margin-left: 30px">
+                {{passenger.birthDateC}}
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </li>
+    </ul>
+    </ul>
+
+</div>
