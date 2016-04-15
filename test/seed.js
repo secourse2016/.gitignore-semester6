@@ -41,3 +41,27 @@ describe('seedAirports',function(){
         });
     });
 });
+/**
+ *	test seeding database with Flights
+ */
+describe('seedFlights',function(){
+    var seedFlights = seedDB.seedFlights;
+    it('should populate the db with Flights if db is empty returning true',function(done){
+      seedFlights(function(err, seed){
+        assert.isTrue(seed, 'Flights collection is empty');
+        done();
+      });
+    });
+    it('should have populated the Flights collection with 1000 Flights',function(done){
+        flight.count(function(err, count){
+          assert.strictEqual(1000,count,'database contains 1000 Flights');
+          done();
+      });
+    });
+    it('should not seed db again if db is not empty returning false in the callback', function(done) {
+        seedFlights(function (err, seed){
+          assert.isNotTrue(seed, 'db is full');
+          done();
+        });
+    });
+});
