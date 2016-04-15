@@ -7,6 +7,7 @@
     // Search the booking in the database
 		this.searchBooking = function(){
 			$http.post('/api/search-booking' , this.request).success(function(data){
+				console.log(data);
 				bookingHistoryService.setBooking(data);
 			});
 		};
