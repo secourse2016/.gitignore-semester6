@@ -31,7 +31,7 @@
 	 * Search Flight Controller form collecting form data
 	 * and redirecting to the flights view.
 	 */
-	app.controller('searchFlightController', function($scope, global, $location, $http){
+	app.controller('searchFlightController', function($scope, global, $location, $http, flights){
 		this.range = [];
 		for(var i = 2; i <= 7; ++i)
 			this.range.push(i);
@@ -49,7 +49,7 @@
 			var outgoingDate	= $scope.formData.outgoingDate;
 			var returnDate		= $scope.formData.returnDate;
 			var tripType		= $scope.formData.tripType;
-			var allAirlines		= $scope.formData.allAirlines || false;
+			var allAirlines		= $scope.formData.allAirlines;
 			var flightClass		= $scope.formData.flightClass;
 
 			var requestParameters = {
@@ -59,20 +59,21 @@
 				'flightClass'	: flightClass,
 				'allAirlines'	: allAirlines,
 			}
-
+			
 			var postURL = 'api/flights/search/oneway';
 			if(tripType == 2 && returnDate) {
 				requestParameters.arrivalDate = returnDate;
 				postURL = 'api/flights/search/roundtrip';
 			}
-			console.log(requestParameters);
 			$http.post(postURL, requestParameters)
-			 .success(function(data){
-			 	// $location.path("/flights");
-				 console.log(data);
+			 .success(function(resultFlights){
+			 	flights.outgoingFlights = resultFlights.outgoingFlights;
+			 	if(tripType == 2)
+			 		flights.returnFlights = resultFlights.returnFlights;
+			 	$location.path("/flights");
 			 })
 			 .error(function(data){
-            	 console.log('Error: can\'t fetch airports');
+            	 console.log('Error: Couldn\'t fetch flights.');
         	});
 
 
@@ -115,7 +116,7 @@
 				 ctrl.airports = loadAll(data);
 			 })
 			 .error(function(data){
-            	 console.log('Error: can\'t fetch airports');
+            	 console.log('Error: can\'t fetch airports.');
         	});
 	});
 
