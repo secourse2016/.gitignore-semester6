@@ -59,7 +59,7 @@
 
 		function loadAll(airports) {
 		   return airports.map(function (airport) {
-			   var displayValue = airport.name + " (" + airport.iata + ")";
+			   var displayValue = (airport.name || "") + " (" + airport.iata + ")";
 			   return 	{
 							 iata: airport.iata,
 							 value: displayValue.toLowerCase(),
