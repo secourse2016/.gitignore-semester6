@@ -1,4 +1,105 @@
 
+
+  <!--Main Container-->
 <div class="container" style="margin-bottom: 100px; margin-top: 50px;" ng-controller="bookingHistoryController as bookingHistoryCtrl">
-B3gr
-</div>
+
+  <!--Flights information-->
+  <ul class= "collection with-header z-depth-3"id="flightsInfo" style="padding: 0px">
+   <li class="collection-header red darken-1"> <h3 class="white-text" > Flight Information </h3></li>
+
+   <!--Outgong Flight info-->
+    <div>
+
+      <!--Origin and distination airports-->
+      <li class="collection-header  grey lighten-3">
+        <h4>{{booking.outgoingFlight.origin}} - {{booking.outgoingFlight.destination}}</h4>
+      </li>
+
+      <li  class="collection-item">
+        <div class="row">
+
+          <!--Departure DateTime-->
+          <div class="col s10 m6 l3">
+            <p>
+              <i class="material-icons" style="margin-right:5px">date_range</i>
+              {{booking.outgoingFlight.departureDateTime}}
+            </p>
+          </div>
+
+          <!--Local Airport-->
+          <div class="col s10 m6 l3">
+            <p>
+              <i class="material-icons " style="margin-right:5px ; margin-left:5px">local_airport</i>
+              {{booking.outgoingFlight.origin}}
+            </p>
+          </div>
+
+          <!--Class-->
+          <div class="col s10 m6 l3">
+            <p>
+              <i class="material-icons" style="margin-right:5px ; margin-left:5px">attach_money</i>
+               {{booking.outgoingFlight.class}}
+            </p>
+          </div>
+
+          <!--Total Price-->
+          <div class="col s10 m6 l3">
+            <p>
+             <i class="material-icons" style="margin-right:5px ; margin-left:5px">attach_money</i>
+             {{booking.totalPrice}}
+           </p>
+         </div>
+       </div>
+     </li>
+   </div>
+
+   <!--Return Flight Information-->
+   <div>
+
+     <!--Origin and destination airports-->
+     <li class="collection-header  grey lighten-3">
+       <h4>{{booking.returnFlight.origin}} - {{booking.returnFlight.destination}}</h4>
+     </li>
+
+
+     <li  class="collection-item">
+       <div class="row">
+
+         <!--Departure DateTime-->
+        <div class="col s10 m6 l3">
+          <p>
+            <i class="material-icons" style="margin-right:5px">date_range</i>
+              {{booking.returnFlight.departureDateTime}}
+          </p>
+        </div>
+
+        <!--Local Airport-->
+        <div class="col s10 m6 l3">
+          <p>
+            <i class="material-icons " style="margin-right:5px ; margin-left:5px">local_airport</i>
+             {{booking.returnFlight.origin}}
+          </p>
+        </div>
+
+        <!--Class-->
+        <div class="col s10 m6 l3">
+          <p>
+            <i class="material-icons" style="margin-right:5px ; margin-left:5px">attach_money</i>
+              {{booking.returnFlight.class}}
+          </p>
+        </div>
+
+        <!--Total Price-->
+        <div class="col s10 m6 l3">
+          <p>
+           <i class="material-icons" style="margin-right:5px ; margin-left:5px">attach_money</i>
+            {{booking.totalPrice}}
+         </p>
+       </div>
+     </div>
+    </li>
+   </div>
+  </ul>
+
+
+   
