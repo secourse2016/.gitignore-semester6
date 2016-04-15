@@ -72,7 +72,6 @@ describe('seedFlights',function(){
  */
 describe('seed',function(){
     this.timeout(10000);
-    clear.clearDB(function(err){});
     it('should populate the db if db is empty returning true',function(done){
         clear.clearDB(function(err){
             seedDB.seed(function(err, seed){
@@ -91,6 +90,25 @@ describe('seed',function(){
         airport.count(function(err, count){
           assert.strictEqual(6726,count,'database contains 6726 Airport');
           done();
+      });
+    });
+});
+
+describe('seed route', function(){
+    request = request(app);
+    it('/api/quote should return a quote JSON object with keys [_id, text, author]', function(done) {
+      request.get("/api/quote").set("Accept", "application/json").expect(200).end(function(err,res){
+           expect(res.body).to.have.property("author");
+           expect(res.body).to.have.property("text");
+           expect(res.body).to.have.property("_id");
+           done();
+         });
+      });
+
+    it('/api/quotes should return an array of JSON object when I visit', function(done) {
+      request.get("/api/quotes").set("Accept", "application/json").expect(200).end(function(err,res){
+           expect(res.body).to.be.a('array');
+           done();
       });
     });
 });
