@@ -67,8 +67,18 @@ module.exports.getAirports = function(cb){
 /*
 * Search for a certain booking in the database and return it
 */
-module.exports.getBooking = function(bookingNo , passportNo , cb){
-    booking.find({"bookingNo":bookingNo , "passportNo":passportNo}, {} , function(err, booking){
-        cb(err, booking);
+module.exports.getBooking = function(id , passportNumber , cb){
+		// get booking record from database
+    booking.find({"id":id , "passportNumber":passportNumber}, {} , function(errBooking, booking){
+				// get the corresponding outgoing flight
+				flight.find({"flightNumber":booking.outgoingFlight},{},function(errOutgoingFlight , outgoingFlight){
+						// get the corresponding return flight
+						flight.find({"flightNumber":booking.returnFlight},{},function(errReturnFlight , returnFlight){
+							// add the information of the flights to the returning booking object
+							booking.outgoingFlightInfo = outgoingFlight;
+							booking.returnFlightInfo = returnFlight;
+							cb(err, booking);							
+						});
+				});
     });
 };
