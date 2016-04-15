@@ -9,8 +9,6 @@ var flight         = require('../app/models/flight');
 var airport        = require('../app/models/airport');
 
 
-
-
 before(function(done){
     clear.clearDB(function(err){
         done();
@@ -93,7 +91,9 @@ describe('seed',function(){
       });
     });
 });
-
+/**
+ * test seed route it give json message
+ */
 describe('seed route', function(){
     request = request(app);
     this.timeout(10000);
