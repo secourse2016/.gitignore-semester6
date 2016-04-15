@@ -113,26 +113,51 @@ app.get('/api/flights/search/:origin/:destination/:departingDate/:class', functi
 * @param class - economy or business only
 * @returns {Array}
 */  
-app.post('/api/flights/search/', function(req, res){
+app.post('/api/flights/search/roundtrip', function(req, res){
   
+    // Get the request parameters
     var origin        =  req.body.origin;
     var destination   =  req.body.destination;
     var departureDate =  moment(req.body.departureDate,['LLLL','L','l','x','X','YYYY-MM-DD']).format('x');
     var arrivalDate   =  moment(req.body.arrivalDate,['LLLL','L','l','x','X','YYYY-MM-DD']).format('x');
     var flightClass   =  req.body.flightClass;
     var allAirlines   =  req.body.allAirlines;
-    console.log(origin);
-    console.log(destination);
-    console.log(flightClass);
-    console.log(allAirlines);
-    console.log(departureDate);
-    console.log(arrivalDate);
 
+    // Get all the flights
     flights.getAllFlights(function(err, resultFlights){
       if(err)
         res.send(err);
       res.json(resultFlights);
     }, allAirlines, origin, destination, flightClass, departureDate, arrivalDate);
+});
+
+
+/**
+* ONE-WAY SEARCH ENDPOINT [POST]
+* This is the route used by the cliend side angular, to search for flights in Austrian and other airlines
+* @param origin - Flight Origin Location
+* @param destination - Flight Destination Location
+* @param departingDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
+* @param returningDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
+* @param class - economy or business only
+* @returns {Array}
+*/  
+app.post('/api/flights/search/oneway', function(req, res){
+  
+    // get the request parameters
+    var origin        =  req.body.origin;
+    var destination   =  req.body.destination;
+    var departureDate =  moment(req.body.departureDate,['LLLL','L','l','x','X','YYYY-MM-DD']).format('x');
+    var flightClass   =  req.body.flightClass;
+    var allAirlines   =  req.body.allAirlines;
+    
+
+    // get all the flights
+    flights.getAllFlights(function(err, resultFlights){
+      if(err)
+        res.send(err);
+      res.json(resultFlights);
+    }, allAirlines, origin, destination, flightClass, departureDate);
 });
 
 
