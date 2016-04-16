@@ -76,6 +76,27 @@
   padding: 20px;
 }
 
+
+/* All airlines checkbox styling */
+.allAirlinesCheckbox 
+{
+  text-align: right;
+  margin-left: 20px;
+  margin-top: 24px;
+}
+
+
+.allAirlinesCheckbox input[type="checkbox"]+label:before {
+  border-color: white;
+}
+.allAirlinesCheckbox input[type="checkbox"]:checked+label:before {
+  border-top: none;
+  border-left: none;
+}
+
+
+
+
 /*  Auto-complete Styling  */
 /* =|=|=|=|=|=|=|=|=|=|=|= */
 
