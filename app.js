@@ -4,6 +4,7 @@ var mongoose      = require('mongoose');
 var bodyParser    = require('body-parser');
 var seed          = require('./database/seed');
 var moment		  = require('moment');
+var clear          = require('./database/clear');
 var app           = express();
 require('dotenv').config();
 
@@ -60,6 +61,16 @@ app.route('/error').get(sendIndex);
          }
      });
  });
+/**
+ *	clear database and return error if the operation did not succeed.
+*/
+ app.get('/db/clear', function(req, res) {
+     clear.clearDB(function (err){
+         if(!err){
+            res.json({message: "database was cleared successfuly"});
+         }
+     });
+ });
 
 /**
 * API route that returns all airports available for flight search
@@ -113,6 +124,7 @@ app.get('/api/flights/search/:origin/:destination/:departingDate/:class', functi
     if(!err)
 		  res.json(resultFlights);
 	}, origin, destination, flightClass, moment(departingDate,"x"));
+
 });
 
 /**
