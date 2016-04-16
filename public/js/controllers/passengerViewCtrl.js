@@ -6,6 +6,7 @@ app.controller('passengerViewCtrl' , function($scope, global, $location){
   //for filling it with passengers info .
   $scope.formData =[];
   $scope.errors =[];
+
     // Get all information from the global service, to be used in the view
       if(!global.searchFlight.adults)
         global.searchFlight.adults = 1;
@@ -18,6 +19,8 @@ app.controller('passengerViewCtrl' , function($scope, global, $location){
       $scope.step = 2;
 
       $scope.submitForm = function() {
+      // initialize errors array.
+        $scope.errors =[];
 
       // boolean value to check the validation of the form.
         var isValid = true;
@@ -37,6 +40,8 @@ app.controller('passengerViewCtrl' , function($scope, global, $location){
           if(!$scope.formData[i].lastName) {
             if(!$scope.errors[i])
               $scope.errors[i] = {};
+              console.log($scope.formData[i].lastName);
+
             $scope.errors[i].lastName = true;
             countErrors++;
           }
@@ -47,7 +52,22 @@ app.controller('passengerViewCtrl' , function($scope, global, $location){
             $scope.errors[i].nationality = true;
             countErrors++;
           }
+
+
+        if(!$scope.formData[i].passportNumber) {
+          if(!$scope.errors[i])
+            $scope.errors[i] = {};
+          $scope.errors[i].passportNumber = true;
+          countErrors++;
         }
+        else if($scope.formData[i].passportNumber.length < 7) {
+        if(!$scope.errors[i])
+          $scope.errors[i] = {};
+        $scope.errors[i].passportNumberLength = true;
+        countErrors++;
+      }
+
+
         // if error(s) found isValid is set to false.
         if(countErrors > 0 || $scope.formData.length == 0)
         isValid = false;
@@ -60,4 +80,6 @@ app.controller('passengerViewCtrl' , function($scope, global, $location){
         $location.path('/confirmation');
       }
     }
+  }
+
 });

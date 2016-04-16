@@ -145,12 +145,14 @@
              <i class="material-icons prefix">email</i>
              <input id="email[{{$index}}]" type="email" class="validate" ng-model="formData[$index].emailAddress" required>
              <label for="email[{{$index}}]">Email</label>
-             <!-- <span ng-show="errors[{{$index}}].emailAddress"> Required ! </span> -->
            </div>
            <div class="input-field col s6">
              <i class="material-icons prefix">pan_tool</i>
              <input id="passportNumber[{{$index}}]" type="text" class="validate" ng-model="formData[$index].passportNumber" required>
              <label for="passportNumber[{{$index}}]">Passport Number</label>
+             <span ng-show="errors[{{$index}}].passportNumber"> Required ! </span>
+             <span ng-show="errors[{{$index}}].passportNumberLength && !errors[{{$index}}].passportNumber"> Not valid passport number !</span>
+
            </div>
          </div>
          <div class="row">
