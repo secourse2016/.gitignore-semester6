@@ -2,6 +2,7 @@ var express       = require('express');
 var path          = require('path');
 var mongoose      = require('mongoose');
 var bodyParser    = require('body-parser');
+var moment		  = require('moment');
 var app           = express();
 require('dotenv').config();
 
@@ -44,15 +45,113 @@ app.route('/error').get(sendIndex);
 // App Routes go here ==========================================================
 
 /**
- * API route that returns all airports available for flight search
- */
+* API route that returns all airports available for flight search
+*/
 app.get('/api/airports', function(req, res){
     flights.getAirports(function(err, airports){
-        if(err)
-            res.send(err);
+      if(!err)
         res.json(airports);
     });
 });
+
+/**
+* ROUND-TRIP SEARCH REST ENDPOINT
+* @param origin - Flight Origin Location
+* @param destination - Flight Destination Location
+* @param departingDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
+* @param returningDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
+* @param class - economy or business only
+* @returns {Array}
+*/   
+app.get('/api/flights/search/:origin/:destination/:departingDate/:returningDate/:class', function(req, res) {
+	// retrieve params 
+	var origin =  req.params.origin;
+	var destination =  req.params.destination;
+	var departingDate =  req.params.departingDate;
+	var returningDate =  req.params.returningDate;
+	var flightClass =  req.params.class;
+
+	flights.getFlights(function(err, resultFlights){
+    if(!err)
+		  res.json(resultFlights);
+	}, origin, destination, flightClass, moment(departingDate,"x"), moment(returningDate,"x"));
+});
+
+/**
+* ONE-WAY SEARCH REST ENDPOINT 
+* @param origin - Flight Origin Location
+* @param DepartingDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
+* @param class - economy or business only
+* @returns {Array}
+*/ 
+	     
+app.get('/api/flights/search/:origin/:destination/:departingDate/:class', function(req, res) {
+    // retrieve params 
+    var origin 			=  req.params.origin;
+    var destination 	=  req.params.destination;
+    var departingDate 	=  req.params.departingDate;
+    var flightClass 	=  req.params.class;
+  
+	flights.getFlights(function(err, resultFlights){
+    if(!err)
+		  res.json(resultFlights);
+	}, origin, destination, flightClass, moment(departingDate,"x"));
+}); 
+
+/**
+* ROUND-TRIP SEARCH ENDPOINT [POST]
+* This is the route used by the cliend side angular, to search for flights in Austrian and other airlines
+* @param origin - Flight Origin Location
+* @param destination - Flight Destination Location
+* @param departingDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
+* @param returningDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
+* @param class - economy or business only
+* @returns {Array}
+*/  
+app.post('/api/flights/search/roundtrip', function(req, res){
+  
+    // Get the request parameters
+    var origin        =  req.body.origin;
+    var destination   =  req.body.destination;
+    var departureDate =  moment(req.body.departureDate,['D MMMM, YYYY','LLLL','L','l','x','X','YYYY-MM-DD']).format('x');
+    var arrivalDate   =  moment(req.body.arrivalDate,['D MMMM, YYYY','LLLL','L','l','x','X','YYYY-MM-DD']).format('x');
+    var flightClass   =  req.body.flightClass;
+    var allAirlines   =  req.body.allAirlines;
+
+    // Get all the flights
+    flights.getAllFlights(function(err, resultFlights){
+        res.json(resultFlights);
+    }, allAirlines, origin, destination, flightClass, departureDate, arrivalDate);
+});
+
+
+/**
+* ONE-WAY SEARCH ENDPOINT [POST]
+* This is the route used by the cliend side angular, to search for flights in Austrian and other airlines
+* @param origin - Flight Origin Location
+* @param destination - Flight Destination Location
+* @param departingDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
+* @param returningDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
+* @param class - economy or business only
+* @returns {Array}
+*/  
+app.post('/api/flights/search/oneway', function(req, res){
+  
+    // get the request parameters
+    var origin        =  req.body.origin;
+    var destination   =  req.body.destination;
+    var departureDate =  moment(req.body.departureDate,['D MMMM, YYYY','LLLL','L','l','x','X','YYYY-MM-DD']).format('x');
+    var flightClass   =  req.body.flightClass;
+    var allAirlines   =  req.body.allAirlines;
+    
+
+    // get all the flights
+    flights.getAllFlights(function(err, resultFlights){
+      if(!err)
+        res.json(resultFlights);
+    }, allAirlines, origin, destination, flightClass, departureDate);
+});
+
 
 app.use(function(req, res, next){
   res.status(404);
