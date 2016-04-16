@@ -31,7 +31,9 @@ describe('Oneway Flights API Route', function() {
         request.get('/api/flights/search/JFK/CAI/1460478300000/economy').expect('Content-Type', /json/)
         .expect(function(res){
             var flights = res.body;
+            // check if the returned object has an array of outgoing flights
             assert.isArray(flights.outgoingFlights, "Returned object has an array of outgoing flights");
+            // check if each returned flights has the same attributes as what we search about
             for(var i = 0; i < flights.outgoingFlights.length; ++i){
                 assert.equal(flights.outgoingFlights[i].origin != "JFK" || flights.outgoingFlights[i].destination != "CAI" || flights.outgoingFlights[i].class != "economy" || flights.outgoingFlights[i].departureDateTime != checkDate , true);
             }
@@ -48,8 +50,11 @@ describe('Round trip Flights API Route', function() {
         request.get('/api/flights/search/JFK/CAI/1460478300000/1460478400000/economy').expect('Content-Type', /json/)
         .expect(function(res){
             var flights = res.body;
+            // check if the returned object has an array of outgoing flights
             assert.isArray(flights.outgoingFlights, "Returned object has an array of outgoing flights");
+            // check if the returned object has an array of return flights
             assert.isArray(flights.returnFlights, "Returned object has an array of return flights");
+            // check if each returned flights has the same attributes as what we search about
             for(var i = 0; i < flights.outgoingFlights.length; ++i){
                 assert.equal(flights.outgoingFlights[i].origin != "JFK" || flights.outgoingFlights[i].destination != "CAI" || flights.outgoingFlights[i].class != "economy" || flights.outgoingFlights[i].departureDateTime != checkDate , true);
             }
