@@ -14,8 +14,7 @@ function($scope, flights, global, $location){
   $scope.tripType=global.searchFlight.tripType;
   $scope.outgoingFlights=flights.outgoingFlights;
    $scope.returnFlights=flights.returnFlights;
-  for(i = 0; i < $scope.outgoingFlights.length; i++)
-  {
+  for(i = 0; i < $scope.outgoingFlights.length; i++){
     var departureTime = new Date($scope.outgoingFlights[i].departureDateTime);
     $scope.outgoingFlights[i].departureDateTime = departureTime.getUTCHours()+":"+departureTime.getUTCMinutes();
 
@@ -23,8 +22,7 @@ function($scope, flights, global, $location){
     $scope.outgoingFlights[i].arrivalDateTime = arrivalTime.getUTCHours()+":"+arrivalTime.getUTCMinutes();
   }
 
-  for(i = 0; i < $scope.returnFlights.length; i++)
-  {
+  for(i = 0; i < $scope.returnFlights.length; i++){
     var departureTime = new Date($scope.returnFlights[i].departureDateTime);
     $scope.returnFlights[i].departureDateTime = departureTime.getUTCHours()+":"+departureTime.getUTCMinutes();
 
