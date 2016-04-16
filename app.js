@@ -52,8 +52,7 @@ app.route('/error').get(sendIndex);
 */
 app.get('/api/airports', function(req, res){
     flights.getAirports(function(err, airports){
-        if(err)
-            res.send(err);
+      if(!err)
         res.json(airports);
     });
 });
@@ -88,10 +87,8 @@ app.get('/api/flights/search/:origin/:destination/:departingDate/:returningDate/
 	var flightClass =  req.params.class;
 
 	flights.getFlights(function(err, resultFlights){
-		if(err)
-			res.send(err);
-		res.json(resultFlights);
-
+    if(!err)
+		  res.json(resultFlights);
 	}, origin, destination, flightClass, moment(departingDate,"x"), moment(returningDate,"x"));
 });
 
@@ -111,12 +108,67 @@ app.get('/api/flights/search/:origin/:destination/:departingDate/:class', functi
     var flightClass 	=  req.params.class;
 
 	flights.getFlights(function(err, resultFlights){
-		if(err)
-			res.send(err);
-		res.json(resultFlights);
-
+    if(!err)
+		  res.json(resultFlights);
 	}, origin, destination, flightClass, moment(departingDate,"x"));
+
+}); 
+
+/**
+* ROUND-TRIP SEARCH ENDPOINT [POST]
+* This is the route used by the cliend side angular, to search for flights in Austrian and other airlines
+* @param origin - Flight Origin Location
+* @param destination - Flight Destination Location
+* @param departingDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
+* @param returningDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
+* @param class - economy or business only
+* @returns {Array}
+*/
+app.post('/api/flights/search/roundtrip', function(req, res){
+
+    // Get the request parameters
+    var origin        =  req.body.origin;
+    var destination   =  req.body.destination;
+    var departureDate =  moment(req.body.departureDate,['D MMMM, YYYY','LLLL','L','l','x','X','YYYY-MM-DD']).format('x');
+    var arrivalDate   =  moment(req.body.arrivalDate,['D MMMM, YYYY','LLLL','L','l','x','X','YYYY-MM-DD']).format('x');
+    var flightClass   =  req.body.flightClass;
+    var allAirlines   =  req.body.allAirlines;
+
+    // Get all the flights
+    flights.getAllFlights(function(err, resultFlights){
+        res.json(resultFlights);
+    }, allAirlines, origin, destination, flightClass, departureDate, arrivalDate);
 });
+
+
+/**
+* ONE-WAY SEARCH ENDPOINT [POST]
+* This is the route used by the cliend side angular, to search for flights in Austrian and other airlines
+* @param origin - Flight Origin Location
+* @param destination - Flight Destination Location
+* @param departingDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
+* @param returningDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
+* @param class - economy or business only
+* @returns {Array}
+*/
+app.post('/api/flights/search/oneway', function(req, res){
+
+    // get the request parameters
+    var origin        =  req.body.origin;
+    var destination   =  req.body.destination;
+    var departureDate =  moment(req.body.departureDate,['D MMMM, YYYY','LLLL','L','l','x','X','YYYY-MM-DD']).format('x');
+    var flightClass   =  req.body.flightClass;
+    var allAirlines   =  req.body.allAirlines;
+
+
+    // get all the flights
+    flights.getAllFlights(function(err, resultFlights){
+      if(!err)
+        res.json(resultFlights);
+    }, allAirlines, origin, destination, flightClass, departureDate);
+});
+
+>>>>>>> c7511b912852deb8ed7819952c2067d92b314714
 
 app.use(function(req, res, next){
   res.status(404);
