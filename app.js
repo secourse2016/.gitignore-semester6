@@ -52,7 +52,7 @@ app.route('/error').get(sendIndex);
  app.get('/db/clear', function(req, res) {
      clear.clearDB(function (err){
          if(!err){
-            res.json({message: "database was cleared"});
+            res.json({message: "database was cleared successfuly"});
          }
      });
  });
