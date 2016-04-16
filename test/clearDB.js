@@ -1,11 +1,14 @@
 var seed = require('../database/seed');
+var app            = require('../app.js');
 var assert = require('chai').assert;
+var expect = require('chai').expect;
+var request = require('supertest');
 var clear = require('../database/clear');
 var flight             = require('../app/models/flight');
 var airport            = require('../app/models/airport');
 var mongoose = require('mongoose');
 require('dotenv').config();
-mongoose.connect(process.env.mongoURL);
+mongoose.createConnection(process.env.mongoURL);
 
 // seed before testing clearing the database.
 before(function(done){
@@ -36,4 +39,19 @@ describe("clearDB", function() {
           });
       });
     });
+});
+
+/**
+ * test clear route.
+ */
+describe('clear route', function(){
+    request = request(app);
+    it('should clear the database on /db/clear route', function(done){
+            // get request to clear route : expected message.
+            request.get("/db/clear").set("Accept", "text/html").expect(200).end(function(err,res){
+                expect(res.body).to.have.property("message");
+                assert.strictEqual(res.body.message,'database was cleared successfuly');
+                done();
+            });
+      });
 });
