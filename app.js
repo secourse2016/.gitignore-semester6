@@ -3,6 +3,7 @@ var path          = require('path');
 var mongoose      = require('mongoose');
 var bodyParser    = require('body-parser');
 var moment		  = require('moment');
+var db = require('./database/seed');
 var app           = express();
 require('dotenv').config();
 
@@ -15,7 +16,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // configuration ===============================================================
 mongoose.connect(process.env.mongoURL); // connect to our database
-
+db.seed(function(err , check){
+  console.log(check);
+});
 /*
 * Default route
 */
@@ -62,9 +65,8 @@ app.post('/api/booking-history', function(req, res){
   var id = req.body.id;
   var passportNumber = req.body.passportNumber;
     flights.getBooking(id , passportNumber , function(err, booking){
-        if(err)
-            res.send(err);
-        res.json(booking);
+        if(!err)
+          res.json(booking);
     });
 });
 
