@@ -24,7 +24,7 @@ describe('Airports API Route', function() {
 });
 
 describe('Oneway Flights API Route', function() {
-    request = request(app);
+    //request = request(app);
 
     it('it should return an array of flights from JFK to CAI on April 12, 2016 with economy class',
     function(done){
@@ -41,7 +41,7 @@ describe('Oneway Flights API Route', function() {
 });
 
 describe('Round trip Flights API Route', function() {
-    request = request(app);
+    //request = request(app);
 
     it('it should return an array of flights from JFK to CAI on April 12, 2016 with economy class and another one for return onApril 13, 2016',
     function(done){
