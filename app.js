@@ -3,6 +3,7 @@ var path          = require('path');
 var mongoose      = require('mongoose');
 var bodyParser    = require('body-parser');
 var moment		  = require('moment');
+var clear          = require('./database/clear');
 var app           = express();
 require('dotenv').config();
 
@@ -44,6 +45,18 @@ app.route('/error').get(sendIndex);
 
 // App Routes go here ==========================================================
 
+
+/**
+ *	clear database and return error if the operation did not succeed.
+*/
+ app.get('/db/clear', function(req, res) {
+     clear.clearDB(function (err){
+         if(!err){
+            res.json({message: "database was cleared successfuly"});
+         }
+     });
+ });
+
 /**
 * API route that returns all airports available for flight search
 */
@@ -62,9 +75,9 @@ app.get('/api/airports', function(req, res){
 * @param returningDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
 * @param class - economy or business only
 * @returns {Array}
-*/   
+*/
 app.get('/api/flights/search/:origin/:destination/:departingDate/:returningDate/:class', function(req, res) {
-	// retrieve params 
+	// retrieve params
 	var origin =  req.params.origin;
 	var destination =  req.params.destination;
 	var departingDate =  req.params.departingDate;
@@ -78,25 +91,26 @@ app.get('/api/flights/search/:origin/:destination/:departingDate/:returningDate/
 });
 
 /**
-* ONE-WAY SEARCH REST ENDPOINT 
+* ONE-WAY SEARCH REST ENDPOINT
 * @param origin - Flight Origin Location
 * @param DepartingDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
 * @param class - economy or business only
 * @returns {Array}
-*/ 
-	     
+*/
+
 app.get('/api/flights/search/:origin/:destination/:departingDate/:class', function(req, res) {
-    // retrieve params 
+    // retrieve params
     var origin 			=  req.params.origin;
     var destination 	=  req.params.destination;
     var departingDate 	=  req.params.departingDate;
     var flightClass 	=  req.params.class;
-  
+
 	flights.getFlights(function(err, resultFlights){
     if(!err)
 		  res.json(resultFlights);
 	}, origin, destination, flightClass, moment(departingDate,"x"));
-}); 
+
+});
 
 /**
 * ROUND-TRIP SEARCH ENDPOINT [POST]
@@ -107,9 +121,9 @@ app.get('/api/flights/search/:origin/:destination/:departingDate/:class', functi
 * @param returningDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
 * @param class - economy or business only
 * @returns {Array}
-*/  
+*/
 app.post('/api/flights/search/roundtrip', function(req, res){
-  
+
     // Get the request parameters
     var origin        =  req.body.origin;
     var destination   =  req.body.destination;
@@ -134,16 +148,16 @@ app.post('/api/flights/search/roundtrip', function(req, res){
 * @param returningDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
 * @param class - economy or business only
 * @returns {Array}
-*/  
+*/
 app.post('/api/flights/search/oneway', function(req, res){
-  
+
     // get the request parameters
     var origin        =  req.body.origin;
     var destination   =  req.body.destination;
     var departureDate =  moment(req.body.departureDate,['D MMMM, YYYY','LLLL','L','l','x','X','YYYY-MM-DD']).format('x');
     var flightClass   =  req.body.flightClass;
     var allAirlines   =  req.body.allAirlines;
-    
+
 
     // get all the flights
     flights.getAllFlights(function(err, resultFlights){
