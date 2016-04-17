@@ -57,7 +57,7 @@
    <li class="collection-header red darken-1"> <h3 class="white-text" > Flight Information </h3></li>
    <div>
      <li class="flight-header collection-header  grey lighten-3">
-      <h4>{{outgoingFlight.origin}} - {{outgoingFlight.destination}}</h4> 
+      <h4>{{outgoingFlight.origin}} - {{outgoingFlight.destination}}</h4>
       <div class="flight-date">{{departureDate}}</div></li>
       <div class="row flight-way">
         <div class="col s10 m6 l3">
@@ -68,8 +68,8 @@
         <div class="col s10 m6 l3">
           <p class="logo-div">
              <img tooltipped data-position="right" data-delay="50" data-tooltip="{{outgoingFlight.Airline}}" ng-show = "outgoingFlight.Airline == airline" class = "logo" src="assets/images/flight-logo.png">
-                
-              <i tooltipped data-position="right" data-delay="50" data-tooltip="{{outgoingFlight.Airline}}" ng-hide = "outgoingFlight.Airline == airline" class="small material-icons other-airport" >local_airport</i> 
+
+              <i tooltipped data-position="right" data-delay="50" data-tooltip="{{outgoingFlight.Airline}}" ng-hide = "outgoingFlight.Airline == airline" class="small material-icons other-airport" >local_airport</i>
           </p>
         </div>
 
@@ -101,7 +101,7 @@
         <div class="col s10 m6 l3">
           <p class="logo-div">
              <img tooltipped data-position="right" data-delay="50" data-tooltip="{{returnFlight.Airline}}" ng-show = "returnFlight.Airline == airline" class = "logo" src="assets/images/flight-logo.png">
-                  <i tooltipped data-position="right" data-delay="50" data-tooltip="{{returnFlight.Airline}}" ng-hide = "returnFlight.Airline == airline" class="small material-icons other-airport" >local_airport</i> 
+                  <i tooltipped data-position="right" data-delay="50" data-tooltip="{{returnFlight.Airline}}" ng-hide = "returnFlight.Airline == airline" class="small material-icons other-airport" >local_airport</i>
           </p>
         </div>
 
@@ -211,6 +211,13 @@
             <span class="validationError"ng-show="errorsChildren[{{$index}}].passportNumber"><i class="tiny material-icons">error</i> This field is required. </span>
             <span class="validationError"ng-show="errorsChildren[{{$index}}].passportNumberLength && !errorsChildren[{{$index}}].passportNumber"><i class="tiny material-icons">error</i> Passport number should not be less than 7 characters. </span>
           </div>
+          <div class="input-field col s6">
+            <i class="material-icons prefix">today</i>
+                  <input id="birthDateC[{{$index}}]" ng-model="formDataChildren[$index].birthDate" input-date type="text"  select-years="60" required>
+                  <label for="birthDateC[{{$index}}]">Birth Date</label>
+                  <span class="validationError"ng-show="errorsChildren[{{$index}}].birthDateRequired"><i class="tiny material-icons">error</i> This field is required. </span>
+                  <span class="validationError"ng-show="errorsChildren[{{$index}}].birthDateNotValid"><i class="tiny material-icons">error</i> A child should be younger than 12 years old. </span>
+          </div>
         </div>
         <div class="row">
           <div class="input-field col s6">
@@ -219,13 +226,6 @@
             <label for="nationalityC[{{$index}}]">Nationality</label>
             <span class="validationError"ng-show="errorsChildren[{{$index}}].nationality"><i class="tiny material-icons">error</i> This field is required. </span>
           </div>
-         <div class="input-field col s6">
-           <i class="material-icons prefix">today</i>
-                 <input id="birthDateC[{{$index}}]" ng-model="formDataChildren[$index].birthDate" input-date type="text"  select-years="60" required>
-                 <label for="birthDateC[{{$index}}]">Birth Date</label>
-                 <span class="validationError"ng-show="errorsChildren[{{$index}}].birthDateRequired"><i class="tiny material-icons">error</i> This field is required. </span>
-                 <span class="validationError"ng-show="errorsChildren[{{$index}}].birthDateNotValid"><i class="tiny material-icons">error</i> A child should be younger than 12 years old. </span>
-         </div>
         </div>
       </div>
 
