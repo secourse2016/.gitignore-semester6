@@ -1,0 +1,22 @@
+[
+  {
+    "id":"1",
+    "passengers":
+        [
+          {
+            "firstName":"Mora",
+            "lastName":"B3gr",
+            "email":"mora@gmail.com",
+            "passportNumber":"123456",
+            "nationality":"7alawani",
+            "birthDate":"1071995"
+          }
+        ],
+    "outgoingFlight": "BO400",
+    "returnFlight": "DE401",
+    "totalPrice":4000 ,
+    "bookingDate":"20051004",
+    "isSuccessful": true,
+    "isChild":false
+  }
+]
