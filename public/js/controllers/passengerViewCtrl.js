@@ -18,7 +18,7 @@ app.controller('passengerViewCtrl' , function($scope, global, $location){
       $scope.submitForm = function() {
 
       // function to validate adult form fields.
-        if(validateAdults($scope)) {
+        if(validateForm($scope)) {
       // set passengers Array in service with filled passengers info .
         global.setPassengers($scope.formData);
       // redirect to confirmation page.
@@ -30,11 +30,17 @@ app.controller('passengerViewCtrl' , function($scope, global, $location){
 /** function to validate birthDate of an adult.
  * returns boolean to indicate validity.
  */
-  function validateDate(stringDate)
+  function validateDate(stringDate , isChild)
   {
     var birthDate = new Date(Date.parse(stringDate));
     var nowDate = new Date(Date.now());
-    return birthDate < nowDate && nowDate.getFullYear() - birthDate.getFullYear() >= 12;
+    var yearDifference = nowDate.getFullYear() - birthDate.getFullYear();
+    if(birthDate >= nowDate)
+      return false;
+    if(!isChild)
+      return yearDifference >= 12;
+      else
+      return yearDifference < 12 && yearDifference > 0;
   }
 
 
@@ -54,7 +60,7 @@ app.controller('passengerViewCtrl' , function($scope, global, $location){
  * takes scope and callback function as parameters.
  * returns boolean isValid to indicate form fields validity.
  */
-  function validateAdults($scope)
+  function validateForm($scope)
   {
     // initialize errors array.
       $scope.errors =[];
@@ -125,7 +131,7 @@ app.controller('passengerViewCtrl' , function($scope, global, $location){
       $scope.errors[i].birthDateRequired = true;
       countErrors++;
     }
-    else if(!validateDate($scope.formData[i].birthDate))
+    else if(!validateDate($scope.formData[i].birthDate , false))
     {
       if(!$scope.errors[i])
         $scope.errors[i] = {};
