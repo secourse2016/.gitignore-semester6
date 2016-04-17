@@ -3,11 +3,13 @@ var path          = require('path');
 var mongoose      = require('mongoose');
 var bodyParser    = require('body-parser');
 var moment		  = require('moment');
+var compression   = require('compression');
 var morgan        = require('morgan');
 var app           = express();
 require('dotenv').config();
 
 // functions ==============================================================
+app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -16,14 +18,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 // configuration ==========================================================
 mongoose.connect(process.env.mongoURL); // connect to our database
 
-// Main and Static Routes  ================================================
+// Main and Static Routes =================================================
 app.get("/",function(req,res){
   res.render("index.html");
 });
 
-/*
-* Send the server route to a fake route to be handled by angular
-*/
+/**
+ * Send the server route to a fake route to be handled by AngularJS.
+ */
 var sendIndex = function(req, res){
     return res.sendFile(__dirname + '../../public/index.html');
 };
@@ -45,7 +47,6 @@ var APIRouter = require('./app/routes/api');
 
 app.use('/db', dbRouter);               //DON'T DEPOLY
 app.use('/api', APIRouter);
-
 
 // 404 Middleware =========================================================
 app.use(function(req, res, next){

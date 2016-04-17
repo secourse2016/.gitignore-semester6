@@ -1,6 +1,3 @@
-
-
-
 #confirmInfo {
   float: right;
 
@@ -8,35 +5,113 @@
 }
 
 
+.validationError {
+  color : #b71c1c;
+  font-style: italic;
+  vertical-align: middle;
+
+  -webkit-transition:all linear 0.5s !important;
+  transition:all linear 0.5s;
+}
+.validationError.ng-hide {
+  opacity:0;
+}
+
+i.tiny {
+  color : #b71c1c;
+  margin-left: 5px;
+}
 
 #flightsInfo h3, #passengerInfo h3
 {
+
   font-size: 25px;
+
 }
 
-#flightsInfo h4, #passengerInfo h4
-{
+#flightsInfo h4, #passengerInfo h4{
   font-size: 23px;
+  display:inline-block;
 }
 
-.picker__date-display
-{
+.flight-header{
+	padding: 0px 20px;
+}
+
+.flight-date{
+	margin-top: 1.7%;
+	float:right;
+	font-size: 21px;
+}
+.picker__date-display{
   background-color: #e53935;
 }
-.picker__weekday-display
-{
+
+.picker__weekday-display{
   background-color: #e53935;
 }
-.picker__day--selected
-{
+
+.picker__day--selected{
   background-color: #e53935 !important;
 }
 
-.picker__close
-{
+.picker__close{
   color: red;
 }
-.picker__today
-{
+
+.picker__today{
   color: red;
+}
+
+.logo-div{
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+.logo{
+  height:40px;
+  width: auto;
+}
+
+
+
+.flight-info-data {
+    margin-bottom: 13px;
+    margin-top: 20px;
+    height: 30px;
+}
+
+.flight-info-date{
+	margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+.flight-info-date span {
+    display: inline-block;
+    min-height: 30px;
+}
+
+.schedule-icon {
+    display: inline-block;
+    margin-right: 5px;
+    height: 29px;
+    vertical-align: middle;
+}
+
+
+
+.row.flight-way{
+	margin-bottom: 0px;
+}
+
+.row.flight-way .col{
+	text-align: center;
+}
+
+@media (max-width: 600px)
+{
+
+  .logo
+  {
+    display: none;
+  }
 }
