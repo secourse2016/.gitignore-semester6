@@ -7,7 +7,7 @@ controller('bookingHistoryController',function($scope, bookingHistoryService){
 		$scope.notFound = false;
 
 
-
+	if($scope.booking){
 		// variable with value of the name of the airline
 	  $scope.airline          = "Austrian";
 
@@ -63,5 +63,7 @@ controller('bookingHistoryController',function($scope, bookingHistoryService){
 	    $scope.returnFlight.arrivalDateTime   = arrivalTime.getUTCHours()+":"+arrivalTime.getUTCMinutes();
 
 	  }
+
+	}
 
 });

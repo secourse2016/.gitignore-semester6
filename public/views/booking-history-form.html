@@ -19,7 +19,7 @@
           <div class="row">
             <div class="input-field col s12">
             <i class="material-icons prefix">payment</i>
-              <input  ng-model="request.id" type="text" class="validate" id="booking" required>
+              <input  ng-model="request.bookingNumber" type="text" class="validate" id="booking" required>
               <label for="booking">Booking No.</label>
             </div>
           </div>
@@ -37,7 +37,7 @@
           <div class="row">
             <div class="input-field col s12">
               <div class="modal-footer">
-                <a ng-click="bookingHistoryForm.$valid && searchBooking()"
+                <a ng-click="searchBooking()"
                 class="modal-action modal-close btn waves-effect waves-light red book-button"
                 name="showHistory">View Booking
                 <i class="material-icons right">send</i>
