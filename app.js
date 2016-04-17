@@ -3,19 +3,21 @@ var path          = require('path');
 var mongoose      = require('mongoose');
 var bodyParser    = require('body-parser');
 var seed          = require('./database/seed');
-var moment		  = require('moment');
-var clear          = require('./database/clear');
+var moment		    = require('moment');
+var clear         = require('./database/clear');
+var morgan        = require('morgan');
 var app           = express();
 require('dotenv').config();
 
-// models ===============================================================
+// functions ==============================================================
 var flights       = require('./flights');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(morgan('dev'));
 
-// configuration ===============================================================
+// configuration ==========================================================
 mongoose.connect(process.env.mongoURL); // connect to our database
 
 /*
@@ -43,17 +45,15 @@ app.route('/offers').get(sendIndex);
 app.route('/pricing').get(sendIndex);
 app.route('/error').get(sendIndex);
 
-// App Routes go here ==========================================================
-
-
+// Unproteceted App Routes go here ========================================
 /**
  *	Seed database and return error if
  *	the operation doesn't complete.
  */
  app.get('/db/seed', function(req, res) {
-     seed.seed(function (err ,chk){
+     seed.seed(function (err ,check){
          if(!err){
-             if(!chk){
+             if(!check){
                  res.json({message: "database was seeded"});
              }else{
                  res.json({message: "database seeded successfuly"});
@@ -61,6 +61,7 @@ app.route('/error').get(sendIndex);
          }
      });
  });
+
 /**
  *	clear database and return error if the operation did not succeed.
 */
@@ -71,6 +72,16 @@ app.route('/error').get(sendIndex);
          }
      });
  });
+
+// middlewares ============================================================
+var verifyToken   = require('./app/middlewares/tokenMiddleware');
+
+/**
+ * JSON Web Token Verification Middleware
+ */
+app.use(verifyToken);
+
+// Proteceted App Routes go here ==========================================
 
 /**
 * API route that returns all airports available for flight search
@@ -112,7 +123,6 @@ app.get('/api/flights/search/:origin/:destination/:departingDate/:returningDate/
 * @param class - economy or business only
 * @returns {Array}
 */
-
 app.get('/api/flights/search/:origin/:destination/:departingDate/:class', function(req, res) {
     // retrieve params
     var origin 			=  req.params.origin;
