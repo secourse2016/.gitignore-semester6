@@ -72,7 +72,6 @@ app.controller('passengerViewCtrl' , function($scope, global, $location){
       $scope.formDataChildren[i].isChild = true;
       // set passengers Array in service with filled passengers info .
       global.setPassengers($scope.formData.concat($scope.formDataChildren));
-      console.log(global.getPassengers());
       // redirect to confirmation page.
       $location.path('/confirmation');
     }

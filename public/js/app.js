@@ -131,7 +131,6 @@ var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBdXN0cmlhbiBBaXJsaW
 app.controller('contactUsCtrl',function($scope, $location){
     $scope.formData = {};
     $scope.send = function(){
-        console.log($scope.formData);
         Materialize.toast('We have received your message. Thank you!', 4000);
         $location.path('/');
     }

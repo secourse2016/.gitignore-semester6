@@ -11,6 +11,12 @@ angular.module('austrianAirlinesApp').service('global', function() {
 	 */
 	this.searchFlight = {};
 
+	// total cost of the booking by the user
+	this.totalCost = 0;
+
+
+	this.bookingNumber = 0;
+
 	// A list of passengers whose info are entered by the user
 
 
@@ -76,5 +82,35 @@ angular.module('austrianAirlinesApp').service('global', function() {
 	*/
 	this.getReturnTrip = function(){
 		return this.returnTrip;
+	}
+
+
+	/**
+	* Set the total cost of the booking
+	*/
+	this.setTotalCost = function(cost){
+		this.totalCost = cost;
+	}
+
+	/**
+	* get the total cost of the booking
+	*/
+	this.getTotalCost = function(){
+		return this.totalCost;
+	}
+
+
+	/**
+	* Set the total cost of the booking
+	*/
+	this.setBookingNumber = function(number){
+		this.bookingNumber = number;
+	}
+
+	/**
+	* get the total cost of the booking
+	*/
+	this.getBookingNumber = function(){
+		return this.bookingNumber;
 	}
 });

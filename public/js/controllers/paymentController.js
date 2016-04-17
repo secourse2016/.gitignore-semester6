@@ -11,7 +11,6 @@
 
 		// Add the form inputs to the booking array
 		this.addBooking = function(){
-			console.log("Hello");
 			this.booking.cardNo = this.cardNo;
 			this.booking.cvv = this.cvv;
 			this.booking.expiryDate = this.expiryDate;
