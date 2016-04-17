@@ -1,9 +1,8 @@
 var mongoose     = require('mongoose');
 var schema       = mongoose.Schema;
+var booking 	 = new schema ({
 
-var booking = new schema ({
-
-	BookingNumber :{type:String ,unique:true},
+	bookingNumber :{type:String ,unique:true},
 	passengers :
 		[
 			{
@@ -12,13 +11,13 @@ var booking = new schema ({
 				email : String,
 				passportNumber : String,
 				nationality : String,
-				birthDate : Date
+				birthDate : Date,
+				isChild :Boolean
 			}
 		],
 	outgoingFlight :{ type:String, ref: 'Flight' },		
 			
 	returnFlight :{type:String , ref:'Flight'},
-		
 	totalPrice : Number,
 	bookingDate : Date,
 	isSuccessful : Boolean		

@@ -1,4 +1,4 @@
-
+var booking = require('./app/models/booking.js');
 /**
 * Require express main app
 */

@@ -17,8 +17,8 @@ var getOneDirectionFlights=module.exports.getOneDirectionFlights=function (cb, o
 	flight.find({"origin": origin, "destination": destination, "class": flightClass, departureDateTime : {"$gte" : startDate, "$lt": endDate}},{},function(err,resultFlights){
 			// call the call back function with the result
 			cb(err, resultFlights);
-		
-	});
+
+		});
 
 }
 
@@ -138,7 +138,7 @@ var getOtherAirlines = function(cb, airlineIndex, allAirlines, origin, destinati
 		}).on('error', function(e) {
 			// Error in the current request, try the next airlines
 			getOtherAirlines(function(otherFlights){
-					cb(otherFlights);
+				cb(otherFlights);
 			}, airlineIndex+1, allAirlines, origin, destination, flightClass, departureDate, arrivalDate);
 		});
 	}
@@ -163,11 +163,11 @@ var getOtherAirlines = function(cb, airlineIndex, allAirlines, origin, destinati
  * @param  {Function} cb will be called with (err, airports)
  */
 
-module.exports.getAirports = function(cb){
-    airport.find(function(err, airports){
-        cb(err, airports);
-    });
-};
+ module.exports.getAirports = function(cb){
+ 	airport.find(function(err, airports){
+ 		cb(err, airports);
+ 	});
+ };
 
 
  module.exports.getAirports = function(cb){
@@ -180,16 +180,23 @@ module.exports.getAirports = function(cb){
 *Get all Booking Information and inserting it into the database.
 */
 
- module.exports.addBooking = function(bookingInfo){
+module.exports.addBooking = function(bookingInfo, cb){
 
 	var newBooking = new booking();
-	newBooking.passengers = bookingInfo.passengers;
-	newBooking.outgoingFlight = bookingInfo.outgoingFlight;
-	newBooking.returnFlight = bookingInfo.returnFlight; 
-	newBooking.totalPrice = bookingInfo.totalPrice;
-	newBooking.bookingDate = Date.now();
-	newBooking.isSuccessful = true ;
-	newBooking.save(function (err) {
-  	if (err) throw err;
-  });
+	var generatedBookingNumber = "6D4B97";
+	booking.count({},function(err,c){
+		/* Concatenate the number of records of the booking collection to the generatedBooking Number*/
+		newBooking.bookingNumber = generatedBookingNumber+c;
+		newBooking.passengers = bookingInfo.passengers;
+		newBooking.outgoingFlight = bookingInfo.outgoingFlight;
+		newBooking.returnFlight = bookingInfo.returnFlight; 
+		newBooking.totalPrice = bookingInfo.totalPrice;
+		newBooking.bookingDate = Date.now();
+		newBooking.isSuccessful = true ;
+		newBooking.save(function (err) {
+			cb(err);
+		});
+
+
+	});
 }

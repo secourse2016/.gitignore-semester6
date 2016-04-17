@@ -181,16 +181,17 @@ app.post('/api/flights/search/oneway', function(req, res){
         res.json(resultFlights);
     }, allAirlines, origin, destination, flightClass, departureDate);
 });
+
 /**
-*USER BOOK FIGHT 
+*User Book Flight Post Route
 */
 
 app.post('/api/addBooking',function(req,res){
-	flights.addBooking(req.body);
-		res.status(200);
+	flights.addBooking(req.body,function(err){
+        if(!err)
+            res.send("Added");
+    });
 });
-
-
 
 
 app.use(function(req, res, next){
