@@ -18,9 +18,10 @@ app.controller('passengerViewCtrl' , function($scope, global, $location){
   $scope.adults = new Array(parseInt(global.searchFlight.adults));
   $scope.children = new Array(parseInt(global.searchFlight.children));
 
+
   $scope.step = 2;
   $scope.submitForm = function() {
-    
+
     // function to validate adult form fields.
     if(validateForm($scope.formData, false, $scope, global.searchFlight.adults) & validateForm($scope.formDataChildren, true, $scope, global.searchFlight.children)) {
 
