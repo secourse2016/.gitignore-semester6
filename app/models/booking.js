@@ -1,5 +1,5 @@
 /*
-**Booking module contain all information of th booking passengers,booking price and booking flights reference 
+**Booking model contain all information of th booking passengers,booking price and booking flights reference 
 */
 var mongoose     = require('mongoose');
 var schema       = mongoose.Schema;

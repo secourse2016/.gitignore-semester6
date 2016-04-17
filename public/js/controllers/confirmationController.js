@@ -9,15 +9,16 @@ controller('confirmationCtrl',function($scope,global,$location,$http){
 	returnFlight:infoFlow.returnTrip.flightNumber,totalPrice:200}; //cost will be modified later .
 
 	$scope.confirm = function(){
+		/* after confirming the booking INFO redirect to the payment view */
+		$http.post('/api/addBooking',bookingInfo).success(function(data){
+			$location.path("/payment");
+		})
+		.error(function(data){
+		/*if there is an err throw it otherWise go to payement page */
+		console.log('Error: Couldn\'t insert in the dataBase.');
+        });
 		
-		$http.post('/api/addBooking',bookingInfo).success(function(err,data){
-			if(err)
-				throw err ;
-				
-});
-		$location.path("/payment");
-		
-}
+	}
 
 });
 

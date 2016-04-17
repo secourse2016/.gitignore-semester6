@@ -176,14 +176,16 @@ var getOtherAirlines = function(cb, airlineIndex, allAirlines, origin, destinati
  	});
  };
 
-/**
-*Get all Booking Information and inserting it into the database.
+/** Add-Booking is a function which takes booking information and inserting it intothe data base.
+*@param newBooking is instance of new booking model record .
+*@param generatedBookingNumber is a fixed value which all booking numbers begin with.
 */
 
 module.exports.addBooking = function(bookingInfo, cb){
 
 	var newBooking = new booking();
 	var generatedBookingNumber = "6D4B97";
+	/* counting all the records in the booking collection */
 	booking.count({},function(err,c){
 	/* Concatenate the number of records of the booking collection to the generatedBooking Number to get unique number*/
 		newBooking.bookingNumber = generatedBookingNumber+c;

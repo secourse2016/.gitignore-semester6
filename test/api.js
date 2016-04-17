@@ -122,9 +122,9 @@ describe('API flights search POST route', function() {
 *  Testing API AddBooking POST routes
 */
 describe('API Add Booking POST Route ', function(){
-        //test add-booking route 
+        //test add-booking route. 
      it('/api/addBooking  should return 200 ok', function(done){
-         // dummy data for booking 
+         // Dummy data for booking. 
         var passenger = [{firstName:"mohamed",
                           lastName:"khaled",
                           email:"mohamed@gmail.com"
@@ -132,6 +132,6 @@ describe('API Add Booking POST Route ', function(){
                          ,nationality:"Egyptian"
                          ,birthDate:30-4-1995}];
         var bookingInfo = {passengers:passenger,outgoingFlight:2,returnFlight:5,totalPrice:200};
-        request.post('/api/addBooking').send(bookingInfo).expect(200, done);
+        request.post('/api/addBooking').send(bookingInfo).expect(200, done);//checking if insert is correct .
     });
 });
