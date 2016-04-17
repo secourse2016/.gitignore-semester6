@@ -127,7 +127,11 @@ var getOtherAirlines = function(cb, airlineIndex, allAirlines, origin, destinati
 			});
 
 
+<<<<<<< HEAD
 		}).on('error', function(e){
+=======
+		}).on('error', function(e) {
+>>>>>>> origin/development
 			// Error in the current request, try the next airlines
 			getOtherAirlines(function(otherFlights){
 				cb(otherFlights);
@@ -152,12 +156,50 @@ module.exports.getAirports = function(cb){
 	});
 };
 
-
-/** Add-Booking is a function which takes booking information and inserting it intothe data base.
-*@param newBooking is instance of new booking model record .
-*@param generatedBookingNumber is a fixed value which all booking numbers begin with.
+/*
+* Search for a certain booking in the database and return it
 */
+module.exports.getBooking = function(bookingNumber , passportNumber , cb){
 
+		var myBooking = {};
+		// get booking record from database
+    booking.find({"bookingNumber":bookingNumber}, {} , function(errBooking, booking){
+				var found = false;
+				if(booking.length == 0)
+					cb(errBooking, null);
+				else {
+					// check the passport number
+					for(i = 0 ; i < booking[0].passengers.length ; i++){
+						if(booking[0].passengers[i].passportNumber === passportNumber){
+							found = true;
+							break;
+						}
+					}
+					if(found){
+						// get the corresponding outgoing flight
+						flight.find({"flightNumber":booking[0].outgoingFlight},{},function(errOutgoingFlight , outgoingFlight){
+								// get the corresponding return flight
+								flight.find({"flightNumber":booking[0].returnFlight},{},function(errReturnFlight , returnFlight){
+									myBooking = booking[0].toJSON();
+									// attach the flights info to the returning object
+									myBooking.outgoingFlightInfo = outgoingFlight[0];
+									myBooking.returnFlightInfo = returnFlight[0];
+									cb(errReturnFlight, myBooking);
+								});
+						});
+					}
+					else {
+						cb(errBooking , null);
+					}
+			}
+    });
+};
+
+/**
+ * Add-Booking is a function which takes booking information and inserting it intothe data base.
+ * @param newBooking is instance of new booking model record .
+ * @param generatedBookingNumber is a fixed value which all booking numbers begin with.
+ */
 module.exports.addBooking = function(bookingInfo, cb){
 
 	var newBooking = new booking();
@@ -177,4 +219,4 @@ module.exports.addBooking = function(bookingInfo, cb){
 		});
 
 	});
-}
+};

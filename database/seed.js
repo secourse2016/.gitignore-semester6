@@ -1,5 +1,5 @@
-var airports           = require("../app/data/airports.json");
 var flights            = require("../app/data/flights.json");
+var airports           = require("../app/data/airports.json");
 var flight             = require('../app/models/flight');
 var airport            = require('../app/models/airport');
 
@@ -30,14 +30,15 @@ exports.seedFlights = function seedFlights(cb){
             cb(err, false);
     });
 }
+
 /**
-* seed both flights and airpors
-*/
+ * Seed both flights and airports
+ */
 exports.seed = function seed(cb){
     var seedFlights = this.seedFlights;
     this.seedAirports(function(err, check){
         if(err)
-        cb(err,check);
+            cb(err,check);
         else{
             seedFlights(function(err, check){
                 cb(err,check);

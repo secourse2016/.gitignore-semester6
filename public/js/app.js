@@ -74,6 +74,12 @@ app.config(function($routeProvider , $locationProvider, $httpProvider) {
             templateUrl : 'views/successful-payment.html'
         })
 
+        //route for booking history
+        .when('/booking-history', {
+            templateUrl : 'views/booking-history.html'
+        })
+
+        // route for error page
         // TODO: Not Found Page route
         .when('/error', {
             templateUrl : 'views/static/error404.html'

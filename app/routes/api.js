@@ -128,7 +128,7 @@ router.post('/flights/search/oneway', function(req, res){
 * @param req.body is the booking Info which was sent from confirmation Controller.
 * @param flights.addBooking is the function in flights.js which insert the booking into the data base .
 */
-router.post('/api/addBooking',function(req, res){
+router.post('/addBooking',function(req, res){
 	flights.addBooking(req.body,function(err,bookingNumber){
         // if there is no error send booking Number
         if(!err)
