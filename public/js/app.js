@@ -109,17 +109,6 @@ var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBdXN0cmlhbiBBaXJsaW
  app.controller('masterController', function($scope, $location) {
     $scope.subscribeData = {};
     $scope.subscribe = function() {
-      // $http.post("api/subscrib",$scope.subscriberMail)
-      // $http.post("api/subscribe",$scope.subscriberMail)
-      // .success(function() {
-      //         $scope.subscriberMail = {};
-      //         console.log('Done: ' + data);
-      //
-      // })
-      // .error(function() {
-      //         console.log('Error: ' + data);
-      // });
-
         if($scope.subscribeData.email){
             Materialize.toast('You have been added to our mailing list.', 4000);
             $scope.subscribeData.email = '';
@@ -131,9 +120,7 @@ var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBdXN0cmlhbiBBaXJsaW
 app.controller('contactUsCtrl',function($scope, $location){
     $scope.formData = {};
     $scope.send = function(){
-        console.log($scope.formData);
         Materialize.toast('We have received your message. Thank you!', 4000);
         $location.path('/');
     }
-
 });

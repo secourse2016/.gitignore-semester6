@@ -21,8 +21,5 @@ app.controller('passengerViewCtrl' , function($scope, global, $location){
       // set passengers Array in service with filled passengers info .
         global.setPassengers($scope.formData);
         $location.path('/confirmation');
-
-      // for testing (Working)
-      // console.log(global.getPassengers());
     }
 });

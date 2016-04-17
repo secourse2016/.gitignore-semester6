@@ -22,7 +22,6 @@ function($scope, flights, global, $location){
     global.outGoingTrip.flights = $scope.booking.outgoing_flights[parseInt($scope.info[0].substring(2))].flights;
     global.returnTrip.flights   = $scope.booking.ingoing_flights[parseInt($scope.info[1].substring(2))].flights;
     $scope.info = [];
-    console.log(global);
     $location.path('/passengers');
   };
 });
