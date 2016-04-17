@@ -10,6 +10,9 @@ angular.module('austrianAirlinesApp').service('global', function() {
 	 * flightClass				["economy", "business"]
 	 */
 	this.searchFlight = {};
+
+	this.totalCost = 0;
+	this.bookingNumber = 0;
 	this.passengers = [];
 	this.outGoingTrip = {};
 	this.returnTrip = {};
@@ -68,5 +71,35 @@ angular.module('austrianAirlinesApp').service('global', function() {
 	*/
 	this.getReturnTrip = function(){
 		return this.returnTrip;
+	}
+
+
+	/**
+	* Set the total cost of the booking
+	*/
+	this.setTotalCost = function(cost){
+		this.totalCost = cost;
+	}
+
+	/**
+	* get the total cost of the booking
+	*/
+	this.getTotalCost = function(){
+		return this.totalCost;
+	}
+
+
+	/**
+	* Set the total cost of the booking
+	*/
+	this.setBookingNumber = function(number){
+		this.bookingNumber = number;
+	}
+
+	/**
+	* get the total cost of the booking
+	*/
+	this.getBookingNumber = function(){
+		return this.bookingNumber;
 	}
 });

@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "description": "A booking system for Austrian Airlines",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test" : "mocha"
   },
   "repository": {
     "type": "git",

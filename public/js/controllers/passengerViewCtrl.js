@@ -37,12 +37,12 @@ app.controller('passengerViewCtrl' , function($scope, global, $location){
 	$scope.submitForm = function(){
 		// Validate adult form fields.
 		if(validateForm($scope.formData, false, $scope, global.searchFlight.adults)
-		&validateForm($scope.formDataChildren, true, $scope, global.searchFlight.children)){
+		  &validateForm($scope.formDataChildren, true, $scope, global.searchFlight.children)){
 			// Determine if the passenger is child or adult
 			for(i = 0; i < $scope.formData.length; i++)
-			$scope.formData[i].isChild = false;
+				$scope.formData[i].isChild = false;
 			for(i = 0; i < $scope.formDataChildren.length; i++)
-			$scope.formDataChildren[i].isChild = true;
+				$scope.formDataChildren[i].isChild = true;
 			// Set passengers Array in service with filled passengers info .
 			global.setPassengers($scope.formData.concat($scope.formDataChildren));
 			// Redirect to confirmation page.
