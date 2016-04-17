@@ -8,7 +8,10 @@ controller('bookingHistoryController',function($scope, bookingHistoryService){
 
 
 	if($scope.booking){
-		console.log($scope.booking);
+		for(i = 0; i<$scope.booking.passengers.length; i++) {
+			$scope.booking.passengers[i].birthDate = new Date($scope.booking.passengers[i].birthDate);
+			$scope.booking.passengers[i].birthDate = $scope.booking.passengers[i].birthDate.toDateString();
+		}
 		// variable with value of the name of the airline
 	  $scope.airline          = "Austrian";
 
