@@ -1,15 +1,16 @@
 (function(){
 	angular.module('austrianAirlinesApp')
-	.controller('historyFormController', ['$http' , function($http , bookingHistoryService){
+	.controller('historyFormController',function($http ,$location , $scope, bookingHistoryService){
 		// Booking history form attributes
-		this.request = {};
-		var Ctrl = this;
+		$scope.request = {};
+
     // Search the booking in the database
-		this.searchBooking = function(){
-			$http.post('/api/search-booking' , this.request).success(function(data){
+		$scope.searchBooking = function searchBooking(){
+			$http.post('/api/search-booking' , $scope.request).success(function(data){
 				console.log(data);
 				bookingHistoryService.setBooking(data);
+				$location.path('/booking-history');
 			});
 		};
-	}]);
+	});
 })();
