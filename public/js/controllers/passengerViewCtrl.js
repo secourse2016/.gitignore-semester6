@@ -30,43 +30,65 @@ app.controller('passengerViewCtrl' , function($scope, global, $location){
 
       // loop in formData submitted to check fields.
         for (var i = 0; i < $scope.formData.length; i++) {
-
-          if(!$scope.formData[i].firstName) {
+          // check if nationality field is empty.
+          if(!$scope.formData[i].firstName)
+          {
             if(!$scope.errors[i])
               $scope.errors[i] = {};
             $scope.errors[i].firstName = true;
             countErrors++;
           }
-          if(!$scope.formData[i].lastName) {
+
+          // check if nationality field is empty.
+          if(!$scope.formData[i].lastName)
+          {
             if(!$scope.errors[i])
               $scope.errors[i] = {};
-              console.log($scope.formData[i].lastName);
-
             $scope.errors[i].lastName = true;
             countErrors++;
           }
 
-          if(!$scope.formData[i].nationality) {
+          // check if nationality field is empty.
+          if(!$scope.formData[i].nationality)
+          {
             if(!$scope.errors[i])
               $scope.errors[i] = {};
             $scope.errors[i].nationality = true;
             countErrors++;
           }
 
-
-        if(!$scope.formData[i].passportNumber) {
+        // check if passport number field is empty or is not valid.
+        if(!$scope.formData[i].passportNumber)
+        {
           if(!$scope.errors[i])
             $scope.errors[i] = {};
           $scope.errors[i].passportNumber = true;
           countErrors++;
         }
-        else if($scope.formData[i].passportNumber.length < 7) {
+        else if($scope.formData[i].passportNumber.length < 7)
+        {
         if(!$scope.errors[i])
           $scope.errors[i] = {};
         $scope.errors[i].passportNumberLength = true;
         countErrors++;
-      }
+        }
 
+        
+
+      // check if birthDate field is empty or is not valid.
+      if(!$scope.formData[i].birthDate) {
+        if(!$scope.errors[i])
+          $scope.errors[i] = {};
+        $scope.errors[i].birthDateRequired = true;
+        countErrors++;
+      }
+      else if(!validateDate($scope.formData[i].birthDate))
+      {
+        if(!$scope.errors[i])
+          $scope.errors[i] = {};
+        $scope.errors[i].birthDateNotValid = true;
+        countErrors++;
+      }
 
         // if error(s) found isValid is set to false.
         if(countErrors > 0 || $scope.formData.length == 0)
@@ -83,3 +105,12 @@ app.controller('passengerViewCtrl' , function($scope, global, $location){
   }
 
 });
+
+/** function to validate birthDate of an adult.
+ * returns boolean to indicate validity.
+ */
+  function validateDate(stringDate) {
+    var birthDate = new Date(Date.parse(stringDate));
+    var nowDate = new Date(Date.now());
+    return birthDate < nowDate && nowDate.getFullYear() - birthDate.getFullYear() >= 12;
+  }
