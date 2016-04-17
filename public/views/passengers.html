@@ -179,7 +179,7 @@
 
 
    <ul class="collection with-header" ng-repeat="child in children track by $index">
-     
+
     <li class="collection-header  grey lighten-3 "><h4>Passenger {{($index + adults.length) + 1}} - Child</h4></li>
     <li  class="collection-item">
       <div class="container">
@@ -188,13 +188,13 @@
            <i class="material-icons prefix">account_circle</i>
             <input id="firstNameC[{{$index}}]" type="text" class="validate" ng-model="formDataChildren[$index].firstName" required>
             <label for="firstNameC[{{$index}}]">First Name</label>
-            <span ng-show="errors[{{$index}}].firstNameC"> Required ! </span>
+            <span ng-show="errorsChildren[{{$index}}].firstName"> Required ! </span>
           </div>
           <div class="input-field col s6">
             <i class="material-icons prefix">account_circle</i>
             <input id="lastNameC[{{$index}}]" type="text" class="validate" ng-model="formDataChildren[$index].lastName" required>
             <label for="lastNameC[{{$index}}]">Last Name</label>
-            <span ng-show="errors[{{$index}}].lastNameC"> Required ! </span>
+            <span ng-show="errorsChildren[{{$index}}].lastName"> Required ! </span>
           </div>
         </div>
         <div class="row">
@@ -203,7 +203,7 @@
             <i class="material-icons prefix">pan_tool</i>
             <input id="passportNumberC[{{$index}}]" type="text" class="validate" ng-model="formDataChildren[$index].passportNumber" required>
             <label for="passportNumberC[{{$index}}]">Passport Number</label>
-            <span ng-show="errors[{{$index}}].passportNumberC"> Required ! </span>
+            <span ng-show="errorsChildren[{{$index}}].passportNumber"> Required ! </span>
           </div>
         </div>
         <div class="row">
@@ -211,14 +211,14 @@
             <i class="material-icons prefix">location_on</i>
             <input id="nationalityC[{{$index}}]" type="text" class="validate" ng-model="formDataChildren[$index].nationality" required>
             <label for="nationalityC[{{$index}}]">Nationality</label>
-            <span ng-show="errors[{{$index}}].nationalityC"> Required ! </span>
+            <span ng-show="errorsChildren[{{$index}}].nationality"> Required ! </span>
           </div>
          <div class="input-field col s6">
            <i class="material-icons prefix">today</i>
                  <input id="birthDateC[{{$index}}]" ng-model="formDataChildren[$index].birthDate" input-date type="text"  select-years="60" required>
                  <label for="birthDateC[{{$index}}]">Birth Date</label>
-                 <span ng-show="errors[{{$index}}].birthDateRequiredC"> Required ! </span>
-                 <span ng-show="errors[{{$index}}].birthDateNotValidC"> not valid birth date ! </span>
+                 <span ng-show="errorsChildren[{{$index}}].birthDateRequired"> Required ! </span>
+                 <span ng-show="errorsChildren[{{$index}}].birthDateNotValid"> not a valid date ! </span>
          </div>
         </div>
       </div>
