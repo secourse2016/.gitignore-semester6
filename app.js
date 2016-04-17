@@ -2,8 +2,11 @@ var express       = require('express');
 var path          = require('path');
 var mongoose      = require('mongoose');
 var bodyParser    = require('body-parser');
+var seed          = require('./database/seed');
 var moment		  = require('moment');
 var db = require('./database/seed');
+var clear          = require('./database/clear');
+
 var app           = express();
 require('dotenv').config();
 
@@ -44,8 +47,34 @@ app.route('/offers').get(sendIndex);
 app.route('/pricing').get(sendIndex);
 app.route('/error').get(sendIndex);
 
-
 // App Routes go here ==========================================================
+
+
+/**
+ *	Seed database and return error if
+ *	the operation doesn't complete.
+ */
+ app.get('/db/seed', function(req, res) {
+     seed.seed(function (err ,chk){
+         if(!err){
+             if(!chk){
+                 res.json({message: "database was seeded"});
+             }else{
+                 res.json({message: "database seeded successfuly"});
+             }
+         }
+     });
+ });
+/**
+ *	clear database and return error if the operation did not succeed.
+*/
+ app.get('/db/clear', function(req, res) {
+     clear.clearDB(function (err){
+         if(!err){
+            res.json({message: "database was cleared successfuly"});
+         }
+     });
+ });
 
 /**
 * API route that returns all airports available for flight search
