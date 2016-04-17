@@ -6,7 +6,7 @@ app.controller('passengerViewCtrl' , function($scope, global, $location){
   // dates of departure and return
   var outgoingDate        = new Date(global.searchFlight.outgoingDate);
   var returnDate          = new Date(global.searchFlight.returnDate);
-    
+
   // converting dates into string form
   $scope.departureDate    = outgoingDate.toDateString();
   $scope.arrivalDate      = returnDate.toDateString();
@@ -23,12 +23,12 @@ app.controller('passengerViewCtrl' , function($scope, global, $location){
 
 
   $scope.outgoingFlight  = angular.copy(global.outGoingTrip);
- 
+
     // arrival time
-    
+
   if($scope.tripType == 2){
     $scope.returnFlight    = angular.copy(global.returnTrip);
-   
+
   }
 
 
@@ -89,11 +89,11 @@ function validateDate(stringDate , isChild)
   var nowDate = new Date(Date.now());
   var yearDifference = nowDate.getFullYear() - birthDate.getFullYear();
   if(birthDate >= nowDate)
-  return false;
+    return false;
   if(!isChild)
-  return yearDifference >= 12;
+    return yearDifference >= 12;
   else
-  return yearDifference < 12 && yearDifference > 0;
+    return yearDifference < 12;
 }
 
 
