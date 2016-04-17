@@ -185,7 +185,7 @@ module.exports.addBooking = function(bookingInfo, cb){
 	var newBooking = new booking();
 	var generatedBookingNumber = "6D4B97";
 	booking.count({},function(err,c){
-		/* Concatenate the number of records of the booking collection to the generatedBooking Number*/
+	/* Concatenate the number of records of the booking collection to the generatedBooking Number to get unique number*/
 		newBooking.bookingNumber = generatedBookingNumber+c;
 		newBooking.passengers = bookingInfo.passengers;
 		newBooking.outgoingFlight = bookingInfo.outgoingFlight;
@@ -196,7 +196,6 @@ module.exports.addBooking = function(bookingInfo, cb){
 		newBooking.save(function (err) {
 			cb(err);
 		});
-
 
 	});
 }
