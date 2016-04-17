@@ -1,7 +1,5 @@
 var app=angular.module('austrianAirlinesApp');
-app.controller('flightsCtrl',
-
-function($scope, flights, global, $location){
+app.controller('flightsCtrl', function($scope, flights, global, $location){
 
   // variable with value of the name of the airline
   $scope.airline          = "Austrian";
@@ -61,7 +59,7 @@ function($scope, flights, global, $location){
 
   // function will be performed when submitting reserve button
   $scope.moveForward = function(){
-    if(!$scope.info[0] || ($scope.tripType == 2 && !$scope.info[1])) {
+    if(!$scope.info[0] || ($scope.tripType == 2 && !$scope.info[1] && $scope.returnFlights.length > 0)) {
       Materialize.toast('Please select the flight.',3000);
     }
     else {
