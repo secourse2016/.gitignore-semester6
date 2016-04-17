@@ -17,5 +17,8 @@
 			this.booking.expiryDate = this.expiryDate;
 			// insert booking into the dataBase
 		};
+	})
+	.controller('successController' , function($scope , global){
+		$scope.bookingNumber = global.getBookingNumber;
 	});
 })();

@@ -6,7 +6,7 @@ app.controller('passengerViewCtrl' , function($scope, global, $location){
   // dates of departure and return
   var outgoingDate        = new Date(global.searchFlight.outgoingDate);
   var returnDate          = new Date(global.searchFlight.returnDate);
-    
+
   // converting dates into string form
   $scope.departureDate    = outgoingDate.toDateString();
   $scope.arrivalDate      = returnDate.toDateString();
@@ -23,12 +23,12 @@ app.controller('passengerViewCtrl' , function($scope, global, $location){
 
 
   $scope.outgoingFlight  = angular.copy(global.outGoingTrip);
- 
+
     // arrival time
-    
+
   if($scope.tripType == 2){
     $scope.returnFlight    = angular.copy(global.returnTrip);
-   
+
   }
 
 
@@ -72,7 +72,6 @@ app.controller('passengerViewCtrl' , function($scope, global, $location){
       $scope.formDataChildren[i].isChild = true;
       // set passengers Array in service with filled passengers info .
       global.setPassengers($scope.formData.concat($scope.formDataChildren));
-      console.log(global.getPassengers());
       // redirect to confirmation page.
       $location.path('/confirmation');
     }
