@@ -145,6 +145,7 @@
              <i class="material-icons prefix">email</i>
              <input id="email[{{$index}}]" type="email" class="validate" ng-model="formData[$index].emailAddress" required>
              <label for="email[{{$index}}]">Email</label>
+             <span ng-show="errors[{{$index}}].emailAddressNotValid"> not a valid email ! </span>
            </div>
            <div class="input-field col s6">
              <i class="material-icons prefix">pan_tool</i>
@@ -166,6 +167,8 @@
             <i class="material-icons prefix">today</i>
                   <input id="birthDate[{{$index}}]" ng-model="formData[$index].birthDate" input-date type="text"  select-years="60" required>
                   <label for="birthDate[{{$index}}]">Birth Date</label>
+                  <span ng-show="errors[{{$index}}].birthDateRequired"> Required ! </span>
+                  <span ng-show="errors[{{$index}}].birthDateNotValid"> not a valid date ! </span>
           </div>
          </div>
        </div>
