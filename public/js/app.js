@@ -1,10 +1,16 @@
 var app = angular.module('austrianAirlinesApp', ['ngRoute', 'ui.materialize', 'jquery-alt', 'ngMaterial']);
+/**
+ * Token to be used for authentication.
+ * Generated online using jwtbuilder
+ * Can be stored in $localStorage
+ */
+var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBdXN0cmlhbiBBaXJsaW5lcyIsImlhdCI6MTQ2MDYzNTE1OCwiZXhwIjoxNDkyMTcxMTU4LCJhdWQiOiJ3d3cuYXVzdHJpYW4tYWlybGluZXMuY29tIiwic3ViIjoiYXVzdHJpYW5BaXJsaW5lcyJ9.Dilu6siLX3ouLk48rNASpYJcJSwKDTFYS2U4Na1M5k4';
 
 /**
  * configure master page routes
  * @controller need to be added
  */
- app.config(function($routeProvider , $locationProvider) {
+ app.config(function($routeProvider , $locationProvider, $httpProvider) {
     $routeProvider.when('/', {
             templateUrl : 'views/landing.html'
         })
@@ -80,6 +86,25 @@ var app = angular.module('austrianAirlinesApp', ['ngRoute', 'ui.materialize', 'j
 
         // use the HTML5 History API
         $locationProvider.html5Mode(true);
+
+        /**
+         * Interceptor to inject every HTTP request with the JSON web token
+         */
+        $httpProvider.interceptors.push(['$q', '$location', function ($q, $location) {
+            return {
+               'request': function (config) {
+                   config.headers = config.headers || {};
+                   config.headers['x-access-token'] = token;
+                   return config;
+               },
+               'responseError': function (response) {
+                   if (response.status === 401 || response.status === 403) {
+                    //TODO: $location.path('/unauthorized');
+                   }
+                   return $q.reject(response);
+               }
+           };
+        }]);
 
     });
 /**
