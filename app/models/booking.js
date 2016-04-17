@@ -11,7 +11,7 @@ var booking 	 = new schema ({
 			{
 				firstName 		: String,
 				lastName 		: String,
-				email 			: String,
+				emailAddress 	: String,
 				passportNumber 	: String,
 				nationality 	: String,
 				birthDate 		: Date,
