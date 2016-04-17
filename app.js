@@ -103,9 +103,9 @@ app.get('/api/airports', function(req, res){
 * API route to get a certain booking from the database
 */
 app.post('/api/search-booking', function(req, res){
-  var id = req.body.id;
+  var bookingNumber = req.body.bookingNumber;
   var passportNumber = req.body.passportNumber;
-    flights.getBooking(id , passportNumber , function(err, booking){
+    flights.getBooking(bookingNumber , passportNumber , function(err, booking){
         if(!err)
           res.json(booking);
     });

@@ -172,11 +172,11 @@ module.exports.getAirports = function(cb){
 /*
 * Search for a certain booking in the database and return it
 */
-module.exports.getBooking = function(id , passportNumber , cb){
+module.exports.getBooking = function(bookingNumber , passportNumber , cb){
 
 		var myBooking = {};
 		// get booking record from database
-    booking.find({"id":id}, {} , function(errBooking, booking){
+    booking.find({"bookingNumber":bookingNumber}, {} , function(errBooking, booking){
 				var found = false;
 				if(booking.length == 0)
 					cb(errBooking, null);
