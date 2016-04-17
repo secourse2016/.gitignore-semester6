@@ -1,4 +1,5 @@
 <link href="../css/confirm.css" rel="stylesheet">
+<link href="../css/passengers.css" rel="stylesheet">
 
 <div class="container" style="margin-bottom: 100px; margin-top: 50px;" ng-controller="confirmationCtrl">
 
@@ -45,61 +46,66 @@
   <ul class= "collection with-header z-depth-3"id="flightsInfo" style="padding: 0px">
    <li class="collection-header red darken-1"> <h3 class="white-text" > Flight Information </h3></li>
    <div>
-    <li class="collection-header  grey lighten-3"><h4>{{infoFlow.getOutGoingTrip().flights[0].origin_abb}} - {{infoFlow.getOutGoingTrip().flights[infoFlow.getOutGoingTrip().flights.length - 1].destination_abb}}</h4></li>
-    <li  class="collection-item" ng-repeat="interFlight in infoFlow.getOutGoingTrip().flights">
-      <div class="row">
+     <li class="flight-header collection-header  grey lighten-3">
+      <h4>{{outgoingFlight.origin}} - {{outgoingFlight.destination}}</h4> 
+      <div class="flight-date">{{departureDate}}</div></li>
+      <div class="row flight-way">
         <div class="col s10 m6 l3">
-          <p>
-            <i class="material-icons" style="margin-right:5px">date_range</i>  {{interFlight.departure_time}}
+          <p class="flight-info-date">
+            <i class="material-icons schedule-icon" style="margin-right:5px">schedule</i><span>  {{outgoingFlight.departureDateTime}} - {{outgoingFlight.arrivalDateTime}}</span>
           </p>
         </div>
         <div class="col s10 m6 l3">
-          <p>
-            <i class="material-icons " style="margin-right:5px ; margin-left:5px">local_airport</i>  {{interFlight.origin_abb}}
+          <p class="logo-div">
+             <img tooltipped data-position="right" data-delay="50" data-tooltip="{{outgoingFlight.Airline}}" ng-show = "outgoingFlight.Airline == airline" class = "logo" src="assets/images/flight-logo.png">
+                
+              <i tooltipped data-position="right" data-delay="50" data-tooltip="{{outgoingFlight.Airline}}" ng-hide = "outgoingFlight.Airline == airline" class="small material-icons other-airport" >local_airport</i> 
           </p>
         </div>
 
         <div class="col s10 m6 l3">
-          <p>
-            <i class="material-icons" style="margin-right:5px ; margin-left:5px">attach_money</i>  {{infoFlow.getOutGoingTrip().class}}
+          <p class="flight-info-data">
+              {{flightClass}}
           </p>
         </div>
         <div class="col s10 m6 l3">
-          <p>
-           <i class="material-icons" style="margin-right:5px ; margin-left:5px">airline_seat_recline_normal</i>  32B
-         </p>
-       </div>
-     </div>
+          <p class="flight-info-data">
+           {{outgoingFlight.cost}} {{outgoingFlight.currency}}
+          </p>
+        </div>
+      </div>
 
-   </li>
- </div>
+  </div>
 
- <li class="collection-header  grey lighten-3"><h4>{{infoFlow.getReturnTrip().flights[0].origin_abb}} - {{infoFlow.getReturnTrip().flights[infoFlow.getReturnTrip().flights.length - 1].destination_abb}}</h4></li>
- <li  class="collection-item" ng-repeat="interFlight in infoFlow.getReturnTrip().flights">
-   <div class="row">
-    <div class="col s10 m6 l3">
-      <p>
-        <i class="material-icons" style="margin-right:5px">date_range</i>  {{interFlight.departure_time}}
-      </p>
-    </div>
-    <div class="col s10 m6 l3">
-      <p>
-        <i class="material-icons " style="margin-right:5px ; margin-left:5px">local_airport</i>  {{interFlight.origin_abb}}
-      </p>
-    </div>
+  <!-- Return Trip -->
+  <li ng-show ="tripType == 2" class="flight-header collection-header  grey lighten-3">
+    <h4>{{returnFlight.origin}} - {{returnFlight.destination}}</h4>
+    <div class="flight-date">{{arrivalDate}}</div>
+  </li>
+   <div class="row flight-way" ng-show ="tripType == 2" style="">
+        <div class="col s10 m6 l3">
+          <p class="flight-info-date">
+            <i class="material-icons schedule-icon" style="margin-right:5px">schedule</i>  <span>{{returnFlight.departureDateTime}} - {{returnFlight.departureDateTime}}</span>
+          </p>
+        </div>
+        <div class="col s10 m6 l3">
+          <p class="logo-div">
+             <img tooltipped data-position="right" data-delay="50" data-tooltip="{{returnFlight.Airline}}" ng-show = "returnFlight.Airline == airline" class = "logo" src="assets/images/flight-logo.png">
+                  <i tooltipped data-position="right" data-delay="50" data-tooltip="{{returnFlight.Airline}}" ng-hide = "returnFlight.Airline == airline" class="small material-icons other-airport" >local_airport</i> 
+          </p>
+        </div>
 
-    <div class="col s10 m6 l3">
-      <p>
-        <i class="material-icons" style="margin-right:5px ; margin-left:5px">attach_money</i>  {{infoFlow.getReturnTrip().class}}
-      </p>
-    </div>
-    <div class="col s10 m6 l3">
-      <p>
-       <i class="material-icons" style="margin-right:5px ; margin-left:5px">airline_seat_recline_normal</i>  32B
-     </p>
-   </div>
- </div>
-</li>
+        <div class="col s10 m6 l3">
+          <p class="flight-info-data">
+             {{flightClass}}
+          </p>
+        </div>
+        <div class="col s10 m6 l3">
+          <p class="flight-info-data">
+            {{returnFlight.cost}} {{returnFlight.currency}}
+          </p>
+        </div>
+      </div>
 
 </ul>
 
@@ -219,7 +225,7 @@
               {{passenger.nationality}}
             </p>
           </div>
-          <div class="col s12 m6" ng-show = "passenger.birthDateC">
+          <div class="col s12 m6">
            <h4>
              <i class="material-icons">today</i>
              Birth Date</h4>

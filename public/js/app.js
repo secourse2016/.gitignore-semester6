@@ -94,6 +94,7 @@ var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBdXN0cmlhbiBBaXJsaW
                'responseError': function (response) {
                    if (response.status === 401 || response.status === 403) {
                     //TODO: $location.path('/unauthorized');
+                    console.log(response.status);
                    }
                    return $q.reject(response);
                }
