@@ -105,9 +105,10 @@
 
 		function createFilterFor(query) {
 		   var lowercaseQuery = angular.lowercase(query);
+		   var uppercaseQuery = angular.uppercase(query);
 		   return function filterFn(airport) {
 			   return (airport.value.indexOf(lowercaseQuery) === 0
-			   			|| airport.iata.indexOf(lowercaseQuery) === 0);
+			   			|| airport.iata.indexOf(uppercaseQuery) === 0);
 		   };
 		}
 
