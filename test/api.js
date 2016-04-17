@@ -117,6 +117,7 @@ describe('API flights search POST route', function() {
     });
 });
 
+
 /**
 *  Testing API AddBooking POST routes
 */
