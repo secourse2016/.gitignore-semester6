@@ -52,65 +52,70 @@
 
   <!-- Flights Info goes here -->
   <ul class="collection with-header z-depth-3" id="flightsInfo">
+
+  <!-- Going Trip -->
    <li class="collection-header red darken-1"> <h3 class="white-text" > Flight Information </h3></li>
    <div>
-     <li class="collection-header  grey lighten-3"><h4>{{infoFlow.getOutGoingTrip().flights[0].origin_abb}} - {{infoFlow.getOutGoingTrip().flights[infoFlow.getOutGoingTrip().flights.length - 1].destination_abb}}</h4></li>
-     <li  class="collection-item" ng-repeat="interFlight in infoFlow.getOutGoingTrip().flights">
-      <div class="row">
+     <li class="flight-header collection-header  grey lighten-3">
+      <h4>{{outgoingFlight.origin}} - {{outgoingFlight.destination}}</h4>
+      <div class="flight-date">{{departureDate}}</div></li>
+      <div class="row flight-way">
         <div class="col s10 m6 l3">
-          <p>
-            <i class="material-icons" style="margin-right:5px">date_range</i>  {{interFlight.departure_time}}
+          <p class="flight-info-date">
+            <i class="material-icons schedule-icon" style="margin-right:5px">schedule</i><span>  {{outgoingFlight.departureDateTime}} - {{outgoingFlight.arrivalDateTime}}</span>
           </p>
         </div>
         <div class="col s10 m6 l3">
-          <p>
-            <i class="material-icons " style="margin-right:5px ; margin-left:5px">local_airport</i>  {{interFlight.origin_abb}}
+          <p class="logo-div">
+             <img tooltipped data-position="right" data-delay="50" data-tooltip="{{outgoingFlight.Airline}}" ng-show = "outgoingFlight.Airline == airline" class = "logo" src="assets/images/flight-logo.png">
+
+              <i tooltipped data-position="right" data-delay="50" data-tooltip="{{outgoingFlight.Airline}}" ng-hide = "outgoingFlight.Airline == airline" class="small material-icons other-airport" >local_airport</i>
           </p>
         </div>
 
         <div class="col s10 m6 l3">
-          <p>
-            <i class="material-icons" style="margin-right:5px ; margin-left:5px">attach_money</i>  {{infoFlow.getOutGoingTrip().class}}
+          <p class="flight-info-data">
+              {{flightClass}}
           </p>
         </div>
         <div class="col s10 m6 l3">
-          <p>
-           <i class="material-icons" style="margin-right:5px ; margin-left:5px">airline_seat_recline_normal</i>  32B
+          <p class="flight-info-data">
+           {{outgoingFlight.cost}} {{outgoingFlight.currency}}
           </p>
         </div>
       </div>
 
-    </li>
   </div>
 
+  <!-- Return Trip -->
+  <li ng-show ="tripType == 2" class="flight-header collection-header  grey lighten-3">
+    <h4>{{returnFlight.origin}} - {{returnFlight.destination}}</h4>
+    <div class="flight-date">{{arrivalDate}}</div>
+  </li>
+   <div class="row flight-way" ng-show ="tripType == 2" style="">
+        <div class="col s10 m6 l3">
+          <p class="flight-info-date">
+            <i class="material-icons schedule-icon" style="margin-right:5px">schedule</i>  <span>{{returnFlight.departureDateTime}} - {{returnFlight.departureDateTime}}</span>
+          </p>
+        </div>
+        <div class="col s10 m6 l3">
+          <p class="logo-div">
+             <img tooltipped data-position="right" data-delay="50" data-tooltip="{{returnFlight.Airline}}" ng-show = "returnFlight.Airline == airline" class = "logo" src="assets/images/flight-logo.png">
+                  <i tooltipped data-position="right" data-delay="50" data-tooltip="{{returnFlight.Airline}}" ng-hide = "returnFlight.Airline == airline" class="small material-icons other-airport" >local_airport</i>
+          </p>
+        </div>
 
-  <li class="collection-header  grey lighten-3"><h4>{{infoFlow.getReturnTrip().flights[0].origin_abb}} - {{infoFlow.getReturnTrip().flights[infoFlow.getReturnTrip().flights.length - 1].destination_abb}}</h4></li>
-  <li  class="collection-item" ng-repeat="interFlight in infoFlow.getReturnTrip().flights">
-   <div class="row">
         <div class="col s10 m6 l3">
-          <p>
-            <i class="material-icons" style="margin-right:5px">date_range</i>  {{interFlight.departure_time}}
+          <p class="flight-info-data">
+             {{flightClass}}
           </p>
         </div>
         <div class="col s10 m6 l3">
-          <p>
-            <i class="material-icons " style="margin-right:5px ; margin-left:5px">local_airport</i>  {{interFlight.origin_abb}}
-          </p>
-        </div>
-
-        <div class="col s10 m6 l3">
-          <p>
-            <i class="material-icons" style="margin-right:5px ; margin-left:5px">attach_money</i>  {{infoFlow.getReturnTrip().class}}
-          </p>
-        </div>
-        <div class="col s10 m6 l3">
-          <p>
-           <i class="material-icons" style="margin-right:5px ; margin-left:5px">airline_seat_recline_normal</i>  32B
+          <p class="flight-info-data">
+            {{returnFlight.cost}} {{returnFlight.currency}}
           </p>
         </div>
       </div>
- </li>
-
 </ul>
 
 
@@ -121,8 +126,9 @@
 
 
  <div class="row">
-   <form  ng-submit="submitForm()">
+   <form  ng-submit="submitForm()" novalidate>
     <ul class="collection with-header" ng-repeat="adult in adults track by $index">
+
      <li class="collection-header  grey lighten-3 "><h4>Passenger {{$index + 1}} - Adult</h4></li>
      <li  class="collection-item">
        <div class="container">
@@ -131,11 +137,13 @@
             <i class="material-icons prefix">account_circle</i>
              <input id="firstName[{{$index}}]" type="text" class="validate" ng-model="formData[$index].firstName" required>
              <label for="firstName[{{$index}}]">First Name</label>
+             <span class="validationError"ng-show="errors[{{$index}}].firstName"> <i class="tiny material-icons">error</i> This field is required. </span>
            </div>
            <div class="input-field col s6">
              <i class="material-icons prefix">account_circle</i>
              <input id="lastName[{{$index}}]" type="text" class="validate" ng-model="formData[$index].lastName" required>
              <label for="lastName[{{$index}}]">Last Name</label>
+             <span class="validationError"ng-show="errors[{{$index}}].lastName"><i class="tiny material-icons">error</i> This field is required. </span>
            </div>
          </div>
          <div class="row">
@@ -143,11 +151,15 @@
              <i class="material-icons prefix">email</i>
              <input id="email[{{$index}}]" type="email" class="validate" ng-model="formData[$index].emailAddress" required>
              <label for="email[{{$index}}]">Email</label>
+             <span class="validationError"ng-show="errors[{{$index}}].emailAddressNotValid"><i class="tiny material-icons">error</i> Invalid email address. </span>
            </div>
            <div class="input-field col s6">
              <i class="material-icons prefix">pan_tool</i>
              <input id="passportNumber[{{$index}}]" type="text" class="validate" ng-model="formData[$index].passportNumber" required>
              <label for="passportNumber[{{$index}}]">Passport Number</label>
+             <span class="validationError"ng-show="errors[{{$index}}].passportNumber"><i class="tiny material-icons">error</i> This field is required. </span>
+             <span class="validationError"ng-show="errors[{{$index}}].passportNumberLength && !errors[{{$index}}].passportNumber"><i class="tiny material-icons">error</i> Passport number should not be less than 7 characters.</span>
+
            </div>
          </div>
          <div class="row">
@@ -155,11 +167,14 @@
              <i class="material-icons prefix">location_on</i>
              <input id="nationality[{{$index}}]" type="text" class="validate" ng-model="formData[$index].nationality" required>
              <label for="nationality[{{$index}}]">Nationality</label>
+             <span class="validationError"ng-show="errors[{{$index}}].nationality"><i class="tiny material-icons">error</i> This field is required. </span>
            </div>
           <div class="input-field col s6">
             <i class="material-icons prefix">today</i>
                   <input id="birthDate[{{$index}}]" ng-model="formData[$index].birthDate" input-date type="text"  select-years="60" required>
                   <label for="birthDate[{{$index}}]">Birth Date</label>
+                  <span class="validationError"ng-show="errors[{{$index}}].birthDateRequired"><i class="tiny material-icons">error</i> This field is required. </span>
+                  <span class="validationError"ng-show="errors[{{$index}}].birthDateNotValid"><i class="tiny material-icons">error</i> An adult should be older than 12 years old. </span>
           </div>
          </div>
        </div>
@@ -169,40 +184,48 @@
 
 
    <ul class="collection with-header" ng-repeat="child in children track by $index">
+
     <li class="collection-header  grey lighten-3 "><h4>Passenger {{($index + adults.length) + 1}} - Child</h4></li>
     <li  class="collection-item">
       <div class="container">
         <div class="row">
           <div class="input-field col s6">
            <i class="material-icons prefix">account_circle</i>
-            <input id="firstNameC[{{$index}}]" type="text" class="validate" ng-model="formData[$index].firstNameC" required>
+            <input id="firstNameC[{{$index}}]" type="text" class="validate" ng-model="formDataChildren[$index].firstName" required>
             <label for="firstNameC[{{$index}}]">First Name</label>
+            <span class="validationError"ng-show="errorsChildren[{{$index}}].firstName"><i class="tiny material-icons">error</i> This field is required. </span>
           </div>
           <div class="input-field col s6">
             <i class="material-icons prefix">account_circle</i>
-            <input id="lastNameC[{{$index}}]" type="text" class="validate" ng-model="formData[$index].lastNameC" required>
+            <input id="lastNameC[{{$index}}]" type="text" class="validate" ng-model="formDataChildren[$index].lastName" required>
             <label for="lastNameC[{{$index}}]">Last Name</label>
+            <span class="validationError"ng-show="errorsChildren[{{$index}}].lastName"><i class="tiny material-icons">error</i> This field is required. </span>
           </div>
         </div>
         <div class="row">
 
           <div class="input-field col s6">
             <i class="material-icons prefix">pan_tool</i>
-            <input id="passportNumberC[{{$index}}]" type="text" class="validate" ng-model="formData[$index].passportNumberC" required>
+            <input id="passportNumberC[{{$index}}]" type="text" class="validate" ng-model="formDataChildren[$index].passportNumber" required>
             <label for="passportNumberC[{{$index}}]">Passport Number</label>
+            <span class="validationError"ng-show="errorsChildren[{{$index}}].passportNumber"><i class="tiny material-icons">error</i> This field is required. </span>
+            <span class="validationError"ng-show="errorsChildren[{{$index}}].passportNumberLength && !errorsChildren[{{$index}}].passportNumber"><i class="tiny material-icons">error</i> Passport number should not be less than 7 characters. </span>
+          </div>
+          <div class="input-field col s6">
+            <i class="material-icons prefix">today</i>
+                  <input id="birthDateC[{{$index}}]" ng-model="formDataChildren[$index].birthDate" input-date type="text"  select-years="60" required>
+                  <label for="birthDateC[{{$index}}]">Birth Date</label>
+                  <span class="validationError"ng-show="errorsChildren[{{$index}}].birthDateRequired"><i class="tiny material-icons">error</i> This field is required. </span>
+                  <span class="validationError"ng-show="errorsChildren[{{$index}}].birthDateNotValid"><i class="tiny material-icons">error</i> A child should be younger than 12 years old. </span>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s6">
             <i class="material-icons prefix">location_on</i>
-            <input id="nationalityC[{{$index}}]" type="text" class="validate" ng-model="formData[$index].nationalityC" required>
+            <input id="nationalityC[{{$index}}]" type="text" class="validate" ng-model="formDataChildren[$index].nationality" required>
             <label for="nationalityC[{{$index}}]">Nationality</label>
+            <span class="validationError"ng-show="errorsChildren[{{$index}}].nationality"><i class="tiny material-icons">error</i> This field is required. </span>
           </div>
-         <div class="input-field col s6">
-           <i class="material-icons prefix">today</i>
-                 <input id="birthDateC[{{$index}}]" ng-model="formData[$index].birthDateC" input-date type="text"  select-years="60" required>
-                 <label for="birthDateC[{{$index}}]">Birth Date</label>
-         </div>
         </div>
       </div>
 

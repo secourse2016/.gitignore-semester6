@@ -1,5 +1,5 @@
-var airports           = require("../app/data/airports.json");
 var flights            = require("../app/data/flights.json");
+var airports           = require("../app/data/airports.json");
 var flight             = require('../app/models/flight');
 var airport            = require('../app/models/airport');
 
@@ -30,8 +30,9 @@ exports.seedFlights = function seedFlights(cb){
           cb(err, false);
     });
 }
+
 /**
- * seed both flights and airpors
+ * seed flights, airpors and bookings
  */
 exports.seed = function seed(cb){
     var seedFlights = this.seedFlights;
@@ -40,7 +41,7 @@ exports.seed = function seed(cb){
             cb(err,check);
         else{
             seedFlights(function(err, check){
-              cb(err,check);
+                cb(err,check);
             });
         }
     });

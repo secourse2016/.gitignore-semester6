@@ -1,0 +1,53 @@
+
+<link href="css/payment.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+
+<div id="history_form" style="position:absolute; left:0px; right:0px; margin-left:auto; margin-right:auto;width:50%; min-width:200px; display:none;" ng-controller="historyFormController as historyFormCtrl">
+  <div class="modal-content">
+    <div class="card-panel grey lighten-3" id="form" >
+
+      <div class="form-header">
+        <h5 class="red-text text-darken-2">Booking History</h5>
+      </div>
+      <hr class="hr">
+
+      <div>
+        <!--Form-->
+        <form name="bookingHistoryForm" class="col s12">
+
+          <!--Booking Number-->
+          <div class="row">
+            <div class="input-field col s12">
+            <i class="material-icons prefix">payment</i>
+              <input  ng-model="request.bookingNumber" type="text" class="validate" id="booking" required>
+              <label for="booking">Booking No.</label>
+            </div>
+          </div>
+
+          <!--Passport Number-->
+          <div class="row">
+            <div class="input-field col s12">
+            <i class="material-icons prefix">payment</i>
+              <input  ng-model="request.passportNumber" type="text" class="validate" id="passportNumber" required>
+              <label for="passportNumber">Passport No.</label>
+            </div>
+          </div>
+
+          <!--Submition button-->
+          <div class="row">
+            <div class="input-field col s12">
+              <div class="modal-footer">
+                <a ng-click="searchBooking()"
+                class="modal-action modal-close btn waves-effect waves-light red book-button"
+                name="showHistory">View Booking
+                <i class="material-icons right">send</i>
+                </a>
+                </div>
+
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
