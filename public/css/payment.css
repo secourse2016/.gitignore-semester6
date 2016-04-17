@@ -1,6 +1,11 @@
+.input-field .prefix.active
+{
+	color: #F44336;
+}
+
 .payment-block {
-	
-	margin-left:auto; 
+
+	margin-left:auto;
 	margin-right:auto;
 	min-width:300px;
 	width: 70%;
@@ -25,10 +30,10 @@
 .congratulations {
 
 	margin-top: 10%;
-	margin-left:auto; 
-	margin-right:auto; 
-	min-width:300px; 
-	width: 40%; 
+	margin-left:auto;
+	margin-right:auto;
+	min-width:300px;
+	width: 40%;
 	border: 1.5px solid #eeeeee;
 }
 
