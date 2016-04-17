@@ -123,9 +123,18 @@
            </select>
         </div>
     </div>
+   
     <!-- Search for flights -->
-    <div class="card-action right-align">
-      <a class="waves-effect waves-light btn white red-text" ng-click="searchFlights()">FIND NOW!</a>
+    <div class="row">
+      <div class="allAirlinesCheckbox col s7" >
+          <input id="allAirlines" ng-model="formData.allAirlines" type="checkbox" />
+          <label for="allAirlines" class="white-text">All airlines</label>
+      </div>
+
+      <div class="card-action col s5 right-align">
+       
+        <a class="waves-effect waves-light btn white red-text" ng-click="searchFlights()">FIND NOW!</a>
+      </div>
     </div>
   </div>
 </form>

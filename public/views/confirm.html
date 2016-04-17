@@ -109,7 +109,7 @@
   <li class="collection-header red darken-1"> <h3 class="white-text"> Passengers Information </h3></li>
 
   <div class="row">
-    <ul class="collection with-header" ng-repeat="passenger in infoFlow.getPassengers()">
+    <ul class="collection with-header" ng-repeat="passenger in infoFlow.getPassengers()" ng-show = "passenger.firstName" >
      <li class="collection-header  grey lighten-3 "><h4>Passenger- Adult</h4></li>
      <li  class="collection-item">
        <div class="container">
