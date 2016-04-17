@@ -155,7 +155,7 @@ function validateForm(formData, isChild, $scope,length) {
     // check if error(s) found isValid is set to false.
 
   }
-  if(countErrors > 0 || formData.length == 0)
+  if(countErrors > 0)
     isValid = false;
 
   return isValid;
