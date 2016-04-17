@@ -2,15 +2,17 @@ var express       = require('express');
 var path          = require('path');
 var mongoose      = require('mongoose');
 var bodyParser    = require('body-parser');
+var compression   = require('compression');
 var seed          = require('./database/seed');
 var moment		  = require('moment');
-var clear          = require('./database/clear');
+var clear         = require('./database/clear');
 var app           = express();
 require('dotenv').config();
 
 // models ===============================================================
 var flights       = require('./flights');
 
+app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
