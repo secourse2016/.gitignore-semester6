@@ -174,16 +174,29 @@ module.exports.getAirports = function(cb){
 */
 module.exports.getBooking = function(id , passportNumber , cb){
 		// get booking record from database
-    booking.find({"id":id , "passportNumber":passportNumber}, {} , function(errBooking, booking){
-				// get the corresponding outgoing flight
-				flight.find({"flightNumber":booking.outgoingFlight},{},function(errOutgoingFlight , outgoingFlight){
-						// get the corresponding return flight
-						flight.find({"flightNumber":booking.returnFlight},{},function(errReturnFlight , returnFlight){
-							// add the information of the flights to the returning booking object
-							booking.outgoingFlightInfo = outgoingFlight;
-							booking.returnFlightInfo = returnFlight;
-							cb(err, booking);
-						});
-				});
+    booking.find({"id":id}, {} , function(errBooking, booking){
+				console.log(booking[0].totalPrice);
+				var found = false;
+				for(i = 0 ; i < booking[0].passengers.length ; i++){
+					if(booking[0].passengers[i].passportNumber === passportNumber){
+						found = true;
+						break;
+					}
+				}
+				if(found){
+					// get the corresponding outgoing flight
+					flight.find({"flightNumber":booking[0].outgoingFlight},{},function(errOutgoingFlight , outgoingFlight){
+							// get the corresponding return flight
+							flight.find({"flightNumber":booking[0].returnFlight},{},function(errReturnFlight , returnFlight){
+								// add the information of the flights to the returning booking object
+								var myBooking = booking[0];
+								myBooking.outgoingFlightInfo = outgoingFlight[0];
+								myBooking.returnFlightInfo = returnFlight[0];
+								// console.log(booking[0].outgoingFlightInfo);
+
+								cb(errReturnFlight, myBooking);
+							});
+					});
+				}
     });
 };
