@@ -56,7 +56,7 @@ controller('confirmationCtrl',function($scope,global,$location,$http){
 	// all booking information in the global servrice which wile be passed to post request .
 	var bookingInfo = {passengers:infoFlow.passengers,outgoingFlight:infoFlow.outGoingTrip.flightNumber,
 	totalCost:totalCost}; //cost will be modified later .
-
+	console.log(infoFlow.passengers);
 	if(infoFlow.returnTrip)
 		bookingInfo.returnFlight = infoFlow.returnTrip.flightNumber;
 
