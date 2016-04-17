@@ -115,3 +115,22 @@ describe('API flights search POST route', function() {
         .expect(200, done);
     });
 });
+
+
+describe('API booking search POST route', function() {
+
+    // test one-way route
+    it('/api/booking POST should return a JSON object containing one booking details',
+    function(done){
+        // send request with a dummy booking information
+        request.post('/api/flights/search/oneway').send({
+            'id'        : '1',
+            'passportNumber'   : '123456',
+        }).expect('Content-Type', /json/)
+        .expect(function(res){
+            var flights = res.body;
+            // check if JSON body contains an array of outgoing flights
+            assert.isArray(flights.outgoingFlights, "Returned object is an array");
+        })
+        .expect(200, done);
+    });
