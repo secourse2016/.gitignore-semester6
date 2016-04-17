@@ -23,6 +23,49 @@ describe('Airports API Route', function() {
     });
 });
 
+describe('Oneway Flights API Route', function() {
+    //request = request(app);
+
+    it('it should return an array of flights from JFK to CAI on April 12, 2016 with economy class',
+    function(done){
+        request.get('/api/flights/search/JFK/CAI/1460478300000/economy').expect('Content-Type', /json/)
+        .expect(function(res){
+            var flights = res.body;
+            // check if the returned object has an array of outgoing flights
+            assert.isArray(flights.outgoingFlights, "Returned object has an array of outgoing flights");
+            // check if each returned flights has the same attributes as what we search about
+            for(var i = 0; i < flights.outgoingFlights.length; ++i){
+                assert.equal(flights.outgoingFlights[i].origin != "JFK" || flights.outgoingFlights[i].destination != "CAI" || flights.outgoingFlights[i].class != "economy" || flights.outgoingFlights[i].departureDateTime != checkDate , true);
+            }
+        })
+        .expect(200, done);
+    });
+});
+
+describe('Round trip Flights API Route', function() {
+    //request = request(app);
+
+    it('it should return an array of flights from JFK to CAI on April 12, 2016 with economy class and another one for return onApril 13, 2016',
+    function(done){
+        request.get('/api/flights/search/JFK/CAI/1460478300000/1460478400000/economy').expect('Content-Type', /json/)
+        .expect(function(res){
+            var flights = res.body;
+            // check if the returned object has an array of outgoing flights
+            assert.isArray(flights.outgoingFlights, "Returned object has an array of outgoing flights");
+            // check if the returned object has an array of return flights
+            assert.isArray(flights.returnFlights, "Returned object has an array of return flights");
+            // check if each returned flights has the same attributes as what we search about
+            for(var i = 0; i < flights.outgoingFlights.length; ++i){
+                assert.equal(flights.outgoingFlights[i].origin != "JFK" || flights.outgoingFlights[i].destination != "CAI" || flights.outgoingFlights[i].class != "economy" || flights.outgoingFlights[i].departureDateTime != checkDate , true);
+            }
+             for(var i = 0; i < flights.returnFlights.length; ++i){
+                assert.equal(flights.returnFlights[i].origin != "JFK" || flights.returnFlights[i].destination != "CAI" || flights.returnFlights[i].class != "economy" || flights.returnFlights[i].departureDateTime != checkDate , true);
+            }
+
+        }).expect(200, done);
+    });
+});
+
 
 
 
@@ -67,11 +110,8 @@ describe('API flights search POST route', function() {
             // check if JSON body contains two arrays of outgoing and return flights
             assert.isArray(flights.outgoingFlights, "Returned object is an array");
             assert.isArray(flights.returnFlights, "Returned object is an array");
+
         })
         .expect(200, done);
     });
 });
-
-
-
-
