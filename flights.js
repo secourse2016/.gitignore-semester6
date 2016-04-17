@@ -17,12 +17,7 @@ var getOneDirectionFlights=module.exports.getOneDirectionFlights=function (cb, o
 	flight.find({"origin": origin, "destination": destination, "class": flightClass, departureDateTime : {"$gte" : startDate, "$lt": endDate}},{},function(err,resultFlights){
 			// call the call back function with the result
 			cb(err, resultFlights);
-
-<<<<<<< HEAD
-	});
-=======
 		});
->>>>>>> 7b941f2c491193769dd142bbf994940f01ac2a48
 
 }
 
