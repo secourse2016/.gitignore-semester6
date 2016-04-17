@@ -38,7 +38,6 @@ controller('confirmationCtrl',function($scope,global,$location,$http){
 	// all booking information in the global servrice which wile be passed to post request .
 	var bookingInfo = {passengers:infoFlow.passengers,outgoingFlight:infoFlow.outGoingTrip.flightNumber,
 	returnFlight:infoFlow.returnTrip.flightNumber,totalPrice:200}; //cost will be modified later .
-	console.log(infoFlow.passengers);
 
 	$scope.confirm = function(){
 		/* after confirming the booking INFO redirect to the payment view */
