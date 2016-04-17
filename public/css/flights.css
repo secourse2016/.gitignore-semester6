@@ -22,7 +22,7 @@
   }
   .full_info
   {
-    margin-left: 25px;
+    margin-left: -10px;
     position: absolute;
     z-index: 5;
     padding: 10px;
@@ -35,7 +35,7 @@
   {
     .full_info
     {
-      margin-left: 20px
+      margin-left: -10px
     }
   }
 
@@ -43,17 +43,11 @@
   {
     .full_info
     {
-      margin-left: -10px
-    }
-  }
-
-  @media(max-width: 500px)
-  {
-    .full_info
-    {
       margin-left: 0px
     }
   }
+
+  
 
   .flights_table_container
   {
@@ -186,6 +180,11 @@
 }
 @media (max-width: 600px)
 {
+  .flightsHeader
+  {
+    font-size: 17px;
+  }
+  
   .logo
   {
     display: none;
