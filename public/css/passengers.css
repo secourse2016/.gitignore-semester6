@@ -4,8 +4,29 @@
 
 }
 
-#flightsInfo h3, #passengerInfo h3{
+
+.validationError {
+  color : #b71c1c;
+  font-style: italic;
+  vertical-align: middle;
+
+  -webkit-transition:all linear 0.5s !important;
+  transition:all linear 0.5s;
+}
+.validationError.ng-hide {
+  opacity:0;
+}
+
+i.tiny {
+  color : #b71c1c;
+  margin-left: 5px;
+}
+
+#flightsInfo h3, #passengerInfo h3
+{
+
   font-size: 25px;
+
 }
 
 #flightsInfo h4, #passengerInfo h4{
@@ -88,7 +109,7 @@
 
 @media (max-width: 600px)
 {
-  
+
   .logo
   {
     display: none;
