@@ -36,7 +36,7 @@ describe('API flights search POST route', function() {
     it('/api/flights/search/oneway POST should return a JSON object containing one array, outgoingFlights',
     function(done){
         // send request with a dummy flight
-        request.post('/api/flights/search/oneway').send({
+        request.post('/api/flights/search/oneway').set('x-access-token', token).send({
             'origin'        : 'CAI',
             'destination'   : 'JFK',
             'departureDate' : 1460478300000,
@@ -55,7 +55,7 @@ describe('API flights search POST route', function() {
     it('/api/flights/search/roundtrip POST should return a JSON object containing two arrays, outgoingFlights and returnFlights',
     function(done){
         // send reqest with dummy array
-        request.post('/api/flights/search/roundtrip').send({
+        request.post('/api/flights/search/roundtrip').set('x-access-token', token).send({
             'origin'        : 'CAI',
             'destination'   : 'JFK',
             'departureDate' : 1460478300000,

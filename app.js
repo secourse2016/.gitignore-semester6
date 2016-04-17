@@ -11,7 +11,7 @@ require('dotenv').config();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(morgan('dev'));
+// app.use(morgan('dev'));
 
 // configuration ==========================================================
 mongoose.connect(process.env.mongoURL); // connect to our database

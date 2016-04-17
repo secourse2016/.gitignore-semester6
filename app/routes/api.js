@@ -1,7 +1,9 @@
 var express       = require('express');
-var router        = express.Router();
+var moment          = require('moment');
 var flights       = require('../../flights');
 var verifyToken   = require('../middlewares/tokenMiddleware');
+
+var router        = express.Router();
 
 // Middlewares ==========================================================
 
@@ -17,7 +19,6 @@ router.use(verifyToken);
 */
 router.get('/airports', function(req, res){
    flights.getAirports(function(err, airports){
-      console.log("Hello");
      if(!err)
        res.json(airports);
    });
@@ -32,7 +33,7 @@ router.get('/airports', function(req, res){
 * @param class - economy or business only
 * @returns {Array}
 */
-router.get('/api/flights/search/:origin/:destination/:departingDate/:returningDate/:class', function(req, res) {
+router.get('/flights/search/:origin/:destination/:departingDate/:returningDate/:class', function(req, res) {
 	// retrieve params
 	var origin =  req.params.origin;
 	var destination =  req.params.destination;
@@ -53,7 +54,7 @@ router.get('/api/flights/search/:origin/:destination/:departingDate/:returningDa
 * @param class - economy or business only
 * @returns {Array}
 */
-router.get('/api/flights/search/:origin/:destination/:departingDate/:class', function(req, res) {
+router.get('/flights/search/:origin/:destination/:departingDate/:class', function(req, res) {
     // retrieve params
     var origin 			=  req.params.origin;
     var destination 	=  req.params.destination;
@@ -77,7 +78,7 @@ router.get('/api/flights/search/:origin/:destination/:departingDate/:class', fun
 * @param class - economy or business only
 * @returns {Array}
 */
-router.post('/api/flights/search/roundtrip', function(req, res){
+router.post('/flights/search/roundtrip', function(req, res){
 
     // Get the request parameters
     var origin        =  req.body.origin;
@@ -103,7 +104,7 @@ router.post('/api/flights/search/roundtrip', function(req, res){
 * @param class - economy or business only
 * @returns {Array}
 */
-router.post('/api/flights/search/oneway', function(req, res){
+router.post('/flights/search/oneway', function(req, res){
 
     // get the request parameters
     var origin        =  req.body.origin;
