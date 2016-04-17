@@ -40,7 +40,8 @@ var getFlights = module.exports.getFlights
 
 		if(arrivalDate == null){	//One way
 			cb(err, result);
-		}else{						//Roundtrip
+		}
+		else{						//Roundtrip
 			getOneDirectionFlights(function(err2, returnFlights){
 				if(err2)
 					cb(err2);
@@ -126,18 +127,14 @@ var getOtherAirlines = function(cb, airlineIndex, allAirlines, origin, destinati
 				}, airlineIndex+1, allAirlines, origin, destination, flightClass, departureDate, arrivalDate);
 			});
 
-
-<<<<<<< HEAD
 		}).on('error', function(e){
-=======
-		}).on('error', function(e) {
->>>>>>> origin/development
 			// Error in the current request, try the next airlines
 			getOtherAirlines(function(otherFlights){
 				cb(otherFlights);
 			}, airlineIndex+1, allAirlines, origin, destination, flightClass, departureDate, arrivalDate);
 		});
-	}else{
+	}
+	else{
 		// Base case of recursion, return empty data that will be filled
 		if(arrivalDate)
 			cb({ outgoingFlights:[], returnFlights:[] });

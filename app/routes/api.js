@@ -123,7 +123,7 @@ router.post('/flights/search/oneway', function(req, res){
 
 
 /**
-*User-BOOK FLIGHT
+* User-BOOK FLIGHT
 * This is the route used by the client side angular, to book flight.
 * @param req.body is the booking Info which was sent from confirmation Controller.
 * @param flights.addBooking is the function in flights.js which insert the booking into the data base .
@@ -135,6 +135,18 @@ router.post('/addBooking',function(req, res){
             res.send(bookingNumber);
 
     });
+});
+
+/*
+* API route to get a certain booking from the database
+*/
+app.post('/search-booking', function(req, res){
+	var bookingNumber = req.body.bookingNumber;
+	var passportNumber = req.body.passportNumber;
+	flights.getBooking(bookingNumber , passportNumber , function(err, booking){
+	    if(!err)
+	      	res.json(booking);
+	});
 });
 
 module.exports = router;

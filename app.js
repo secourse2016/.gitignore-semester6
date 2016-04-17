@@ -27,7 +27,7 @@ app.get("/",function(req,res){
  * Send the server route to a fake route to be handled by AngularJS.
  */
 var sendIndex = function(req, res){
-    return res.sendFile(__dirname + '../../public/index.html');
+    return res.sendFile(__dirname + '/public/index.html');
 };
 
 app.route('/about').get(sendIndex);

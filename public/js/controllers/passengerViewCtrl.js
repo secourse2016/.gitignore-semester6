@@ -16,7 +16,7 @@ app.controller('passengerViewCtrl' , function($scope, global, $location){
 	$scope.outgoingFlight   = angular.copy(global.outGoingTrip);
 
 	if($scope.tripType == 2)
-	$scope.returnFlight = angular.copy(global.returnTrip);
+		$scope.returnFlight = angular.copy(global.returnTrip);
 
 	$scope.formData =[];
 	$scope.formDataChildren =[];
@@ -24,9 +24,9 @@ app.controller('passengerViewCtrl' , function($scope, global, $location){
 	$scope.errorsChildren = [];
 
 	if(!global.searchFlight.adults)
-	global.searchFlight.adults = 1;
+		global.searchFlight.adults = 1;
 	if(!global.searchFlight.children)
-	global.searchFlight.children = 0;
+		global.searchFlight.children = 0;
 	$scope.infoFlow = global;
 
 	$scope.adults   = new Array(parseInt(global.searchFlight.adults));
@@ -61,11 +61,11 @@ function validateDate(stringDate , isChild){
 	var yearDifference   = nowDate.getFullYear() - birthDate.getFullYear();
 
 	if(birthDate >= nowDate)
-	return false;
+		return false;
 	if(!isChild)
-	return yearDifference >= 12;
+		return yearDifference >= 12;
 	else
-	return yearDifference < 12;
+		return yearDifference < 12;
 }
 
 
@@ -76,7 +76,7 @@ function validateDate(stringDate , isChild){
 function validateEmail(email)
 {
 	if(!email)
-	return false;
+		return false;
 	var regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	return regex.test(email);
 }
