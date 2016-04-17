@@ -159,6 +159,7 @@ app.post('/api/flights/search/roundtrip', function(req, res){
 
     // Get all the flights
     flights.getAllFlights(function(err, resultFlights){
+      if(!err)
         res.json(resultFlights);
     }, allAirlines, origin, destination, flightClass, departureDate, arrivalDate);
 });
