@@ -206,10 +206,10 @@ app.post('/api/flights/search/oneway', function(req, res){
 */
 
 app.post('/api/addBooking',function(req, res){
-	flights.addBooking(req.body,function(err){
-        /* if there is no error send added message */
+	flights.addBooking(req.body,function(err,bookingNumber){
+        /* if there is no error send booking Number */
         if(!err)
-            res.send("Added");
+            res.send(bookingNumber);
 
     });
 });

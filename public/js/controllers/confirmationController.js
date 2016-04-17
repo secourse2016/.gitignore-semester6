@@ -35,13 +35,35 @@ controller('confirmationCtrl',function($scope,global,$location,$http){
 	var infoFlow = $scope.infoFlow = global;
 	$scope.step = 3; // View number in the stepper
 
+		var adultNumber = 0;
+		var childNumber = 0;
+		for(var i = 0 ; i<infoFlow.passengers.length;i++){
+			if(infoFlow.passengers[i].isChild == true)
+				childNumber++;
+			else
+				adultNumber++;
+		}
+
+		var outGoingTripCost = infoFlow.outGoingTrip.cost ;
+		var returnFlightCost = 0;
+		if(infoFlow.returnTrip.cost)
+			returnFlightCost = infoFlow.returnTrip.cost ;
+
+		var totalCost = adultNumber*(outGoingTripCost+returnFlightCost)+childNumber*((outGoingTripCost+returnFlightCost)/2);
+		
+		global.setTotalCost(totalCost)
+
 	// all booking information in the global servrice which wile be passed to post request .
 	var bookingInfo = {passengers:infoFlow.passengers,outgoingFlight:infoFlow.outGoingTrip.flightNumber,
-	returnFlight:infoFlow.returnTrip.flightNumber,totalPrice:200}; //cost will be modified later .
+	totalCost:totalCost}; //cost will be modified later .
+
+	if(infoFlow.returnTrip)
+		bookingInfo.returnFlight = infoFlow.returnTrip.flightNumber;
 
 	$scope.confirm = function(){
 		/* after confirming the booking INFO redirect to the payment view */
 		$http.post('/api/addBooking',bookingInfo).success(function(data){
+			global.setBookingNumber(data);
 			$location.path("/payment");
 		})
 		.error(function(data){

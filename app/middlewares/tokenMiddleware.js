@@ -18,7 +18,6 @@ module.exports = function(req, res, next){
             }
         });
     } else {
-        console.log("Bla Bla");
         return res.status(403).json({ message: 'Unauthorized access.'});
     }
 };
