@@ -5,7 +5,6 @@ var bodyParser    = require('body-parser');
 var compression   = require('compression');
 var seed          = require('./database/seed');
 var moment		  = require('moment');
-var db = require('./database/seed');
 var clear          = require('./database/clear');
 var moment		    = require('moment');
 var morgan        = require('morgan');
@@ -23,9 +22,7 @@ app.use(morgan('dev'));
 
 // configuration ==========================================================
 mongoose.connect(process.env.mongoURL); // connect to our database
-db.seed(function(err , check){
-  console.log(check);
-});
+
 /*
 * Default route
 */
@@ -156,7 +153,7 @@ app.get('/api/flights/search/:origin/:destination/:departingDate/:class', functi
     if(!err)
 		  res.json(resultFlights);
 	}, origin, destination, flightClass, moment(departingDate,"x"));
-});   
+});
 
 
 /**
@@ -215,7 +212,7 @@ app.post('/api/flights/search/oneway', function(req, res){
 });
 
 /**
-*User-BOOK FLIGHT 
+*User-BOOK FLIGHT
 * This is the route used by the client side angular, to book flight.
 * @param req.body is the booking Info which was sent from confirmation Controller.
 * @param flights.addBooking is the function in flights.js which insert the booking into the data base .
