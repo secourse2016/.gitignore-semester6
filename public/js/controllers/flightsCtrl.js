@@ -4,10 +4,11 @@ app.controller('flightsCtrl', function($scope, flights, global, $location){
   // variable with value of the name of the airline
   $scope.airline          = "Austrian";
 
+
   // dates of departure and return
   var outgoingDate        = new Date(global.searchFlight.outgoingDate);
   var returnDate          = new Date(global.searchFlight.returnDate);
-    
+
   // converting dates into string form
   $scope.departureDate    = outgoingDate.toDateString();
   $scope.arrivalDate      = returnDate.toDateString();
@@ -26,7 +27,7 @@ app.controller('flightsCtrl', function($scope, flights, global, $location){
   $scope.outgoingFlights  = angular.copy(flights.outgoingFlights);
   $scope.returnFlights    = angular.copy(flights.returnFlights);
 
-  // converting outgoing flights dated into form of hours and minutes 
+  // converting outgoing flights dated into form of hours and minutes
   for(i = 0; i < $scope.outgoingFlights.length; i++){
     // departure time
     var departureTime                           = new Date($scope.outgoingFlights[i].departureDateTime);
@@ -37,7 +38,7 @@ app.controller('flightsCtrl', function($scope, flights, global, $location){
     $scope.outgoingFlights[i].arrivalDateTime   = arrivalTime.getUTCHours()+":"+arrivalTime.getUTCMinutes();
   }
 
-  // converting return flights dated into form of hours and minutes 
+  // converting return flights dated into form of hours and minutes
   for(i = 0; i < $scope.returnFlights.length; i++){
     //departure time
     var departureTime                           = new Date($scope.returnFlights[i].departureDateTime);
@@ -47,7 +48,7 @@ app.controller('flightsCtrl', function($scope, flights, global, $location){
     var arrivalTime                             = new Date($scope.returnFlights[i].arrivalDateTime);
     $scope.returnFlights[i].arrivalDateTime     = arrivalTime.getUTCHours()+":"+arrivalTime.getUTCMinutes();
   }
-  
+
   // array to store indexes of selected flights
   $scope.info   = [];
 
@@ -55,7 +56,7 @@ app.controller('flightsCtrl', function($scope, flights, global, $location){
   $scope.trans  = {id: -1};
 
   // View number in the stepper
-  $scope.step   = 1; 
+  $scope.step   = 1;
 
   // function will be performed when submitting reserve button
   $scope.moveForward = function(){
@@ -71,10 +72,12 @@ app.controller('flightsCtrl', function($scope, flights, global, $location){
         // passing selected return flight to the global service
         global.returnTrip = $scope.returnFlights[$scope.info[1]];
       }
+      if($scope.tripType == 2 &&  $scope.returnFlights.length==0)
+        global.searchFlight.tripType = 1;
       $location.path('/passengers');
     }
 
-    
+
   };
 });
 
