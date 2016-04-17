@@ -18,7 +18,11 @@ var getOneDirectionFlights=module.exports.getOneDirectionFlights=function (cb, o
 			// call the call back function with the result
 			cb(err, resultFlights);
 
+<<<<<<< HEAD
 	});
+=======
+		});
+>>>>>>> 7b941f2c491193769dd142bbf994940f01ac2a48
 
 }
 
@@ -138,7 +142,7 @@ var getOtherAirlines = function(cb, airlineIndex, allAirlines, origin, destinati
 		}).on('error', function(e) {
 			// Error in the current request, try the next airlines
 			getOtherAirlines(function(otherFlights){
-					cb(otherFlights);
+				cb(otherFlights);
 			}, airlineIndex+1, allAirlines, origin, destination, flightClass, departureDate, arrivalDate);
 		});
 	}
@@ -207,3 +211,30 @@ module.exports.getBooking = function(bookingNumber , passportNumber , cb){
 			}
     });
 };
+
+
+/** Add-Booking is a function which takes booking information and inserting it intothe data base.
+*@param newBooking is instance of new booking model record .
+*@param generatedBookingNumber is a fixed value which all booking numbers begin with.
+*/
+
+module.exports.addBooking = function(bookingInfo, cb){
+
+	var newBooking = new booking();
+	var generatedBookingNumber = "6D4B97";
+	/* counting all the records in the booking collection */
+	booking.count({},function(err,c){
+	/* Concatenate the number of records of the booking collection to the generatedBooking Number to get unique number*/
+		newBooking.bookingNumber = generatedBookingNumber+c;
+		newBooking.passengers = bookingInfo.passengers;
+		newBooking.outgoingFlight = bookingInfo.outgoingFlight;
+		newBooking.returnFlight = bookingInfo.returnFlight;
+		newBooking.totalCost = bookingInfo.totalCost;
+		newBooking.bookingDate = Date.now();
+		newBooking.isSuccessful = true ;
+		newBooking.save(function (err) {
+			cb(err,newBooking.bookingNumber);
+		});
+
+	});
+}

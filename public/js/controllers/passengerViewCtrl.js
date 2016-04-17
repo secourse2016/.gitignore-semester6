@@ -88,11 +88,11 @@ function validateDate(stringDate , isChild)
   var nowDate = new Date(Date.now());
   var yearDifference = nowDate.getFullYear() - birthDate.getFullYear();
   if(birthDate >= nowDate)
-  return false;
+    return false;
   if(!isChild)
-  return yearDifference >= 12;
+    return yearDifference >= 12;
   else
-  return yearDifference < 12 && yearDifference > 0;
+    return yearDifference < 12;
 }
 
 
