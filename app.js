@@ -5,7 +5,8 @@ var bodyParser    = require('body-parser');
 var compression   = require('compression');
 var seed          = require('./database/seed');
 var moment		  = require('moment');
-var clear         = require('./database/clear');
+var clear          = require('./database/clear');
+var moment		    = require('moment');
 var morgan        = require('morgan');
 var app           = express();
 require('dotenv').config();
@@ -99,6 +100,18 @@ app.get('/api/airports', function(req, res){
     });
 });
 
+/*
+* API route to get a certain booking from the database
+*/
+app.post('/api/search-booking', function(req, res){
+  var bookingNumber = req.body.bookingNumber;
+  var passportNumber = req.body.passportNumber;
+    flights.getBooking(bookingNumber , passportNumber , function(err, booking){
+        if(!err)
+          res.json(booking);
+    });
+});
+
 /**
 * ROUND-TRIP SEARCH REST ENDPOINT
 * @param origin - Flight Origin Location
@@ -140,7 +153,7 @@ app.get('/api/flights/search/:origin/:destination/:departingDate/:class', functi
     if(!err)
 		  res.json(resultFlights);
 	}, origin, destination, flightClass, moment(departingDate,"x"));
-});   
+});
 
 
 /**
@@ -199,7 +212,7 @@ app.post('/api/flights/search/oneway', function(req, res){
 });
 
 /**
-*User-BOOK FLIGHT 
+*User-BOOK FLIGHT
 * This is the route used by the client side angular, to book flight.
 * @param req.body is the booking Info which was sent from confirmation Controller.
 * @param flights.addBooking is the function in flights.js which insert the booking into the data base .

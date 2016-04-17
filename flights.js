@@ -17,7 +17,6 @@ var getOneDirectionFlights=module.exports.getOneDirectionFlights=function (cb, o
 	flight.find({"origin": origin, "destination": destination, "class": flightClass, departureDateTime : {"$gte" : startDate, "$lt": endDate}},{},function(err,resultFlights){
 			// call the call back function with the result
 			cb(err, resultFlights);
-
 		});
 
 }
@@ -134,7 +133,7 @@ var getOtherAirlines = function(cb, airlineIndex, allAirlines, origin, destinati
 				}, airlineIndex+1, allAirlines, origin, destination, flightClass, departureDate, arrivalDate);
 			});
 
-			
+
 		}).on('error', function(e) {
 			// Error in the current request, try the next airlines
 			getOtherAirlines(function(otherFlights){
@@ -162,12 +161,51 @@ var getOtherAirlines = function(cb, airlineIndex, allAirlines, origin, destinati
  * Get all airports that can be available for flight search
  * @param  {Function} cb will be called with (err, airports)
  */
+module.exports.getAirports = function(cb){
+    airport.find(function(err, airports){
+        cb(err, airports);
+    });
+};
 
- module.exports.getAirports = function(cb){
- 	airport.find(function(err, airports){
- 		cb(err, airports);
- 	});
- };
+
+/*
+* Search for a certain booking in the database and return it
+*/
+module.exports.getBooking = function(bookingNumber , passportNumber , cb){
+
+		var myBooking = {};
+		// get booking record from database
+    booking.find({"bookingNumber":bookingNumber}, {} , function(errBooking, booking){
+				var found = false;
+				if(booking.length == 0)
+					cb(errBooking, null);
+				else {
+					// check the passport number
+					for(i = 0 ; i < booking[0].passengers.length ; i++){
+						if(booking[0].passengers[i].passportNumber === passportNumber){
+							found = true;
+							break;
+						}
+					}
+					if(found){
+						// get the corresponding outgoing flight
+						flight.find({"flightNumber":booking[0].outgoingFlight},{},function(errOutgoingFlight , outgoingFlight){
+								// get the corresponding return flight
+								flight.find({"flightNumber":booking[0].returnFlight},{},function(errReturnFlight , returnFlight){
+									myBooking = booking[0].toJSON();
+									// attach the flights info to the returning object
+									myBooking.outgoingFlightInfo = outgoingFlight[0];
+									myBooking.returnFlightInfo = returnFlight[0];
+									cb(errReturnFlight, myBooking);
+								});
+						});
+					}
+					else {
+						cb(errBooking , null);
+					}
+			}
+    });
+};
 
 
 /** Add-Booking is a function which takes booking information and inserting it intothe data base.
@@ -185,7 +223,7 @@ module.exports.addBooking = function(bookingInfo, cb){
 		newBooking.bookingNumber = generatedBookingNumber+c;
 		newBooking.passengers = bookingInfo.passengers;
 		newBooking.outgoingFlight = bookingInfo.outgoingFlight;
-		newBooking.returnFlight = bookingInfo.returnFlight; 
+		newBooking.returnFlight = bookingInfo.returnFlight;
 		newBooking.totalCost = bookingInfo.totalCost;
 		newBooking.bookingDate = Date.now();
 		newBooking.isSuccessful = true ;

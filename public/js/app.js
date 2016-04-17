@@ -74,6 +74,12 @@ var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBdXN0cmlhbiBBaXJsaW
             templateUrl : 'views/successful-payment.html'
         })
 
+        //route for booking history
+        .when('/booking-history', {
+            templateUrl : 'views/booking-history.html'
+        })
+
+        // route for error page
         .when('/error', {
             templateUrl : 'views/static/error404.html'
         });
