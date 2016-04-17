@@ -1,9 +1,6 @@
 #confirmInfo {
   float: right;
-
-
 }
-
 
 .validationError {
   color : #b71c1c;
@@ -13,6 +10,7 @@
   -webkit-transition:all linear 0.5s !important;
   transition:all linear 0.5s;
 }
+
 .validationError.ng-hide {
   opacity:0;
 }
@@ -22,8 +20,7 @@ i.tiny {
   margin-left: 5px;
 }
 
-#flightsInfo h3, #passengerInfo h3
-{
+#flightsInfo h3, #passengerInfo h3{
 
   font-size: 25px;
 
@@ -72,8 +69,6 @@ i.tiny {
   width: auto;
 }
 
-
-
 .flight-info-data {
     margin-bottom: 13px;
     margin-top: 20px;
@@ -97,8 +92,6 @@ i.tiny {
     vertical-align: middle;
 }
 
-
-
 .row.flight-way{
 	margin-bottom: 0px;
 }
@@ -107,11 +100,9 @@ i.tiny {
 	text-align: center;
 }
 
-@media (max-width: 600px)
-{
+@media (max-width: 600px){
 
-  .logo
-  {
+  .logo{
     display: none;
   }
 }
