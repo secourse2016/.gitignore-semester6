@@ -7,7 +7,6 @@
     // Search the booking in the database
 		$scope.searchBooking = function searchBooking(){
 			$http.post('/api/search-booking' , $scope.request).success(function(data){
-				console.log(data);
 				bookingHistoryService.setBooking(data);
 				$location.path('/booking-history');
 			});

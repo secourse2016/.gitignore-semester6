@@ -93,6 +93,8 @@ app.post('/api/search-booking', function(req, res){
   var id = req.body.id;
   var passportNumber = req.body.passportNumber;
     flights.getBooking(id , passportNumber , function(err, booking){
+      console.log("Print Booking");
+      console.log(booking);
         if(!err)
           res.json(booking);
     });

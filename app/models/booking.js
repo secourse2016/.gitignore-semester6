@@ -12,7 +12,8 @@ var booking = new schema ({
 				email : String,
 				passportNumber : String,
 				nationality : String,
-				birthDate : Number
+				birthDate : Number,
+				isChild:Boolean
 			}
 		],
 	outgoingFlight :{ type:String, ref: 'Flight' },
@@ -21,8 +22,7 @@ var booking = new schema ({
 
 	totalPrice : Number,
 	bookingDate : Number,
-	isSuccessful : Boolean,
-	isChild:Boolean
+	isSuccessful : Boolean
 });
 
 module.exports = mongoose.model('Booking', booking);

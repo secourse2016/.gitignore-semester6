@@ -175,7 +175,6 @@ module.exports.getAirports = function(cb){
 module.exports.getBooking = function(id , passportNumber , cb){
 		// get booking record from database
     booking.find({"id":id}, {} , function(errBooking, booking){
-				console.log(booking[0].totalPrice);
 				var found = false;
 				for(i = 0 ; i < booking[0].passengers.length ; i++){
 					if(booking[0].passengers[i].passportNumber === passportNumber){
@@ -189,10 +188,13 @@ module.exports.getBooking = function(id , passportNumber , cb){
 							// get the corresponding return flight
 							flight.find({"flightNumber":booking[0].returnFlight},{},function(errReturnFlight , returnFlight){
 								// add the information of the flights to the returning booking object
-								var myBooking = booking[0];
+								// var myBooking = {};
+								// myBooking.passengers = booking[0].passengers;
+								// myBooking.totalPrice = booking[0].totalPrice;
+								var myBooking = booking[0].toJSON();
 								myBooking.outgoingFlightInfo = outgoingFlight[0];
 								myBooking.returnFlightInfo = returnFlight[0];
-								// console.log(booking[0].outgoingFlightInfo);
+								console.log(myBooking);
 
 								cb(errReturnFlight, myBooking);
 							});

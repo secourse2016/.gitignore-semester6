@@ -9,14 +9,14 @@
             "email":"mora@gmail.com",
             "passportNumber":"123456",
             "nationality":"7alawani",
-            "birthDate":"1071995"
+            "birthDate":"1071995",
+            "isChild":false
           }
         ],
     "outgoingFlight": "BO400",
     "returnFlight": "DE401",
     "totalPrice":4000 ,
     "bookingDate":"20051004",
-    "isSuccessful": true,
-    "isChild":false
+    "isSuccessful": true
   }
 ]

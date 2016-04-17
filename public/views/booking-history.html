@@ -15,7 +15,7 @@
 
       <!--Origin and distination airports-->
       <li class="collection-header  grey lighten-3">
-        <h4>{{booking.outgoingFlightInfo.origin}} - {{booking.outgoingFlightInfo.destination}}</h4>
+        <h4>{{booking.outgoingFlight}} - {{booking.outgoingFlightInfo.destination}}</h4>
       </li>
 
       <li  class="collection-item">
@@ -113,7 +113,7 @@
     <div class="row">
 
       <!--Repeated Passenger Info-->
-      <ul class="collection with-header" ng-repeat="passenger in booking.passengers" ng-hide="passenger.isChild">
+      <ul class="collection with-header" ng-repeat="passenger in booking.passengers" ng-hide = "passenger.isChild">
        <li class="collection-header  grey lighten-3 "><h4>Passenger- Adult</h4></li>
 
        <!--Actual data-->
@@ -172,7 +172,8 @@
               <div class="col s12 m6">
                <h4>
                  <i class="material-icons">location_on</i>
-                 Nationality</h4>
+                 Nationality
+               </h4>
                  <p>
                   {{passenger.nationality}}
                 </p>
@@ -235,10 +236,15 @@
           <div class="row">
 
             <!--Nationality-->
+            <div class="col s12 m6">
+            <h4>
+              <i class="material-icons">location_on</i>
+              Nationality</h4>
                <p style="margin-left: 30px">
                 {{passenger.nationality}}
               </p>
             </div>
+
 
             <!--BirthDate-->
             <div class="col s12 m6" ng-show = "passenger.birthDate">

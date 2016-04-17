@@ -19,8 +19,8 @@
           <div class="row">
             <div class="input-field col s12">
             <i class="material-icons prefix">payment</i>
-              <input  ng-model="request.id" type="text" class="validate" required>
-              <label for="id">Booking No.</label>
+              <input  ng-model="request.id" type="text" class="validate" id="booking" required>
+              <label for="booking">Booking No.</label>
             </div>
           </div>
 
@@ -28,7 +28,7 @@
           <div class="row">
             <div class="input-field col s12">
             <i class="material-icons prefix">payment</i>
-              <input  ng-model="request.passportNumber" type="text" class="validate" required>
+              <input  ng-model="request.passportNumber" type="text" class="validate" id="passportNumber" required>
               <label for="passportNumber">Passport No.</label>
             </div>
           </div>
@@ -36,11 +36,14 @@
           <!--Submition button-->
           <div class="row">
             <div class="input-field col s12">
-              <a ng-click="searchBooking()"
-              class="btn waves-effect waves-light red book-button"
-              name="showHistory">View Booking
-              <i class="material-icons right">send</i>
-              </a>
+              <div class="modal-footer">
+                <a ng-click="searchBooking()"
+                class="modal-action modal-close btn waves-effect waves-light red book-button"
+                name="showHistory">View Booking
+                <i class="material-icons right">send</i>
+                </a>
+                </div>
+
             </div>
           </div>
         </form>
