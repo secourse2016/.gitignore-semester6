@@ -1,25 +1,17 @@
 angular.module('austrianAirlinesApp').service('global', function() {
 
 	/**
-	 * Information passed from the landing page to search for flights
+	 * searchFlight: Information passed from the landing page to search for flights
 	 * ==============================================================
 	 * origin, destination 		[airport IATA]
 	 * adults, children 		[integer]
 	 * tripType					[1 for one way, 2 for roundtrip]
 	 * outgoingDate, returnDate	["date"]
-	 * flightClass				["economy", :business]
+	 * flightClass				["economy", "business"]
 	 */
 	this.searchFlight = {};
-
-	// A list of passengers whose info are entered by the user
-
-
 	this.passengers = [];
-
-	// the outgoing trip selected by the user
 	this.outGoingTrip = {};
-
-	// The return trip selected by the user
 	this.returnTrip = {};
 
 	/**
@@ -51,28 +43,28 @@ angular.module('austrianAirlinesApp').service('global', function() {
 	}
 
 	/**
-	* Set the outgoing trip to a list of flights (to handle transits)
+	* Set the outgoing trip to a list of flights (to handle transits).
 	*/
 	this.setOutGoingTrip = function(trip){
 		this.outGoingTrip = trip;
 	}
 
 	/**
-	* Get the list of flights of the outgoing trip
+	* Get the list of flights of the outgoing trip.
 	*/
 	this.getOutGoingTrip = function(){
 		return this.outGoingTrip;
 	}
 
 	/**
-	* Set the return trip to a list of flights
+	* Set the return trip to a list of flights.
 	*/
 	this.setReturnTrip = function(trip){
 		this.returnTrip = trip;
 	}
 
 	/**
-	* get the list of flights of the return trip
+	* get the list of flights of the return trip.
 	*/
 	this.getReturnTrip = function(){
 		return this.returnTrip;
