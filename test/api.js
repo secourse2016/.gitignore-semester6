@@ -26,3 +26,56 @@ describe('Airports API Route', function() {
         .expect(200, done);
     });
 });
+
+
+
+
+/**
+*  Testing API search POST routes
+*/
+describe('API flights search POST route', function() {
+
+    // test one-way route
+    it('/api/flights/search/oneway POST should return a JSON object containing one array, outgoingFlights',
+    function(done){
+        // send request with a dummy flight
+        request.post('/api/flights/search/oneway').send({
+            'origin'        : 'CAI',
+            'destination'   : 'JFK',
+            'departureDate' : 1460478300000,
+            'flightClass'   : 'economy',
+            'allAirlines'   : false,
+        }).expect('Content-Type', /json/)
+        .expect(function(res){
+            var flights = res.body;
+            // check if JSON body contains an array of outgoing flights
+            assert.isArray(flights.outgoingFlights, "Returned object is an array");
+        })
+        .expect(200, done);
+    });
+
+    // test round-trip route
+    it('/api/flights/search/roundtrip POST should return a JSON object containing two arrays, outgoingFlights and returnFlights',
+    function(done){
+        // send reqest with dummy array
+        request.post('/api/flights/search/roundtrip').send({
+            'origin'        : 'CAI',
+            'destination'   : 'JFK',
+            'departureDate' : 1460478300000,
+            'arrivalDate'   : 1460478300000,
+            'flightClass'   : 'economy',
+            'allAirlines'   : false,
+        }).expect('Content-Type', /json/)
+        .expect(function(res){
+            var flights = res.body;
+            // check if JSON body contains two arrays of outgoing and return flights
+            assert.isArray(flights.outgoingFlights, "Returned object is an array");
+            assert.isArray(flights.returnFlights, "Returned object is an array");
+        })
+        .expect(200, done);
+    });
+});
+
+
+
+
