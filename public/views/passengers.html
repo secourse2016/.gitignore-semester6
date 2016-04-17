@@ -123,6 +123,7 @@
  <div class="row">
    <form  ng-submit="submitForm()" novalidate>
     <ul class="collection with-header" ng-repeat="adult in adults track by $index">
+
      <li class="collection-header  grey lighten-3 "><h4>Passenger {{$index + 1}} - Adult</h4></li>
      <li  class="collection-item">
        <div class="container">
@@ -178,39 +179,46 @@
 
 
    <ul class="collection with-header" ng-repeat="child in children track by $index">
+     
     <li class="collection-header  grey lighten-3 "><h4>Passenger {{($index + adults.length) + 1}} - Child</h4></li>
     <li  class="collection-item">
       <div class="container">
         <div class="row">
           <div class="input-field col s6">
            <i class="material-icons prefix">account_circle</i>
-            <input id="firstNameC[{{$index}}]" type="text" class="validate" ng-model="formData[$index].firstNameC" required>
+            <input id="firstNameC[{{$index}}]" type="text" class="validate" ng-model="formDataChildren[$index].firstName" required>
             <label for="firstNameC[{{$index}}]">First Name</label>
+            <span ng-show="errors[{{$index}}].firstNameC"> Required ! </span>
           </div>
           <div class="input-field col s6">
             <i class="material-icons prefix">account_circle</i>
-            <input id="lastNameC[{{$index}}]" type="text" class="validate" ng-model="formData[$index].lastNameC" required>
+            <input id="lastNameC[{{$index}}]" type="text" class="validate" ng-model="formDataChildren[$index].lastName" required>
             <label for="lastNameC[{{$index}}]">Last Name</label>
+            <span ng-show="errors[{{$index}}].lastNameC"> Required ! </span>
           </div>
         </div>
         <div class="row">
 
           <div class="input-field col s6">
             <i class="material-icons prefix">pan_tool</i>
-            <input id="passportNumberC[{{$index}}]" type="text" class="validate" ng-model="formData[$index].passportNumberC" required>
+            <input id="passportNumberC[{{$index}}]" type="text" class="validate" ng-model="formDataChildren[$index].passportNumber" required>
             <label for="passportNumberC[{{$index}}]">Passport Number</label>
+            <span ng-show="errors[{{$index}}].passportNumberC"> Required ! </span>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s6">
             <i class="material-icons prefix">location_on</i>
-            <input id="nationalityC[{{$index}}]" type="text" class="validate" ng-model="formData[$index].nationalityC" required>
+            <input id="nationalityC[{{$index}}]" type="text" class="validate" ng-model="formDataChildren[$index].nationality" required>
             <label for="nationalityC[{{$index}}]">Nationality</label>
+            <span ng-show="errors[{{$index}}].nationalityC"> Required ! </span>
           </div>
          <div class="input-field col s6">
            <i class="material-icons prefix">today</i>
-                 <input id="birthDateC[{{$index}}]" ng-model="formData[$index].birthDateC" input-date type="text"  select-years="60" required>
+                 <input id="birthDateC[{{$index}}]" ng-model="formDataChildren[$index].birthDate" input-date type="text"  select-years="60" required>
                  <label for="birthDateC[{{$index}}]">Birth Date</label>
+                 <span ng-show="errors[{{$index}}].birthDateRequiredC"> Required ! </span>
+                 <span ng-show="errors[{{$index}}].birthDateNotValidC"> not valid birth date ! </span>
          </div>
         </div>
       </div>
