@@ -73,7 +73,14 @@ app.controller('passengerViewCtrl' , function($scope, global, $location){
         countErrors++;
         }
 
-        
+        // check if email address field is empty or is not valid.
+        if(!validateEmail($scope.formData[i].emailAddress))
+        {
+        if(!$scope.errors[i])
+          $scope.errors[i] = {};
+          $scope.errors[i].emailAddressNotValid = true;
+          countErrors++;
+        }
 
       // check if birthDate field is empty or is not valid.
       if(!$scope.formData[i].birthDate) {
@@ -114,3 +121,15 @@ app.controller('passengerViewCtrl' , function($scope, global, $location){
     var nowDate = new Date(Date.now());
     return birthDate < nowDate && nowDate.getFullYear() - birthDate.getFullYear() >= 12;
   }
+
+
+/** function to validate email address.
+ * returns boolean to indicate validity.
+ * Using regular expressions to test email format.
+ */
+  function validateEmail(email) {
+    if(!email)
+    return false;
+    var regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return regex.test(email);
+}
