@@ -8,6 +8,7 @@ controller('bookingHistoryController',function($scope, bookingHistoryService){
 
 
 	if($scope.booking){
+		console.log($scope.booking);
 		// variable with value of the name of the airline
 	  $scope.airline          = "Austrian";
 
