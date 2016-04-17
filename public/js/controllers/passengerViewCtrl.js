@@ -20,9 +20,9 @@ app.controller('passengerViewCtrl' , function($scope, global, $location){
 
   $scope.step = 2;
   $scope.submitForm = function() {
-
+    
     // function to validate adult form fields.
-    if(validateForm($scope.formData,false,$scope) && validateForm($scope.formDataChildren,true,$scope)) {
+    if(validateForm($scope.formData, false, $scope, global.searchFlight.adults) & validateForm($scope.formDataChildren, true, $scope, global.searchFlight.children)) {
 
       // Determine if the passenger is child or adult
       for(i = 0; i<$scope.formData.length; i++)
@@ -72,12 +72,12 @@ function validateEmail(email)
 * takes scope and callback function as parameters.
 * returns boolean isValid to indicate form fields validity.
 */
-function validateForm(formData, isChild, $scope) {
-  errors = [];
+function validateForm(formData, isChild, $scope,length) {
+  var validationErrors = [];
   if(isChild)
-  $scope.errorsChildren = errors;
+    $scope.errorsChildren = validationErrors;
   else
-  $scope.errors = errors;
+    $scope.errors = validationErrors;
 
 
   // boolean value to check the validation of the form.
@@ -86,12 +86,14 @@ function validateForm(formData, isChild, $scope) {
   // integer to indicate errors occurences
   var countErrors = 0;
   // loop in formData submitted to check fields.
-  for (var i = 0; i < formData.length; i++) {
+  for (var i = 0; i < length; i++) {
+    if(!formData[i])
+      formData[i] = {};
     // check if first name  field is empty.
     if(!formData[i].firstName){
-      if(!errors[i])
-        errors[i] = {};
-      errors[i].firstName = true;
+      if(!validationErrors[i])
+        validationErrors[i] = {};
+      validationErrors[i].firstName = true;
       countErrors++;
     }
 
@@ -99,60 +101,61 @@ function validateForm(formData, isChild, $scope) {
 
     // check if last name field is empty.
     if(!formData[i].lastName){
-      if(!errors[i])
-        errors[i] = {};
-      errors[i].lastName = true;
+      if(!validationErrors[i])
+        validationErrors[i] = {};
+      validationErrors[i].lastName = true;
       countErrors++;
     }
 
     // check if nationality field is empty.
     if(!formData[i].nationality)  {
-      if(!errors[i])
-        errors[i] = {};
-      errors[i].nationality = true;
+      if(!validationErrors[i])
+        validationErrors[i] = {};
+      validationErrors[i].nationality = true;
       countErrors++;
     }
 
     // check if passport number field is empty or is not valid.
     if(!formData[i].passportNumber){
-      if(!errors[i])
-        errors[i] = {};
-      errors[i].passportNumber = true;
+      if(!validationErrors[i])
+        validationErrors[i] = {};
+      validationErrors[i].passportNumber = true;
       countErrors++;
     }
     else if(formData[i].passportNumber.length < 7) {
-      if(!errors[i])
-        errors[i] = {};
-      errors[i].passportNumberLength = true;
+      if(!validationErrors[i])
+        validationErrors[i] = {};
+      validationErrors[i].passportNumberLength = true;
       countErrors++;
     }
 
     // check if email address field is empty or is not valid.
     if(!isChild && !validateEmail(formData[i].emailAddress))  {
-      if(!errors[i])
-        errors[i] = {};
-      errors[i].emailAddressNotValid = true;
+      if(!validationErrors[i])
+        validationErrors[i] = {};
+      validationErrors[i].emailAddressNotValid = true;
       countErrors++;
     }
 
     // check if birthDate field is empty or is not valid.
     if(!formData[i].birthDate) {
-      if(!errors[i])
-        errors[i] = {};
-      errors[i].birthDateRequired = true;
+      if(!validationErrors[i])
+        validationErrors[i] = {};
+      validationErrors[i].birthDateRequired = true;
       countErrors++;
     }
     else if(!validateDate(formData[i].birthDate , isChild)){
-      if(!errors[i])
-        errors[i] = {};
-      errors[i].birthDateNotValid = true;
+      if(!validationErrors[i])
+        validationErrors[i] = {};
+      validationErrors[i].birthDateNotValid = true;
       countErrors++;
     }
 
     // check if error(s) found isValid is set to false.
-    if(countErrors > 0 || formData.length == 0)
-      isValid = false;
 
-    return isValid;
   }
+  if(countErrors > 0 || formData.length == 0)
+    isValid = false;
+
+  return isValid;
 }

@@ -132,13 +132,13 @@
             <i class="material-icons prefix">account_circle</i>
              <input id="firstName[{{$index}}]" type="text" class="validate" ng-model="formData[$index].firstName" required>
              <label for="firstName[{{$index}}]">First Name</label>
-             <span ng-show="errors[{{$index}}].firstName"> Required ! </span>
+             <span ng-show="errors[{{$index}}].firstName"> This field is required. </span>
            </div>
            <div class="input-field col s6">
              <i class="material-icons prefix">account_circle</i>
              <input id="lastName[{{$index}}]" type="text" class="validate" ng-model="formData[$index].lastName" required>
              <label for="lastName[{{$index}}]">Last Name</label>
-             <span ng-show="errors[{{$index}}].lastName"> Required ! </span>
+             <span ng-show="errors[{{$index}}].lastName"> This field is required. </span>
            </div>
          </div>
          <div class="row">
@@ -146,14 +146,14 @@
              <i class="material-icons prefix">email</i>
              <input id="email[{{$index}}]" type="email" class="validate" ng-model="formData[$index].emailAddress" required>
              <label for="email[{{$index}}]">Email</label>
-             <span ng-show="errors[{{$index}}].emailAddressNotValid"> not a valid email ! </span>
+             <span ng-show="errors[{{$index}}].emailAddressNotValid"> Invalid email address. </span>
            </div>
            <div class="input-field col s6">
              <i class="material-icons prefix">pan_tool</i>
              <input id="passportNumber[{{$index}}]" type="text" class="validate" ng-model="formData[$index].passportNumber" required>
              <label for="passportNumber[{{$index}}]">Passport Number</label>
-             <span ng-show="errors[{{$index}}].passportNumber"> Required ! </span>
-             <span ng-show="errors[{{$index}}].passportNumberLength && !errors[{{$index}}].passportNumber"> Not valid passport number !</span>
+             <span ng-show="errors[{{$index}}].passportNumber"> This field is required. </span>
+             <span ng-show="errors[{{$index}}].passportNumberLength && !errors[{{$index}}].passportNumber"> Passport number should not be less than 7 characters.</span>
 
            </div>
          </div>
@@ -162,14 +162,14 @@
              <i class="material-icons prefix">location_on</i>
              <input id="nationality[{{$index}}]" type="text" class="validate" ng-model="formData[$index].nationality" required>
              <label for="nationality[{{$index}}]">Nationality</label>
-             <span ng-show="errors[{{$index}}].nationality"> Required ! </span>
+             <span ng-show="errors[{{$index}}].nationality"> This field is required. </span>
            </div>
           <div class="input-field col s6">
             <i class="material-icons prefix">today</i>
                   <input id="birthDate[{{$index}}]" ng-model="formData[$index].birthDate" input-date type="text"  select-years="60" required>
                   <label for="birthDate[{{$index}}]">Birth Date</label>
-                  <span ng-show="errors[{{$index}}].birthDateRequired"> Required ! </span>
-                  <span ng-show="errors[{{$index}}].birthDateNotValid"> not a valid date ! </span>
+                  <span ng-show="errors[{{$index}}].birthDateRequired"> This field is required. </span>
+                  <span ng-show="errors[{{$index}}].birthDateNotValid"> An adult should be older than 12 years old. </span>
           </div>
          </div>
        </div>
@@ -188,13 +188,13 @@
            <i class="material-icons prefix">account_circle</i>
             <input id="firstNameC[{{$index}}]" type="text" class="validate" ng-model="formDataChildren[$index].firstName" required>
             <label for="firstNameC[{{$index}}]">First Name</label>
-            <span ng-show="errorsChildren[{{$index}}].firstName"> Required ! </span>
+            <span ng-show="errorsChildren[{{$index}}].firstName"> This field is required. </span>
           </div>
           <div class="input-field col s6">
             <i class="material-icons prefix">account_circle</i>
             <input id="lastNameC[{{$index}}]" type="text" class="validate" ng-model="formDataChildren[$index].lastName" required>
             <label for="lastNameC[{{$index}}]">Last Name</label>
-            <span ng-show="errorsChildren[{{$index}}].lastName"> Required ! </span>
+            <span ng-show="errorsChildren[{{$index}}].lastName"> This field is required. </span>
           </div>
         </div>
         <div class="row">
@@ -203,7 +203,8 @@
             <i class="material-icons prefix">pan_tool</i>
             <input id="passportNumberC[{{$index}}]" type="text" class="validate" ng-model="formDataChildren[$index].passportNumber" required>
             <label for="passportNumberC[{{$index}}]">Passport Number</label>
-            <span ng-show="errorsChildren[{{$index}}].passportNumber"> Required ! </span>
+            <span ng-show="errorsChildren[{{$index}}].passportNumber"> This field is required. </span>
+            <span ng-show="errorsChildren[{{$index}}].passportNumberLength && !errorsChildren[{{$index}}].passportNumber"> Passport number should not be less than 7 characters. </span>
           </div>
         </div>
         <div class="row">
@@ -211,14 +212,14 @@
             <i class="material-icons prefix">location_on</i>
             <input id="nationalityC[{{$index}}]" type="text" class="validate" ng-model="formDataChildren[$index].nationality" required>
             <label for="nationalityC[{{$index}}]">Nationality</label>
-            <span ng-show="errorsChildren[{{$index}}].nationality"> Required ! </span>
+            <span ng-show="errorsChildren[{{$index}}].nationality"> This field is required. </span>
           </div>
          <div class="input-field col s6">
            <i class="material-icons prefix">today</i>
                  <input id="birthDateC[{{$index}}]" ng-model="formDataChildren[$index].birthDate" input-date type="text"  select-years="60" required>
                  <label for="birthDateC[{{$index}}]">Birth Date</label>
-                 <span ng-show="errorsChildren[{{$index}}].birthDateRequired"> Required ! </span>
-                 <span ng-show="errorsChildren[{{$index}}].birthDateNotValid"> not a valid date ! </span>
+                 <span ng-show="errorsChildren[{{$index}}].birthDateRequired"> This field is required. </span>
+                 <span ng-show="errorsChildren[{{$index}}].birthDateNotValid"> A child should be younger than 12 years old. </span>
          </div>
         </div>
       </div>
