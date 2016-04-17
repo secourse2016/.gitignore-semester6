@@ -173,32 +173,37 @@ module.exports.getAirports = function(cb){
 * Search for a certain booking in the database and return it
 */
 module.exports.getBooking = function(id , passportNumber , cb){
+
+		var myBooking = {};
 		// get booking record from database
     booking.find({"id":id}, {} , function(errBooking, booking){
 				var found = false;
-				for(i = 0 ; i < booking[0].passengers.length ; i++){
-					if(booking[0].passengers[i].passportNumber === passportNumber){
-						found = true;
-						break;
+				if(booking.length == 0)
+					cb(errBooking, null);
+				else {
+					// check the passport number
+					for(i = 0 ; i < booking[0].passengers.length ; i++){
+						if(booking[0].passengers[i].passportNumber === passportNumber){
+							found = true;
+							break;
+						}
 					}
-				}
-				if(found){
-					// get the corresponding outgoing flight
-					flight.find({"flightNumber":booking[0].outgoingFlight},{},function(errOutgoingFlight , outgoingFlight){
-							// get the corresponding return flight
-							flight.find({"flightNumber":booking[0].returnFlight},{},function(errReturnFlight , returnFlight){
-								// add the information of the flights to the returning booking object
-								// var myBooking = {};
-								// myBooking.passengers = booking[0].passengers;
-								// myBooking.totalPrice = booking[0].totalPrice;
-								var myBooking = booking[0].toJSON();
-								myBooking.outgoingFlightInfo = outgoingFlight[0];
-								myBooking.returnFlightInfo = returnFlight[0];
-								console.log(myBooking);
-
-								cb(errReturnFlight, myBooking);
-							});
-					});
-				}
+					if(found){
+						// get the corresponding outgoing flight
+						flight.find({"flightNumber":booking[0].outgoingFlight},{},function(errOutgoingFlight , outgoingFlight){
+								// get the corresponding return flight
+								flight.find({"flightNumber":booking[0].returnFlight},{},function(errReturnFlight , returnFlight){
+									myBooking = booking[0].toJSON();
+									// attach the flights info to the returning object
+									myBooking.outgoingFlightInfo = outgoingFlight[0];
+									myBooking.returnFlightInfo = returnFlight[0];
+									cb(errReturnFlight, myBooking);
+								});
+						});
+					}
+					else {
+						cb(errBooking , null);
+					}
+			}
     });
 };
