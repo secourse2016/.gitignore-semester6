@@ -60,7 +60,7 @@ app.get('/api/airports', function(req, res){
 /*
 * API route to get a certain booking from the database
 */
-app.post('/api/booking-history', function(req, res){
+app.post('/api/search-booking', function(req, res){
   var id = req.body.id;
   var passportNumber = req.body.passportNumber;
     flights.getBooking(id , passportNumber , function(err, booking){
@@ -112,7 +112,7 @@ app.get('/api/flights/search/:origin/:destination/:departingDate/:class', functi
 		  res.json(resultFlights);
 	}, origin, destination, flightClass, moment(departingDate,"x"));
 
-}); 
+});
 
 /**
 * ROUND-TRIP SEARCH ENDPOINT [POST]
@@ -168,7 +168,6 @@ app.post('/api/flights/search/oneway', function(req, res){
     }, allAirlines, origin, destination, flightClass, departureDate);
 });
 
->>>>>>> c7511b912852deb8ed7819952c2067d92b314714
 
 app.use(function(req, res, next){
   res.status(404);
