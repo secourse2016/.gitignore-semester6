@@ -1,6 +1,6 @@
 var app = angular.module('austrianAirlinesApp');
 
-app.controller('passengerViewCtrl' , function($scope, global, $location){
+app.controller('passengerViewController' , function($scope, global, $location){
 
 	$scope.airline          = "Austrian";
 
