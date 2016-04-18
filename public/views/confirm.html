@@ -1,7 +1,7 @@
 <link href="../css/confirm.css" rel="stylesheet">
 <link href="../css/passengers.css" rel="stylesheet">
 
-<div class="container" style="margin-bottom: 100px; margin-top: 50px;" ng-controller="confirmationCtrl">
+<div class="container" style="margin-bottom: 100px; margin-top: 50px;" ng-controller="confirmationController">
 
   <link href="css/stepper.css" rel="stylesheet">
   <div class="mdl-card mdl-shadow--2dp">
@@ -40,14 +40,14 @@
       </div>
 
     </div>
-    
+
   </div>
 
   <ul class= "collection with-header z-depth-3"id="flightsInfo" style="padding: 0px">
    <li class="collection-header red darken-1"> <h3 class="white-text" > Flight Information </h3></li>
    <div>
      <li class="flight-header collection-header  grey lighten-3">
-      <h4>{{outgoingFlight.origin}} - {{outgoingFlight.destination}}</h4> 
+      <h4>{{outgoingFlight.origin}} - {{outgoingFlight.destination}}</h4>
       <div class="flight-date">{{departureDate}}</div></li>
       <div class="row flight-way">
         <div class="col s10 m6 l3">
@@ -58,8 +58,8 @@
         <div class="col s10 m6 l3">
           <p class="logo-div">
              <img tooltipped data-position="right" data-delay="50" data-tooltip="{{outgoingFlight.Airline}}" ng-show = "outgoingFlight.Airline == airline" class = "logo" src="assets/images/flight-logo.png">
-                
-              <i tooltipped data-position="right" data-delay="50" data-tooltip="{{outgoingFlight.Airline}}" ng-hide = "outgoingFlight.Airline == airline" class="small material-icons other-airport" >local_airport</i> 
+
+              <i tooltipped data-position="right" data-delay="50" data-tooltip="{{outgoingFlight.Airline}}" ng-hide = "outgoingFlight.Airline == airline" class="small material-icons other-airport" >local_airport</i>
           </p>
         </div>
 
@@ -91,7 +91,7 @@
         <div class="col s10 m6 l3">
           <p class="logo-div">
              <img tooltipped data-position="right" data-delay="50" data-tooltip="{{returnFlight.Airline}}" ng-show = "returnFlight.Airline == airline" class = "logo" src="assets/images/flight-logo.png">
-                  <i tooltipped data-position="right" data-delay="50" data-tooltip="{{returnFlight.Airline}}" ng-hide = "returnFlight.Airline == airline" class="small material-icons other-airport" >local_airport</i> 
+                  <i tooltipped data-position="right" data-delay="50" data-tooltip="{{returnFlight.Airline}}" ng-hide = "returnFlight.Airline == airline" class="small material-icons other-airport" >local_airport</i>
           </p>
         </div>
 
@@ -233,7 +233,7 @@
               {{passenger.nationality}}
             </p>
           </div>
-         
+
         </div>
       </div>
 
@@ -245,5 +245,3 @@
 </div>
 </ul>
 </div>
-
-

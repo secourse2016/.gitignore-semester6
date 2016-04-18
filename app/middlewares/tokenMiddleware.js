@@ -17,7 +17,8 @@ module.exports = function(req, res, next){
                 next();
             }
         });
-    } else {
+    }
+    else {
         return res.status(403).json({ message: 'Unauthorized access.'});
     }
 };

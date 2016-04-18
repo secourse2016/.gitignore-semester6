@@ -36,15 +36,8 @@ var a = [{
   destination :"MXP"
 }
 ];
-// var startDate = moment('2016-04-12');
-// console.log(startDate.format('LLLL'));
-// startDate.add(1, 'days');
-// console.log(startDate.format('LLLL'));
-//
 
-// console.log(moment('2016-04-12'));
 var id = 1024;
-console.log(id.toString(16));
 var startDate = moment('2016-04-12',x);
 var endDate = moment('2016-05-31').toDate().getTime();
 var data = [];
