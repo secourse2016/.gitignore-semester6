@@ -1,4 +1,4 @@
-var seed = require('../database/seed');
+var seed           = require('../database/seed');
 var app            = require('../app.js');
 var assert = require('chai').assert;
 var expect = require('chai').expect;
@@ -21,7 +21,7 @@ before(function(done){
 });
 
 // testing clearDB function.
-describe("clearDB", function() {
+describe("clearDB Function", function() {
 
     it("should clear flights and airports , find all empty", function(done) {
       clear.clearDB(function(err){
@@ -44,7 +44,7 @@ describe("clearDB", function() {
 /**
  * test clear route.
  */
-describe('clear route', function(){
+describe('Clear DB Route', function(){
     request = request(app);
     it('should clear the database on /db/clear route', function(done){
             // get request to clear route : expected message.

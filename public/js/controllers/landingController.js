@@ -3,7 +3,6 @@
 
 	/**
 	* Images and texts used in the slides.
-	* Increase slides, if needed.
 	*/
 	var landingSlides = [
 		{
@@ -21,7 +20,7 @@
 	];
 
 	/**
-	* Slider controller passes the slides content to the landing-page view.
+	* Slider controller passes the slides content to the landing page view.
 	*/
 	app.controller('sliderController', function($scope){
 		this.slides = landingSlides;
@@ -34,30 +33,30 @@
 	app.controller('searchFlightController', function($scope, global, $location, $http, flights){
 		this.range = [];
 		for(var i = 2; i <= 7; ++i)
-		this.range.push(i);
+			this.range.push(i);
 		$scope.formData = {tripType:2};
 		$scope.errors = {};
-		$scope.searchFlights = function(){
 
+		$scope.searchFlights = function(){
 
 			global.setSearchFlight($scope.formData);
 
-			// send a post request to get the flights
-
-			var origin 				= $scope.formData.origin;
+			// Send POST request to get the flights
+			var origin 			= $scope.formData.origin;
 			var destination 	= $scope.formData.destination;
 			var outgoingDate	= $scope.formData.outgoingDate;
 			var returnDate		= $scope.formData.returnDate;
-			var tripType			= $scope.formData.tripType;
+			var tripType		= $scope.formData.tripType;
 			var allAirlines		= $scope.formData.allAirlines;
 			var flightClass		= $scope.formData.flightClass;
-			var validInput = validateSearchFlights(origin, destination, outgoingDate, returnDate, flightClass, tripType, $scope);
+			var validInput		= validateSearchFlights(origin, destination, outgoingDate,
+												returnDate, flightClass, tripType, $scope);
+
 			if(validInput){
 				if($scope.formData.origin)
 					$scope.formData.origin = origin = $scope.formData.origin.iata;
 				if($scope.formData.destination)
 					$scope.formData.destination = destination = $scope.formData.destination.iata;
-
 
 				var requestParameters = {
 					'origin' 		: origin,
@@ -68,16 +67,17 @@
 				}
 
 				var postURL = 'api/flights/search/oneway';
-				if(tripType == 2 && returnDate) {
+				if(tripType == 2 && returnDate){
 					requestParameters.arrivalDate = returnDate;
 					postURL = 'api/flights/search/roundtrip';
 				}
+
 				$http.post(postURL, requestParameters)
 				.success(function(resultFlights){
 					flights.outgoingFlights = resultFlights.outgoingFlights;
 					if(tripType == 2)
-					flights.returnFlights = resultFlights.returnFlights;
-						$location.path("/flights");
+						flights.returnFlights = resultFlights.returnFlights;
+					$location.path("/flights");
 				})
 				.error(function(data){
 					console.log('Error: Couldn\'t fetch flights.');
@@ -90,33 +90,30 @@
 	});
 
 
-	function validateSearchFlights(origin, destination, outgoingDate, returnDate, flightClass, tripType) {
-		var valid = true;
+	function validateSearchFlights(origin, destination, outgoingDate, returnDate, flightClass, tripType){
 
+		var valid = true;
 		var today = new Date();
 		today.setHours(0,0,0,0);
 
-		if(!origin) {
+		if(!origin){
 			valid = false;
 			var message = 'Please select a valid origin airport.';
 		}
 
-		else if(!destination) {
+		else if(!destination){
 			valid = false;
 			var message = 'Please select a valid destiation airport.';
 		}
-
-		else if(!outgoingDate) {
+		else if(!outgoingDate){
 			valid = false;
 			var message = 'Please select your outgoing trip date.';
 		}
-		else if(Date.parse(outgoingDate) < today)
-		{
+		else if(Date.parse(outgoingDate) < today){
 			valid = false;
 			var message = 'You cannot travel back in time.';
 		}
-
-		else if(tripType == 2 && !returnDate) {
+		else if(tripType == 2 && !returnDate){
 			valid = false;
 			var message = 'Please select your return trip date.';
 		}
@@ -130,26 +127,26 @@
 			valid = false;
 			var message = 'Return date should be later than departure date.';
 		}
-
-		else if(!flightClass) {
+		else if(!flightClass){
 			valid = false;
 			var message = 'Please select the trip class.';
 		}
+
 		if(!valid)
 			Materialize.toast(message,3000);
 		return valid;
-
-
 	}
 
-
-	app.controller('autoCompleteController', function($http, $timeout, $q) {
+	/**
+	 * Autocomplete (Typeahead) Controller for airport search.
+	 */
+	app.controller('autoCompleteController', function($http, $timeout, $q){
 		var ctrl = this;
 		ctrl.airports      = [];
 		ctrl.searchText    = null;
 		ctrl.querySearch   = querySearch;
 
-		function querySearch (query) {
+		function querySearch(query){
 			var results = query ? ctrl.airports.filter(createFilterFor(query) ) : [];
 			return results;
 		}
@@ -182,5 +179,4 @@
 			console.log('Error: can\'t fetch airports.');
 		});
 	});
-
 })();

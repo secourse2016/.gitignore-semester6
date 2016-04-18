@@ -17,7 +17,7 @@ before(function(done){
 /**
  *	test seeding database with Airports
  */
-describe('seedAirports',function(){
+describe('Seed Airports Function',function(){
     this.timeout(7000);
     var seedAirports = seedDB.seedAirports;
     it('should populate the db with Airports if db is empty returning true',function(done){
@@ -42,7 +42,7 @@ describe('seedAirports',function(){
 /**
  *	test seeding database with Flights
  */
-describe('seedFlights',function(){
+describe('Seed Flights Function',function(){
     this.timeout(5000);
     var seedFlights = seedDB.seedFlights;
     it('should populate the db with Flights if db is empty returning true',function(done){
@@ -67,7 +67,7 @@ describe('seedFlights',function(){
 /**
  *	test seeding database with Flights
  */
-describe('seed',function(){
+describe('Seed Database Function',function(){
     this.timeout(10000);
     it('should populate the db if db is empty returning true',function(done){
         clear.clearDB(function(err){
@@ -93,7 +93,7 @@ describe('seed',function(){
 /**
  * test seed route it give json message
  */
-describe('seed route', function(){
+describe('Seed DB Route', function(){
     request = request(app);
     this.timeout(10000);
     it('/db/seed should seed db', function(done){

@@ -3,7 +3,7 @@
 
 
         angular.module("slider-mouse", [])
-            .directive("sliderMouse", ["$compile", "$timeout", function ($compile, $timeout) {
+            .directive("sliderMouse", ["$compile", "$timeout", function($compile, $timeout){
                     return {
                         link: function(scope, element, attrs){
 
