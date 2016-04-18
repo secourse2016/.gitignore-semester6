@@ -78,7 +78,7 @@
 
 
 /* All airlines checkbox styling */
-.allAirlinesCheckbox 
+.allAirlinesCheckbox
 {
   text-align: right;
   margin-left: 20px;
@@ -146,9 +146,10 @@ md-virtual-repeat-container{
   margin-top: 3px !important;
 }
 
-body > md-virtual-repeat-container:nth-child(7){
+body > md-virtual-repeat-container:nth-child(8){
   margin-left: -17% !important;
 }
+
 
 li > md-autocomplete-parent-scope > span{
   color: #ef5350;
