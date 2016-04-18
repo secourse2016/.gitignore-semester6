@@ -42,7 +42,7 @@
   <div class="col s12 m6">
     <form >
       <div >
-        <h5 class="flightsHeader"><i class="small material-icons out" >local_airport</i>{{origin}} - {{destination}} - ({{ flightClass }})<div style="float:right">{{departureDate}}</div></h5>
+        <h5 class="flightsHeader"><i class="small material-icons out" >local_airport</i>{{origin}} - {{destination}} - ({{ flightClass }})<div style="float:right; margin-top:21px">{{departureDate}}</div></h5>
         <div ng-show="outgoingFlights.length == 0" class= "card red darken-1"><h5 class="card-content white-text">Sorry, there are no outgoing flights</h5></div>
         <div ng-show="outgoingFlights.length != 0">
           <table class="striped flights_table" >
@@ -96,7 +96,7 @@
 </div>
 <div class ="divider"></div>
 <div ng-show = "tripType == 2">
-  <h5 class="flightsHeader"><i class="small material-icons head1">local_airport</i>{{destination}} - {{origin}} - ({{ flightClass }})<div class="" style="float:right">{{arrivalDate}}</div> </h5>
+  <h5 class="flightsHeader"><i class="small material-icons head1">local_airport</i>{{destination}} - {{origin}} - ({{ flightClass }})<div class="" style="float:right; margin-top: 21px">{{arrivalDate}}</div> </h5>
   <div ng-show="returnFlights.length == 0" class= "card red darken-1"><h5 class="card-content white-text">Sorry, there are no return flights</h5></div>
         <div ng-show="returnFlights.length != 0">
     <table class="striped flights_table">
