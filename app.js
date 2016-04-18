@@ -39,6 +39,17 @@ app.route('/offers').get(sendIndex);
 app.route('/pricing').get(sendIndex);
 app.route('/error').get(sendIndex);
 
+
+/**
+ * Allow access for headers
+ */
+app.all('*', function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+  next();
+});
+
+
 // DB and API Routes  =====================================================
 var dbRouter = require('./app/routes/db');
 var APIRouter = require('./app/routes/api');
