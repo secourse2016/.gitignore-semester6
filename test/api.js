@@ -11,18 +11,15 @@ var token = jwt.sign({}, process.env.SECRET_KEY);
 describe('Airports API Route', function() {
     request = request(app);
 
-    it('/api/airports should return an array of 6726 airports as JSON objects when I visit',
+    it('/api/airports should return an array of airports as JSON objects when I visit',
     function(done){
-        var attributes = ["iata", "lon", "iso", "status", "continent", "type", "lat"];
         request.get('/api/airports').set('x-access-token', token)
         .expect('Content-Type', /json/).expect(function(res){
             var airports = res.body;
             assert.isArray(airports, "Returned object is an array");
-            assert.equal(airports.length, 6726, "Number of airports");
             for(var i = 0; i < airports.length; ++i){
                 assert.isNotNull(airports[i], "No airport is null");
-                for(var j = 0; j < attributes.length; ++j)
-                    assert.isNotNull(airports[i][attributes[j]], "Airport "+airports[i]["iata"]+" has "+attributes[j]);
+                assert.isNotNull(airports[i][attributes[j]], "Airport "+airports[i]["iata"]+" has IATA.");
             }
         })
         .expect(200, done);
@@ -30,11 +27,12 @@ describe('Airports API Route', function() {
 });
 
 describe('Oneway Flights API Route', function() {
-    //request = request(app);
+    // request = request(app);
 
     it('it should return an array of flights from JFK to CAI on April 12, 2016 with economy class',
     function(done){
-        request.get('/api/flights/search/JFK/CAI/1460478300000/economy').expect('Content-Type', /json/)
+        request.get('/api/flights/search/JFK/CAI/1460478300000/economy')
+        .expect('Content-Type', /json/).set('x-access-token', token)
         .expect(function(res){
             var flights = res.body;
             // check if the returned object has an array of outgoing flights
@@ -53,7 +51,8 @@ describe('Round trip Flights API Route', function() {
 
     it('it should return an array of flights from JFK to CAI on April 12, 2016 with economy class and another one for return onApril 13, 2016',
     function(done){
-        request.get('/api/flights/search/JFK/CAI/1460478300000/1460478400000/economy').expect('Content-Type', /json/)
+        request.get('/api/flights/search/JFK/CAI/1460478300000/1460478400000/economy')
+        .expect('Content-Type', /json/).set('x-access-token', token)
         .expect(function(res){
             var flights = res.body;
             // check if the returned object has an array of outgoing flights
@@ -85,7 +84,7 @@ describe('API flights search POST route', function() {
     it('/api/flights/search/oneway POST should return a JSON object containing one array, outgoingFlights',
     function(done){
         // send request with a dummy flight
-        request.post('/api/flights/search/oneway').send({
+        request.post('/api/flights/search/oneway').set('x-access-token', token).send({
             'origin'        : 'CAI',
             'destination'   : 'JFK',
             'departureDate' : 1460478300000,
@@ -104,7 +103,7 @@ describe('API flights search POST route', function() {
     it('/api/flights/search/roundtrip POST should return a JSON object containing two arrays, outgoingFlights and returnFlights',
     function(done){
         // send reqest with dummy array
-        request.post('/api/flights/search/roundtrip').send({
+        request.post('/api/flights/search/roundtrip').set('x-access-token', token).send({
             'origin'        : 'CAI',
             'destination'   : 'JFK',
             'departureDate' : 1460478300000,
@@ -123,39 +122,21 @@ describe('API flights search POST route', function() {
     });
 });
 
-
-describe('API booking search POST route', function() {
-
-    // test one-way route
-    it('/api/booking POST should return a JSON object containing one booking details',
-    function(done){
-        // send request with a dummy booking information
-        request.post('/api/flights/search/oneway').send({
-            'id'        : '1',
-            'passportNumber'   : '123456',
-        }).expect('Content-Type', /json/)
-        .expect(function(res){
-            var flights = res.body;
-            // check if JSON body contains an array of outgoing flights
-            assert.isArray(flights.outgoingFlights, "Returned object is an array");
-        })
-        .expect(200, done);
-    });
+// TODO Search booking test
 
 /**
 *  Testing API AddBooking POST routes
 */
 describe('API Add Booking POST Route ', function(){
-        //test add-booking route.
-     it('/api/addBooking  should return 200 ok', function(done){
-         // Dummy data for booking.
+     it('/api/addBooking  should return 200 OK', function(done){
+         // Test data for booking.
         var passenger = [{firstName:"mohamed",
                           lastName:"khaled",
-                          email:"mohamed@gmail.com"
-                         ,passportNumber:212
-                         ,nationality:"Egyptian"
-                         ,birthDate:30-4-1995}];
-        var bookingInfo = {passengers:passenger,outgoingFlight:2,returnFlight:5,totalPrice:200};
-        request.post('/api/addBooking').send(bookingInfo).expect(200, done);//checking if insert is correct .
+                          emailAddress:"mohamed@gmail.com",
+                          passportNumber:212,
+                          nationality:"Egyptian",
+                          birthDate:30-4-1995}];
+        var bookingInfo = {passengers:passenger,outgoingFlight:2,returnFlight:5,totalCost:200};
+        request.post('/api/addBooking').set('x-access-token', token).send(bookingInfo).expect(200, done);
     });
 });

@@ -3,13 +3,8 @@
   padding: 30px;
 }
 
-
-
-
 #confirmInfo {
   float: right;
-
-
 }
 
 #flightsInfo {
@@ -17,15 +12,10 @@
   padding: 30px;
 }
 
-
-
-#flightsInfo h3, #passengerInfo h3
-{
+#flightsInfo h3, #passengerInfo h3{
   font-size: 25px;
 }
 
-#flightsInfo h4, #passengerInfo h4
-{
+#flightsInfo h4, #passengerInfo h4{
   font-size: 23px;
 }
-
