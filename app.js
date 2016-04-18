@@ -125,8 +125,8 @@ app.get('/api/flights/search/:origin/:destination/:departingDate/:returningDate/
 	// retrieve params
 	var origin =  req.params.origin;
 	var destination =  req.params.destination;
-	var departingDate =  req.params.departingDate;
-	var returningDate =  req.params.returningDate;
+	var departingDate =  moment(req.params.departingDate,['D MMMM, YYYY','LLLL','L','l','x','X','YYYY-MM-DD']).format('x');
+  var returningDate =  moment(req.params.returningDate,['D MMMM, YYYY','LLLL','L','l','x','X','YYYY-MM-DD']).format('x');
 	var flightClass =  req.params.class;
 
 	flights.getFlights(function(err, resultFlights){
@@ -146,7 +146,7 @@ app.get('/api/flights/search/:origin/:destination/:departingDate/:class', functi
     // retrieve params
     var origin 			=  req.params.origin;
     var destination 	=  req.params.destination;
-    var departingDate 	=  req.params.departingDate;
+    var departingDate 	=  moment(req.params.departingDate,['D MMMM, YYYY','LLLL','L','l','x','X','YYYY-MM-DD']).format('x');
     var flightClass 	=  req.params.class;
 
 	flights.getFlights(function(err, resultFlights){
