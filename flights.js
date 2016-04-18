@@ -4,7 +4,7 @@ var airport = require('./app/models/airport');
 var booking = require('./app/models/booking');
 var fs 		= require('fs');
 var http 	= require('http');
-
+var jwt 	= require('jsonwebtoken');
 
 /*
 this function returns all flights from origin to destination in the specefic date with the specific class given in the arguments
@@ -56,6 +56,8 @@ var getFlights=module.exports.getFlights=function (cb, origin, destination, flig
 // get list of other airlines' APIs URLs
 var airlines = JSON.parse(fs.readFileSync('./app/data/airlines.json', 'utf8'));
 
+var jwtToken = jwt.sign({},process.env.SECRET_KEY);
+
 /**
 *  Takes the search input, searches Austrian airline and other airlines (if required), and returns JSON object containing
 *  outgoing flights and return flights (if round trip)
@@ -104,7 +106,8 @@ var getOtherAirlines = function(cb, airlineIndex, allAirlines, origin, destinati
 		// assign the HTTP request options: host and path
 		var options = {
 			host: targetHost,
-			path: targetPath
+			path: targetPath + '?token='+jwtToken,
+			headers: { 'x-access-token': jwtToken }
 		};
 
 		// call the HTTP GET request
@@ -122,12 +125,19 @@ var getOtherAirlines = function(cb, airlineIndex, allAirlines, origin, destinati
 				// get flights of next airline and add the result to the current airlines' flights
 				getOtherAirlines(function(otherFlights){
 					// parse the data of the flights of the current airline into JSON
+					var isJSON = true;
+					try{
 					flightsData = JSON.parse(flightsData);
+					} catch(e) {
+						isJSON = false;
+					}
 
 					// add the current flights to the flights of the next airlines
-					otherFlights.outgoingFlights = otherFlights.outgoingFlights.concat(flightsData.outgoingFlights);
-					if(arrivalDate)
-						otherFlights.returnFlights = otherFlights.returnFlights.concat(flightsData.returnFlights);
+					if(flightsData.outgoingFlights && isJSON){
+						otherFlights.outgoingFlights = otherFlights.outgoingFlights.concat(flightsData.outgoingFlights);
+						if(arrivalDate)
+							otherFlights.returnFlights = otherFlights.returnFlights.concat(flightsData.returnFlights);
+					}
 					// return the results
 					cb(otherFlights);
 				}, airlineIndex+1, allAirlines, origin, destination, flightClass, departureDate, arrivalDate);
