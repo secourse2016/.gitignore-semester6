@@ -106,7 +106,7 @@ var getOtherAirlines = function(cb, airlineIndex, allAirlines, origin, destinati
 		// Assign the HTTP request options: host and path
 		var options = {
 			host: targetHost,
-			path: targetPath + '?token='+jwtToken,
+			path: targetPath + '?wt='+jwtToken,
 			headers: { 'x-access-token': jwtToken }
 		};
 
