@@ -109,8 +109,8 @@
       <td>
         <div class="row" style="margin-bottom: 0px;">
           <div class="col s2 offset-s2">
-            <img ng-show = "flight.Airline == airline" class = "logo" src="assets/images/flight-logo.png">
-            <i ng-hide = "flight.Airline == airline" class="small material-icons out" >local_airport</i>
+            <img tooltipped data-position="right" data-delay="50" data-tooltip="{{flight.Airline}}" ng-show = "flight.Airline == airline" class = "logo" src="assets/images/flight-logo.png">
+            <i tooltipped data-position="right" data-delay="50" data-tooltip="{{flight.Airline}}" ng-hide = "flight.Airline == airline" class="small material-icons out" >local_airport</i>
           </div>
           <div class="col s7 flightTime">
             {{flight.departureDateTime}} - {{flight.arrivalDateTime}}
