@@ -127,7 +127,7 @@ describe('API booking search POST route', function() {
     it('/api/booking POST should return a JSON object containing one booking details',
     function(done){
         // send request with a dummy booking information
-        request.post('/api/flights/search/oneway').send({
+        request.post('/api/flights/search/oneway').set('x-access-token', token).send({
             'id'        : '1',
             'passportNumber'   : '123456',
         }).expect('Content-Type', /json/)
@@ -138,14 +138,14 @@ describe('API booking search POST route', function() {
         })
         .expect(200, done);
     });
+});
 
 /**
 *  Testing API AddBooking POST routes
 */
 describe('API Add Booking POST Route ', function(){
-        //test add-booking route.
-     it('/api/addBooking  should return 200 ok', function(done){
-         // Dummy data for booking.
+     it('/api/addBooking  should return 200 OK', function(done){
+         // Test data for booking.
         var passenger = [{firstName:"mohamed",
                           lastName:"khaled",
                           email:"mohamed@gmail.com"
@@ -153,6 +153,6 @@ describe('API Add Booking POST Route ', function(){
                          ,nationality:"Egyptian"
                          ,birthDate:30-4-1995}];
         var bookingInfo = {passengers:passenger,outgoingFlight:2,returnFlight:5,totalPrice:200};
-        request.post('/api/addBooking').send(bookingInfo).expect(200, done);//checking if insert is correct .
+        request.post('/api/addBooking').set('x-access-token', token).send(bookingInfo).expect(200, done);
     });
 });

@@ -6,7 +6,7 @@ var flights = require('../flights.js');
 var booking = require('../app/models/booking');
 
 /*
-** test for addBooking function in flights.js 
+** test for addBooking function in flights.js
 */
 describe('addBooking function', function(){
         it('addBooking should insert the record in the dataBase',function(done){
@@ -18,13 +18,14 @@ flights.addBooking(bookingInfo,function(){
     /*get the last record in the dataBase in the booking model and comparing it with the above one */
 booking.findOne({}, {}, { sort: { 'bookingDate' : -1 } }, function(err, record) {
 for (var i = 0; i < bookingInfo.passengers.length; i++) {
-/*checking if all passengers information are the same */	
+/*checking if all passengers information are the same */
 assert.equal(record.passengers[i].firstName,bookingInfo.passengers[i].firstName,"firstNames are equal");
 assert.equal(record.passengers[i].lastName,bookingInfo.passengers[i].lastName,"lastNames are equal");
-assert.equal(record.passengers[i].email,bookingInfo.passengers[i].email,"Emails are equal");
+//TODO: test is not working because of this assertion
+assert.equal(record.passengers[i].email, bookingInfo.passengers[i].email,"Emails are equal");
 assert.equal(record.passengers[i].passportNumber,bookingInfo.passengers[i].passportNumber,"passportNumbers are equal");
 assert.equal(record.passengers[i].nationality,bookingInfo.passengers[i].nationality,"nationalities is equal");
-    
+
 }
 assert.equal(record.totalPrice,bookingInfo.totalPrice,"totalPrices are equal");
 assert.equal(record.outgoingFlight,bookingInfo.outgoingFlight,"outgoing flights are equal");
