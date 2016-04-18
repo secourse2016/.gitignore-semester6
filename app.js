@@ -2,9 +2,8 @@ var express       = require('express');
 var path          = require('path');
 var mongoose      = require('mongoose');
 var bodyParser    = require('body-parser');
-var moment		  = require('moment');
+var moment	   	  = require('moment');
 var compression   = require('compression');
-var morgan        = require('morgan');
 var app           = express();
 require('dotenv').config();
 
@@ -13,7 +12,6 @@ app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
-// app.use(morgan('dev'));
 
 // configuration ==========================================================
 mongoose.connect(process.env.mongoURL); // connect to our database
@@ -45,7 +43,7 @@ app.route('/error').get(sendIndex);
 var dbRouter = require('./app/routes/db');
 var APIRouter = require('./app/routes/api');
 
-app.use('/db', dbRouter);               //DON'T DEPOLY
+// app.use('/db', dbRouter);               //DON'T DEPOLY
 app.use('/api', APIRouter);
 
 // 404 Middleware =========================================================
