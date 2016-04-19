@@ -137,7 +137,7 @@ var getOtherAirlines = function(cb, airlineIndex, allAirlines, origin, destinati
 					// Add the current flights to the flights of the next airlines
 					if(flightsData.outgoingFlights && isJSON){
 						otherFlights.outgoingFlights = otherFlights.outgoingFlights.concat(flightsData.outgoingFlights);
-						if(arrivalDate)
+						if(arrivalDate && flightsData.returnFlights)
 							otherFlights.returnFlights = otherFlights.returnFlights.concat(flightsData.returnFlights);
 					}
 					// Return the results
