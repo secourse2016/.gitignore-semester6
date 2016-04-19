@@ -58,10 +58,12 @@ angular.module('austrianAirlinesApp')
 		if(infoFlow.returnTrip)
 			bookingInfo.returnFlight = infoFlow.returnTrip.flightNumber;
 
-
+		/* after confirming the booking INFO redirect to the payment view */
 		$scope.confirm = function(){
-			/* after confirming the booking INFO redirect to the payment view */
-			if(bookingInfo.outgoingFlight.Airline == "Austrian" || (bookingInfo.returnFlight && bookingInfo.returnFlight.Airline == "Austrian"))
+
+			/* Only insert to the database if the airline is Austrian
+			 in either the outgoing or the return flight*/
+			if(global.outGoingTrip.Airline == "Austrian" || (bookingInfo.returnFlight && global.returnTrip.Airline == "Austrian"))
 			{
 				$http.post('/api/addBooking',bookingInfo).success(function(data){
 					global.setBookingNumber(data);
