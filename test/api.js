@@ -2,6 +2,7 @@ var app = require('../app.js');
 var assert = require('chai').assert;
 var request = require('supertest');
 var flights = require('../flights.js');
+var booking = require('../app/models/booking');
 
 
 // JWT Token Generation
@@ -19,7 +20,7 @@ describe('Airports API Route', function() {
             assert.isArray(airports, "Returned object is an array");
             for(var i = 0; i < airports.length; ++i){
                 assert.isNotNull(airports[i], "No airport is null");
-                assert.isNotNull(airports[i][attributes[j]], "Airport "+airports[i]["iata"]+" has IATA.");
+                assert.isNotNull(airports[i]["iata"], "Airport "+airports[i]["iata"]+" has IATA.");
             }
         })
         .expect(200, done);
@@ -139,4 +140,37 @@ describe('API Add Booking POST Route ', function(){
         var bookingInfo = {passengers:passenger,outgoingFlight:2,returnFlight:5,totalCost:200};
         request.post('/api/addBooking').set('x-access-token', token).send(bookingInfo).expect(200, done);
     });
+});
+
+
+/**
+*  Testing API getBooking POST route
+*/
+describe('API get booking POST route', function(){
+  it('/api/getBooking should return 200 OK', function(done){
+    var passenger = [{
+             firstName:"Omar",
+             lastName:"Radwan",
+             emailAddress:"omarradwan213@gmail.com",
+             passportNumber:12345678,
+             nationality:"Egyptian",
+             birthDate:10-7-1995
+         }];
+    var bookingInfo = {
+           passengers:passenger,
+           outgoingFlight:2,
+           returnFlight:5,
+           totalCost:1400
+         };
+    request.post('/api/addBooking').set('x-access-token', token).send(bookingInfo).expect(200);
+    booking.findOne({}, {}, { sort: { 'bookingDate' : -1 } }, function(err, record) {
+      var bookingNumber = record.bookingNumber;
+      var passportNumber = record.passengers[0].passportNumber;
+      var req = {};
+      req.bookingNumber = bookingNumber;
+      req.passportNumber = passportNumber;
+      request.post('/api/getBooking').set('x-access-token', token).send(req).expect(200, done);
+
+    });
+  });
 });

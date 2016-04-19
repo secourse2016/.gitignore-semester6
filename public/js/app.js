@@ -75,7 +75,7 @@ app.config(function($routeProvider , $locationProvider, $httpProvider) {
         })
 
         //route for booking history
-        .when('/booking-history', {
+        .when('/booking', {
             templateUrl : 'views/booking-history.html'
         })
 
