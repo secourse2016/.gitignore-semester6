@@ -113,10 +113,10 @@ var getOtherAirlines = function(cb, airlineIndex, allAirlines, origin, destinati
 		// Call the HTTP GET request
 		http.get(options, function(res){
 
-			var flightsData = {};
+			var flightsData = "";
 			res.on('data', function(flights){
 				// Successful request
-				flightsData = flights;
+				flightsData += flights;
 			});
 			res.on('end', function(){
 
