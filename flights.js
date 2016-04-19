@@ -113,10 +113,10 @@ var getOtherAirlines = function(cb, airlineIndex, allAirlines, origin, destinati
 		// Call the HTTP GET request
 		http.get(options, function(res){
 
-			var flightsData = {};
+			var flightsData = "";
 			res.on('data', function(flights){
 				// Successful request
-				flightsData = flights;
+				flightsData += flights;
 			});
 			res.on('end', function(){
 
@@ -150,7 +150,7 @@ var getOtherAirlines = function(cb, airlineIndex, allAirlines, origin, destinati
 			getOtherAirlines(function(otherFlights){
 				cb(otherFlights);
 			}, airlineIndex+1, allAirlines, origin, destination, flightClass, departureDate, arrivalDate);
-		}).setTimeout(1500, function(){
+		}).setTimeout(1000, function(){
 
 			this.abort();
 		});
