@@ -21,6 +21,7 @@
   <div class="card red darken-1">
     <div class="card-content white-text">
       <span class="card-title">Find Flights</span>
+
       <br>
 
       <!-- Flight From -->
@@ -123,7 +124,7 @@
            </select>
         </div>
     </div>
-   
+
     <!-- Search for flights -->
     <div class="row">
       <div class="allAirlinesCheckbox col s7" >
@@ -132,9 +133,26 @@
       </div>
 
       <div class="card-action col s5 right-align">
-       
-        <a class="waves-effect waves-light btn white red-text" ng-click="searchFlights()">FIND NOW!</a>
+
+        <a class="waves-effect waves-light btn white red-text" ng-hide="loading" ng-click="searchFlights()">FIND NOW!</a>
+
+        <div ng-show="loading">
+              <div class="preloader-wrapper small active" >
+
+                <div class="spinner-layer spinner-black" style="border-color:white">
+                <div class="circle-clipper left">
+                  <div class="circle"></div>
+                </div><div class="gap-patch">
+                  <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                  <div class="circle"></div>
+                </div>
+              </div>
+              </div>
+        </div>
       </div>
+
+
     </div>
   </div>
 </form>
