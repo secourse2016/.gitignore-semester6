@@ -32,6 +32,7 @@
 	*/
 	app.controller('searchFlightController', function($scope, global, $location, $http, flights){
 		this.range = [];
+		$scope.loading = false;
 		for(var i = 2; i <= 7; ++i)
 			this.range.push(i);
 		$scope.formData = {tripType:2};
@@ -82,6 +83,7 @@
 				.error(function(data){
 					console.log('Error: Couldn\'t fetch flights.');
 				});
+				$scope.loading = true;
 			}
 
 
