@@ -21,6 +21,7 @@ controller('bookingHistoryController',function($scope, bookingHistoryService){
 			$scope.tripType = 1;
 
 	  // dates of departure and return
+		
 	  var outgoingDate        = new Date($scope.booking.outgoingFlightInfo.departureDateTime);
 		if($scope.tripType == 2)
 	  	var returnDate          = new Date($scope.booking.returnFlightInfo.departureDateTime);

@@ -61,13 +61,19 @@ angular.module('austrianAirlinesApp')
 
 		$scope.confirm = function(){
 			/* after confirming the booking INFO redirect to the payment view */
-			$http.post('/api/addBooking',bookingInfo).success(function(data){
-				global.setBookingNumber(data);
+			if(bookingInfo.outgoingFlight.Airline == "Austrian" || (bookingInfo.returnFlight && bookingInfo.returnFlight.Airline == "Austrian"))
+			{
+				$http.post('/api/addBooking',bookingInfo).success(function(data){
+					global.setBookingNumber(data);
+					$location.path("/payment");
+				})
+				.error(function(data){
+					/*if there is an err throw it otherWise go to payement page */
+					console.log('Error: Couldn\'t insert in the dataBase.');
+				});
+			}
+			else
 				$location.path("/payment");
-			})
-			.error(function(data){
-				/*if there is an err throw it otherWise go to payement page */
-				console.log('Error: Couldn\'t insert in the dataBase.');
-			});
+
 		}
 });

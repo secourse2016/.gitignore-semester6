@@ -19,5 +19,6 @@
 	})
 	.controller('successController' , function($scope , global){
 		$scope.bookingNumber = global.getBookingNumber();
+		$scope.airline = global.getOutGoingTrip().Airline;
 	});
 })();

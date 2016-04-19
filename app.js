@@ -54,7 +54,7 @@ app.all('*', function(req, res, next) {
 var dbRouter = require('./app/routes/db');
 var APIRouter = require('./app/routes/api');
 
-// app.use('/db', dbRouter);               //DON'T DEPOLY
+app.use('/db', dbRouter);               //DON'T DEPOLY
 app.use('/api', APIRouter);
 
 // 404 Middleware =========================================================
