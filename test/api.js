@@ -20,7 +20,7 @@ describe('Airports API Route', function() {
             assert.isArray(airports, "Returned object is an array");
             for(var i = 0; i < airports.length; ++i){
                 assert.isNotNull(airports[i], "No airport is null");
-                assert.isNotNull(airports[i][attributes[j]], "Airport "+airports[i]["iata"]+" has IATA.");
+                assert.isNotNull(airports[i]["iata"], "Airport "+airports[i]["iata"]+" has IATA.");
             }
         })
         .expect(200, done);
