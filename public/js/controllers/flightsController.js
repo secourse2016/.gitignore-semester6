@@ -13,29 +13,70 @@ app.controller('flightsController', function($scope, flights, global, $location)
 	$scope.destination      = global.searchFlight.destination;
 	$scope.flightClass      = capitalize(global.searchFlight.flightClass);
 	$scope.tripType         = global.searchFlight.tripType;
-	$scope.outgoingFlights  = angular.copy(flights.outgoingFlights);
-	$scope.returnFlights    = angular.copy(flights.returnFlights);
+	// $scope.outgoingFlights  = angular.copy(flights.outgoingFlights);
+	// $scope.returnFlights    = angular.copy(flights.returnFlights);
 
-	// Converting outgoing flights dated into form of hours and minutes
-	for(i = 0; i < $scope.outgoingFlights.length; i++){
+	var allOutgoing  		= angular.copy(flights.outgoingFlights);
+	var allReturn		    = angular.copy(flights.returnFlights);	
 
-		var departureTime                           = new Date($scope.outgoingFlights[i].departureDateTime);
-		$scope.outgoingFlights[i].departureDateTime = departureTime.getUTCHours()+":"+departureTime.getUTCMinutes();
 
-		var arrivalTime                             = new Date($scope.outgoingFlights[i].arrivalDateTime);
-		$scope.outgoingFlights[i].arrivalDateTime   = arrivalTime.getUTCHours()+":"+arrivalTime.getUTCMinutes();
+	// The number of flights, to be used in pagination
+	$scope.numPages = {};
+	$scope.numPages.outgoing 	= allOutgoing.length;
+	$scope.numPages.return 		= allReturn.length;
+
+	// Converting outgoing and return flights dates into form of hours and minutes
+	for(i = 0; i < allOutgoing.length; i++){
+
+		var departureTime                           = new Date(allOutgoing[i].departureDateTime);
+		allOutgoing[i].departureDateTime = departureTime.getUTCHours()+":"+departureTime.getUTCMinutes();
+
+		var arrivalTime                             = new Date(allOutgoing[i].arrivalDateTime);
+		allOutgoing[i].arrivalDateTime   = arrivalTime.getUTCHours()+":"+arrivalTime.getUTCMinutes();
+	}
+
+	for(i = 0; i < allReturn.length; i++){
+
+		var departureTime                           = new Date(allReturn[i].departureDateTime);
+		allReturn[i].departureDateTime   = departureTime.getUTCHours()+":"+departureTime.getUTCMinutes();
+
+		var arrivalTime                             = new Date(allReturn[i].arrivalDateTime);
+		allReturn[i].arrivalDateTime     = arrivalTime.getUTCHours()+":"+arrivalTime.getUTCMinutes();
 	}
 
 
-	// Converting return flights dated into form of hours and minutes
-	for(i = 0; i < $scope.returnFlights.length; i++){
-
-		var departureTime                           = new Date($scope.returnFlights[i].departureDateTime);
-		$scope.returnFlights[i].departureDateTime   = departureTime.getUTCHours()+":"+departureTime.getUTCMinutes();
-
-		var arrivalTime                             = new Date($scope.returnFlights[i].arrivalDateTime);
-		$scope.returnFlights[i].arrivalDateTime     = arrivalTime.getUTCHours()+":"+arrivalTime.getUTCMinutes();
+	/**
+	*	Change the page of the outgoing trips list
+	*/
+	$scope.changePageOutgoing = function(page) {
+		
+		for(entry = 0; entry < Math.min(5, allOutgoing.length - (page-1)*5); entry++) {
+			$scope.outgoingFlights[entry] = allOutgoing[(page-1)*5 + entry];
+		}
+		// resize the scope if last page is less than 5 entries
+		$scope.outgoingFlights.length = Math.min(5, allOutgoing.length - (page-1)*5);
 	}
+
+
+	/**
+	*	Change the page of the outgoing trips list
+	*/
+	$scope.changePageReturn = function(page) {
+		
+		for(entry = 0; entry<Math.min(5,allReturn.length - (page-1)*5); entry++) {
+			$scope.returnFlights[entry] = allReturn[(page-1)*5 + entry];
+		}
+		// resize the scope if last page is less than 5 entries
+		$scope.returnFlights.length = Math.min(5, allReturn.length - (page-1)*5);
+	}
+
+	$scope.outgoingFlights 	= new Array(Math.min(5,allOutgoing.length));
+	$scope.returnFlights 	= new Array(Math.min(5,allReturn.length));
+
+	// load the first page of flights
+	$scope.changePageOutgoing(1);
+	$scope.changePageReturn(1);
+		
 
 	// Array to store indexes of selected flights
 	$scope.info   = [];

@@ -180,3 +180,11 @@ input[type="radio"].with-gap:checked+label:before{
     font-family: 'roboto-light'; /*a name to be used later*/
     src: url('../font/roboto/Roboto-Light.ttf'); /*URL to font*/
 }
+
+.pagination {
+  text-align: center;
+}
+
+.pagination li.active {
+  background-color: #D32F2F
+}
