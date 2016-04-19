@@ -24,6 +24,10 @@
    min-width: 300px;
 }
 
+.card-action{
+  min-height: 80px;
+}
+
 /* Left input fields of the form */
 .form-left{
   margin: auto;
