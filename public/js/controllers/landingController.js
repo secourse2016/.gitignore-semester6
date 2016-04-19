@@ -32,7 +32,6 @@
 	*/
 	app.controller('searchFlightController', function($scope, global, $location, $http, flights){
 		this.range = [];
-		$scope.loading = false;
 		for(var i = 2; i <= 7; ++i)
 			this.range.push(i);
 		$scope.formData = {tripType:2};
@@ -58,7 +57,6 @@
 					$scope.formData.origin = origin = $scope.formData.origin.iata;
 				if($scope.formData.destination)
 					$scope.formData.destination = destination = $scope.formData.destination.iata;
-
 				var requestParameters = {
 					'origin' 		: origin,
 					'destination'	: destination,
@@ -73,21 +71,22 @@
 					postURL = 'api/flights/search/roundtrip';
 				}
 
-				$http.post(postURL, requestParameters)
-				.success(function(resultFlights){
-					flights.outgoingFlights = resultFlights.outgoingFlights;
-					if(tripType == 2)
-						flights.returnFlights = resultFlights.returnFlights;
-					$location.path("/flights");
-				})
-				.error(function(data){
-					console.log('Error: Couldn\'t fetch flights.');
-				});
-				$scope.loading = true;
+				$scope.hideSubmit = true;
+
+				setTimeout(function(){
+					$scope.loading = true;
+					$http.post(postURL, requestParameters)
+					.success(function(resultFlights){
+						flights.outgoingFlights = resultFlights.outgoingFlights;
+						if(tripType == 2)
+							flights.returnFlights = resultFlights.returnFlights;
+						$location.path("/flights");
+					})
+					.error(function(data){
+						console.log('Error: Couldn\'t fetch flights.');
+					});
+				}, 1000);
 			}
-
-
-
 		};
 	});
 
