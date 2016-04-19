@@ -1,5 +1,8 @@
 
+
 <link href="css/flights.css" rel="stylesheet">
+
+
 
 <div class="container flights_table_container" ng-controller="flightsController">
   <link href="css/stepper.css" rel="stylesheet">
@@ -91,6 +94,17 @@
             </td>
       </tr>
     </table>
+
+    <pagination
+    page="1"
+    page-size="5"
+    total="numPages.outgoing"
+    show-prev-next="false"
+    dots="..."
+    hide-if-empty="true"
+    adjacent="2"
+    scroll-top="false"
+    pagination-action="changePageOutgoing(page)" />
   </div>
 
 </div>
@@ -146,6 +160,16 @@
             </td>
     </tr>
   </table>
+  <pagination
+    page="1"
+    page-size="5"
+    total="numPages.return"
+    show-prev-next="false"
+    dots="..."
+    hide-if-empty="true"
+    adjacent="2"
+    scroll-top="false"
+    pagination-action="changePageReturn(page)" />
 </div>
 
 </div>
