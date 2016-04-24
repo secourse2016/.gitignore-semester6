@@ -53,11 +53,13 @@ app.controller('flightsController', function($scope, flights, global, $location)
 		for(entry = 0; entry < Math.min(5, allOutgoing.length - (page-1)*5); entry++) {
 			$scope.outgoingFlights[entry] = allOutgoing[(page-1)*5 + entry];
 		}
+		if($scope.info[0])
+			$scope.info[0] = null;
 		// resize the scope if last page is less than 5 entries
 		$scope.outgoingFlights.length = Math.min(5, allOutgoing.length - (page-1)*5);
 	}
 
-
+	$scope.info   = [];
 	/**
 	*	Change the page of the outgoing trips list
 	*/
@@ -66,6 +68,8 @@ app.controller('flightsController', function($scope, flights, global, $location)
 		for(entry = 0; entry<Math.min(5,allReturn.length - (page-1)*5); entry++) {
 			$scope.returnFlights[entry] = allReturn[(page-1)*5 + entry];
 		}
+		if($scope.info[1])
+			$scope.info[1] = null;
 		// resize the scope if last page is less than 5 entries
 		$scope.returnFlights.length = Math.min(5, allReturn.length - (page-1)*5);
 	}
@@ -79,7 +83,7 @@ app.controller('flightsController', function($scope, flights, global, $location)
 		
 
 	// Array to store indexes of selected flights
-	$scope.info   = [];
+	
 
 	// Model to represent which flight to show its information
 	$scope.trans  = {id: -1};
