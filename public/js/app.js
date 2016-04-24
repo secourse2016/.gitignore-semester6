@@ -88,6 +88,7 @@ app.config(function($routeProvider , $locationProvider, $httpProvider) {
     // Use the HTML5 History API
     $locationProvider.html5Mode(true);
 
+    Stripe.setPublishableKey('pk_test_GLghvbf0O1mNsV4T8nECOC1u');
     /**
      * Interceptor to inject every HTTP request with the JSON web token.
      */

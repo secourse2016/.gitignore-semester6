@@ -6,6 +6,8 @@ var flight 	= require('./app/models/flight');
 var airport = require('./app/models/airport');
 var booking = require('./app/models/booking');
 var jwt 	= require('jsonwebtoken');
+var stripe 	= require('stripe')(process.env.STRIPE_KEY);
+
 
 /**
  * Returns all flights from the origin to the destination in the specified
