@@ -194,10 +194,10 @@ module.exports.getBooking = function(bookingNumber , passportNumber , cb){
 						}
 					}
 					if(found){
-						// get the corresponding outgoing flight
-						flight.find({"flightNumber":booking[0].outgoingFlight},{},function(errOutgoingFlight , outgoingFlight){
+						// get the corresponding outgoindg flight
+						flight.find({"_id":booking[0].outgoingFlight},{},function(errOutgoingFlight , outgoingFlight){
 								// get the corresponding return flight
-								flight.find({"flightNumber":booking[0].returnFlight},{},function(errReturnFlight , returnFlight){
+								flight.find({"_id":booking[0].returnFlight},{},function(errReturnFlight , returnFlight){
 									myBooking = booking[0].toJSON();
 									// attach the flights info to the returning object
 									myBooking.outgoingFlightInfo = outgoingFlight[0];
