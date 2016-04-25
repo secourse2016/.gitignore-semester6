@@ -69,6 +69,10 @@ var getAllFlights = module.exports.getAllFlights
 				  = function(cb, allAirlines, origin, destination, flightClass, departureDate, arrivalDate){
 	// get flights from Austrian airlines
 	getFlights(function(err, austrianFlights){
+		_.map(austrianFlights, function(flight){
+			flight.airline = {name:"Austrian Airlines" , url:"ec2-52-90-41-197.compute-1.amazonaws.com", ip:"52.90.41.197"};
+			return flight;
+		  });
 		if(err)
 			cb(err,{});
 		else if(allAirlines){
