@@ -17,6 +17,7 @@
 			var booking2 = null;
 			var airline2 = null;
 
+			// Add the booking details to the booking(s)
 			booking1.passengerDetails = global.getPassengers();
 			booking1.outgoingFlightId = global.getOutGoingTrip().flightId;
 			airline1 = global.getOutGoingTrip().airline;
@@ -24,14 +25,17 @@
 			if(global.getReturnTrip() && global.getOutGoingTrip().Airline != global.getReturnTrip().Airline) {
 				booking2 = {};
 				booking2.passengerDetails = global.getPassengers();
-				booking2.returnFlightId = global.getReturnTrip().flightId;
+				booking2.outgoingFlightId = global.getReturnTrip().flightId;
 				airline2 = global.getReturnTrip().airline;
+			}
+			else if(global.getReturnTrip()) {
+				booking1.returnFlightId = global.getReturnTrip().flightId;
 			}
 
 
 			$scope.error = {};
 
-			// Make sure that all fields are entered
+			// Make sure that all payment fields are entered
 			var errored = false;
 			if(!$scope.cardNo) {
 				$scope.error.number = true;
@@ -84,7 +88,7 @@
 
 						var requestParameters = {};
 						requestParameters.booking1 = booking1;
-						requestParamters.airline1 = airline1;
+						requestParameters.airline1 = airline1;
 
 						if(global.getReturnTrip() && global.getOutGoingTrip().Airline != global.getReturnTrip().Airline) {
 							// Two different airlines, generate another token.
@@ -96,12 +100,12 @@
 									booking2.paymentToken = responseToken2.id;
 									
 									requestParameters.booking2 = booking2;
-									requestParamters.airline2 = airline2;
+									requestParameters.airline2 = airline2;
 									// Send post request with two bookings 
 									$http.post('/api/addBooking',requestParameters).success(function(data){
 
 										// TODO add the booking reference(s) to the global service
-										
+
 										$location.path('/successful');
 										$scope.$apply();
 									})
