@@ -145,6 +145,10 @@ var getOtherAirlines = function(cb, airlineIndex, allAirlines, origin, destinati
 						  });
 						otherFlights.outgoingFlights = otherFlights.outgoingFlights.concat(flightsData.outgoingFlights);
 						if(arrivalDate && flightsData.returnFlights){
+							_.map(flightsData.returnFlights, function(flight){
+								flight.airline = airlines[airlineIndex];
+								return flight;
+							  });
 							  otherFlights.returnFlights = otherFlights.returnFlights.concat(flightsData.returnFlights);
 						}
 					}
