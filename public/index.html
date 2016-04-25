@@ -38,20 +38,20 @@
 
   <!-- controllers -->
   <script type="text/javascript" src="js/services/globalService.js"></script>
-  <script src="js/controllers/landingController.js"></script>
-  <script src="js/controllers/flightsCtrl.js"></script>
+  <script type="text/javascript" src="js/controllers/landingController.js"></script>
+  <script type="text/javascript" src="js/controllers/flightsController.js"></script>
   <script type="text/javascript" src="js/services/flightsService.js"></script>
-  <script type="text/javascript" src="js/controllers/passengerViewCtrl.js"></script>
-  <script type="text/javascript" src="js/controllers/passengerViewCtrl.js"></script>
+  <script type="text/javascript" src="js/services/bookingHistoryService.js"></script>
   <script type="text/javascript" src="js/controllers/confirmationController.js"></script>
-
   <script type="text/javascript" src="js/controllers/paymentController.js"></script>
-  <script type="text/javascript" src="js/controllers/passengerViewCtrl.js"></script>
+  <script type="text/javascript" src="js/controllers/passengerViewController.js"></script>
+  <script type="text/javascript" src="js/controllers/bookingHistoryFormController.js"></script>
+  <script type="text/javascript" src="js/controllers/bookingHistoryController.js"></script>
 
   <!--favicon image-->
   <link rel="icon" type="image/ico" href="assets/images/favicon.ico"/>
 </head>
-<body ng-controller="masterController" >
+<body ng-controller="masterController">
   <!--nav bar-->
   <nav class="red" role="navigation">
     <div class="nav-wrapper container">
@@ -59,12 +59,14 @@
         <img class="logo" src="assets/images/logo.png"/>
       </a>
       <ul class="right hide-on-med-and-down">
+        <li><a href='#history_form' modal>Booking History</a></li>
         <li><a href="/contact">Contact</a></li>
         <li><a href="/help">Help/FAQ</a></li>
         <li><a href="/about">About</a></li>
       </ul>
 
       <ul id="nav-mobile" class="side-nav">
+        <li><a href='#history_form' modal>Booking History</a></li>
         <li><a href="/contact">Contact</a></li>
         <li><a href="/help">Help/FAQ</a></li>
         <li><a href="/about">About</a></li>
@@ -72,6 +74,7 @@
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
   </nav>
+  <ng-include src="'views/booking-history-form.html'"></ng-include>
   <div id="mainContainer" class="mainContainer">
     <!-- angular templating -->
     <!-- this is where content will be injected -->

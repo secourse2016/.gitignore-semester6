@@ -2,9 +2,9 @@
 <link href="css/payment.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 
 
-<div class="card-panel grey lighten-3 congratulations">
-	<h4>Congratulations</h4>
+<div class="card-panel grey lighten-3 congratulations" ng-controller="successController as successCtrl">
 	<p class="paragraph">You have successfully booked your ticket, Have a nice trip!</p>
+	<p class="paragraph">Your booking number is {{bookingNumber}}</p>	
 	<div class="row">
         <div class="input-field col s12">
             <a ng-href="{{ '/'}}"
