@@ -7,6 +7,8 @@ var airport = require('./app/models/airport');
 var booking = require('./app/models/booking');
 var airlines= require('./app/data/airlines.json');
 var jwt 	= require('jsonwebtoken');
+var _       = require('underscore');
+
 
 /**
  * Returns all flights from the origin to the destination in the specified
@@ -95,9 +97,9 @@ var getAllFlights = module.exports.getAllFlights
 var getOtherAirlines = function(cb, airlineIndex, allAirlines, origin, destination, flightClass, departureDate, arrivalDate){
 	// Check if there are still airlines
 	if(airlineIndex < airlines.length){
-		// Get the URL of the airline
+		// Get the URL of the airline or the IP
 		var targetHost = airlines[airlineIndex].url?airlines[airlineIndex].url:airlines[airlineIndex].ip;
-		console.log(targetHost);
+		//console.log(targetHost);
 		// Get the API route
 		var targetPath = '/api/flights/search/'+origin+'/'+destination+'/'+departureDate+'/'+flightClass;
 		if(arrivalDate)
@@ -136,9 +138,15 @@ var getOtherAirlines = function(cb, airlineIndex, allAirlines, origin, destinati
 
 					// Add the current flights to the flights of the next airlines
 					if(flightsData.outgoingFlights && isJSON){
+						//add property airlines to all the flights
+						_.map(flightsData.outgoingFlights, function(flight){
+							flight.airline = airlines[airlineIndex];
+							return flight;
+						  });
 						otherFlights.outgoingFlights = otherFlights.outgoingFlights.concat(flightsData.outgoingFlights);
-						if(arrivalDate && flightsData.returnFlights)
-							otherFlights.returnFlights = otherFlights.returnFlights.concat(flightsData.returnFlights);
+						if(arrivalDate && flightsData.returnFlights){
+							  otherFlights.returnFlights = otherFlights.returnFlights.concat(flightsData.returnFlights);
+						}
 					}
 					// Return the results
 					cb(otherFlights);
