@@ -1,107 +1,107 @@
 [
-    {
-        "name": "Lufthansa",
-        "url": "ec2-54-152-123-100.compute-1.amazonaws.com",
-        "ip": "54.152.123.100"
-    },
-    {
-        "name": "Turkish airlines",
-        "url": "",
-        "ip": "52.27.150.19"
-    },
-    {
-        "name": "KLM",
-        "url": "ec2-52-26-166-80.us-west-2.compute.amazonaws.com",
-        "ip": "52.26.166.80"
-    },
-    {
-        "name": "Emirates",
-        "url": "",
-        "ip": "52.90.46.68"
-    },
-    {
-        "name": "Air France",
-        "url": "",
-        "ip": "52.34.160.140"
-    },
-    {
-        "name": "British Airways",
-        "url": "",
-        "ip": "52.36.195.124"
-    },
-    {
-        "name": "Delta Airlines",
-        "url": "",
-        "ip": "52.25.15.124"
-    },
-    {
-        "name": "Swiss Air",
-        "url": "www.swiss-air.me",
-        "ip": ""
-    },
-    {
-        "name": "Airline Canada",
-        "url": "",
-        "ip": "52.36.250.55"
-    },
-    {
-        "name": "Japan Airlines",
-        "url": "",
-        "ip": "54.187.208.145"
-    },
-    {
-        "name": "Singapore Airlines",
-        "url": "sebitsplease.com.s3-website-us-east-1.amazonaws.com",
-        "ip": ""
-    },
-    {
-        "name": "DragonAir Airlines",
-        "url": "",
-        "ip": "52.58.46.74"
-    },
-    {
-        "name": "Hawaiian Airlines",
-        "url": "",
-        "ip": "54.93.36.94"
-    },
-    {
-        "name": "Air Madagascar",
-        "url": "",
-        "ip": "54.191.202.17"
-    },
-    {
-        "name": "South African Airways",
-        "url": "",
-        "ip": "54.213.157.185"
-    },
-    {
-        "name": "New Zealand Airlines",
-        "url": "",
-        "ip": "52.28.246.230"
-    },
-    {
-        "name": "IBERIA Airlines",
-        "url": "mynksh.com",
-        "ip": ""
-    },
-    {
-        "name": "Alaska Airlines",
-        "url": "",
-        "ip": "52.207.211.179"
-    },
-    {
-        "name": "Malaysia Airlines",
-        "url": "",
-        "ip": "52.32.109.147"
-    },
-    {
-        "name": "Northwest Airlines",
-        "url": "",
-        "ip": "52.36.169.206"
-    },
-    {
-        "name": "Cathay Pacific Airlines",
-        "url": "ec2-52-91-94-227.compute-1.amazonaws.com",
-        "ip": "52.91.94.227"
-    }
+    {
+        "name":"Lufthansa",
+        "url":"ec2-54-152-123-100.compute-1.amazonaws.com",
+        "ip":"54.152.123.100"
+    },
+    {
+        "name":"Turkish airlines",
+        "url":"",
+        "ip":"52.27.150.19"
+    },
+    {
+        "name":"KLM",
+        "url":"ec2-52-26-166-80.us-west-2.compute.amazonaws.com",
+        "ip":"52.26.166.80"
+    },
+    {
+        "name":"Emirates",
+        "url":"",
+        "ip":"52.90.46.68"
+    },
+    {
+        "name":"Air France",
+        "url":"",
+        "ip":"52.34.160.140"
+    },
+    {
+        "name":"British Airways",
+        "url":"",
+        "ip":"52.36.195.124"
+    },
+    {
+        "name":"Delta Airlines",
+        "url":"",
+        "ip":"52.25.15.124"
+    },
+    {
+        "name":"Swiss Air",
+        "url":"www.swiss-air.me",
+        "ip":""
+    },
+    {
+        "name":"Airline Canada",
+        "url":"",
+        "ip":"52.36.250.55"
+    },
+    {
+        "name":"Japan Airlines",
+        "url":"",
+        "ip":"54.187.208.145"
+    },
+    {
+        "name":"Singapore Airlines",
+        "url":"sebitsplease.com.s3-website-us-east-1.amazonaws.com",
+        "ip":""
+    },
+    {
+        "name":"DragonAir Airlines",
+        "url":"",
+        "ip":"52.58.46.74"
+    },
+    {
+        "name":"Hawaiian Airlines",
+        "url":"",
+        "ip":"54.93.36.94"
+    },
+    {
+        "name":"Air Madagascar",
+        "url":"",
+        "ip":"54.191.202.17"
+    },
+    {
+        "name":"South African Airways",
+        "url":"",
+        "ip":"54.213.157.185"
+    },
+    {
+        "name":"New Zealand Airlines",
+        "url":"",
+        "ip":"52.28.246.230"
+    },
+    {
+        "name":"IBERIA Airlines",
+        "url":"mynksh.com",
+        "ip":""
+    },
+    {
+        "name":"Alaska Airlines",
+        "url":"",
+        "ip":"52.207.211.179"
+    },
+    {
+        "name":"Malaysia Airlines",
+        "url":"",
+        "ip":"52.32.109.147"
+    },
+    {
+        "name":"Northwest Airlines",
+        "url":"",
+        "ip":"52.36.169.206"
+    },
+    {
+        "name":"Cathay Pacific Airlines",
+        "url":"ec2-52-91-94-227.compute-1.amazonaws.com",
+        "ip":"52.91.94.227"
+    }
 ]

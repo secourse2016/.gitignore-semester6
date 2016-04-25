@@ -5,6 +5,7 @@ var moment 	= require('moment');
 var flight 	= require('./app/models/flight');
 var airport = require('./app/models/airport');
 var booking = require('./app/models/booking');
+var airlines= require('./app/data/airlines.json');
 var jwt 	= require('jsonwebtoken');
 
 /**
@@ -54,7 +55,6 @@ var getFlights = module.exports.getFlights
 	}, origin, destination, flightClass, departureDate);
 }
 
-var airlines = JSON.parse(fs.readFileSync('./app/data/airlines.json', 'utf8'));
 
 var jwtToken = jwt.sign({},process.env.SECRET_KEY);
 
@@ -96,8 +96,8 @@ var getOtherAirlines = function(cb, airlineIndex, allAirlines, origin, destinati
 	// Check if there are still airlines
 	if(airlineIndex < airlines.length){
 		// Get the URL of the airline
-		var targetHost = airlines[airlineIndex];
-
+		var targetHost = airlines[airlineIndex].url?airlines[airlineIndex].url:airlines[airlineIndex].ip;
+		console.log(targetHost);
 		// Get the API route
 		var targetPath = '/api/flights/search/'+origin+'/'+destination+'/'+departureDate+'/'+flightClass;
 		if(arrivalDate)
