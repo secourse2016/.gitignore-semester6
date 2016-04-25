@@ -19,13 +19,13 @@
 
 			booking1.passengerDetails = global.getPassengers();
 			booking1.outgoingFlightId = global.getOutGoingTrip().flightId;
-			airline1 = global.getOutGoingTrip().airlineDetails;
+			airline1 = global.getOutGoingTrip().airline;
 
 			if(global.getReturnTrip() && global.getOutGoingTrip().Airline != global.getReturnTrip().Airline) {
 				booking2 = {};
 				booking2.passengerDetails = global.getPassengers();
 				booking2.returnFlightId = global.getReturnTrip().flightId;
-				airline2 = global.getReturnTrip().airlineDetails;
+				airline2 = global.getReturnTrip().airline;
 			}
 
 
@@ -81,8 +81,11 @@
 					}
 					else {
 						booking1.paymentToken = response.id;
+
 						var requestParameters = {};
 						requestParameters.booking1 = booking1;
+						requestParamters.airline1 = airline1;
+
 						if(global.getReturnTrip() && global.getOutGoingTrip().Airline != global.getReturnTrip().Airline) {
 							// Two different airlines, generate another token.
 							Stripe.card.createToken(card, function(status2, responseToken2){
@@ -93,19 +96,38 @@
 									booking2.paymentToken = responseToken2.id;
 									
 									requestParameters.booking2 = booking2;
-									// TODO Send post request with two bookings here
+									requestParamters.airline2 = airline2;
+									// Send post request with two bookings 
+									$http.post('/api/addBooking',requestParameters).success(function(data){
 
+										// TODO add the booking reference(s) to the global service
+										
+										$location.path('/successful');
+										$scope.$apply();
+									})
+									.error(function(data){
+										/*if there is an err throw it otherWise go to payement page */
+										console.log('Error: Couldn\'t insert in the dataBase.');
+									});
 
-									$location.path('/successful');
-									$scope.$apply();
+									
 								}
 							});
 						}
 						else {
 
-							// TODO Send post request with one booking here.
+							// Send post request with one booking.
+							$http.post('/api/addBooking',requestParameters).success(function(data){
 
+								// TODO add the booking reference(s) to the global service
 
+								$location.path('/successful');
+								$scope.$apply();
+							})
+							.error(function(data){
+								/*if there is an err throw it otherWise go to payement page */
+								console.log('Error: Couldn\'t insert in the dataBase.');
+							});
 
 							$location.path('/successful');
 							$scope.$apply();
