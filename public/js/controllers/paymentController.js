@@ -10,6 +10,25 @@
 		*	Handle paying for the booking using stripe
 		*/
 		$scope.payForBooking = function(){
+
+			var booking1 = {};
+			var airline1 = {};
+
+			var booking2 = null;
+			var airline2 = null;
+
+			booking1.passengerDetails = global.getPassengers();
+			booking1.outgoingFlightId = global.getOutGoingTrip().flightId;
+			airline1 = global.getOutGoingTrip().airlineDetails;
+
+			if(global.getReturnTrip() && global.getOutGoingTrip().Airline != global.getReturnTrip().Airline) {
+				booking2 = {};
+				booking2.passengerDetails = global.getPassengers();
+				booking2.returnFlightId = global.getReturnTrip().flightId;
+				airline2 = global.getReturnTrip().airlineDetails;
+			}
+
+
 			$scope.error = {};
 
 			// Make sure that all fields are entered
@@ -61,11 +80,38 @@
 					
 					}
 					else {
-						// TODO will send the booking details to the server here.
+						booking1.paymentToken = response.id;
+						var requestParameters = {};
+						requestParameters.booking1 = booking1;
+						if(global.getReturnTrip() && global.getOutGoingTrip().Airline != global.getReturnTrip().Airline) {
+							// Two different airlines, generate another token.
+							Stripe.card.createToken(card, function(status2, responseToken2){
+								if(responseToken2.error) {
+
+								}
+								else {
+									booking2.paymentToken = responseToken2.id;
+									
+									requestParameters.booking2 = booking2;
+									// TODO Send post request with two bookings here
 
 
-						$location.path('/successful');
-						$scope.$apply();
+									$location.path('/successful');
+									$scope.$apply();
+								}
+							});
+						}
+						else {
+
+							// TODO Send post request with one booking here.
+
+
+
+							$location.path('/successful');
+							$scope.$apply();
+						}
+
+						
 					}
 
 				});
