@@ -1,20 +1,55 @@
 (function(){
 	angular.module('austrianAirlinesApp')
-	.controller('PaymentController', function($scope , global){
+	.controller('PaymentController', function($scope , global, $location){
 		$scope.totalCost = global.getTotalCost();
 		$scope.currency = global.outGoingTrip.currency;
 		$scope.step = 4; // View number in the stepper
-		// Payment Form attributes
-		$scope.cardNo = 0;
-		$scope.cvv = 0;
-		$scope.expiryDate = {};
+		
+	
+		/**
+		*	Handle paying for the booking using stripe
+		*/
+		$scope.payForBooking = function(){
+			var expiryDate = new Date($scope.expiryDate);
 
-		// Add the form inputs to the booking array
-		this.addBooking = function(){
-			this.booking.cardNo = this.cardNo;
-			this.booking.cvv = this.cvv;
-			this.booking.expiryDate = this.expiryDate;
-			// insert booking into the dataBase
+			// Get the entered credit card information
+			var card = {
+				number: $scope.cardNo,
+				exp_month: (expiryDate.getMonth()+1),
+				exp_year: expiryDate.getFullYear(),
+				cvc : $scope.cvv
+			}
+			
+			// Create the stripe token
+			Stripe.card.createToken(card, function(status,response){
+				
+				// Display the error message in the view in the appropriate place
+				if(response.error){
+
+					$scope.error = {};
+					$scope.error.message = response.error.message;
+
+					if(response.error.param == 'number')
+						$scope.error.number = true;
+					else if(response.error.param == 'exp_month')
+						$scope.error.date = true;
+					else if(response.error.param == 'exp_year')
+						$scope.error.date = true;
+					else if(response.error.param == 'cvc')
+						$scope.error.cvv = true;
+
+					$scope.$apply();	
+				
+				}
+				else {
+					// TODO will send the booking details to the server here.
+
+
+					$location.path('/successful');
+				}
+
+			});
+			
 		};
 	})
 	.controller('successController' , function($scope , global){
