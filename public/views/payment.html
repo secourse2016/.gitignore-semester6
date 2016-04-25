@@ -67,7 +67,7 @@
               <div class="row">
                 <div class="input-field col s12">
                 <i class="material-icons prefix">payment</i>
-                  <input  ng-model="cardNo" id="cardNo" type="text" class="validate" required>
+                  <input  ng-model="cardNo" id="cardNo" type="text" class="validate">
                   <label for="cardNo">Card No.</label>
                   <div class="paymentError" ng-show="error.number"><i class="tiny material-icons">error</i> {{error.message}}</div>
                 </div>
@@ -77,7 +77,7 @@
               <div class="row">
                 <div class="input-field col s6">
                 <i class="material-icons prefix">payment</i>
-                  <input  ng-model="cvv" id="cvv" type="text" class="validate" required>
+                  <input  ng-model="cvv" id="cvv" type="text" class="validate">
                   <label for="cvv">CVV</label>
                   <div class="paymentError" ng-show="error.cvv"><i class="tiny material-icons">error</i> {{error.message}}</div>
                 </div>
