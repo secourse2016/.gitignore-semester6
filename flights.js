@@ -106,17 +106,17 @@ var getOtherAirlines = function(cb, airlineIndex, allAirlines, origin, destinati
 		// Assign the HTTP request options: host and path
 		var options = {
 			host: targetHost,
-			path: targetPath + '?token='+jwtToken,
+			path: targetPath + '?wt='+jwtToken,
 			headers: { 'x-access-token': jwtToken }
 		};
 
 		// Call the HTTP GET request
 		http.get(options, function(res){
 
-			var flightsData = {};
+			var flightsData = "";
 			res.on('data', function(flights){
 				// Successful request
-				flightsData = flights;
+				flightsData += flights;
 			});
 			res.on('end', function(){
 
@@ -124,9 +124,11 @@ var getOtherAirlines = function(cb, airlineIndex, allAirlines, origin, destinati
 				getOtherAirlines(function(otherFlights){
 
 					// Parse the data of the flights of the current airline into JSON
+
 					var isJSON = true;
 					try{
 						flightsData = JSON.parse(flightsData);
+
 					}
 					catch(e){
 						isJSON = false;
@@ -135,7 +137,7 @@ var getOtherAirlines = function(cb, airlineIndex, allAirlines, origin, destinati
 					// Add the current flights to the flights of the next airlines
 					if(flightsData.outgoingFlights && isJSON){
 						otherFlights.outgoingFlights = otherFlights.outgoingFlights.concat(flightsData.outgoingFlights);
-						if(arrivalDate)
+						if(arrivalDate && flightsData.returnFlights)
 							otherFlights.returnFlights = otherFlights.returnFlights.concat(flightsData.returnFlights);
 					}
 					// Return the results
@@ -148,6 +150,9 @@ var getOtherAirlines = function(cb, airlineIndex, allAirlines, origin, destinati
 			getOtherAirlines(function(otherFlights){
 				cb(otherFlights);
 			}, airlineIndex+1, allAirlines, origin, destination, flightClass, departureDate, arrivalDate);
+		}).setTimeout(1000, function(){
+
+			this.abort();
 		});
 	}
 	else{

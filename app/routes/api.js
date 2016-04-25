@@ -140,7 +140,7 @@ router.post('/addBooking',function(req, res){
 /*
 * API route to get a certain booking from the database
 */
-router.post('/search-booking', function(req, res){
+router.post('/getBooking', function(req, res){
 	var bookingNumber = req.body.bookingNumber;
 	var passportNumber = req.body.passportNumber;
 	flights.getBooking(bookingNumber , passportNumber , function(err, booking){

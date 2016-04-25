@@ -6,9 +6,9 @@
     // Search the booking in the database
 		$scope.searchBooking = function searchBooking(){
 			if(validate($scope.request)){
-				$http.post('/api/search-booking' , $scope.request).success(function(data){
+				$http.post('/api/getBooking' , $scope.request).success(function(data){
 						bookingHistoryService.setBooking(data);
-						$location.path('/booking-history');
+						$location.path('/booking');
 				});
 			}
 		};

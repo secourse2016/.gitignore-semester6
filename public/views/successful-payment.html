@@ -4,7 +4,8 @@
 
 <div class="card-panel grey lighten-3 congratulations" ng-controller="successController as successCtrl">
 	<p class="paragraph">You have successfully booked your ticket, Have a nice trip!</p>
-	<p class="paragraph">Your booking number is {{bookingNumber}}</p>	
+	<p ng-if="bookingNumber != 0" class="paragraph">Your booking number is {{bookingNumber}}</p>
+	<p ng-if="airline != 'Austrian'" class="paragraph">To check your booking Information, please refere to {{airline}} Airlines. </p>
 	<div class="row">
         <div class="input-field col s12">
             <a ng-href="{{ '/'}}"

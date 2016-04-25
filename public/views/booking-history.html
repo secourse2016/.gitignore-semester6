@@ -10,7 +10,7 @@
 
       <!-- Going Trip -->
        <li class="collection-header red darken-1"> <h3 class="white-text" > Flight Information </h3></li>
-       <div>
+       <div ng-show="tripType != 3">
          <li class="flight-header collection-header  grey lighten-3">
           <h4>{{outgoingFlight.origin}} - {{outgoingFlight.destination}}</h4>
           <div class="flight-date">{{departureDate}}</div></li>
@@ -43,11 +43,11 @@
       </div>
 
       <!-- Return Trip -->
-      <li ng-show ="tripType == 2" class="flight-header collection-header  grey lighten-3">
+      <li ng-show ="tripType != 1" class="flight-header collection-header  grey lighten-3">
         <h4>{{returnFlight.origin}} - {{returnFlight.destination}}</h4>
         <div class="flight-date">{{arrivalDate}}</div>
       </li>
-       <div class="row flight-way" ng-show ="tripType == 2" style="">
+       <div class="row flight-way" ng-show ="tripType != 1" style="">
             <div class="col s10 m6 l3">
               <p class="flight-info-date">
                 <i class="material-icons schedule-icon" style="margin-right:5px">schedule</i>  <span>{{returnFlight.departureDateTime}} - {{returnFlight.departureDateTime}}</span>

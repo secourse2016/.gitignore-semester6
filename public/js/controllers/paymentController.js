@@ -19,5 +19,14 @@
 	})
 	.controller('successController' , function($scope , global){
 		$scope.bookingNumber = global.getBookingNumber();
+		/* check if Austrian is involved in any of the trips.
+			 If not, show the other airline*/
+		$scope.airline = "Austrian";
+		if(global.getOutGoingTrip().Airline != "Austrian"){
+			$scope.airline = global.getOutGoingTrip().Airline;
+			if(global.getReturnTrip() && global.getReturnTrip().Airline == "Austrian"){
+					$scope.airline = "Austrian";
+			}
+		}
 	});
 })();
