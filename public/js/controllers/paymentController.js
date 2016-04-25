@@ -65,6 +65,7 @@
 
 
 						$location.path('/successful');
+						$scope.$apply();
 					}
 
 				});
