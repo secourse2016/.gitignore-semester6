@@ -133,8 +133,6 @@
 								console.log('Error: Couldn\'t insert in the dataBase.');
 							});
 
-							$location.path('/successful');
-							$scope.$apply();
 						}
 
 						
