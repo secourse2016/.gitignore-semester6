@@ -26,7 +26,7 @@ angular.module('starter', ['ionic'])
   .state('index', {
     url: '/',
     views : {
-      
+
       'main-view' : {
         templateUrl: 'partials/home.html'
       },
@@ -34,13 +34,21 @@ angular.module('starter', ['ionic'])
         templateUrl: 'partials/search.html'
       }
     }
-    
+
   })
   .state('about', {
     url: '/about',
     views : {
       'main-view' : {
         templateUrl: 'partials/about.html'
+      }
+    }
+  })
+  .state('passengers', {
+    url: '/passengers',
+    views : {
+      'main-view' : {
+        templateUrl: 'partials/passengers.html'
       }
     }
   })
