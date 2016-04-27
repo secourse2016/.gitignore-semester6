@@ -150,13 +150,13 @@ function validateForm(formData, isChild, $scope,length) {
 		}
 
 		// check if birthDate field is empty or is not valid.
-		if(!formData[i].birthDate) {
+		if(!formData[i].dateOfBirth) {
 			if(!validationErrors[i])
 				validationErrors[i] = {};
 			validationErrors[i].birthDateRequired = true;
 			countErrors++;
 		}
-		else if(!validateDate(formData[i].birthDate , isChild)){
+		else if(!validateDate(formData[i].dateOfBirth , isChild)){
 			if(!validationErrors[i])
 				validationErrors[i] = {};
 			validationErrors[i].birthDateNotValid = true;

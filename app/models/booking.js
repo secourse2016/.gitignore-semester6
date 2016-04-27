@@ -6,7 +6,7 @@ var schema       = mongoose.Schema;
 var booking 	 = new schema ({
 
 	bookingNumber	: {type:String ,unique:true},
-	passengers 		:
+	passengerDetails	:
 		[
 			{
 				firstName 		: String,

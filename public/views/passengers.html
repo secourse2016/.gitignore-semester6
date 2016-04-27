@@ -171,7 +171,7 @@
            </div>
           <div class="input-field col s6">
             <i class="material-icons prefix">today</i>
-                  <input id="birthDate[{{$index}}]" ng-model="formData[$index].birthDate" input-date type="text"  select-years="60" required>
+                  <input id="birthDate[{{$index}}]" ng-model="formData[$index].dateOfBirth" input-date type="text"  select-years="60" required>
                   <label for="birthDate[{{$index}}]">Birth Date</label>
                   <span class="validationError"ng-show="errors[{{$index}}].birthDateRequired"><i class="tiny material-icons">error</i> This field is required. </span>
                   <span class="validationError"ng-show="errors[{{$index}}].birthDateNotValid"><i class="tiny material-icons">error</i> An adult should be older than 12 years old. </span>
@@ -213,7 +213,7 @@
           </div>
           <div class="input-field col s6">
             <i class="material-icons prefix">today</i>
-                  <input id="birthDateC[{{$index}}]" ng-model="formDataChildren[$index].birthDate" input-date type="text"  select-years="60" required>
+                  <input id="birthDateC[{{$index}}]" ng-model="formDataChildren[$index].dateOfBirth" input-date type="text"  select-years="60" required>
                   <label for="birthDateC[{{$index}}]">Birth Date</label>
                   <span class="validationError"ng-show="errorsChildren[{{$index}}].birthDateRequired"><i class="tiny material-icons">error</i> This field is required. </span>
                   <span class="validationError"ng-show="errorsChildren[{{$index}}].birthDateNotValid"><i class="tiny material-icons">error</i> A child should be younger than 12 years old. </span>
