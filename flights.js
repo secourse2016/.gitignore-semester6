@@ -40,7 +40,11 @@ var getFlights = module.exports.getFlights
 			cb(err,{});
 		var result = {};
 		// Add outgoing flights to the result
+		// edit the values of the flights and add flight ID and remove unwanted keys 
 		_.map(outgoingFlights, function(flight){
+			delete flight._id;
+			delete flight.id;
+			delete flight.__v;
 			flight.flightId = flight._id;
 			return flight;
 		  });
@@ -54,7 +58,9 @@ var getFlights = module.exports.getFlights
 				if(err2)
 					cb(err2);
 				_.map(returnFlights, function(flight){
-
+					delete flight._id;
+					delete flight.id;
+					delete flight.__v;
 					flight.flightId = flight._id;
 					return flight;
 				  });
