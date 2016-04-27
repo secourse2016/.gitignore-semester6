@@ -1,0 +1,62 @@
+<div style="margin-top: 50px" ng-controller="passengerViewController">
+	<link href="../css/passengers.css" rel="stylesheet">
+	<ion-header-bar class="bar red darken-1">
+		<h1 class="title white-text">Trip Information</h1>
+	</ion-header-bar>
+	<ion-content>
+
+      <ion-list>
+
+         <ul class="collection with-header ">
+          <li class="collection-header item item-stable grey lighten-3"
+                    ng-click="toggleGroup(1)"
+                    ng-class="{active: isGroupShown(1)}">
+            <div class="orginDestination">{{origin}} - {{destination}}</div>
+						<div class="flight-date">{{departureDate}} <i class="flightCollapseIcon icon ion-ios-arrow-down tiny"></i> </div>
+
+          </li>
+          <li class="collection-item item item-accordion"
+                    ng-show="isGroupShown(1)">
+						<div class="row">
+            <div class="col s6">{{outgoingFlight.departureDateTime}} - {{outgoingFlight.arrivalDateTime}}</div>
+						<div class="col s6">{{outgoingFlight.Airline}}</div>
+						</div>
+						<div class="row">
+						<div class="col s6">{{flightClass}}</div>
+						<div class="col s6"> {{outgoingFlight.cost}} {{outgoingFlight.currency}}</div>
+					</div>
+          </li>
+				</ul>
+
+				<ul class="collection with-header ">
+ 				<li class="collection-header item item-stable grey lighten-3"
+ 									ng-click="toggleGroup(2)"
+ 									ng-class="{active: isGroupShown(2)}">
+ 					<div class="orginDestination">{{returnFlight.origin}} - {{returnFlight.destination}}</div>
+ 					<div class="flight-date">{{departureDate}} <i class="flightCollapseIcon icon ion-ios-arrow-down tiny"></i></div>
+ 					<ion-icon name="arrow-dropdown-circle"></ion-icon>
+ 				</li>
+ 				<li class="collection-item item item-accordion"
+ 									ng-show="isGroupShown(2)">
+ 					<div class="row">
+ 					<div class="col s6">{{returnFlight.departureDateTime}} - {{returnFlight.arrivalDateTime}}</div>
+ 					<div class="col s6">{{returnFlight.Airline}}</div>
+ 					</div>
+ 					<div class="row">
+ 					<div class="col s6">{{flightClass}}</div>
+ 					<div class="col s6"> {{returnFlight.cost}} {{returnFlight.currency}}</div>
+ 				</div>
+ 				</li>
+ 			</ul>
+      </ion-list>
+
+    </ion-content>
+
+		<script>
+		$(document).ready(function(){
+    $('.collapsible').collapsible({
+      accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+    });
+  });
+		</script>
+</div>

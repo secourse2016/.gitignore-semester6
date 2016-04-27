@@ -1,0 +1,30 @@
+/*
+ * http://docs.angularjs.org/api/ng/directive/ngShow#usage_animations
+ */
+.list .item.item-accordion {
+
+  transition: 0.09s all linear;
+}
+.list .item.item-accordion.ng-hide {
+  line-height: 0px;
+}
+.list .item.item-accordion.ng-hide-add,
+.list .item.item-accordion.ng-hide-remove {
+  display: block !important;
+}
+
+.flight-date{
+	margin-top: 0%;
+	float:right;
+	font-size: 18px;
+}
+
+.orginDestination{
+  margin-top: 0%;
+  float:left;
+  font-size: 18px;
+}
+
+.flightCollapseIcon{
+  margin-left: 15px;
+}
