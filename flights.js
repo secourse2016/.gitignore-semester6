@@ -69,10 +69,6 @@ var getAllFlights = module.exports.getAllFlights
 				  = function(cb, allAirlines, origin, destination, flightClass, departureDate, arrivalDate){
 	// get flights from Austrian airlines
 	getFlights(function(err, austrianFlights){
-		_.map(austrianFlights, function(flight){
-			flight.airline = {name:"Austrian Airlines" , url:"ec2-52-90-41-197.compute-1.amazonaws.com", ip:"52.90.41.197"};
-			return flight;
-		  });
 		if(err)
 			cb(err,{});
 		else if(allAirlines){
@@ -254,4 +250,62 @@ module.exports.addBooking = function(bookingInfo, cb){
 		});
 
 	});
+};
+/**
+ * [function description]
+ * @param  {[type]}   requestParameters [description]
+ * @param  {Function} cb                [description]
+ * @return {[type]}                     [description]
+ */
+module.exports.handleBooking = function(requestParameters, cb){
+	var airline1 = requestParameters.airline1;
+	var airline2 = requestParameters.airline2;
+	var booking1 = requestParameters.booking1;
+	var booking2 = requestParameters.booking2;
+	var targetHost1 = airline1.url?airline1.url:airline1.ip;
+	// Assign the HTTP request options: host and path
+	var options = {
+		path: 'Booking?wt='+jwtToken,
+		headers: { 'x-access-token': jwtToken }
+	};
+	// Call the HTTP POST request
+	options.host =targetHost1;
+	var status ;
+	http.post(options, function(res){
+		var bookingRes = res.body;
+		if(bookingRes.errorMessage){
+			error.errorMessage = bookingRes.errorMessage;
+			error.airline = airline1;
+			cb({},error);
+		}else{
+			status.airlin1.refNum = bookingRes.refNum;
+			status.airlin1.info = airlin1;
+			if(airline2){
+				options.host = airline2.url?airline2.url:airline2.ip;
+				http.post(options, function(req,res){
+					req.body = booking2;
+					bookingRes = res.body;
+					if(bookingRes.errorMessage){
+						error.errorMessage = bookingRes.errorMessage;
+						error.airline = airline2;
+						cb({},error);
+					}else{
+						status.airlin2.refNum = bookingRes.refNum;
+						status.airlin2.info = airlin2;
+					}
+				});
+			}else{
+				cb(status,null);
+			}
+		}
+	}).on('error', function(e){
+		// Error in the current request, try the next airlines
+		getOtherAirlines(function(otherFlights){
+			cb(otherFlights);
+		}, airlineIndex+1, allAirlines, origin, destination, flightClass, departureDate, arrivalDate);
+	}).setTimeout(1000, function(){
+
+		this.abort();
+	}).write(booking1);
+
 };
