@@ -36,6 +36,16 @@ angular.module('starter', ['ionic'])
     }
     
   })
+  .state('flights', {
+    url: '/flights',
+    views : {
+      
+      'flights' : {
+        templateUrl: 'partials/flights.html'
+      }
+    }
+    
+  })
   .state('about', {
     url: '/about',
     views : {

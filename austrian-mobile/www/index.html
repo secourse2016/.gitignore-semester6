@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="starter">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
@@ -12,17 +12,25 @@
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
     -->
-
+     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/master.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <script src="js/libraries/jquery-1.11.2.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
+    <script src="js/app.js"></script>
+    <script type="text/javascript" src="js/services/flightsService.js"></script>
+    <script type="text/javascript" src="js/services/globalService.js"></script>
+    <script type="text/javascript" src="js/controllers/flightsController.js"></script>
 
     <!-- your app's js -->
-    <script src="js/app.js"></script>
+    
   </head>
-  <body ng-app="starter">
+  <body >
 
       
 
@@ -48,7 +56,7 @@
         
 
       </ion-nav-bar>
-       <ion-nav-view name="main-view" style="">
+       <ion-nav-view name="flights" style="">
       </ion-nav-view>
 
 

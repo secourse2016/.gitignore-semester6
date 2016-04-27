@@ -1,22 +1,30 @@
+<link href="css/flights.css" rel="stylesheet">
+
 <ion-tabs class="tabs-assertive tabs-icon-top">
 
         <ion-tab title="Book" icon-on="ion-paper-airplane" icon-off="ion-paper-airplane">
           <ion-nav-view name="tab-book">
           	<div ng-controller="flightsController" style="margin-top:50px">
+          	<h4 style="color:#7B0A0A">Select your flights</h4>
+          	 <h5 class="flightsHeader"><i class="small material-icons out" >local_airport</i>{{origin}} - {{destination}} - ({{ flightClass }})<div style="float:right; margin-top:21px">{{departureDate}}</div></h5>
           		<ion-list>
 
                 <ion-item ng-repeat="flight in outgoingFlights" class="item-avatar">
-                   <img >
-                   <h2>title</h2>
-                   <p>artist</p>
+                   <i class="small material-icons out" >local_airport</i>
+                   <h2>{{flight.origin}}</h2>
+                   <p>{{flight.destination}}</p>
+                    <div >
+                <input class="check with-gap red info_icon" name="group1" type="radio" id="test6/{{$index}}"  value="{{$index}}" ng-model="info[0]">
+                <label for="test6/{{$index}}"></label>
+              </div>
                 </ion-item>
               </ion-list>
-
+              <div class="divider"></div>
               <ion-list>
                 <ion-item ng-repeat="flight in returnFlights" class="item-avatar">
-                   <img >
-                   <h2>title</h2>
-                   <p>artist</p>
+                   <i class="small material-icons out" >local_airport</i>
+                   <h2>{{flight.origin}}</h2>
+                   <p>{{flight.destination}}</p>
                 </ion-item>
               </ion-list>
 
