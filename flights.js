@@ -228,6 +228,7 @@ module.exports.addBooking = function(bookingInfo, cb){
   		var currentDate= new Date();
     	var currentYear = currentDate.getFullYear();		
     	for (var i = 0 ; i < bookingInfo.passengerDetails.length ; i++){
+    		/* get the birth year of  the passenger with correct foramat */
     		var passengerBirthDate = new Date(bookingInfo.passengerDetails[i].birthDate);
     		var passengerBirthYear = passengerBirthYear.getFullYear();
 			if (currentYear-passengerBirthYear < 12) 
