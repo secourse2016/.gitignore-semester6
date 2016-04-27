@@ -224,14 +224,24 @@ module.exports.addBooking = function(bookingInfo, cb){
 	var generatedBookingNumber = "6D4B97";
 	/* counting all the records in the booking collection */
 	booking.count({},function(err,c){
-	/* Concatenate the number of records of the booking collection to the generatedBooking Number to get unique number*/
+		/* check if the passenger is child or not */
+  		var currentDate= new Date();
+    	var currentYear = currentDate.getFullYear();		
+    	for (var i = 0 ; i < bookingInfo.passengerDetails.length ; i++){
+    		var passengerBirthDate = new Date(bookingInfo.passengerDetails[i].birthDate);
+    		var passengerBirthYear = passengerBirthYear.getFullYear();
+			if (currentYear-passengerBirthYear < 12) 
+				bookingInfo.passengerDetails[i].isChild = true ;
+			else
+				bookingInfo.passengerDetails[i].isChild = false ;
+		}
+		/* Concatenate the number of records of the booking collection to the generatedBooking Number to get unique number*/
 		newBooking.bookingNumber = generatedBookingNumber+c;
-		newBooking.passengers = bookingInfo.passengers;
-		newBooking.outgoingFlight = bookingInfo.outgoingFlight;
-		newBooking.returnFlight = bookingInfo.returnFlight;
-		newBooking.totalCost = bookingInfo.totalCost;
+		newBooking.passengerDetails = bookingInfo.passengerDetails;
+		newBooking.outgoingFlightId = bookingInfo.outgoingFlightId;
+		newBooking.returnFlightId = bookingInfo.returnFlightId;
+		newBooking.cost = bookingInfo.cost;
 		newBooking.bookingDate = Date.now();
-		newBooking.isSuccessful = true ;
 		newBooking.save(function (err) {
 			cb(err,newBooking.bookingNumber);
 		});
