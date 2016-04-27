@@ -26,7 +26,7 @@ angular.module('starter', ['ionic'])
   .state('index', {
     url: '/',
     views : {
-      
+
       'main-view' : {
         templateUrl: 'partials/home.html'
       },
@@ -34,7 +34,7 @@ angular.module('starter', ['ionic'])
         templateUrl: 'partials/search.html'
       }
     }
-    
+
   })
   .state('about', {
     url: '/about',
@@ -47,6 +47,14 @@ angular.module('starter', ['ionic'])
   .state('faq', {
     url: '/faq',
     templateUrl: 'partials/faq.html'
+  })
+  .state('payment', {
+    url: '/payment',
+    views : {
+      'payment' : {
+        templateUrl: 'partials/payment.html'
+      }
+    }
   });
 })
 .controller('masterController',function($scope, $ionicSideMenuDelegate){
