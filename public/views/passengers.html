@@ -149,13 +149,13 @@
          <div class="row">
            <div class="input-field col s6">
              <i class="material-icons prefix">email</i>
-             <input id="email[{{$index}}]" type="email" class="validate" ng-model="formData[$index].emailAddress" required>
+             <input id="email[{{$index}}]" type="email" class="validate" ng-model="formData[$index].email" required>
              <label for="email[{{$index}}]">Email</label>
              <span class="validationError"ng-show="errors[{{$index}}].emailAddressNotValid"><i class="tiny material-icons">error</i> Invalid email address. </span>
            </div>
            <div class="input-field col s6">
              <i class="material-icons prefix">pan_tool</i>
-             <input id="passportNumber[{{$index}}]" type="text" class="validate" ng-model="formData[$index].passportNumber" required>
+             <input id="passportNumber[{{$index}}]" type="text" class="validate" ng-model="formData[$index].passportNum" required>
              <label for="passportNumber[{{$index}}]">Passport Number</label>
              <span class="validationError"ng-show="errors[{{$index}}].passportNumber"><i class="tiny material-icons">error</i> This field is required. </span>
              <span class="validationError"ng-show="errors[{{$index}}].passportNumberLength && !errors[{{$index}}].passportNumber"><i class="tiny material-icons">error</i> Passport number should not be less than 7 characters.</span>
@@ -206,7 +206,7 @@
 
           <div class="input-field col s6">
             <i class="material-icons prefix">pan_tool</i>
-            <input id="passportNumberC[{{$index}}]" type="text" class="validate" ng-model="formDataChildren[$index].passportNumber" required>
+            <input id="passportNumberC[{{$index}}]" type="text" class="validate" ng-model="formDataChildren[$index].passportNum" required>
             <label for="passportNumberC[{{$index}}]">Passport Number</label>
             <span class="validationError"ng-show="errorsChildren[{{$index}}].passportNumber"><i class="tiny material-icons">error</i> This field is required. </span>
             <span class="validationError"ng-show="errorsChildren[{{$index}}].passportNumberLength && !errorsChildren[{{$index}}].passportNumber"><i class="tiny material-icons">error</i> Passport number should not be less than 7 characters. </span>

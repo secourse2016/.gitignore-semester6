@@ -128,13 +128,13 @@ function validateForm(formData, isChild, $scope,length) {
 		}
 
 		// Check if passport number field is empty or is not valid.
-		if(!formData[i].passportNumber){
+		if(!formData[i].passportNum){
 			if(!validationErrors[i])
 				validationErrors[i] = {};
 			validationErrors[i].passportNumber = true;
 			countErrors++;
 		}
-		else if(formData[i].passportNumber.length < 7) {
+		else if(formData[i].passportNum.length < 7) {
 			if(!validationErrors[i])
 				validationErrors[i] = {};
 			validationErrors[i].passportNumberLength = true;
@@ -142,7 +142,7 @@ function validateForm(formData, isChild, $scope,length) {
 		}
 
 		// check if email address field is empty or is not valid.
-		if(!isChild && !validateEmail(formData[i].emailAddress))  {
+		if(!isChild && !validateEmail(formData[i].email))  {
 			if(!validationErrors[i])
 				validationErrors[i] = {};
 			validationErrors[i].emailAddressNotValid = true;

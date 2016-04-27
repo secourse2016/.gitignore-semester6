@@ -57,6 +57,7 @@ angular.module('austrianAirlinesApp')
 		totalCost:totalCost}; //cost will be modified later .
 		if(infoFlow.returnTrip)
 			bookingInfo.returnFlight = infoFlow.returnTrip.flightNumber;
+		console.log(bookingInfo.passengers);
 
 		/* after confirming the booking INFO redirect to the payment view */
 		$scope.confirm = function(){

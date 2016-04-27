@@ -14,7 +14,7 @@ var booking 	 = new schema ({
 				email		 	: String,
 				passportNum 	: String,
 				nationality 	: String,
-				dateOfBirth 	: Date.GetTime(),
+				dateOfBirth 	: Number,
 				isChild 		: Boolean
 			}
 		],
