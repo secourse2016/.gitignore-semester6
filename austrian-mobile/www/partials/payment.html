@@ -1,0 +1,59 @@
+<!--Payment block-->
+  <div ng-controller="PaymentController as paymentCtrl">
+  <div class="form-header">
+    <h5 class="red-text text-darken-2">Payment Form</h5>
+  </div>
+  <hr class="hr">
+
+  <img src="img/creditcards.png" alt="" class="responsive-img">
+  <hr class="hr">
+
+  <div>
+    <!--Form-->
+    <form name="paymentForm" class="col s12" ng-submit="paymentForm.$valid && addBoking()">
+      <!--cardNo-->
+      <div class="row">
+        <div class="input-field col s12">
+        <i class="material-icons prefix">payment</i>
+          <input  ng-model="cardNo" id="cardNo" type="text" class="validate" required>
+          <label for="cardNo">Card No.</label>
+        </div>
+      </div>
+
+      <!--CVV-->
+      <div class="row">
+        <div class="input-field col s6">
+        <i class="material-icons prefix">payment</i>
+          <input  ng-model="cvv" id="cvv" type="text" class="validate" required>
+          <label for="cvv">CVV</label>
+        </div>
+
+        <!--Expiry date-->
+        <div class="input-field col s6">
+          <i class="material-icons prefix">date_range</i>
+          <input id="expirydate" name="expirydate" ng-model="expiryDate" input-date type="text"  select-years="15"required>
+          <label for="expirydate">Expiry Date</label>
+        </div>
+      </div>
+
+      <!--Submition button-->
+      <div class="row">
+        <div class="input-field col s12">
+          <a ng-href="{{ paymentForm.$valid ?'/successful' : '/payment'}}"
+          class="btn waves-effect waves-light red book-button"
+          name="buy">Book Now
+          <i class="material-icons right">send</i>
+          </a>
+        </div>
+      </div>
+    </form>
+  </div>
+
+<br/>
+<!--Total price-->
+<div>
+  <h5 class="center-align red-text text-darken-2">
+    Total Cost: {{totalCost}} {{currency}}
+  </h5>
+</div>
+</div>
