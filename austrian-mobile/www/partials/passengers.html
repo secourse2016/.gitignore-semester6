@@ -1,10 +1,12 @@
 <div style="margin-top: 50px" ng-controller="passengerViewController">
 	<link href="../css/passengers.css" rel="stylesheet">
-	<ion-header-bar class="bar red darken-1">
-		<h1 class="title white-text">Trip Information</h1>
-	</ion-header-bar>
-	<ion-content>
 
+	<ion-content>
+		<div class="card">
+	  <div class="item item-divider red">
+	    <h2 class="white-text infoBar">Trip Information</h2>
+	  </div>
+	</div>
       <ion-list>
 
          <ul class="collection with-header ">
@@ -50,7 +52,15 @@
  			</ul>
       </ion-list>
 
-    </ion-content>
+		<div class="card">
+	  <div class="item item-divider red">
+	    <h2 class="white-text infoBar">Passenger Information</h2>
+	  </div>
+	</div>
+	</ion-content>
+
+
+
 
 		<script>
 		$(document).ready(function(){
