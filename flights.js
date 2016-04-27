@@ -21,7 +21,7 @@ var getOneDirectionFlights	= module.exports.getOneDirectionFlights
 
 	// Find documents in flights collection
 	flight.find({"origin": origin, "destination": destination, "class": flightClass,
-				 "departureDateTime" : {"$gte" : startDate, "$lt": endDate}}, {},
+				 "departureDateTime" : {"$gte" : startDate, "$lt": endDate}}).lean().exec(
 				 function(err, resultFlights){
 		cb(err, resultFlights);
 	});
@@ -40,6 +40,10 @@ var getFlights = module.exports.getFlights
 			cb(err,{});
 		var result = {};
 		// Add outgoing flights to the result
+		_.map(outgoingFlights, function(flight){
+			flight.flightId = flight._id;
+			return flight;
+		  });
 		result.outgoingFlights = outgoingFlights;
 
 		if(arrivalDate == null){	//One way
@@ -49,6 +53,11 @@ var getFlights = module.exports.getFlights
 			getOneDirectionFlights(function(err2, returnFlights){
 				if(err2)
 					cb(err2);
+				_.map(returnFlights, function(flight){
+
+					flight.flightId = flight._id;
+					return flight;
+				  });
 				result.returnFlights = returnFlights;
 				cb(err2, result);
 			}, destination, origin, flightClass, arrivalDate);
@@ -69,6 +78,15 @@ var getAllFlights = module.exports.getAllFlights
 				  = function(cb, allAirlines, origin, destination, flightClass, departureDate, arrivalDate){
 	// get flights from Austrian airlines
 	getFlights(function(err, austrianFlights){
+		_.map(austrianFlights.outgoingFlights, function(flight){
+			flight.airline = {name:"Austrian Airlines" , url:"ec2-52-90-41-197.compute-1.amazonaws.com", ip:"52.90.41.197"};
+			return flight;
+		  });
+		  _.map(austrianFlights.returnFlights, function(flight){
+			  flight.airline = {name:"Austrian Airlines" , url:"ec2-52-90-41-197.compute-1.amazonaws.com", ip:"52.90.41.197"};
+			  return flight;
+			});
+			console.log(austrianFlights.outgoingFlights);
 		if(err)
 			cb(err,{});
 		else if(allAirlines){
