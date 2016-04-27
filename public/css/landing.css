@@ -24,6 +24,10 @@
    min-width: 300px;
 }
 
+.card-action{
+  min-height: 80px;
+}
+
 /* Left input fields of the form */
 .form-left{
   margin: auto;
@@ -76,6 +80,27 @@
   padding: 20px;
 }
 
+
+/* All airlines checkbox styling */
+.allAirlinesCheckbox
+{
+  text-align: right;
+  margin-left: 20px;
+  margin-top: 24px;
+}
+
+
+.allAirlinesCheckbox input[type="checkbox"]+label:before {
+  border-color: white;
+}
+.allAirlinesCheckbox input[type="checkbox"]:checked+label:before {
+  border-top: none;
+  border-left: none;
+}
+
+
+
+
 /*  Auto-complete Styling  */
 /* =|=|=|=|=|=|=|=|=|=|=|= */
 
@@ -125,9 +150,10 @@ md-virtual-repeat-container{
   margin-top: 3px !important;
 }
 
-body > md-virtual-repeat-container:nth-child(7){
+body > md-virtual-repeat-container:nth-child(8){
   margin-left: -17% !important;
 }
+
 
 li > md-autocomplete-parent-scope > span{
   color: #ef5350;
@@ -160,7 +186,7 @@ li > md-autocomplete-parent-scope > span{
     width: 200px !important;
   }
 
-  body > md-virtual-repeat-container:nth-child(7){
+  body > md-virtual-repeat-container:nth-child(8){
 
     margin-left: 0% !important;
 

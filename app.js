@@ -2,30 +2,28 @@ var express       = require('express');
 var path          = require('path');
 var mongoose      = require('mongoose');
 var bodyParser    = require('body-parser');
-var moment		  = require('moment');
+var moment	   	  = require('moment');
+var compression   = require('compression');
 var app           = express();
 require('dotenv').config();
 
-// models ===============================================================
-var flights       = require('./flights');
-
+// functions ==============================================================
+app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// configuration ===============================================================
+// configuration ==========================================================
 mongoose.connect(process.env.mongoURL); // connect to our database
 
-/*
-* Default route
-*/
+// Main and Static Routes =================================================
 app.get("/",function(req,res){
   res.render("index.html");
 });
 
-/*
-* Send the server route to a fake route to be handled by angular
-*/
+/**
+ * Send the server route to a fake route to be handled by AngularJS.
+ */
 var sendIndex = function(req, res){
     return res.sendFile(__dirname + '/public/index.html');
 };
@@ -42,70 +40,27 @@ app.route('/pricing').get(sendIndex);
 app.route('/error').get(sendIndex);
 
 
-// App Routes go here ==========================================================
-
 /**
-* API route that returns all airports available for flight search
-*/
-app.get('/api/airports', function(req, res){
-    flights.getAirports(function(err, airports){
-        if(err)
-            res.send(err);
-        res.json(airports);
-    });
+ * Allow access for headers
+ */
+app.all('*', function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+  next();
 });
 
-/**
-* ROUND-TRIP SEARCH REST ENDPOINT
-* @param origin - Flight Origin Location
-* @param destination - Flight Destination Location
-* @param departingDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
-* @param returningDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
-* @param class - economy or business only
-* @returns {Array}
-*/   
-app.get('/api/flights/search/:origin/:destination/:departingDate/:returningDate/:class', function(req, res) {
-	// retrieve params 
-	var origin =  req.params.origin;
-	var destination =  req.params.destination;
-	var departingDate =  req.params.departingDate;
-	var returningDate =  req.params.returningDate;
-	var flightClass =  req.params.class;
 
-	flights.getFlights(function(err, resultFlights){
-		if(err)
-			res.send(err);
-		res.json(resultFlights);
+// DB and API Routes  =====================================================
+var dbRouter = require('./app/routes/db');
+var APIRouter = require('./app/routes/api');
 
-	}, origin, destination, flightClass, moment(departingDate,"x"), moment(returningDate,"x"));
-});
+// app.use('/db', dbRouter);               //DON'T DEPOLY
+app.use('/api', APIRouter);
 
-/**
-* ONE-WAY SEARCH REST ENDPOINT 
-* @param origin - Flight Origin Location
-* @param DepartingDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
-* @param class - economy or business only
-* @returns {Array}
-*/ 
-	     
-app.get('/api/flights/search/:origin/:destination/:departingDate/:class', function(req, res) {
-    // retrieve params 
-    var origin 			=  req.params.origin;
-    var destination 	=  req.params.destination;
-    var departingDate 	=  req.params.departingDate;
-    var flightClass 	=  req.params.class;
-  
-	flights.getFlights(function(err, resultFlights){
-		if(err)
-			res.send(err);
-		res.json(resultFlights);
-
-	}, origin, destination, flightClass, moment(departingDate,"x"));
-});   
-
+// 404 Middleware =========================================================
 app.use(function(req, res, next){
-  res.status(404);
-   res.send('404 Not Found');
+    res.status(404);
+    res.send('404 Not Found');
 });
 
 module.exports = app;
