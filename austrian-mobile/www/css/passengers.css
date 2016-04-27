@@ -13,6 +13,10 @@
   display: block !important;
 }
 
+.item.item-stable.active{
+  color:red;
+}
+
 .flight-date{
 	margin-top: 0%;
 	float:right;
@@ -27,4 +31,11 @@
 
 .flightCollapseIcon{
   margin-left: 15px;
+}
+
+h2.infoBar{
+  margin-top: 5px;
+  font-size: 20px;
+  text-align: center;
+  font-style: bold;
 }
