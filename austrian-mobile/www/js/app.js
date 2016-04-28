@@ -40,7 +40,7 @@ angular.module('starter', ['ionic'])
     url: '/flights',
     views : {
       
-      'flights' : {
+      'main-view' : {
         templateUrl: 'partials/flights.html'
       }
     }
