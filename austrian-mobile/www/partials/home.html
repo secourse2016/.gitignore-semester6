@@ -1,23 +1,72 @@
+<link href="css/form.css" rel="stylesheet">
 <ion-tabs class="tabs-assertive tabs-icon-top">
 
     <!-- Search flights form -->
     <ion-tab title="Book" icon-on="ion-paper-airplane" icon-off="ion-paper-airplane">
       <ion-nav-view name="tab-book">
-      	<div style="margin-top:50px">
-            <div class="list padding">
-                <!-- Origin Airport -->
-                <div class="list">
-                    <ion-md-input placeholder="From" highlight-color="balanced" type="text"></ion-md-input>
-                    <ion-md-input placeholder="To" highlight-color="energized" type="text"></ion-md-input>
-                </div>
-                <!-- Adults Count -->
-                <!-- Children Count -->
-                <!-- Trip Type -->
-                <!-- Departure Date -->
-                <!-- Return Date -->
-                <!-- Flight Class -->
-                <!-- Search for Flights -->
+      	<div style="margin-top:50px" class="padding">
+            <div class="list">
 
+                <div class="list-fields padding">
+                    <h3 id="search-header">Find Flights</h3>
+                    <!-- Origin Airport -->
+                    <ion-md-input placeholder="From" type="text"></ion-md-input>
+                    <!-- Origin Destination -->
+                    <ion-md-input placeholder="To" type="text"></ion-md-input>
+
+                    <!-- Adults Count -->
+                    <label class="item item-input item-select">
+                       <div class="input-label">
+                         Adults
+                       </div>
+                       <select>
+                         <option selected>1 adult</option>
+                         <option>2 adults</option>
+                         <!-- repeat -->
+                       </select>
+                   </label>
+                    <!-- Children Count -->
+                    <label class="item item-input item-select">
+                       <div class="input-label">
+                         Children
+                       </div>
+                       <select>
+                         <option selected>no children</option>
+                         <option>1 child</option>
+                         <!-- repeat -->
+                       </select>
+                   </label>
+                    <!-- Trip Type -->
+                    <label class="item item-input item-select">
+                       <div class="input-label">
+                         Trip Type
+                       </div>
+                       <select>
+                         <option selected>One-way</option>
+                         <option>Roundtrip</option>
+                         <!-- repeat -->
+                       </select>
+                   </label>
+                    <!-- Departure Date -->
+                    <!--  date picker -->
+                    <!-- Return Date -->
+                    <!--  date picker -->
+                    <!-- Flight Class -->
+                    <label class="item item-input item-select">
+                       <div class="input-label">
+                         Class
+                       </div>
+                       <select>
+                         <option selected>economy</option>
+                         <option>business</option>
+                         <!-- repeat -->
+                       </select>
+                   </label>
+                    <!-- Search for Flights -->
+                    <button class="button button-light">
+                      FIND NOW!
+                    </button>
+                </div>
             </div>
       	</div>
       </ion-nav-view>

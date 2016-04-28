@@ -1,0 +1,30 @@
+.list-fields{
+    background-color: #ef473a;
+}
+
+#search-header{
+    text-align: center;
+    color: white;
+}
+
+/* Field underline color */
+input[type=text] {
+  border-bottom: 2px solid white;
+  box-shadow: 0 1px 0 0 white;
+}
+
+input.md-input{
+  background: transparent;
+}
+
+.item-md-label .input-label{
+  opacity: 1;
+}
+
+.item-select{
+  margin-top: 10px;
+}
+.item-select .input-label{
+  margin-left: -10px;
+  color: white;
+}
