@@ -10,9 +10,9 @@
                 <div class="list-fields">
                     <h3 id="search-header" class="condensed light card-panel grey lighten-3">Find Flights</h3>
                     <!-- Origin Airport -->
-                    <i class="material-icons" style="float:left; margin-left:10px; margin-top:10px">flight_takeoff</i>
-                    <div ng-controller="autoCompleteController as ctrl" class="padding">
 
+                    <div ng-controller="autoCompleteController as ctrl" class="padding">
+                      <i class="material-icons">flight_takeoff</i>
                       <md-autocomplete required
                           md-input-name="autocompleteField"
                           md-selected-item="formData.origin"
@@ -30,8 +30,8 @@
                     </div>
                     <hr>
                     <!-- Destination Airport -->
-                    <i class="material-icons" style="float:left; margin-left:10px; margin-top:10px">flight_land</i>
                     <div ng-controller="autoCompleteController as ctrl" class="padding">
+                    <i class="material-icons">flight_land</i>
                       <md-autocomplete required
                           md-input-name="autocompleteField"
                           md-selected-item="formData.destination"

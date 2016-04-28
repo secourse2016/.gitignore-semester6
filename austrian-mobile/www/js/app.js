@@ -36,6 +36,16 @@ angular.module('starter', ['ionic', 'ngMaterial'])
     }
 
   })
+  .state('flights', {
+    url: '/flights',
+    views : {
+
+      'main-view' : {
+        templateUrl: 'partials/flights.html'
+      }
+    }
+
+  })
   .state('about', {
     url: '/about',
     views : {
@@ -51,10 +61,33 @@ angular.module('starter', ['ionic', 'ngMaterial'])
         templateUrl: 'partials/passengers.html'
       }
     }
+  }) .state('confirmation', {
+    url: '/confirmation',
+    views : {
+      'main-view' : {
+        templateUrl: 'partials/confirmation.html'
+      }
+    }
   })
   .state('faq', {
     url: '/faq',
     templateUrl: 'partials/faq.html'
+  })
+  .state('payment', {
+    url: '/payment',
+    views : {
+      'main-view' : {
+        templateUrl: 'partials/payment.html'
+      }
+    }
+  })
+  .state('successful', {
+    url: '/successful',
+    views : {
+      'main-view' : {
+        templateUrl: 'partials/successful.html'
+      }
+    }
   });
 
   /**
@@ -76,6 +109,10 @@ angular.module('starter', ['ionic', 'ngMaterial'])
  //         }
  //     };
  // }]);
+  /*
+   * Set the public key for stripe
+   */
+   Stripe.setPublishableKey('pk_test_GLghvbf0O1mNsV4T8nECOC1u');
 })
 .controller('masterController',function($scope, $ionicSideMenuDelegate){
   $scope.toggleLeft = function() {

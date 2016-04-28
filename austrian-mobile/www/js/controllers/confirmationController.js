@@ -1,5 +1,5 @@
-angular.module('austrianAirlinesApp')
-	   .controller('confirmationController', function($scope, $http, global, $location){
+var app = angular.module('starter');
+app.controller('confirmationController' , function($scope, $http, global, $state) {
 
 	$scope.airline         = "Austrian";
 
@@ -30,7 +30,6 @@ angular.module('austrianAirlinesApp')
 		$scope.returnFlight = angular.copy(global.returnTrip);
 
 	}
-
 	var infoFlow = $scope.infoFlow = global;
 	$scope.step = 3; // View number in the stepper
 
@@ -53,6 +52,8 @@ angular.module('austrianAirlinesApp')
 	global.setTotalCost(totalCost)
 	/* after confirming the booking INFO redirect to the payment view */
 	$scope.confirm = function(){
-		$location.path("/payment");
+		$state.go("payment");
 	}
+
+
 });
