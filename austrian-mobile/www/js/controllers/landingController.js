@@ -6,9 +6,11 @@
 	* and redirecting to the flights view.
 	*/
 	app.controller('searchFlightController', function($scope, global, $location, $http){
+
 		this.range = [];
 		for(var i = 2; i <= 7; ++i)
 			this.range.push(i);
+
 		$scope.formData = {};
 		$scope.errors = {};
 		$scope.searchFlights = function(){
@@ -155,3 +157,11 @@
 		});
 	});
 })();
+
+/* Date Field Styling */
+function checkDateField(field) {
+	if (field.value == '')
+			return 'text';
+	else
+			return 'date';
+}

@@ -68,21 +68,20 @@
                          <!-- repeat -->
                     </select>
                     <!-- Departure Date -->
-                    <label class="item item-input item-stacked-label">
-                        <span class="input-label">Outgoing Date</span>
-                        <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" ng-model="formData.outgoingDate">
+                    <label class="item item-input">
+                        <i class="icon ion-calendar"></i>
+                        <input ng-model="formData.outgoingDate" placeholder="Outgoing Date" type="text" onfocus="(this.type='date')" onblur="(this.type=checkDateField(this))">
                     </label>
                     <!-- Return Date -->
-                    <label class="item item-input item-stacked-label">
-                        <span class="input-label">Return Date</span>
-                        <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" ng-model="formData.returnDate">
+                    <label class="item item-input">
+                        <i class="icon ion-calendar"></i>
+                        <input ng-model="formData.returnDate" placeholder="Departure Date" type="text" onfocus="(this.type='date')" onblur="(this.type=checkDateField(this))">
                     </label>
                     <!-- Flight Class -->
                     <select ng-model="formData.flightClass">
                         <option value="" disabled selected>Flight Class</option>
                         <option value="economy">Economy</option>
                         <option value="business">Business</option>
-                         <!-- repeat -->
                     </select>
                     <!-- Search for Flights -->
                     <br>
