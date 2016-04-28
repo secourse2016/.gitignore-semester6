@@ -8,10 +8,10 @@
 	<p ng-if="airline != 'Austrian'" class="paragraph">To check your booking Information, please refere to {{airline}} Airlines. </p>
 	<div class="row">
         <div class="input-field col s12">
-            <a ng-href="{{'/'}}"
+            <button ng-click="redirect()"
              class="btn waves-effect waves-light red home-button"
              name="buy">Back to Home
-            </a>
+           </button>
         </div>
     </div>
 </div>

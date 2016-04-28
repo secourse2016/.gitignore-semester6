@@ -1,6 +1,6 @@
 (function(){
 	angular.module('starter')
-	.controller('PaymentController', function($scope , global, $location){
+	.controller('PaymentController', function($scope , global, $state){
 		$scope.totalCost = global.getTotalCost();
 		$scope.currency = global.outGoingTrip.currency;
 		$scope.step = 4; // View number in the stepper
@@ -133,7 +133,7 @@
 								console.log('Error: Couldn\'t insert in the dataBase.');
 							});
 
-							$location.path('/successful');
+							$state.go('successful');
 							$scope.$apply();
 						}
 
@@ -145,7 +145,7 @@
 
 		};
 	})
-	.controller('successController' , function($scope , global){
+	.controller('successController' , function($scope, global, $state){
 		$scope.bookingNumber = global.getBookingNumber();
 		/* check if Austrian is involved in any of the trips.
 			 If not, show the other airline*/
@@ -155,6 +155,10 @@
 			if(global.getReturnTrip() && global.getReturnTrip().Airline == "Austrian"){
 					$scope.airline = "Austrian";
 			}
+		}
+
+		$scope.redirect = function(){
+			$state.go('index');
 		}
 	});
 })();
