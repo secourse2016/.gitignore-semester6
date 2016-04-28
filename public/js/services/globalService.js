@@ -14,8 +14,8 @@ angular.module('austrianAirlinesApp').service('global', function() {
 	this.totalCost = 0;
 	this.bookingNumber = 0;
 	this.passengers = [];
-	this.outGoingTrip = {};
-	this.returnTrip = {};
+	this.outGoingTrip = null;
+	this.returnTrip = null;
 
 	/**
 	 * Set the search flight information from the landing-page search form.
