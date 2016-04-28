@@ -69,7 +69,8 @@
 							 ng-click="toggleGroup($index)"
 							 ng-class="{active: isGroupShown($index)}">
 			 <div class="orginDestination">Passenger {{$index + 1}} - Adult</div>
-			 <i class="passengerCollapseIcon icon ion-ios-arrow-down tiny"></i>
+			 <i class="passengerCollapseIcon icon ion-ios-arrow-down tiny" ng-show="validAdults()"></i>
+			 <i class="passengerCollapseIcon icon ion-alert-circled tiny" ng-show="!validAdults()" ng-class="{alert: !validAdults()}"></i>
 		 </li>
 		 <li class="collection-item item item-accordion"
 							 ng-show="isGroupShown($index)">
@@ -102,7 +103,7 @@
 
 				 <label class="item item-input item-stacked-label">
 			     <!-- <span class="input-label">Passport Number</span> -->
-			     <input class="fromInput" type="text" placeholder="Passport Number" ng-model="formData[$index].passportNumr">
+			     <input class="fromInput" type="text" placeholder="Passport Number" ng-model="formData[$index].passportNum">
 	   		</label>
 			 </div>
 			 <div class="row item item-accordion">
@@ -132,7 +133,8 @@
 						ng-click="toggleGroup($index + adults.length)"
 						ng-class="{active: isGroupShown($index + adults.length)}">
 		<div class="orginDestination">Passenger {{($index + adults.length) + 1}} - Child</div>
-		<i class="passengerCollapseIcon icon ion-ios-arrow-down tiny"></i>
+		<i class="passengerCollapseIcon icon ion-ios-arrow-down tiny" ng-show="validChildren()"></i>
+		<i class="passengerCollapseIcon icon ion-alert-circled tiny" ng-show="!validChildren()" ng-class="{alert: !validChildren()}"></i>
 	</li>
 	<li class="collection-item item item-accordion"
 						ng-show="isGroupShown($index + adults.length)">
