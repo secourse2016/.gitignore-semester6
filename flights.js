@@ -74,7 +74,6 @@ var getFlights = module.exports.getFlights
 
 
 var jwtToken = jwt.sign({},process.env.SECRET_KEY);
-console.log(jwtToken);
 
 /**
  * Takes the search input, searches Austrian airline and other airlines
@@ -290,62 +289,71 @@ module.exports.addBooking = function(bookingInfo, cb){
 
 	});
 };
+var postBookingRequests = module.exports.postBookingRequests
+			   = function(airline , booking , cb){
+				   if(airline.ip == "52.90.41.197"){
+					   //call the function int the server
+				   }else{
+					   if(airline){
+						   var targetHost = airline.url?airline.url:airline.ip;
+						   // Assign the HTTP request options: host and path
+						   var options = {
+							   host: targetHost1;
+							   path: 'Booking?wt='+jwtToken,
+							   headers: { 'x-access-token': jwtToken }
+						   };
+		   				http.post(options, function(req,res){
+		   					bookingRes = res.body;
+		   					if(bookingRes.errorMessage){
+		   						error.errorMessage = bookingRes.errorMessage;
+		   						error.airline = airline;
+		   						cb(error,{});
+		   					}else{
+		   						airline.refNum = bookingRes.refNum;
+								cb(0,airline);
+		   					}
+		   				}).on('error', function(e){
+		   					cb(1,{});
+		   				}).setTimeout(1000, function(){
+		   					this.abort();
+		   				}).write(booking);
+
+				   }else{
+					   cb(0,{});
+				   }
+
+			   }
+
+
 /**
- * [function description]
- * @param  {[type]}   requestParameters [description]
+ * [Function send the Post requests to the airlines ]
+ * @param  {[object with airline and Booking]}   requestParameters [description]
  * @param  {Function} cb                [description]
  * @return {[type]}                     [description]
  */
-module.exports.handleBooking = function(requestParameters, cb){
+ module.exports.handleBooking = function(requestParameters, cb){
 	var airline1 = requestParameters.airline1;
 	var airline2 = requestParameters.airline2;
 	var booking1 = requestParameters.booking1;
 	var booking2 = requestParameters.booking2;
-
-	var targetHost1 = airline1.url?airline1.url:airline1.ip;
-	// Assign the HTTP request options: host and path
-	var options = {
-		path: 'Booking?wt='+jwtToken,
-		headers: { 'x-access-token': jwtToken }
-	};
-	// Call the HTTP POST request
-	options.host =targetHost1;
-	var status ;
-	http.post(options, function(res){
-		var bookingRes = res.body;
-		if(bookingRes.errorMessage){
-			error.errorMessage = bookingRes.errorMessage;
-			error.airline = airline1;
-			cb(error,{});
+	var status   ;
+	postBookingRequests(airline1, booking1, function(error, airline1Status){
+		if(!error){
+			status.airline1 = airline1Status;
+			postBookingRequests(airline2, booking2, function(error, airline2Status){
+				status.airline2 = airline2Status;
+				if(!error){
+					cb(status, error);
+				}else{
+					cb({},error);
+				}
+			});
 		}else{
-			status.airlin1.refNum = bookingRes.refNum;
-			status.airlin1.info = airlin1;
-			if(airline2){
-				options.host = airline2.url?airline2.url:airline2.ip;
-				http.post(options, function(req,res){
-					req.body = booking2;
-					bookingRes = res.body;
-					if(bookingRes.errorMessage){
-						error.errorMessage = bookingRes.errorMessage;
-						error.airline = airline2;
-						cb({},error);
-					}else{
-						status.airlin2.refNum = bookingRes.refNum;
-						status.airlin2.info = airlin2;
-					}
-				}).on('error', function(e){
-					cb({},1);
-				}).setTimeout(1000, function(){
-					this.abort();
-				}).write(booking2);
-			}else{
-				cb(status,null);
-			}
+			cb({},error);
 		}
-	}).on('error', function(e){
-		cb({},1);
-	}).setTimeout(1000, function(){
-		this.abort();
-	}).write(booking1);
+
+	});
+
+
 
 };
