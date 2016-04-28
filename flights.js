@@ -74,6 +74,7 @@ var getFlights = module.exports.getFlights
 
 
 var jwtToken = jwt.sign({},process.env.SECRET_KEY);
+console.log(jwtToken);
 
 /**
  * Takes the search input, searches Austrian airline and other airlines
@@ -283,7 +284,7 @@ module.exports.addBooking = function(bookingInfo, cb){
 		newBooking.returnFlightId = bookingInfo.returnFlightId;
 		newBooking.cost = bookingInfo.cost;
 		newBooking.bookingDate = Date.now();
-		newBooking.save(function (err) {
+		newBooking.save(function (err){
 			cb(err,newBooking.bookingNumber);
 		});
 
@@ -300,6 +301,7 @@ module.exports.handleBooking = function(requestParameters, cb){
 	var airline2 = requestParameters.airline2;
 	var booking1 = requestParameters.booking1;
 	var booking2 = requestParameters.booking2;
+
 	var targetHost1 = airline1.url?airline1.url:airline1.ip;
 	// Assign the HTTP request options: host and path
 	var options = {
@@ -331,18 +333,18 @@ module.exports.handleBooking = function(requestParameters, cb){
 						status.airlin2.refNum = bookingRes.refNum;
 						status.airlin2.info = airlin2;
 					}
-				});
+				}).on('error', function(e){
+					cb({},1);
+				}).setTimeout(1000, function(){
+					this.abort();
+				}).write(booking2);
 			}else{
 				cb(status,null);
 			}
 		}
 	}).on('error', function(e){
-		// Error in the current request, try the next airlines
-		getOtherAirlines(function(otherFlights){
-			cb(otherFlights);
-		}, airlineIndex+1, allAirlines, origin, destination, flightClass, departureDate, arrivalDate);
+		cb({},1);
 	}).setTimeout(1000, function(){
-
 		this.abort();
 	}).write(booking1);
 
