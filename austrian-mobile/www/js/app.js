@@ -44,6 +44,14 @@ angular.module('starter', ['ionic'])
       }
     }
   })
+  .state('passengers', {
+    url: '/passengers',
+    views : {
+      'main-view' : {
+        templateUrl: 'partials/passengers.html'
+      }
+    }
+  })
   .state('faq', {
     url: '/faq',
     templateUrl: 'partials/faq.html'
@@ -70,4 +78,3 @@ angular.module('starter', ['ionic'])
     $ionicSideMenuDelegate.toggleLeft();
   };
 });
-;

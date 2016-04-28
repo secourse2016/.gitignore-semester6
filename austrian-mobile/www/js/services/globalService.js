@@ -14,8 +14,25 @@ angular.module('starter').service('global', function() {
 	this.totalCost = 0;
 	this.bookingNumber = 0;
 	this.passengers = [];
-	this.outGoingTrip = {};
-	this.returnTrip = {};
+
+	this.outGoingTrip = {
+    origin:"CAI",
+    destination:"JED",
+    departureDateTime:"22:0",
+    arrivalDateTime:"22:30",
+    Airline:"Austrian",
+    cost:"700",
+    currency:"USD"
+  };
+	this.returnTrip = {
+    origin:"JED",
+    destination:"CAI",
+    departureDateTime:"22:0",
+    arrivalDateTime:"22:30",
+    Airline:"Austrian",
+    cost:"700",
+    currency:"USD"
+  };
 
 	/**
 	 * Set the search flight information from the landing-page search form.
