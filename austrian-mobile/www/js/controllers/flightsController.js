@@ -1,7 +1,7 @@
 var app=angular.module('starter');
 
 app.controller('flightsController', function($scope, flights, global){
-
+	$scope.error 			= {};
 	$scope.airline          = "Austrian";
 
 	var outgoingDate        = new Date(global.searchFlight.outgoingDate);
@@ -95,9 +95,13 @@ app.controller('flightsController', function($scope, flights, global){
 	$scope.moveForward = function(){
 
 		if(!$scope.info[0] || ($scope.tripType == 2 && !$scope.info[1] && $scope.returnFlights.length > 0)) {
-			Materialize.toast('Please select the flight.',3000);
+			// Materialize.toast('Please select the flight.',3000);
+			// toaster.pop('success', "", "text");
+			$scope.error.message = "Please select your flights";
 		}
 		else{
+
+			$scope.error.message = null;
 			// Passing selected outgoing flight to the global service
 			global.outGoingTrip = $scope.outgoingFlights[$scope.info[0]];
 			if ($scope.tripType == 2){

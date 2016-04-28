@@ -14,7 +14,7 @@ angular.module('starter').service('global', function() {
 		'origin': 'CAI',
 		'destination': 'JED',
 		'flightClass': 'economy',
-		'tripTipe': 2,
+		'tripType': 2,
 		'outgoingDate':1460478300000,
 		'returnDate':1460478400000
 	};
