@@ -57,8 +57,11 @@
 	    <h2 class="white-text infoBar">Passenger Information</h2>
 	  </div>
 	</div>
-	<form novalidate>
-	<ion-list ng-controller="collapsableController">
+
+	<!-- Form for adults goes here -->
+
+	<form ng-submit="submitForm()" novalidate>
+	<ion-list ng-controller="collapsableController" data-ng-init="openFirstAccordion()">
 
 		<div ng-repeat="adult in adults track by $index">
 		<ul class="collection with-header ">
@@ -66,6 +69,7 @@
 							 ng-click="toggleGroup($index)"
 							 ng-class="{active: isGroupShown($index)}">
 			 <div class="orginDestination">Passenger {{$index + 1}} - Adult</div>
+			 <i class="passengerCollapseIcon icon ion-ios-arrow-down tiny"></i>
 		 </li>
 		 <li class="collection-item item item-accordion"
 							 ng-show="isGroupShown($index)">
