@@ -42,11 +42,12 @@ var getFlights = module.exports.getFlights
 		var result = {};
 		// Add outgoing flights to the result
 		// edit the values of the flights and add flight ID and remove unwanted keys
+
 		_.map(outgoingFlights, function(flight){
+			flight.flightId = flight._id;
 			delete flight._id;
 			delete flight.id;
 			delete flight.__v;
-			flight.flightId = flight._id;
 			return flight;
 		  });
 		result.outgoingFlights = outgoingFlights;
@@ -59,10 +60,10 @@ var getFlights = module.exports.getFlights
 				if(err2)
 					cb(err2);
 				_.map(returnFlights, function(flight){
+					flight.flightId = flight._id;
 					delete flight._id;
 					delete flight.id;
 					delete flight.__v;
-					flight.flightId = flight._id;
 					return flight;
 				  });
 				result.returnFlights = returnFlights;
@@ -305,7 +306,7 @@ var postBooking = module.exports.postBookingRequests
 						   // Assign the HTTP request options: host and path
 						   var options = {
 							   host: targetHost,
-							   path: 'Booking?wt='+jwtToken,
+							   path: 'api/Booking?wt='+jwtToken,
 							   headers: { 'x-access-token': jwtToken }
 						   };
 		   				http.post(options, function(req,res){
