@@ -5,7 +5,7 @@
 	* Search Flight Controller form collecting form data
 	* and redirecting to the flights view.
 	*/
-	app.controller('searchFlightController', function($scope, global, $location, $http){
+	app.controller('searchFlightController', function($scope, global, $state, $http, flights){
 
 		this.range = [];
 		for(var i = 2; i <= 7; ++i)
@@ -43,27 +43,22 @@
 					'allAirlines'	: allAirlines,
 				};
 
-				var postURL = 'api/flights/search/oneway';
+				var postURL = 'http://localhost:8080/api/flights/search/oneway';
 				if(tripType == 2 && returnDate){
 					requestParameters.arrivalDate = returnDate;
-					postURL = 'api/flights/search/roundtrip';
+					postURL = 'http://localhost:8080/api/flights/search/roundtrip';
 				}
-			console.log("POST to Server!");
-			// 	$scope.hideSubmit = true;
-			//
-			// 	setTimeout(function(){
-			// 		$scope.loading = true;
-			// 		$http.post(postURL, requestParameters)
-			// 		.success(function(resultFlights){
-			// 			flights.outgoingFlights = resultFlights.outgoingFlights;
-			// 			if(tripType == 2)
-			// 				flights.returnFlights = resultFlights.returnFlights;
-						// $location.path("/flights");
-			// 		})
-			// 		.error(function(data){
-			// 			console.log('Error: Couldn\'t fetch flights.');
-			// 		});
-			// 	}, 1000);
+				// TODO:: Add loading
+				$http.post(postURL, requestParameters)
+				.success(function(resultFlights){
+					flights.outgoingFlights = resultFlights.outgoingFlights;
+					if(tripType == 2)
+						flights.returnFlights = resultFlights.returnFlights;
+						$state.go('flights');
+				})
+				.error(function(data){
+					console.log('Error: Couldn\'t fetch flights.');
+				});
 			}
 		};
 	});
