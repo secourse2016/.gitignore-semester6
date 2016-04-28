@@ -28,9 +28,9 @@
 			//
 			// if(validInput){
 				if($scope.formData.origin)
-					$scope.formData.origin = origin = $scope.formData.origin.iata;
+					origin = $scope.formData.origin.iata;
 				if($scope.formData.destination)
-					$scope.formData.destination = destination = $scope.formData.destination.iata;
+					destination = $scope.formData.destination.iata;
 				var requestParameters = {
 					'origin' 		: origin,
 					'destination'	: destination,
@@ -145,7 +145,7 @@
 				|| airport.iata.indexOf(uppercaseQuery) === 0);
 			};
 		}
-		//TODO:: change this route
+		//TODO:: change this route to /api/airports
 		$http.get('http://localhost:8080/api/airports')
 		.success(function(data){
 			ctrl.airports = loadAll(data);

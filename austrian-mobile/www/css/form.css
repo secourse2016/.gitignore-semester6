@@ -92,16 +92,6 @@ md-autocomplete[md-floating-label] md-input-container{
   display: none;
 }
 
-md-virtual-repeat-container{
-  color: red !important;
-  width: 32% !important;
-  margin-top: 3px !important;
-}
-
-body > md-virtual-repeat-container:nth-child(8){
-  margin-left: -17% !important;
-}
-
 
 li > md-autocomplete-parent-scope > span{
   color: #ef5350;
