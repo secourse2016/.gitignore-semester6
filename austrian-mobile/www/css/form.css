@@ -9,7 +9,7 @@
 }
 
 
-.md-input-focused label.ng-binding{
+.md-input-focused label.ng-binding, .md-input-has-value label.ng-binding{
   margin-bottom: -5px;
 }
 
@@ -141,4 +141,24 @@ md-input-container label:not(.md-container-ignore){
 
 md-input-container input[type=search]{
   margin-bottom: 5px;
+}
+
+.errorToast {
+  background: black;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+  height: 40px;
+  opacity: 0.7;
+  color: white;
+  text-align: center;
+  font-size: 16px;
+  padding: 10px 0 5px 0;
+  transition:all cubic-bezier(0, 1, 0.5, 1) 0.5s;
+}
+
+.errorToast.ng-hide {
+  margin-top: -30px;
+  opacity: 0;
 }

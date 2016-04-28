@@ -13,7 +13,9 @@
 
 		$scope.formData = {};
 		$scope.errors = {};
+
 		$scope.searchFlights = function(){
+			$scope.error = {};
 
 			global.setSearchFlight($scope.formData);
 
@@ -25,10 +27,10 @@
 			var tripType		= $scope.formData.tripType;
 			var allAirlines		= $scope.formData.allAirlines;
 			var flightClass		= $scope.formData.flightClass;
-			// var validInput		= validateSearchFlights(origin, destination, outgoingDate,
-			// 									returnDate, flightClass, tripType, $scope);
-			//
-			// if(validInput){
+			$scope.error		= validateSearchFlights(origin, destination, outgoingDate,
+												returnDate, flightClass, tripType, $scope);
+
+			if(!$scope.error){
 				if($scope.formData.origin)
 					origin = $scope.formData.origin.iata;
 				if($scope.formData.destination)
@@ -46,7 +48,7 @@
 					requestParameters.arrivalDate = returnDate;
 					postURL = 'api/flights/search/roundtrip';
 				}
-			//
+			console.log("POST to Server!");
 			// 	$scope.hideSubmit = true;
 			//
 			// 	setTimeout(function(){
@@ -62,57 +64,42 @@
 			// 			console.log('Error: Couldn\'t fetch flights.');
 			// 		});
 			// 	}, 1000);
-			// }
+			}
 		};
 	});
 
 
-	// function validateSearchFlights(origin, destination, outgoingDate, returnDate, flightClass, tripType){
-	//
-	// 	var valid = true;
-	// 	var today = new Date();
-	// 	today.setHours(0,0,0,0);
-	//
-	// 	if(!origin){
-	// 		valid = false;
-	// 		var message = 'Please select a valid origin airport.';
-	// 	}
-	//
-	// 	else if(!destination){
-	// 		valid = false;
-	// 		var message = 'Please select a valid destiation airport.';
-	// 	}
-	// 	else if(!outgoingDate){
-	// 		valid = false;
-	// 		var message = 'Please select your outgoing trip date.';
-	// 	}
-	// 	else if(Date.parse(outgoingDate) < today){
-	// 		valid = false;
-	// 		var message = 'You cannot travel back in time.';
-	// 	}
-	// 	else if(tripType == 2 && !returnDate){
-	// 		valid = false;
-	// 		var message = 'Please select your return trip date.';
-	// 	}
-	// 	else if(tripType == 2 && Date.parse(returnDate) < today)
-	// 	{
-	// 		valid = false;
-	// 		var message = 'You cannot travel back in time.';
-	// 	}
-	// 	else if(tripType == 2 && Date.parse(outgoingDate) >= Date.now() && Date.parse(returnDate) < Date.parse(outgoingDate))
-	// 	{
-	// 		valid = false;
-	// 		var message = 'Return date should be later than departure date.';
-	// 	}
-	// 	else if(!flightClass){
-	// 		valid = false;
-	// 		var message = 'Please select the trip class.';
-	// 	}
-	//
-	// 	if(!valid)
-	// 		Materialize.toast(message,3000);
-	// 	return valid;
-	// }
+	function validateSearchFlights(origin, destination, outgoingDate, returnDate, flightClass, tripType){
+
+		var today = new Date();
+		today.setHours(0,0,0,0);
+
+		if(!origin)
+			return 'Please select a valid origin airport.';
+
+		if(!destination)
+			return 'Please select a valid destiation airport.';
+
+
+		if(!outgoingDate)
+			return 'Please select your outgoing trip date.';
+
+		if(Date.parse(outgoingDate) < today)
+	 		return 'You cannot travel back in time.';
+
+		if(tripType == 2 && !returnDate)
+			return 'Please select your return trip date.';
+
+		if(tripType == 2 && Date.parse(returnDate) < today)
+			return 'You cannot travel back in time.';
+
+		if(tripType == 2 && Date.parse(outgoingDate) >= Date.now() && Date.parse(returnDate) < Date.parse(outgoingDate))
+			return 'Return date should be later than departure date.';
+
+		if(!flightClass)
+			return 'Please select the trip class.';
+		return null;
+	}
 
 	/**
 	 * Autocomplete (Typeahead) Controller for airport search.

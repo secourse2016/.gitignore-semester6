@@ -1,10 +1,14 @@
 <link href="css/form.css" rel="stylesheet">
 <ion-tabs class="tabs-assertive tabs-icon-top">
-
     <!-- Search flights form -->
     <ion-tab title="Book" icon-on="ion-paper-airplane" icon-off="ion-paper-airplane" ng-controller="searchFlightController as searchCtrl">
       <ion-nav-view name="tab-book">
-      	<div style="margin-top:50px;" class="">
+      <div class="errorContainer">
+          <div class="errorToast" ng-show="error">
+              {{error}}
+          </div>
+      </div>
+      	<div  class="">
             <div class="list" >
 
                 <h3 id="search-header" class="condensed light card-panel grey lighten-3">Find Flights</h3>
