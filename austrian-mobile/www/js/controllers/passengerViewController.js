@@ -19,7 +19,7 @@ app.controller('passengerViewController' , function($scope, global) {
   	$scope.errorsChildren = [];
 
   	if(!global.searchFlight.adults)
-  		global.searchFlight.adults = 1;
+  		global.searchFlight.adults = 2;
   	if(!global.searchFlight.children)
   		global.searchFlight.children = 0;
   	$scope.infoFlow = global;
@@ -27,19 +27,17 @@ app.controller('passengerViewController' , function($scope, global) {
   	$scope.adults   = new Array(parseInt(global.searchFlight.adults));
   	$scope.children = new Array(parseInt(global.searchFlight.children));
 
-    $scope.validAdults = function(){
-  		for (var i = 0; i < $scope.errors.length; i++) {
-  		  if($scope.errors[i])
+    $scope.validAdults = function(index){
+
+  		  if($scope.errors[index])
           return false;
-  		}
       return true;
   	}
 
-    $scope.validChildren = function(){
-  		for (var i = 0; i < $scope.errorsChildren.length; i++) {
-  		  if($scope.errorsChildren[i])
+    $scope.validChildren = function(index){
+
+  		  if($scope.errorsChildren[index])
           return false;
-  		}
       return true;
   	}
 
