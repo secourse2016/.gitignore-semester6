@@ -1,0 +1,17 @@
+.list .item.item-accordion {
+
+  transition: 0.09s all linear;
+}
+.list .item.item-accordion.ng-hide {
+  line-height: 0px;
+}
+.list .item.item-accordion.ng-hide-add,
+.list .item.item-accordion.ng-hide-remove {
+  display: block !important;
+}
+
+.item.item-stable.active{
+
+    
+
+}
