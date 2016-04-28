@@ -1,0 +1,61 @@
+<link href="css/payment.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+<link href="css/formColors.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+<!--Payment block-->
+<div style="padding:20px;" ng-controller="PaymentController as paymentCtrl">
+  </br>
+  </br>
+  </br>
+  <div class="form-header">
+    <h3 class="red-text text-darken-2" style="text-align:center">Payment Form</h3>
+  </div>
+  <hr class="hr">
+  <div style="horizontal-allign:center">
+  <img src="img/creditcards.png" alt="" class="responsive-img" style="">
+  </div>
+  <hr class="hr">
+
+  <div>
+    <!--Form-->
+    <form name="paymentForm" class="col s12" ng-submit="payForBooking()">
+      <!--cardNo-->
+      <div class="list">
+        <label class="item item-input">
+          <i class="icon ion-card"></i>
+          <input ng-model="cardNo" class="input_field margin" type="text" placeholder="Card No.">
+        </label>
+         <div class="paymentError" ng-show="error.number"><i class="icons ion-alert-circled"></i> <span style="margin-left:8px">{{error.message}}</span></div>
+      </div>
+
+      <!--CVV-->
+      <div class="list">
+        <label class="item item-input">
+          <i class="icon ion-card"></i>
+          <input ng-model="cvv" class="input_field margin" type="text" placeholder="CVV">
+        </label>
+        <div class="paymentError" ng-show="error.cvv"><i class="icons ion-alert-circled"></i> <span style="margin-left:8px">{{error.message}}</span></div>
+      </div>
+
+        <!--Expiry date-->
+        <div class="list">
+          <label class="item item-input">
+            <i class="icon ion-calendar"></i>
+            <input ng-model="expiryDate" class="input_field margin" placeholder="Expiry Date" type="text" onfocus="(this.type='date')" onblur="(this.type=checkField(this))">
+          </label>
+          <div class="paymentError" ng-show="error.date"><i class="icons ion-alert-circled"></i> <span style="margin-left:8px">{{error.message}}</span></div>
+        </div>
+
+      <!--Submition button-->
+        <div class="input-field col s12" style="padding:30px">
+          <input class="btn waves-effect waves-light red book-button"
+          value="Book Now" type="submit">
+        </div>
+    </form>
+  </div>
+  <!--Total price-->
+  <div style="padding-bottom:100px">
+    <h5 class="center-align red-text text-darken-2">
+      Total Cost: {{totalCost}} {{currency}}
+    </h5>
+  </div>
+</div>
