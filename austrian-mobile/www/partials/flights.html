@@ -13,8 +13,13 @@
       <h3 class="white-text infoBar">{{origin}}-{{destination}} ({{departureDate}})</h3>
     </div>
   </div>
+  <div class="card" ng-controller="flightsController" ng-hide="outgoingFlights.length>0">
+    <div class="item item-divider grey">
+      <h3 class="white-text infoBar">No outgoing flights</h3>
+    </div>
+  </div>
 
-      <ion-list ng-controller="collapsableController">
+      <ion-list ng-controller="collapsableController" ng-show="outgoingFlights.length>0">
         <div ng-repeat="flight in outgoingFlights track by $index">
            <ul class="collection with-header ">
           <li class="collection-header item item-stable grey lighten-3"
@@ -65,7 +70,13 @@
     </div>
   </div>
 
-      <ion-list ng-controller="collapsableController" ng-show = "tripType==2">
+   <div class="card" ng-controller="flightsController" ng-hide="returnFlights.length>0">
+    <div class="item item-divider grey">
+      <h3 class="white-text infoBar">No return flights</h3>
+    </div>
+  </div>
+
+      <ion-list ng-controller="collapsableController" ng-show = "tripType==2 && returnFlights.length>0">
         <div ng-repeat="flight in returnFlights track by $index">
            <ul class="collection with-header ">
           <li class="collection-header item item-stable grey lighten-3"
