@@ -2,7 +2,7 @@
 <ion-tabs class="tabs-assertive tabs-icon-top">
 
     <!-- Search flights form -->
-    <ion-tab title="Book" icon-on="ion-paper-airplane" icon-off="ion-paper-airplane" ng-controller="landingController">
+    <ion-tab title="Book" icon-on="ion-paper-airplane" icon-off="ion-paper-airplane" ng-controller="searchFlightController as searchCtrl">
       <ion-nav-view name="tab-book">
       	<div style="margin-top:50px;" class="padding">
             <div class="list">
@@ -10,60 +10,60 @@
                 <div class="list-fields padding">
                     <h3 id="search-header">Find Flights</h3>
                     <!-- Origin Airport -->
-                    <ion-md-input placeholder="From" type="text"></ion-md-input>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">From</span>
+                        <input type="text" placeholder="From" ng-model="formData.origin">
+                    </label>
                     <!-- Destination Airport -->
-                    <ion-md-input placeholder="To" type="text"></ion-md-input>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">To</span>
+                        <input type="text" placeholder="To" ng-model="formData.destination">
+                    </label>
 
                     <!-- Adults Count -->
-                    <label class="item item-input item-select">
-                       <div class="input-label">
-                         Adults
-                       </div>
-                       <select>
-                         <option selected>1 adult</option>
-                         <option>2 adults</option>
-                         <!-- repeat -->
-                       </select>
-                   </label>
+                    <select  ng-model="formData.adults">
+                        <option value="" disabled selected>Adults</option>
+                        <option value="1">1 adult</option>
+                        <option value="{{n}}" ng-repeat="n in searchCtrl.range">{{n}} adults</option>
+                    </select>
+
                     <!-- Children Count -->
-                    <label class="item item-input item-select">
-                       <div class="input-label">
-                         Children
-                       </div>
-                       <select>
-                         <option selected>no children</option>
-                         <option>1 child</option>
-                         <!-- repeat -->
-                       </select>
-                   </label>
+                    <select  ng-model="formData.children">
+                        <option value="" disabled selected>Children</option>
+                        <option value="0">no children</option>
+                        <option value="1">1 child</option>
+                        <option value="{{n}}" ng-repeat="n in searchCtrl.range">{{n}} children</option>
+                    </select>
+
                     <!-- Trip Type -->
-                    <label class="item item-input item-select">
-                       <div class="input-label">
-                         Trip Type
-                       </div>
-                       <select>
-                         <option selected>One-way</option>
-                         <option>Roundtrip</option>
+                    <select ng-model="formData.tripType">
+                        <option value="" disabled selected>Trip Type</option>
+                        <option value="1">One-way</option>
+                        <option value="2">Roundtrip</option>
                          <!-- repeat -->
-                       </select>
-                   </label>
+                    </select>
                     <!-- Departure Date -->
-                    <!--  date picker -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Outgoing Date</span>
+                        <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" ng-model="formData.outgoingDate">
+                    </label>
                     <!-- Return Date -->
-                    <!--  date picker -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Return Date</span>
+                        <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" ng-model="formData.returnDate">
+                    </label>
                     <!-- Flight Class -->
-                    <label class="item item-input item-select">
-                       <div class="input-label">
-                         Class
-                       </div>
-                       <select>
-                         <option selected>economy</option>
-                         <option>business</option>
+                    <select ng-model="formData.flightClass">
+                        <option value="" disabled selected>Flight Class</option>
+                        <option value="economy">Economy</option>
+                        <option value="business">Business</option>
                          <!-- repeat -->
-                       </select>
-                   </label>
+                    </select>
                     <!-- Search for Flights -->
-                    <a class="waves-effect waves-light btn white red-text" ng-click="searchFlights()">FIND NOW!</a>
+                    <br>
+                    <div class="center">
+                        <a class="waves-effect waves-light btn white red-text" ng-click="searchFlights()">FIND NOW!</a>
+                    </div>
                 </div>
             </div>
       	</div>

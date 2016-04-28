@@ -1,30 +1,45 @@
+/* Background color of the search form */
 .list-fields{
     background-color: #ef473a;
 }
 
+/* Header of the search form */
 #search-header{
     text-align: center;
     color: white;
 }
 
 /* Field underline color */
-input[type=text] {
+input[type=text], input[type=text]:focus, input[type=text]:focus:not([readonly])  {
   border-bottom: 2px solid white;
   box-shadow: 0 1px 0 0 white;
 }
 
-input.md-input{
-  background: transparent;
+/* Input field color */
+input[type=text]{
+  color: white;
 }
 
-.item-md-label .input-label{
-  opacity: 1;
+/* Field Label Color */
+.input-label{
+  color: white;
+}
+input[type=text]::-webkit-input-placeholder {
+   color: white;
 }
 
+.list .item.item-floating-label, .item-floating-label{
+  border-bottom: 0px;
+}
 .item-select{
   margin-top: 10px;
 }
 .item-select .input-label{
   margin-left: -10px;
   color: white;
+}
+
+select{
+  margin-top: 7px;
+  display: block;
 }
