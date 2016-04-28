@@ -1,6 +1,6 @@
 (function(){
 	angular.module('austrianAirlinesApp')
-	.controller('PaymentController', function($scope , global, $location){
+	.controller('PaymentController', function($scope , global, $location, $http){
 		$scope.totalCost = global.getTotalCost();
 		$scope.currency = global.outGoingTrip.currency;
 		$scope.step = 4; // View number in the stepper
@@ -79,8 +79,8 @@
 							$scope.error.date = true;
 						else if(response.error.param == 'cvc')
 							$scope.error.cvv = true;
-
-						$scope.$apply();	
+						if(!$scope.$$phase)
+							$scope.$apply();	
 					
 					}
 					else {
@@ -102,12 +102,14 @@
 									requestParameters.booking2 = booking2;
 									requestParameters.airline2 = airline2;
 									// Send post request with two bookings 
+									console.log(requestParameters);
 									$http.post('/api/addBooking',requestParameters).success(function(data){
 
 										// TODO add the booking reference(s) to the global service
 
 										$location.path('/successful');
-										$scope.$apply();
+										if(!$scope.$$phase)
+											$scope.$apply();
 									})
 									.error(function(data){
 										/*if there is an err throw it otherWise go to payement page */
@@ -121,12 +123,14 @@
 						else {
 
 							// Send post request with one booking.
+							console.log(requestParameters);
 							$http.post('/api/addBooking',requestParameters).success(function(data){
 
 								// TODO add the booking reference(s) to the global service
 
 								$location.path('/successful');
-								$scope.$apply();
+								if(!$scope.$$phase)
+									$scope.$apply();
 							})
 							.error(function(data){
 								/*if there is an err throw it otherWise go to payement page */
