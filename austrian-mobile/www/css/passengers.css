@@ -1,7 +1,5 @@
 .item.item-stable.active{
-  /*color:red;*/
-  border: 3px solid #D01A07;
-  background-color: #FB766C !important;
+  background-color: #CAC9C9 !important;
 }
 
 .flight-date{
