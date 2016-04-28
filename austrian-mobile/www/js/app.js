@@ -72,7 +72,28 @@ angular.module('starter', ['ionic'])
   .state('faq', {
     url: '/faq',
     templateUrl: 'partials/faq.html'
+  })
+  .state('payment', {
+    url: '/payment',
+    views : {
+      'main-view' : {
+        templateUrl: 'partials/payment.html'
+      }
+    }
+  })
+  .state('successful', {
+    url: '/successful',
+    views : {
+      'main-view' : {
+        templateUrl: 'partials/successful.html'
+      }
+    }
   });
+
+  /**
+  * Set the public key for stripe
+  */
+  Stripe.setPublishableKey('pk_test_GLghvbf0O1mNsV4T8nECOC1u');
 })
 .controller('masterController',function($scope, $ionicSideMenuDelegate){
   $scope.toggleLeft = function() {
