@@ -6,7 +6,7 @@ var schema       = mongoose.Schema;
 var booking 	 = new schema ({
 
 	bookingNumber	: {type:String ,unique:true},
-	passengers 		:
+	passengerDetails	:
 		[
 			{
 				firstName 		: String,
@@ -14,7 +14,7 @@ var booking 	 = new schema ({
 				email		 	: String,
 				passportNum 	: String,
 				nationality 	: String,
-				dateOfBirth 	: Date.GetTime(),
+				dateOfBirth 	: Number,
 				isChild 		: Boolean
 			}
 		],

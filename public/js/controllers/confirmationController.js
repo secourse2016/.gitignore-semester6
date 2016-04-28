@@ -53,10 +53,10 @@ angular.module('austrianAirlinesApp')
 	global.setTotalCost(totalCost)
 
 	// all booking information in the global servrice which wile be passed to post request .
-	var bookingInfo = {passengers:infoFlow.passengers,outgoingFlight:infoFlow.outGoingTrip.flightNumber,
-		totalCost:totalCost}; //cost will be modified later .
+	var bookingInfo = {passengers:infoFlow.passengers,outgoingFlightId:infoFlow.outGoingTrip.flightNumber,
+		cost:totalCost}; //cost will be modified later .
 		if(infoFlow.returnTrip)
-			bookingInfo.returnFlight = infoFlow.returnTrip.flightNumber;
+			bookingInfo.returnFlightId = infoFlow.returnTrip.flightNumber;
 
 		/* after confirming the booking INFO redirect to the payment view */
 		$scope.confirm = function(){
