@@ -48,34 +48,11 @@ angular.module('austrianAirlinesApp')
 	if(infoFlow.returnTrip.cost)
 		returnFlightCost = infoFlow.returnTrip.cost ;
 
-	var totalCost = adultNumber*(outGoingTripCost+returnFlightCost)+childNumber*((outGoingTripCost+returnFlightCost)/2);
+	var totalCost = (adultNumber + childNumber)*(parseInt(outGoingTripCost)+parseInt(returnFlightCost));
 
 	global.setTotalCost(totalCost)
-
-	// all booking information in the global servrice which wile be passed to post request .
-	var bookingInfo = {passengers:infoFlow.passengers,outgoingFlightId:infoFlow.outGoingTrip.flightNumber,
-		cost:totalCost}; //cost will be modified later .
-		if(infoFlow.returnTrip)
-			bookingInfo.returnFlightId = infoFlow.returnTrip.flightNumber;
-
-		/* after confirming the booking INFO redirect to the payment view */
-		$scope.confirm = function(){
-
-			/* Only insert to the database if the airline is Austrian
-			 in either the outgoing or the return flight*/
-			if(global.outGoingTrip.Airline == "Austrian" || (bookingInfo.returnFlight && global.returnTrip.Airline == "Austrian"))
-			{
-				$http.post('/api/addBooking',bookingInfo).success(function(data){
-					global.setBookingNumber(data);
-					$location.path("/payment");
-				})
-				.error(function(data){
-					/*if there is an err throw it otherWise go to payement page */
-					console.log('Error: Couldn\'t insert in the dataBase.');
-				});
-			}
-			else
-				$location.path("/payment");
-
-		}
+	/* after confirming the booking INFO redirect to the payment view */
+	$scope.confirm = function(){
+		$location.path("/payment");
+	}
 });
