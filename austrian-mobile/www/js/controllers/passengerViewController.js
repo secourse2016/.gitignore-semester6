@@ -1,31 +1,36 @@
 var app = angular.module('starter');
 
-app.controller('passengerViewController' , function($scope, global) {
+app.controller('passengerViewController' , function($scope, $state, global) {
 
-  $scope.departureDate    = "20th, April 2016";
-	$scope.arrivalDate      = "21th, April 2016";
-	$scope.origin           = "CAI";
-	$scope.destination      = "JED";
-	$scope.flightClass      = "Economy";
-	$scope.tripType         = 2;
-	$scope.outgoingFlight   = angular.copy(global.outGoingTrip);
+  $scope.airline          = "Austrian";
+
+  var outgoingDate        = new Date(global.searchFlight.outgoingDate);
+  var returnDate          = new Date(global.searchFlight.returnDate);
+  $scope.departureDate    = outgoingDate.toDateString();
+  $scope.arrivalDate      = returnDate.toDateString();
+
+  $scope.origin           = global.searchFlight.origin;
+  $scope.destination      = global.searchFlight.destination;
+  $scope.flightClass      = capitalize(global.searchFlight.flightClass);
+  $scope.tripType         = global.searchFlight.tripType;
+  $scope.outgoingFlight   = angular.copy(global.outGoingTrip);
+
   if($scope.tripType == 2)
-		$scope.returnFlight = angular.copy(global.returnTrip);
+    $scope.returnFlight = angular.copy(global.returnTrip);
 
+  $scope.formData =[];
+  $scope.formDataChildren =[];
+  $scope.errors = [];
+  $scope.errorsChildren = [];
 
-    $scope.formData =[];
-  	$scope.formDataChildren =[];
-  	$scope.errors = [];
-  	$scope.errorsChildren = [];
+  if(!global.searchFlight.adults)
+    global.searchFlight.adults = 1;
+  if(!global.searchFlight.children)
+    global.searchFlight.children = 0;
+  $scope.infoFlow = global;
 
-  	if(!global.searchFlight.adults)
-  		global.searchFlight.adults = 2;
-  	if(!global.searchFlight.children)
-  		global.searchFlight.children = 0;
-  	$scope.infoFlow = global;
-
-  	$scope.adults   = new Array(parseInt(global.searchFlight.adults));
-  	$scope.children = new Array(parseInt(global.searchFlight.children));
+  $scope.adults   = new Array(parseInt(global.searchFlight.adults));
+  $scope.children = new Array(parseInt(global.searchFlight.children));
 
     $scope.validAdults = function(index){
 
@@ -53,7 +58,7 @@ app.controller('passengerViewController' , function($scope, global) {
   			// Set passengers Array in service with filled passengers info .
   			global.setPassengers($scope.formData.concat($scope.formDataChildren));
   			// Redirect to confirmation page.
-  			// $location.path('/confirmation');
+  			$state.go('confirmation');
   		}
   	}
 });
