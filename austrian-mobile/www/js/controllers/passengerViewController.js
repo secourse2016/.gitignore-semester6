@@ -12,14 +12,4 @@ app.controller('passengerViewController' , function($scope, global) {
   if($scope.tripType == 2)
 		$scope.returnFlight = angular.copy(global.returnTrip);
 
-    $scope.toggleGroup = function(group) {
-    if ($scope.isGroupShown(group)) {
-      $scope.shownGroup = null;
-    } else {
-      $scope.shownGroup = group;
-    }
-  };
-  $scope.isGroupShown = function(group) {
-    return $scope.shownGroup === group;
-  };
 });

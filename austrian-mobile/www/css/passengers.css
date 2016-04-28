@@ -1,20 +1,7 @@
-/*
- * http://docs.angularjs.org/api/ng/directive/ngShow#usage_animations
- */
-.list .item.item-accordion {
-
-  transition: 0.09s all linear;
-}
-.list .item.item-accordion.ng-hide {
-  line-height: 0px;
-}
-.list .item.item-accordion.ng-hide-add,
-.list .item.item-accordion.ng-hide-remove {
-  display: block !important;
-}
-
 .item.item-stable.active{
-  color:red;
+  /*color:red;*/
+  border: 3px solid #D01A07;
+  background-color: #FB766C !important;
 }
 
 .flight-date{
