@@ -160,7 +160,6 @@ router.post('/addBooking',function(req, res){
         // if there is no error send booking Number
         if(!err)
             res.send(status);
-
     });
 });
 

@@ -8,6 +8,7 @@ var booking = require('./app/models/booking');
 var airlines= require('./app/data/airlines.json');
 var jwt 	= require('jsonwebtoken');
 var _       = require('underscore');
+var stripe 	= require('stripe')(process.env.STRIPE_KEY);
 
 
 /**
@@ -223,17 +224,17 @@ module.exports.getBooking = function(bookingNumber , passportNumber , cb){
 					cb(errBooking, null);
 				else {
 					// check the passport number
-					for(i = 0 ; i < booking[0].passengers.length ; i++){
-						if(booking[0].passengers[i].passportNumber === passportNumber){
+					for(i = 0 ; i < booking[0].passengerDetails.length ; i++){
+						if(booking[0].passengerDetails[i].passportNum === passportNumber){
 							found = true;
 							break;
 						}
 					}
 					if(found){
-						// get the corresponding outgoindg flight
-						flight.find({"_id":booking[0].outgoingFlight},{},function(errOutgoingFlight , outgoingFlight){
+						// get the corresponding outgoing flight
+						flight.find({"_id":booking[0].outgoingFlightId},{},function(errOutgoingFlight , outgoingFlight){
 								// get the corresponding return flight
-								flight.find({"_id":booking[0].returnFlight},{},function(errReturnFlight , returnFlight){
+								flight.find({"_id":booking[0].returnFlightId},{},function(errReturnFlight , returnFlight){
 									myBooking = booking[0].toJSON();
 									// attach the flights info to the returning object
 									myBooking.outgoingFlightInfo = outgoingFlight[0];
@@ -264,21 +265,21 @@ module.exports.addBooking = function(bookingInfo, cb){
 		/* check if the passenger is child or not */
   		var currentDate= new Date();
     	var currentYear = currentDate.getFullYear();
-    	for (var i = 0 ; i < bookingInfo.passengers.length ; i++){
+    	for (var i = 0 ; i < bookingInfo.passengerDetails.length ; i++){
     		/* get the birth year of  the passenger with correct foramat */
-    		var passengerBirthDate = new Date(bookingInfo.passengers[i].dateOfBirth);
+    		var passengerBirthDate = new Date(bookingInfo.passengerDetails[i].dateOfBirth);
     		var passengerBirthYear = passengerBirthDate.getFullYear();
 			if (currentYear-passengerBirthYear < 12)
-				bookingInfo.passengers[i].isChild = true ;
+				bookingInfo.passengerDetails[i].isChild = true ;
 			else
-				bookingInfo.passengers[i].isChild = false ;
+				bookingInfo.passengerDetails[i].isChild = false ;
 				/* changing the time format to match the schema */
-	    		bookingInfo.passengers[i].dateOfBirth = passengerBirthDate.getTime();
+	    		bookingInfo.passengerDetails[i].dateOfBirth = passengerBirthDate.getTime();
 
 		}
 		/* Concatenate the number of records of the booking collection to the generatedBooking Number to get unique number*/
 		newBooking.bookingNumber = generatedBookingNumber+c;
-		newBooking.passengerDetails = bookingInfo.passengers;
+		newBooking.passengerDetails = bookingInfo.passengerDetails;
 		newBooking.outgoingFlightId = bookingInfo.outgoingFlightId;
 		newBooking.returnFlightId = bookingInfo.returnFlightId;
 		newBooking.cost = bookingInfo.cost;
@@ -344,6 +345,7 @@ var postBooking = module.exports.postBookingRequests
 	var booking2 = requestParameters.booking2;
 	var status   ;
 	postBooking(airline1, booking1, function(error, airline1Status){
+		console.log(airline1Status);
 		if(!error){
 			status.airline1 = airline1Status;
 			postBooking(airline2, booking2, function(error, airline2Status){
