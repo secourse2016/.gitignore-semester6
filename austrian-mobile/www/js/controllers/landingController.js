@@ -11,7 +11,6 @@
 			this.range.push(i);
 		$scope.formData = {};
 		$scope.errors = {};
-
 		$scope.searchFlights = function(){
 
 			global.setSearchFlight($scope.formData);
@@ -24,23 +23,22 @@
 			var tripType		= $scope.formData.tripType;
 			var allAirlines		= $scope.formData.allAirlines;
 			var flightClass		= $scope.formData.flightClass;
-			console.log($scope.formData);
 			// var validInput		= validateSearchFlights(origin, destination, outgoingDate,
 			// 									returnDate, flightClass, tripType, $scope);
 			//
 			// if(validInput){
-			// 	if($scope.formData.origin)
-			// 		$scope.formData.origin = origin = $scope.formData.origin.iata;
-			// 	if($scope.formData.destination)
-			// 		$scope.formData.destination = destination = $scope.formData.destination.iata;
-			// 	var requestParameters = {
-			// 		'origin' 		: origin,
-			// 		'destination'	: destination,
-			// 		'departureDate'	: outgoingDate,
-			// 		'flightClass'	: flightClass,
-			// 		'allAirlines'	: allAirlines,
-			// 	}
-			//
+				if($scope.formData.origin)
+					$scope.formData.origin = origin = $scope.formData.origin.iata;
+				if($scope.formData.destination)
+					$scope.formData.destination = destination = $scope.formData.destination.iata;
+				var requestParameters = {
+					'origin' 		: origin,
+					'destination'	: destination,
+					'departureDate'	: outgoingDate,
+					'flightClass'	: flightClass,
+					'allAirlines'	: allAirlines,
+				};
+
 			// 	var postURL = 'api/flights/search/oneway';
 			// 	if(tripType == 2 && returnDate){
 			// 		requestParameters.arrivalDate = returnDate;
@@ -56,7 +54,7 @@
 			// 			flights.outgoingFlights = resultFlights.outgoingFlights;
 			// 			if(tripType == 2)
 			// 				flights.returnFlights = resultFlights.returnFlights;
-			// 			$location.path("/flights");
+						// $location.path("/flights");
 			// 		})
 			// 		.error(function(data){
 			// 			console.log('Error: Couldn\'t fetch flights.');
@@ -66,7 +64,7 @@
 		};
 	});
 
-	//
+
 	// function validateSearchFlights(origin, destination, outgoingDate, returnDate, flightClass, tripType){
 	//
 	// 	var valid = true;
@@ -147,8 +145,8 @@
 				|| airport.iata.indexOf(uppercaseQuery) === 0);
 			};
 		}
-
-		$http.get('/api/airports')
+		//TODO:: change this route
+		$http.get('http://localhost:8080/api/airports')
 		.success(function(data){
 			ctrl.airports = loadAll(data);
 		})

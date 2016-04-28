@@ -3,7 +3,7 @@ var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBdXN0cmlhbiBBaXJsaW
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic'])
+angular.module('starter', ['ionic', 'ngMaterial'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -60,21 +60,22 @@ angular.module('starter', ['ionic'])
   /**
    * Interceptor to inject every HTTP request with the JSON web token.
    */
-  $httpProvider.interceptors.push(['$q', '$location', function($q, $location){
-      return {
-         'request': function(config){
-             config.headers = config.headers || {};
-             config.headers['x-access-token'] = token;
-             return config;
-         },
-         'responseError': function(response){
-             if (response.status === 401 || response.status === 403){
-              //TODO: $location.path('/unauthorized');
-             }
-             return $q.reject(response);
-         }
-     };
- }]);
+  // TODO:: most probably will not work
+ //  $httpProvider.interceptors.push(['$q', '$location', function($q, $location){
+ //      return {
+ //         'request': function(config){
+ //             config.headers = config.headers || {};
+ //             config.headers['x-access-token'] = token;
+ //             return config;
+ //         },
+ //         'responseError': function(response){
+ //             if (response.status === 401 || response.status === 403){
+ //              //TODO: $location.path('/unauthorized');
+ //             }
+ //             return $q.reject(response);
+ //         }
+ //     };
+ // }]);
 })
 .controller('masterController',function($scope, $ionicSideMenuDelegate){
   $scope.toggleLeft = function() {

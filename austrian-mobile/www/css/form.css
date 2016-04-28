@@ -15,6 +15,11 @@ input[type=text], input[type=text]:focus, input[type=text]:focus:not([readonly])
   box-shadow: 0 1px 0 0 white;
 }
 
+input[type=date], input[type=date]:focus, input[type=date]:focus:not([readonly])  {
+  border-bottom: 2px solid white;
+  box-shadow: 0 1px 0 0 white;
+}
+
 /* Input field color */
 input[type=text]{
   color: white;
@@ -42,4 +47,62 @@ input[type=text]::-webkit-input-placeholder {
 select{
   margin-top: 7px;
   display: block;
+}
+
+/*  Auto-complete Styling  */
+/* =|=|=|=|=|=|=|=|=|=|=|= */
+
+md-input-container input[type=search] {
+  border-bottom: 1px solid white;
+  box-shadow: 0 1px 0 0 white;
+}
+
+md-input-container input[type=search]:focus{
+  border-bottom: 1px solid white !important;
+  box-shadow: 0 1px 0 0 white !important;
+  border-color: white !important;
+}
+
+md-input-container label,  md-input-container .md-input {
+  font-size: 14px;
+  color: white !important;
+}
+
+md-input-container .md-input{
+  margin-top: 7px;
+}
+md-input-container label{
+  margin-left: 8px;
+}
+
+md-autocomplete{
+  min-width: inherit;
+}
+
+md-input-container{
+  margin: auto;
+  padding: 0px;
+}
+
+md-autocomplete[md-floating-label] md-input-container{
+  padding-bottom: 0px;
+}
+
+.md-errors-spacer{
+  display: none;
+}
+
+md-virtual-repeat-container{
+  color: red !important;
+  width: 32% !important;
+  margin-top: 3px !important;
+}
+
+body > md-virtual-repeat-container:nth-child(8){
+  margin-left: -17% !important;
+}
+
+
+li > md-autocomplete-parent-scope > span{
+  color: #ef5350;
 }

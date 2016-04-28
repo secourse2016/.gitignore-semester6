@@ -10,15 +10,40 @@
                 <div class="list-fields padding">
                     <h3 id="search-header">Find Flights</h3>
                     <!-- Origin Airport -->
-                    <label class="item item-input item-floating-label">
-                        <span class="input-label">From</span>
-                        <input type="text" placeholder="From" ng-model="formData.origin">
-                    </label>
+                    <div ng-controller="autoCompleteController as ctrl">
+                      <md-autocomplete required
+                          md-input-name="autocompleteField"
+                          md-selected-item="formData.origin"
+                          md-search-text="ctrl.searchText"
+                          md-items="item in ctrl.querySearch(ctrl.searchText)"
+                          md-item-text="item.display"
+                          md-floating-label="From">
+                        <md-item-template>
+                          <span md-highlight-text="ctrl.searchText">{{item.display}}</span>
+                        </md-item-template>
+                        <md-not-found>
+                             No airports matching "{{ctrl.searchText}}" were found.
+                        </md-not-found>
+                      </md-autocomplete>
+                    </div>
+
                     <!-- Destination Airport -->
-                    <label class="item item-input item-floating-label">
-                        <span class="input-label">To</span>
-                        <input type="text" placeholder="To" ng-model="formData.destination">
-                    </label>
+                    <div ng-controller="autoCompleteController as ctrl">
+                      <md-autocomplete required
+                          md-input-name="autocompleteField"
+                          md-selected-item="formData.destination"
+                          md-search-text="ctrl.searchText"
+                          md-items="item in ctrl.querySearch(ctrl.searchText)"
+                          md-item-text="item.display"
+                          md-floating-label="To">
+                        <md-item-template>
+                          <span md-highlight-text="ctrl.searchText">{{item.display}}</span>
+                        </md-item-template>
+                        <md-not-found>
+                             No airports matching "{{ctrl.searchText}}" were found.
+                        </md-not-found>
+                      </md-autocomplete>
+                    </div>
 
                     <!-- Adults Count -->
                     <select  ng-model="formData.adults">
