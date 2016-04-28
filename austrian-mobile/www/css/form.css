@@ -1,10 +1,21 @@
 
+.list-fields{
+   box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18),0 4px 15px 0 rgba(0,0,0,0.15);
+}
 /* Header of the search form */
 #search-header{
     text-align: center;
     color: black;
 }
 
+
+.md-input-focused label.ng-binding{
+  margin-bottom: -5px;
+}
+
+label.ng-binding{
+  margin-bottom: 3px;
+}
 /* Field underline color */
 input[type=text]{
   border-bottom: 1px solid transparent;
@@ -51,7 +62,6 @@ input[type=text]::-webkit-input-placeholder {
 }
 
 select{
-  margin-top: 7px;
   display: block;
   border: 0px;
 }
@@ -110,11 +120,19 @@ md-autocomplete[md-floating-label] md-input-container{
 }
 
 .padding-date{
-  padding: 0px 20px 0px 50px !important;
+  padding: 7px 20px 0px 50px !important;
 }
 
 .padding-class{
   padding: 0px 20px 0px 7px !important;
+}
+
+.input-border{
+  border: 1px solid grey;
+}
+
+.push-up{
+  margin-top: -1px;
 }
 
 md-input-container label:not(.md-container-ignore){
