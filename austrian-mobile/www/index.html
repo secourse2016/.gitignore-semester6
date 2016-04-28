@@ -23,15 +23,22 @@
     <!-- your app's js -->
     <script src="js/app.js"></script>
 
+    <!-- CSS -->
+    <link href="/css/collapsable.css" rel="stylesheet">
+    <!-- controllers -->
+    <script type="text/javascript" src="js/controllers/passengerViewController.js"></script>
+    <script type="text/javascript" src="js/controllers/collapsableController.js"></script>
+    <script type="text/javascript" src="js/services/globalService.js"></script>
+
   </head>
   <body ng-app="starter">
 
-      
+
 
 
 
    <ion-side-menus ng-controller = "masterController">
-    
+
 
 
     <ion-side-menu-content>
@@ -48,14 +55,14 @@
             <i class="ion-arrow-left-c"></i> Back
           </ion-nav-back-button>
 
-        
+
 
       </ion-nav-bar>
        <ion-nav-view name="main-view" style="">
       </ion-nav-view>
 
 
-    
+
     </ion-side-menu-content>
     <ion-side-menu side="left">
           <div class="side-menu-logo">
@@ -83,15 +90,15 @@
             </ion-list>
           </ion-content>
 
-        
+
     </ion-side-menu>
   </ion-side-menus>
-      
 
 
-      
 
-  
-  
+
+
+
+
   </body>
 </html>
