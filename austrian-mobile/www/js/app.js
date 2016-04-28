@@ -44,6 +44,14 @@ angular.module('starter', ['ionic', 'ionMdInput'])
       }
     }
   })
+  .state('passengers', {
+    url: '/passengers',
+    views : {
+      'main-view' : {
+        templateUrl: 'partials/passengers.html'
+      }
+    }
+  })
   .state('faq', {
     url: '/faq',
     templateUrl: 'partials/faq.html'
