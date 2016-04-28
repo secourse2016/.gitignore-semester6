@@ -43,10 +43,10 @@
 					'allAirlines'	: allAirlines,
 				};
 
-				var postURL = 'http://localhost:8080/api/flights/search/oneway?wt'+token;
+				var postURL = 'http://52.90.41.197:80/api/flights/search/oneway?wt'+token;
 				if(tripType == 2 && returnDate){
 					requestParameters.arrivalDate = returnDate;
-					postURL = 'http://localhost:8080/api/flights/search/roundtrip?wt='+token;
+					postURL = 'http://52.90.41.197:80/api/flights/search/roundtrip?wt='+token;
 				}
 				// TODO:: Add loading
 				$http.post(postURL, requestParameters)
@@ -130,7 +130,7 @@
 			};
 		}
 		//TODO:: change this route to /api/airports
-		$http.get('http://localhost:8080/api/airports?wt='+token)
+		$http.get('http://52.90.41.197:80/api/airports?wt='+token)
 		.success(function(data){
 			ctrl.airports = loadAll(data);
 		})
