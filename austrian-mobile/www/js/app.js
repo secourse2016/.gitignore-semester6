@@ -55,6 +55,14 @@ angular.module('starter', ['ionic'])
         templateUrl: 'partials/payment.html'
       }
     }
+  })
+  .state('successful', {
+    url: '/successful',
+    views : {
+      'main-view' : {
+        templateUrl: 'partials/successful.html'
+      }
+    }
   });
 })
 .controller('masterController',function($scope, $ionicSideMenuDelegate){
