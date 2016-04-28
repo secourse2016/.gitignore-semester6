@@ -40,7 +40,7 @@ var getFlights = module.exports.getFlights
 			cb(err,{});
 		var result = {};
 		// Add outgoing flights to the result
-		// edit the values of the flights and add flight ID and remove unwanted keys 
+		// edit the values of the flights and add flight ID and remove unwanted keys
 		_.map(outgoingFlights, function(flight){
 			delete flight._id;
 			delete flight.id;
@@ -92,7 +92,7 @@ var getAllFlights = module.exports.getAllFlights
 			  flight.airline = {name:"Austrian Airlines" , url:"ec2-52-90-41-197.compute-1.amazonaws.com", ip:"52.90.41.197"};
 			  return flight;
 			});
-			console.log(austrianFlights.outgoingFlights);
+			// console.log(austrianFlights.outgoingFlights);
 		if(err)
 			cb(err,{});
 		else if(allAirlines){
@@ -263,12 +263,12 @@ module.exports.addBooking = function(bookingInfo, cb){
 	booking.count({},function(err,c){
 		/* check if the passenger is child or not */
   		var currentDate= new Date();
-    	var currentYear = currentDate.getFullYear();		
+    	var currentYear = currentDate.getFullYear();
     	for (var i = 0 ; i < bookingInfo.passengers.length ; i++){
     		/* get the birth year of  the passenger with correct foramat */
     		var passengerBirthDate = new Date(bookingInfo.passengers[i].dateOfBirth);
     		var passengerBirthYear = passengerBirthDate.getFullYear();
-			if (currentYear-passengerBirthYear < 12) 
+			if (currentYear-passengerBirthYear < 12)
 				bookingInfo.passengers[i].isChild = true ;
 			else
 				bookingInfo.passengers[i].isChild = false ;
@@ -314,7 +314,7 @@ module.exports.handleBooking = function(requestParameters, cb){
 		if(bookingRes.errorMessage){
 			error.errorMessage = bookingRes.errorMessage;
 			error.airline = airline1;
-			cb({},error);
+			cb(error,{});
 		}else{
 			status.airlin1.refNum = bookingRes.refNum;
 			status.airlin1.info = airlin1;
