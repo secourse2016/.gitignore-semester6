@@ -1,6 +1,18 @@
 .item.item-stable.active{
   background-color: #CAC9C9 !important;
 }
+.validationError {
+  color : #b71c1c;
+  font-style: italic;
+  vertical-align: middle;
+
+  -webkit-transition:all linear 0.5s !important;
+  transition:all linear 0.5s;
+}
+
+.validationError.ng-hide {
+  opacity:0;
+}
 
 .flight-date{
 	margin-top: 0%;
@@ -39,5 +51,5 @@ h2.infoBar{
 }
 
 .alert{
-  color: red;
+  color: #b71c1c;
 }
