@@ -54,4 +54,3 @@ angular.module('starter', ['ionic', 'ionMdInput'])
     $ionicSideMenuDelegate.toggleLeft();
   };
 });
-;

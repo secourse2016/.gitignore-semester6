@@ -2,7 +2,7 @@
 <ion-tabs class="tabs-assertive tabs-icon-top">
 
     <!-- Search flights form -->
-    <ion-tab title="Book" icon-on="ion-paper-airplane" icon-off="ion-paper-airplane">
+    <ion-tab title="Book" icon-on="ion-paper-airplane" icon-off="ion-paper-airplane" ng-controller="landingController">
       <ion-nav-view name="tab-book">
       	<div style="margin-top:50px" class="padding">
             <div class="list">
@@ -63,9 +63,7 @@
                        </select>
                    </label>
                     <!-- Search for Flights -->
-                    <button class="button button-light">
-                      FIND NOW!
-                    </button>
+                    <a class="waves-effect waves-light btn white red-text" ng-click="searchFlights()">FIND NOW!</a>
                 </div>
             </div>
       	</div>
