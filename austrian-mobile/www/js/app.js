@@ -51,7 +51,7 @@ angular.module('starter', ['ionic'])
   .state('payment', {
     url: '/payment',
     views : {
-      'payment' : {
+      'main-view' : {
         templateUrl: 'partials/payment.html'
       }
     }
