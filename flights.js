@@ -289,8 +289,13 @@ module.exports.addBooking = function(bookingInfo, cb){
 
 	});
 };
-var postBookingRequests = module.exports.postBookingRequests
-			   = function(airline , booking , cb){
+/**
+ * [send post request with booking info if it is not
+ * from our airlines else call server function]
+ * @type {[type]}
+ */
+var postBooking = module.exports.postBookingRequests
+			    = function postBookingRequests(airline , booking , cb){
 				   if(airline.ip == "52.90.41.197"){
 					   //call the function int the server
 				   }else{
@@ -298,7 +303,7 @@ var postBookingRequests = module.exports.postBookingRequests
 						   var targetHost = airline.url?airline.url:airline.ip;
 						   // Assign the HTTP request options: host and path
 						   var options = {
-							   host: targetHost1;
+							   host: targetHost,
 							   path: 'Booking?wt='+jwtToken,
 							   headers: { 'x-access-token': jwtToken }
 						   };
@@ -323,6 +328,7 @@ var postBookingRequests = module.exports.postBookingRequests
 				   }
 
 			   }
+		   };
 
 
 /**
@@ -337,10 +343,10 @@ var postBookingRequests = module.exports.postBookingRequests
 	var booking1 = requestParameters.booking1;
 	var booking2 = requestParameters.booking2;
 	var status   ;
-	postBookingRequests(airline1, booking1, function(error, airline1Status){
+	postBooking(airline1, booking1, function(error, airline1Status){
 		if(!error){
 			status.airline1 = airline1Status;
-			postBookingRequests(airline2, booking2, function(error, airline2Status){
+			postBooking(airline2, booking2, function(error, airline2Status){
 				status.airline2 = airline2Status;
 				if(!error){
 					cb(status, error);
@@ -353,7 +359,4 @@ var postBookingRequests = module.exports.postBookingRequests
 		}
 
 	});
-
-
-
 };
