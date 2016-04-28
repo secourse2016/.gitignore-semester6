@@ -1,0 +1,61 @@
+<div style="margin-top: 50px" ng-controller="passengerViewController">
+	<link href="../css/passengers.css" rel="stylesheet">
+
+	<ion-content>
+		<div class="card">
+	  <div class="item item-divider red">
+	    <h2 class="white-text infoBar">Trip Information</h2>
+	  </div>
+	</div>
+      <ion-list ng-controller="collapsableController">
+
+         <ul class="collection with-header ">
+          <li class="collection-header item item-stable grey lighten-3"
+                    ng-click="toggleGroup(1)"
+                    ng-class="{active: isGroupShown(1)}">
+            <div class="orginDestination">{{origin}} - {{destination}}</div>
+						<div class="flight-date">{{departureDate}} <i class="flightCollapseIcon icon ion-ios-arrow-down tiny"></i> </div>
+
+          </li>
+          <li class="collection-item item item-accordion"
+                    ng-show="isGroupShown(1)">
+						<div class="row">
+            <div class="col s6">{{outgoingFlight.departureDateTime}} - {{outgoingFlight.arrivalDateTime}}</div>
+						<div class="col s6">{{outgoingFlight.Airline}}</div>
+						</div>
+						<div class="row">
+						<div class="col s6">{{flightClass}}</div>
+						<div class="col s6"> {{outgoingFlight.cost}} {{outgoingFlight.currency}}</div>
+					</div>
+          </li>
+				</ul>
+
+				<ul class="collection with-header ">
+ 				<li class="collection-header item item-stable grey lighten-3"
+ 									ng-click="toggleGroup(2)"
+ 									ng-class="{active: isGroupShown(2)}">
+ 					<div class="orginDestination">{{returnFlight.origin}} - {{returnFlight.destination}}</div>
+ 					<div class="flight-date">{{departureDate}} <i class="flightCollapseIcon icon ion-ios-arrow-down tiny"></i></div>
+ 					<ion-icon name="arrow-dropdown-circle"></ion-icon>
+ 				</li>
+ 				<li class="collection-item item item-accordion"
+ 									ng-show="isGroupShown(2)">
+ 					<div class="row">
+ 					<div class="col s6">{{returnFlight.departureDateTime}} - {{returnFlight.arrivalDateTime}}</div>
+ 					<div class="col s6">{{returnFlight.Airline}}</div>
+ 					</div>
+ 					<div class="row">
+ 					<div class="col s6">{{flightClass}}</div>
+ 					<div class="col s6"> {{returnFlight.cost}} {{returnFlight.currency}}</div>
+ 				</div>
+ 				</li>
+ 			</ul>
+      </ion-list>
+
+		<div class="card">
+	  <div class="item item-divider red">
+	    <h2 class="white-text infoBar">Passenger Information</h2>
+	  </div>
+	</div>
+	</ion-content>
+</div>

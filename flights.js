@@ -264,18 +264,21 @@ module.exports.addBooking = function(bookingInfo, cb){
 		/* check if the passenger is child or not */
   		var currentDate= new Date();
     	var currentYear = currentDate.getFullYear();		
-    	for (var i = 0 ; i < bookingInfo.passengerDetails.length ; i++){
+    	for (var i = 0 ; i < bookingInfo.passengers.length ; i++){
     		/* get the birth year of  the passenger with correct foramat */
-    		var passengerBirthDate = new Date(bookingInfo.passengerDetails[i].birthDate);
-    		var passengerBirthYear = passengerBirthYear.getFullYear();
+    		var passengerBirthDate = new Date(bookingInfo.passengers[i].dateOfBirth);
+    		var passengerBirthYear = passengerBirthDate.getFullYear();
 			if (currentYear-passengerBirthYear < 12) 
-				bookingInfo.passengerDetails[i].isChild = true ;
+				bookingInfo.passengers[i].isChild = true ;
 			else
-				bookingInfo.passengerDetails[i].isChild = false ;
+				bookingInfo.passengers[i].isChild = false ;
+				/* changing the time format to match the schema */
+	    		bookingInfo.passengers[i].dateOfBirth = passengerBirthDate.getTime();
+
 		}
 		/* Concatenate the number of records of the booking collection to the generatedBooking Number to get unique number*/
 		newBooking.bookingNumber = generatedBookingNumber+c;
-		newBooking.passengerDetails = bookingInfo.passengerDetails;
+		newBooking.passengerDetails = bookingInfo.passengers;
 		newBooking.outgoingFlightId = bookingInfo.outgoingFlightId;
 		newBooking.returnFlightId = bookingInfo.returnFlightId;
 		newBooking.cost = bookingInfo.cost;
