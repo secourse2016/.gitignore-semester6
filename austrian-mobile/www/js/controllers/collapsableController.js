@@ -2,9 +2,13 @@ var app = angular.module('starter');
 
 app.controller('collapsableController' , function($scope) {
 
-  /**
-   * function to toggle the active group to not active and vice versa.
-   **/
+
+    $scope.openFirstAccordion = function() {
+      $scope.shownGroup = 0;
+    };
+    /**
+     * function to toggle the active group to not active and vice versa.
+     **/
     $scope.toggleGroup = function(group) {
     if ($scope.isGroupShown(group)) {
       $scope.shownGroup = null;

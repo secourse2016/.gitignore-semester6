@@ -51,3 +51,16 @@
 
 	min-width: 300px;
 }
+
+.paymentError {
+  color : #b71c1c;
+  font-style: italic;
+  vertical-align: middle;
+
+  -webkit-transition:all linear 0.5s !important;
+  transition:all linear 0.5s;
+}
+
+.paymentError.ng-hide {
+  opacity:0;
+}
