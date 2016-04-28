@@ -1,6 +1,6 @@
 var app=angular.module('starter');
 
-app.controller('flightsController', function($scope, flights, global){
+app.controller('flightsController', function($scope,$state, flights, global){
 	$scope.error 			= {};
 	$scope.airline          = "Austrian";
 
@@ -110,7 +110,7 @@ app.controller('flightsController', function($scope, flights, global){
 			}
 			if($scope.tripType == 2 &&  $scope.returnFlights.length==0)
 				global.searchFlight.tripType = 1;
-			//$location.path('/passengers');
+			 $state.go('passengers');
 		}
 
 	};
