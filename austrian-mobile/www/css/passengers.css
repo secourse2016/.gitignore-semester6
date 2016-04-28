@@ -37,3 +37,7 @@ h2.infoBar{
 .passengerCollapseIcon{
   float: right;
 }
+
+.alert{
+  color: red;
+}
