@@ -78,7 +78,7 @@
 
 				 <label class="item item-input item-stacked-label">
 			     <!-- <span class="input-label">First Name</span> -->
-			     <input class="fromInput" type="text" placeholder="First Name">
+			     <input class="fromInput" type="text" placeholder="First Name"  ng-model="formData[$index].firstName">
 	   		</label>
 			 </div>
 			 <div class="row item item-accordion">
@@ -86,7 +86,7 @@
 
 				 <label class="item item-input item-stacked-label">
 			     <!-- <span class="input-label">Last Name</span> -->
-			     <input class="fromInput" type="text" placeholder="Last Name">
+			     <input class="fromInput" type="text" placeholder="Last Name" ng-model="formData[$index].lastName" >
 	   		</label>
 			 </div>
 			 <div class="row item item-accordion">
@@ -94,15 +94,15 @@
 
 				 <label class="item item-input item-stacked-label">
 			     <!-- <span class="input-label">Email</span> -->
-			     <input class="fromInput" type="text" placeholder="Email Address">
+			     <input class="fromInput" type="text" placeholder="Email Address" ng-model="formData[$index].emailAddress"  >
 	   		</label>
 			 </div>
 			 <div class="row item item-accordion">
-				 <i class="icon ion-earth tiny formIcons"></i>
+				 <i class="icon ion-android-hand tiny formIcons"></i>
 
 				 <label class="item item-input item-stacked-label">
 			     <!-- <span class="input-label">Passport Number</span> -->
-			     <input class="fromInput" type="text" placeholder="Passport Number">
+			     <input class="fromInput" type="text" placeholder="Passport Number" ng-model="formData[$index].passportNumber">
 	   		</label>
 			 </div>
 			 <div class="row item item-accordion">
@@ -110,7 +110,7 @@
 
 				 <label class="item item-input item-stacked-label">
 			     <!-- <span class="input-label">Nationality</span> -->
-			     <input class="fromInput" type="text" placeholder="Nationality">
+			     <input class="fromInput" type="text" placeholder="Nationality" ng-model="formData[$index].nationality">
 	   		</label>
 			 </div>
 			 <div class="row item item-accordion">
@@ -118,14 +118,71 @@
 
 				 <label class="item item-input item-stacked-label">
 			     <!-- <span class="input-label">Birthdate</span> -->
-			     <input class="fromInput" type="text" placeholder="Birth date" onfocus="(this.type = 'date')" onblur="(this.type='text')">
+			     <input class="fromInput" type="text" placeholder="Birth date" onfocus="(this.type = 'date')" onblur="(this.type='text')" ng-model="formData[$index].birthDate">
 	   		</label>
 			 </div>
 		 </li>
 	 </ul>
  </div>
 
+ <!-- children goes here -->
+ <div ng-repeat="child in children track by $index">
+ <ul class="collection with-header ">
+	<li class="collection-header item item-stable grey lighten-3"
+						ng-click="toggleGroup($index + adults.length)"
+						ng-class="{active: isGroupShown($index + adults.length)}">
+		<div class="orginDestination">Passenger {{($index + adults.length) + 1}} - Child</div>
+		<i class="passengerCollapseIcon icon ion-ios-arrow-down tiny"></i>
+	</li>
+	<li class="collection-item item item-accordion"
+						ng-show="isGroupShown($index + adults.length)">
+		<div class="row item item-accordion">
+			<i class="icon ion-person tiny formIcons"></i>
+
+			<label class="item item-input item-stacked-label">
+				<!-- <span class="input-label">First Name</span> -->
+				<input class="fromInput" type="text" placeholder="First Name"  ng-model="formDataChildren[$index].firstName">
+		 </label>
+		</div>
+		<div class="row item item-accordion">
+			<i class="icon ion-person tiny formIcons"></i>
+
+			<label class="item item-input item-stacked-label">
+				<!-- <span class="input-label">Last Name</span> -->
+				<input class="fromInput" type="text" placeholder="Last Name" ng-model="formDataChildren[$index].lastName"  >
+		 </label>
+		</div>
+		<div class="row item item-accordion">
+			<i class="icon ion-android-hand tiny formIcons"></i>
+
+			<label class="item item-input item-stacked-label">
+				<!-- <span class="input-label">Passport Number</span> -->
+				<input class="fromInput" type="text" placeholder="Passport Number" ng-model="formDataChildren[$index].passportNumber">
+		 </label>
+		</div>
+		<div class="row item item-accordion">
+			<i class="icon ion-location tiny formIcons"></i>
+
+			<label class="item item-input item-stacked-label">
+				<!-- <span class="input-label">Nationality</span> -->
+				<input class="fromInput" type="text" placeholder="Nationality" ng-model="formDataChildren[$index].nationality">
+		 </label>
+		</div>
+		<div class="row item item-accordion">
+			<i class="icon ion-calendar tiny formIcons"></i>
+
+			<label class="item item-input item-stacked-label">
+				<!-- <span class="input-label">Birthdate</span> -->
+				<input class="fromInput" type="text" placeholder="Birth date" onfocus="(this.type = 'date')" onblur="(this.type='text')" ng-model="formData[$index].birthDate">
+		 </label>
+		</div>
+	</li>
+</ul>
+</div>
+
 	</ion-list>
+	<button class="btn waves-effect waves-light red darken-1" type="submit" name="action"> CONTINUE
+	</button>
 	</form>
 	</ion-content>
 </div>
