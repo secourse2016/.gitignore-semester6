@@ -57,5 +57,71 @@
 	    <h2 class="white-text infoBar">Passenger Information</h2>
 	  </div>
 	</div>
+	<form novalidate>
+	<ion-list ng-controller="collapsableController">
+
+		<div ng-repeat="adult in adults track by $index">
+		<ul class="collection with-header ">
+		 <li class="collection-header item item-stable grey lighten-3"
+							 ng-click="toggleGroup($index)"
+							 ng-class="{active: isGroupShown($index)}">
+			 <div class="orginDestination">Passenger {{$index + 1}} - Adult</div>
+		 </li>
+		 <li class="collection-item item item-accordion"
+							 ng-show="isGroupShown($index)">
+			 <div class="row item item-accordion">
+				 <i class="icon ion-person tiny formIcons"></i>
+
+				 <label class="item item-input item-stacked-label">
+			     <!-- <span class="input-label">First Name</span> -->
+			     <input class="fromInput" type="text" placeholder="First Name">
+	   		</label>
+			 </div>
+			 <div class="row item item-accordion">
+				 <i class="icon ion-person tiny formIcons"></i>
+
+				 <label class="item item-input item-stacked-label">
+			     <!-- <span class="input-label">Last Name</span> -->
+			     <input class="fromInput" type="text" placeholder="Last Name">
+	   		</label>
+			 </div>
+			 <div class="row item item-accordion">
+				 <i class="icon ion-email tiny formIcons"></i>
+
+				 <label class="item item-input item-stacked-label">
+			     <!-- <span class="input-label">Email</span> -->
+			     <input class="fromInput" type="text" placeholder="Email Address">
+	   		</label>
+			 </div>
+			 <div class="row item item-accordion">
+				 <i class="icon ion-earth tiny formIcons"></i>
+
+				 <label class="item item-input item-stacked-label">
+			     <!-- <span class="input-label">Passport Number</span> -->
+			     <input class="fromInput" type="text" placeholder="Passport Number">
+	   		</label>
+			 </div>
+			 <div class="row item item-accordion">
+				 <i class="icon ion-location tiny formIcons"></i>
+
+				 <label class="item item-input item-stacked-label">
+			     <!-- <span class="input-label">Nationality</span> -->
+			     <input class="fromInput" type="text" placeholder="Nationality">
+	   		</label>
+			 </div>
+			 <div class="row item item-accordion">
+				 <i class="icon ion-calendar tiny formIcons"></i>
+
+				 <label class="item item-input item-stacked-label">
+			     <!-- <span class="input-label">Birthdate</span> -->
+			     <input class="fromInput" type="text" placeholder="Birth date" onfocus="(this.type = 'date')" onblur="(this.type='text')">
+	   		</label>
+			 </div>
+		 </li>
+	 </ul>
+ </div>
+
+	</ion-list>
+	</form>
 	</ion-content>
 </div>
