@@ -61,6 +61,13 @@ angular.module('starter', ['ionic'])
         templateUrl: 'partials/passengers.html'
       }
     }
+  }) .state('confirmation', {
+    url: '/confirmation',
+    views : {
+      'main-view' : {
+        templateUrl: 'partials/confirmation.html'
+      }
+    }
   })
   .state('faq', {
     url: '/faq',
