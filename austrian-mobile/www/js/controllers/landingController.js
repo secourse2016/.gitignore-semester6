@@ -41,11 +41,11 @@
 					'allAirlines'	: allAirlines,
 				};
 
-			// 	var postURL = 'api/flights/search/oneway';
-			// 	if(tripType == 2 && returnDate){
-			// 		requestParameters.arrivalDate = returnDate;
-			// 		postURL = 'api/flights/search/roundtrip';
-			// 	}
+				var postURL = 'api/flights/search/oneway';
+				if(tripType == 2 && returnDate){
+					requestParameters.arrivalDate = returnDate;
+					postURL = 'api/flights/search/roundtrip';
+				}
 			//
 			// 	$scope.hideSubmit = true;
 			//

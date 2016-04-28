@@ -7,10 +7,12 @@
       	<div style="margin-top:50px;" class="">
             <div class="list">
 
-                <div class="list-fields padding">
-                    <h3 id="search-header">Find Flights</h3>
+                <div class="list-fields">
+                    <h3 id="search-header" class="condensed light card-panel grey lighten-3">Find Flights</h3>
                     <!-- Origin Airport -->
-                    <div ng-controller="autoCompleteController as ctrl">
+                    <i class="material-icons" style="float:left; margin-left:10px; margin-top:10px">flight_takeoff</i>
+                    <div ng-controller="autoCompleteController as ctrl" class="padding">
+
                       <md-autocomplete required
                           md-input-name="autocompleteField"
                           md-selected-item="formData.origin"
@@ -26,9 +28,10 @@
                         </md-not-found>
                       </md-autocomplete>
                     </div>
-
+                    <hr>
                     <!-- Destination Airport -->
-                    <div ng-controller="autoCompleteController as ctrl">
+                    <i class="material-icons" style="float:left; margin-left:10px; margin-top:10px">flight_land</i>
+                    <div ng-controller="autoCompleteController as ctrl" class="padding">
                       <md-autocomplete required
                           md-input-name="autocompleteField"
                           md-selected-item="formData.destination"
@@ -44,49 +47,68 @@
                         </md-not-found>
                       </md-autocomplete>
                     </div>
-
+                    <hr>
                     <!-- Adults Count -->
-                    <select  ng-model="formData.adults">
-                        <option value="" disabled selected>Adults</option>
-                        <option value="1">1 adult</option>
-                        <option value="{{n}}" ng-repeat="n in searchCtrl.range">{{n}} adults</option>
-                    </select>
+                    <i class="material-icons" style="float:left; margin-left:10px; margin-top:10px">person</i>
+                    <div class="padding">
+                        <select  ng-model="formData.adults">
 
+                            <option value="" disabled selected>Adults</option>
+                            <option value="1">1 adult</option>
+                            <option value="{{n}}" ng-repeat="n in searchCtrl.range">{{n}} adults</option>
+                        </select>
+                    </div>
+                    <hr>
                     <!-- Children Count -->
-                    <select  ng-model="formData.children">
-                        <option value="" disabled selected>Children</option>
-                        <option value="0">no children</option>
-                        <option value="1">1 child</option>
-                        <option value="{{n}}" ng-repeat="n in searchCtrl.range">{{n}} children</option>
-                    </select>
-
+                    <i class="material-icons" style="float:left; margin-left:10px; margin-top:10px">child_care</i>
+                    <div class="padding">
+                        <select  ng-model="formData.children">
+                            <option value="" disabled selected>Children</option>
+                            <option value="0">no children</option>
+                            <option value="1">1 child</option>
+                            <option value="{{n}}" ng-repeat="n in searchCtrl.range">{{n}} children</option>
+                        </select>
+                    </div>
+                    <hr>
                     <!-- Trip Type -->
-                    <select ng-model="formData.tripType">
-                        <option value="" disabled selected>Trip Type</option>
-                        <option value="1">One-way</option>
-                        <option value="2">Roundtrip</option>
-                         <!-- repeat -->
-                    </select>
+                    <i class="material-icons" style="float:left; margin-left:10px; margin-top:10px">card_travel</i>
+                    <div class="padding">
+                        <select ng-model="formData.tripType">
+                            <option value="" disabled selected>Trip Type</option>
+                            <option value="1">One-way</option>
+                            <option value="2">Roundtrip</option>
+                        </select>
+                    </div>
+                    <hr>
                     <!-- Departure Date -->
-                    <label class="item item-input">
-                        <i class="icon ion-calendar"></i>
-                        <input ng-model="formData.outgoingDate" placeholder="Outgoing Date" type="text" onfocus="(this.type='date')" onblur="(this.type=checkDateField(this))">
-                    </label>
+                    <i class="material-icons" style="float:left; margin-left:10px; margin-top:10px">date_range</i>
+                    <div class="padding-date">
+                        <label>
+                            <input ng-model="formData.outgoingDate" placeholder="Outgoing Date" type="text" onfocus="(this.type='date')" onblur="(this.type=checkDateField(this))">
+                        </label>
+                    </div>
+                    <hr>
                     <!-- Return Date -->
-                    <label class="item item-input">
-                        <i class="icon ion-calendar"></i>
-                        <input ng-model="formData.returnDate" placeholder="Departure Date" type="text" onfocus="(this.type='date')" onblur="(this.type=checkDateField(this))">
-                    </label>
+                    <i class="material-icons" style="float:left; margin-left:10px; margin-top:10px">date_range</i>
+                    <div class="padding-date">
+                        <label>
+                            <input ng-model="formData.returnDate" placeholder="Departure Date" type="text" onfocus="(this.type='date')" onblur="(this.type=checkDateField(this))">
+                        </label>
+                    </div>
+                    <hr>
                     <!-- Flight Class -->
-                    <select ng-model="formData.flightClass">
-                        <option value="" disabled selected>Flight Class</option>
-                        <option value="economy">Economy</option>
-                        <option value="business">Business</option>
-                    </select>
+                    <i class="material-icons" style="float:left; margin-left:10px; margin-top:10px">class</i>
+                    <div class="padding">
+                        <select ng-model="formData.flightClass" class="padding-class">
+                            <option value="" disabled selected>Flight Class</option>
+                            <option value="economy">Economy</option>
+                            <option value="business">Business</option>
+                        </select>
+                    </div>
                     <!-- Search for Flights -->
                     <br>
                     <div class="center">
-                        <a class="waves-effect waves-light btn white red-text" ng-click="searchFlights()">FIND NOW!</a>
+                        <a class="waves-effect waves-light btn red" ng-click="searchFlights()">FIND NOW!</a>
                     </div>
                 </div>
             </div>

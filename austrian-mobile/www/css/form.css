@@ -1,36 +1,42 @@
-/* Background color of the search form */
-.list-fields{
-    background-color: white;
-}
 
 /* Header of the search form */
 #search-header{
     text-align: center;
-    color: white;
+    color: black;
 }
 
 /* Field underline color */
-input[type=text], input[type=text]:focus, input[type=text]:focus:not([readonly])  {
-  border-bottom: 2px solid white;
-  box-shadow: 0 1px 0 0 white;
+input[type=text]{
+  border-bottom: 1px solid transparent;
+  box-shadow: 0 1px 0 0 transparent;
 }
 
-input[type=date], input[type=date]:focus, input[type=date]:focus:not([readonly])  {
-  border-bottom: 2px solid white;
-  box-shadow: 0 1px 0 0 white;
+input[type=text]:focus, input[type=text]:focus:not([readonly])  {
+  border-bottom: 1px solid transparent;
+  box-shadow: 0 1px 0 0 transparent;
+}
+
+input[type=date]{
+  border-bottom: 1px solid black;
+  box-shadow: 0 1px 0 0 black;
+}
+
+input[type=date]:focus, input[type=date]:focus:not([readonly])  {
+  border-bottom: 1px solid transparent;
+  box-shadow: 0 1px 0 0 transparent;
 }
 
 /* Input field color */
 input[type=text]{
-  color: white;
+  color: black;
 }
 
 /* Field Label Color */
 .input-label{
-  color: white;
+  color: black;
 }
 input[type=text]::-webkit-input-placeholder {
-   color: white;
+   color: black;
 }
 
 .list .item.item-floating-label, .item-floating-label{
@@ -41,31 +47,38 @@ input[type=text]::-webkit-input-placeholder {
 }
 .item-select .input-label{
   margin-left: -10px;
-  color: white;
+  color: black;
 }
 
 select{
   margin-top: 7px;
   display: block;
+  border: 0px;
+}
+
+/* FIND NOW button */
+.btn{
+  width: 100%;
 }
 
 /*  Auto-complete Styling  */
 /* =|=|=|=|=|=|=|=|=|=|=|= */
 
 md-input-container input[type=search] {
-  border-bottom: 1px solid white;
-  box-shadow: 0 1px 0 0 white;
+  border-bottom: 1px solid transparent;
+  box-shadow: 0 1px 0 0 transparent;
 }
 
 md-input-container input[type=search]:focus{
-  border-bottom: 1px solid white !important;
-  box-shadow: 0 1px 0 0 white !important;
-  border-color: white !important;
+  border-bottom: 1px solid transparent !important;
+  box-shadow: 0 1px 0 0 transparent !important;
+  border-color: transparent !important;
 }
+
 
 md-input-container label,  md-input-container .md-input {
   font-size: 14px;
-  color: white !important;
+  color: black !important;
 }
 
 md-input-container .md-input{
@@ -92,7 +105,22 @@ md-autocomplete[md-floating-label] md-input-container{
   display: none;
 }
 
+.padding{
+  padding: 0px 10px 0px 40px !important;
+}
 
-li > md-autocomplete-parent-scope > span{
-  color: #ef5350;
+.padding-date{
+  padding: 0px 20px 0px 50px !important;
+}
+
+.padding-class{
+  padding: 0px 20px 0px 7px !important;
+}
+
+md-input-container label:not(.md-container-ignore){
+  bottom: 80%;
+}
+
+md-input-container input[type=search]{
+  margin-bottom: 5px;
 }
