@@ -1,5 +1,5 @@
 var app = angular.module('starter');
-app.controller('confirmationController' , function($scope, $http, global, $location) {
+app.controller('confirmationController' , function($scope, $http, global, $state) {
 
 	$scope.airline         = "Austrian";
 
