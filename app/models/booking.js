@@ -11,18 +11,18 @@ var booking 	 = new schema ({
 			{
 				firstName 		: String,
 				lastName 		: String,
-				emailAddress 	: String,
-				passportNumber 	: String,
+				email		 	: String,
+				passportNum 	: String,
 				nationality 	: String,
-				birthDate 		: Date,
+				dateOfBirth 	: Date.GetTime(),
 				isChild 		: Boolean
 			}
 		],
-	outgoingFlight 	: { type:String, ref: 'Flight' },	//reference id to the outGoingFlight number .
-	totalCost		: Number,
-	returnFlight 	: {type:String , ref:'Flight'}, // reference id to the returnFlight number .
-	bookingDate		: Date, // booking date will be equal to the current date .
-	isSuccessful	: Boolean // check if is booking is successful will be handelled after handelling stripe for payment
+	outgoingFlightId 	: { type:String, ref: 'Flight' },	//reference id to the outGoingFlight number .
+	cost 				: Number,
+	returnFlightId 		: {type:String , ref:'Flight'}, // reference id to the returnFlight number .
+	bookingDate			: Date, // booking date will be equal to the current date .
+
 });
 
 module.exports = mongoose.model('Booking', booking);
