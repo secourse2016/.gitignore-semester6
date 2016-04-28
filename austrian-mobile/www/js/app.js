@@ -72,6 +72,11 @@ angular.module('starter', ['ionic'])
       }
     }
   });
+
+  /**
+  * Set the public key for stripe
+  */
+  Stripe.setPublishableKey('pk_test_GLghvbf0O1mNsV4T8nECOC1u');
 })
 .controller('masterController',function($scope, $ionicSideMenuDelegate){
   $scope.toggleLeft = function() {
