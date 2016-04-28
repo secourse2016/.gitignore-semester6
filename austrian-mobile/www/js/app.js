@@ -21,7 +21,7 @@ angular.module('starter', ['ionic', 'ngMaterial'])
       StatusBar.styleDefault();
     }
   });
-}).config(function($stateProvider, $httpProvider) {
+}).config(function($stateProvider) {
   $stateProvider
   .state('index', {
     url: '/',
@@ -90,25 +90,6 @@ angular.module('starter', ['ionic', 'ngMaterial'])
     }
   });
 
-  /**
-   * Interceptor to inject every HTTP request with the JSON web token.
-   */
-  // TODO:: most probably will not work
- //  $httpProvider.interceptors.push(['$q', '$location', function($q, $location){
- //      return {
- //         'request': function(config){
- //             config.headers = config.headers || {};
- //             config.headers['x-access-token'] = token;
- //             return config;
- //         },
- //         'responseError': function(response){
- //             if (response.status === 401 || response.status === 403){
- //              //TODO: $location.path('/unauthorized');
- //             }
- //             return $q.reject(response);
- //         }
- //     };
- // }]);
   /*
    * Set the public key for stripe
    */

@@ -1,5 +1,6 @@
 (function(){
 	var app = angular.module('starter');
+	var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBdXN0cmlhbiBBaXJsaW5lcyIsImlhdCI6MTQ2MDYzNTE1OCwiZXhwIjoxNDkyMTcxMTU4LCJhdWQiOiJ3d3cuYXVzdHJpYW4tYWlybGluZXMuY29tIiwic3ViIjoiYXVzdHJpYW5BaXJsaW5lcyJ9.Dilu6siLX3ouLk48rNASpYJcJSwKDTFYS2U4Na1M5k4';
 
 	/**
 	* Search Flight Controller form collecting form data
@@ -19,7 +20,6 @@
 
 			global.setSearchFlight($scope.formData);
 
-			// Send POST request to get the flights
 			var origin 			= $scope.formData.origin;
 			var destination 	= $scope.formData.destination;
 			var outgoingDate	= $scope.formData.outgoingDate;
@@ -43,10 +43,10 @@
 					'allAirlines'	: allAirlines,
 				};
 
-				var postURL = 'http://localhost:8080/api/flights/search/oneway';
+				var postURL = 'http://localhost:8080/api/flights/search/oneway?wt'+token;
 				if(tripType == 2 && returnDate){
 					requestParameters.arrivalDate = returnDate;
-					postURL = 'http://localhost:8080/api/flights/search/roundtrip';
+					postURL = 'http://localhost:8080/api/flights/search/roundtrip?wt='+token;
 				}
 				// TODO:: Add loading
 				$http.post(postURL, requestParameters)
@@ -130,7 +130,7 @@
 			};
 		}
 		//TODO:: change this route to /api/airports
-		$http.get('http://localhost:8080/api/airports')
+		$http.get('http://localhost:8080/api/airports?wt='+token)
 		.success(function(data){
 			ctrl.airports = loadAll(data);
 		})

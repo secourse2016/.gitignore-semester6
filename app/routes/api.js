@@ -10,7 +10,7 @@ var router        = express.Router();
 /**
  * JSON Web Token Verification Middleware
  */
-// router.use(verifyToken);
+router.use(verifyToken);
 
 // API Routes (Protected Routes) ========================================
 
