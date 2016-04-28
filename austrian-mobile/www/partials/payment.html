@@ -17,43 +17,38 @@
 
   <div>
     <!--Form-->
-    <form name="paymentForm" class="col s12" ng-submit="paymentForm.$valid && addBoking()">
+    <form name="paymentForm" class="col s12" ng-submit="payForBooking()">
       <!--cardNo-->
       <div class="list">
         <label class="item item-input">
           <i class="icon ion-card"></i>
-          <input class="input_field margin" type="text" placeholder="Card No.">
+          <input ng-model="cardNo" class="input_field margin" type="text" placeholder="Card No.">
         </label>
+         <div class="paymentError" ng-show="error.number"><i class="icons ion-alert-circled"></i> <span style="margin-left:8px">{{error.message}}</span></div>
       </div>
 
       <!--CVV-->
       <div class="list">
         <label class="item item-input">
           <i class="icon ion-card"></i>
-          <input class="input_field margin" type="text" placeholder="CVV">
+          <input ng-model="cvv" class="input_field margin" type="text" placeholder="CVV">
         </label>
+        <div class="paymentError" ng-show="error.cvv"><i class="icons ion-alert-circled"></i> <span style="margin-left:8px">{{error.message}}</span></div>
       </div>
 
         <!--Expiry date-->
-      <!--  <div class="list">
-          <label class="item item-input">
-            <i class="icon ion-calendar small"></i>
-            <input class="input_field margin" type="date" placeholder="Expiry Date">
-          </label>
-        </div> -->
         <div class="list">
           <label class="item item-input">
             <i class="icon ion-calendar"></i>
-            <input class="input_field margin" placeholder="Expiry Date" type="text" onfocus="(this.type='date')" onblur="(this.type='text')">
+            <input ng-model="expiryDate" class="input_field margin" placeholder="Expiry Date" type="text" onfocus="(this.type='date')" onblur="(this.type=checkField(this))">
           </label>
+          <div class="paymentError" ng-show="error.date"><i class="icons ion-alert-circled"></i> <span style="margin-left:8px">{{error.message}}</span></div>
         </div>
+
       <!--Submition button-->
         <div class="input-field col s12" style="padding:30px">
-          <a ng-href="{{ paymentForm.$valid ?'/successful' : '/payment'}}"
-          class="btn waves-effect waves-light red book-button"
-          name="buy">Book Now
-          <i class="icons ion-send"></i>
-          </a>
+          <input class="btn waves-effect waves-light red book-button"
+          value="Book Now" type="submit">
         </div>
     </form>
   </div>
