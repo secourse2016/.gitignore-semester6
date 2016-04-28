@@ -1,59 +1,62 @@
+<link href="css/payment.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
 <!--Payment block-->
-  <div ng-controller="PaymentController as paymentCtrl">
+<div style="padding:20px;" ng-controller="PaymentController as paymentCtrl">
+  </br>
+  </br>
+  </br>
   <div class="form-header">
-    <h5 class="red-text text-darken-2">Payment Form</h5>
+    <h3 class="red-text text-darken-2" style="text-align:center">Payment Form</h3>
   </div>
   <hr class="hr">
-
-  <img src="img/creditcards.png" alt="" class="responsive-img">
+  <div style="horizontal-allign:center">
+  <img src="img/creditcards.png" alt="" class="responsive-img" style="">
+  </div>
   <hr class="hr">
 
   <div>
     <!--Form-->
     <form name="paymentForm" class="col s12" ng-submit="paymentForm.$valid && addBoking()">
       <!--cardNo-->
-      <div class="row">
-        <div class="input-field col s12">
-        <i class="material-icons prefix">payment</i>
-          <input  ng-model="cardNo" id="cardNo" type="text" class="validate" required>
-          <label for="cardNo">Card No.</label>
-        </div>
+      <div class="list">
+
+        <label class="item item-input">
+          <i class="icon ion-card small"></i>
+          <input style="margin-left:12px;" type="text" placeholder="Card No.">
+        </label>
+
       </div>
 
       <!--CVV-->
-      <div class="row">
-        <div class="input-field col s6">
-        <i class="material-icons prefix">payment</i>
-          <input  ng-model="cvv" id="cvv" type="text" class="validate" required>
-          <label for="cvv">CVV</label>
-        </div>
-
-        <!--Expiry date-->
-        <div class="input-field col s6">
-          <i class="material-icons prefix">date_range</i>
-          <input id="expirydate" name="expirydate" ng-model="expiryDate" input-date type="text"  select-years="15"required>
-          <label for="expirydate">Expiry Date</label>
-        </div>
+      <div class="list">
+        <label class="item item-input">
+          <i class="icon ion-card small"></i>
+          <input style="margin-left:12px;" type="text" placeholder="CVV">
+        </label>
       </div>
 
+        <!--Expiry date-->
+        <div class="list">
+          <label class="item item-input">
+            <i class="icon ion-card small"></i>
+            <input style="margin-left:12px;" type="text" placeholder="Expiry Date">
+          </label>
+        </div>
+
       <!--Submition button-->
-      <div class="row">
-        <div class="input-field col s12">
+        <div class="input-field col s12" style="padding:30px">
           <a ng-href="{{ paymentForm.$valid ?'/successful' : '/payment'}}"
           class="btn waves-effect waves-light red book-button"
           name="buy">Book Now
-          <i class="material-icons right">send</i>
+          <i class="icons ion-send"></i>
           </a>
         </div>
-      </div>
     </form>
   </div>
-
-<br/>
-<!--Total price-->
-<div>
-  <h5 class="center-align red-text text-darken-2">
-    Total Cost: {{totalCost}} {{currency}}
-  </h5>
-</div>
+  <!--Total price-->
+  <div style="padding-bottom:100px">
+    <h5 class="center-align red-text text-darken-2">
+      Total Cost: {{totalCost}} {{currency}}
+    </h5>
+  </div>
 </div>

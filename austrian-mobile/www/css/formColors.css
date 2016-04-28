@@ -1,0 +1,92 @@
+/* label underline color */
+.input-field input[type=text] , input[type=email]{
+  border-bottom: 1px solid white;
+  box-shadow: 0 1px 0 0 white;
+}
+
+/* label underline focus color */
+.input-field input[type=text]:focus , input[type=email]:focus {
+  border-bottom: 1px solid white;
+  box-shadow: 0 1px 0 0 white;
+}
+
+/* label color */
+.input-field label {
+  color: #000;
+  font-size: 40;
+}
+
+/* label focus color */
+.input-field input[type=text]:focus + label {
+  color: #b71c1c;
+}
+
+/* label focus color for email type */
+.input-field input[type=email]:focus + label {
+  color: #b71c1c;
+}
+/* label underline focus color */
+.input-field input[type=text]:focus {
+  border-bottom: 1px solid #b71c1c;
+  box-shadow: 0 1px 0 0 #b71c1c;
+  border-color: #b71c1c;
+}
+/* label underline focus color for email type*/
+.input-field input[type=email]:focus {
+  border-bottom: 1px solid #b71c1c;
+  box-shadow: 0 1px 0 0 #b71c1c;
+  border-color: #b71c1c;
+}
+/* valid color */
+.input-field input[type=text].valid {
+  border-bottom: 1px solid white;
+  box-shadow: 0 1px 0 0 white;
+}
+/* invalid color */
+.input-field input[type=text].invalid {
+  border-bottom: 1px solid red;
+  box-shadow: 0 1px 0 0 red;
+}
+/* icon prefix focus color */
+.input-field .prefix.active {
+  color: #b71c1c;
+}
+
+/* Radio buttons colors */
+[type="radio"]:not(:checked) + label:before,
+[type="radio"]:not(:checked) + label:after,
+[type="radio"]:checked + label:before {
+border: 2px solid white;
+}
+
+[type="radio"]:checked + label:after{
+border: 2px solid white;
+background: white;
+}
+/* Select Arrow */
+.select-wrapper span.caret{
+ color: white;
+}
+
+/* Select Options */
+.dropdown-content li>a, .dropdown-content li>span{
+  color: #ef5350;
+}
+
+/* Date Picker Styling */
+.picker__date-display,
+.picker__weekday-display{
+   background-color: #e53935;
+}
+
+.picker__day--selected{
+   background-color: #e53935 !important;
+}
+.picker__today, .picker__close,
+.picker__day.picker__day--today{
+   color: red;
+ }
+
+.picker__nav--prev:hover, .picker__nav--next:hover {
+background-color: #ffebee;
+}

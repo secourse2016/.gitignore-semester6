@@ -1,0 +1,53 @@
+.input-field .prefix.active
+{
+	color: #F44336;
+}
+
+.payment-block {
+
+	margin-left:auto;
+	margin-right:auto;
+	min-width:300px;
+	width: 70%;
+	border: 1.5px solid #eeeeee;
+}
+
+.form-header {
+
+	margin-bottom: 20px;
+}
+
+.hr {
+
+	border-color:red;
+}
+
+.book-button {
+
+	width: 100%;
+}
+
+.congratulations {
+
+	margin-top: 10%;
+	margin-left:auto;
+	margin-right:auto;
+	min-width:300px;
+	width: 40%;
+	border: 1.5px solid #eeeeee;
+}
+
+.paragraph {
+
+	margin-left: 3%;
+}
+
+.home-button {
+
+	width: 100%;
+}
+
+.bar {
+
+	min-width: 300px;
+}
