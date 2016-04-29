@@ -49,7 +49,8 @@
 					requestParameters.arrivalDate = returnDate;
 					postURL = host+'/api/flights/search/roundtrip?wt='+token;
 				}
-				// TODO:: Add loading
+
+				$scope.loading = true;
 				$http.post(postURL, requestParameters)
 				.success(function(resultFlights){
 					flights.outgoingFlights = resultFlights.outgoingFlights;

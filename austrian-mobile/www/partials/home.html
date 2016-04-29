@@ -8,7 +8,7 @@
               {{error}}
           </div>
       </div>
-      	<div  class="">
+      	<div ng-hide="loading">
             <div class="list" >
 
                 <h3 id="search-header" class="condensed light card-panel grey lighten-3">Find Flights</h3>
@@ -121,6 +121,7 @@
                             </select>
                         </div>
                     </div>
+                    <!-- All Airlines -->
                     <div class="row input-border push-up">
                         <div class="allAirlinesCheckbox col s7" >
                             <input id="allAirlines" ng-model="formData.allAirlines" type="checkbox" />
@@ -128,7 +129,6 @@
                         </div>
                     </div>
             </div>
-            <!-- All Airlines -->
             <br>
             <!-- Search for Flights -->
             <div class="center">
@@ -136,6 +136,25 @@
             </div>
         </div>
       	</div>
+        <!-- Loading -->
+        <div class="loading" ng-show="loading">
+              <div class="preloader-wrapper small active" >
+                <div class="spinner-layer spinner-red" >
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                      <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                      <div class="circle"></div>
+                    </div>
+                </div>
+              </div>
+              <div id="loading-text">
+                  Loading...
+              </div>
+        </div>
       </ion-nav-view>
     </ion-tab>
 
