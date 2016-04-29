@@ -90,8 +90,8 @@
                             </select>
                         </div>
                     </div>
-                    <!-- Departure Date -->
-                    <div class="input-border push-up" style="float:left; width: 50%;">
+                    <!-- Outgoing Date -->
+                    <div class="input-border push-up date-trans" ng-show="formData.tripType >= 1">
                         <i class="material-icons" style="float:left; margin-left:10px; margin-top:13px">date_range</i>
                         <div class="padding-date">
                             <label>
@@ -101,11 +101,11 @@
                     </div>
 
                     <!-- Return Date -->
-                    <div class="input-border push-up" style="float:left; width: 50%;">
+                    <div class="input-border push-up date-trans" ng-show="formData.tripType == 2">
                         <i class="material-icons" style="float:left; margin-left:10px; margin-top:13px">date_range</i>
                         <div class="padding-date">
                             <label>
-                                <input style="margin-bottom: 5px;" ng-model="formData.returnDate" placeholder="Departure Date" type="text" onfocus="(this.type='date')" onblur="(this.type=checkDateField(this))">
+                                <input style="margin-bottom: 5px;" ng-model="formData.returnDate" placeholder="Return Date" type="text" onfocus="(this.type='date')" onblur="(this.type=checkDateField(this))">
                             </label>
                         </div>
                     </div>

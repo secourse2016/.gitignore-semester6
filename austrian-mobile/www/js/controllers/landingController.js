@@ -62,6 +62,7 @@
 					console.log('Error: Couldn\'t fetch flights.');
 				});
 			}
+			setTimeout(function(){ $scope.error = null; }, 1000);
 		};
 	});
 
