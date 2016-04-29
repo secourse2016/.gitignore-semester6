@@ -1,9 +1,9 @@
 // Ionic Starter App
-
+var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBdXN0cmlhbiBBaXJsaW5lcyIsImlhdCI6MTQ2MDYzNTE1OCwiZXhwIjoxNDkyMTcxMTU4LCJhdWQiOiJ3d3cuYXVzdHJpYW4tYWlybGluZXMuY29tIiwic3ViIjoiYXVzdHJpYW5BaXJsaW5lcyJ9.Dilu6siLX3ouLk48rNASpYJcJSwKDTFYS2U4Na1M5k4';
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic'])
+angular.module('starter', ['ionic', 'ngMaterial'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -39,12 +39,12 @@ angular.module('starter', ['ionic'])
   .state('flights', {
     url: '/flights',
     views : {
-      
+
       'main-view' : {
         templateUrl: 'partials/flights.html'
       }
     }
-    
+
   })
   .state('about', {
     url: '/about',
@@ -90,10 +90,10 @@ angular.module('starter', ['ionic'])
     }
   });
 
-  /**
-  * Set the public key for stripe
-  */
-  Stripe.setPublishableKey('pk_test_GLghvbf0O1mNsV4T8nECOC1u');
+  /*
+   * Set the public key for stripe
+   */
+   Stripe.setPublishableKey('pk_test_GLghvbf0O1mNsV4T8nECOC1u');
 })
 .controller('masterController',function($scope, $ionicSideMenuDelegate){
   $scope.toggleLeft = function() {

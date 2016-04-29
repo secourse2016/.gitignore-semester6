@@ -1,23 +1,172 @@
+<link href="css/landing.css" rel="stylesheet">
 <ion-tabs class="tabs-assertive tabs-icon-top">
+    <!-- Search flights form -->
+    <ion-tab title="Book" icon-on="ion-paper-airplane" icon-off="ion-paper-airplane" ng-controller="searchFlightController as searchCtrl">
+      <ion-nav-view name="tab-book">
+      <div class="errorContainer">
+          <div class="errorToast" ng-show="error">
+              {{error}}
+          </div>
+      </div>
+      	<div ng-hide="loading">
+            <div class="list" >
 
-        <ion-tab title="Book" icon-on="ion-paper-airplane" icon-off="ion-paper-airplane">
-          <ion-nav-view name="tab-book">
-          	<div style="margin-top:50px">
-          	  Search flights form here		
- -          	</div>
-            <!-- Tab 1 content -->
-          </ion-nav-view>
-        </ion-tab>
+                <h3 id="search-header" class="condensed light card-panel grey lighten-3">Find Flights</h3>
+                <div class="list-fields">
+                    <!-- Origin Airport -->
+                    <div class="input-border">
+                    <i class="material-icons" style="float:left; margin-left:10px; margin-top:10px">flight_takeoff</i>
+                    <div ng-controller="autoCompleteController as ctrl" class="padding">
+                      <md-autocomplete required
+                          md-input-name="autocompleteField"
+                          md-selected-item="formData.origin"
+                          md-search-text="ctrl.searchText"
+                          md-items="item in ctrl.querySearch(ctrl.searchText)"
+                          md-item-text="item.display"
+                          md-floating-label="From">
+                        <md-item-template>
+                          <span md-highlight-text="ctrl.searchText">{{item.display}}</span>
+                        </md-item-template>
+                        <md-not-found>
+                             No airports matching "{{ctrl.searchText}}" were found.
+                        </md-not-found>
+                      </md-autocomplete>
+                    </div>
+                </div>
+                    <!-- Destination Airport -->
+                    <div class="input-border push-up">
+                    <i class="material-icons" style="float:left; margin-left:10px; margin-top:10px">flight_land</i>
+                    <div ng-controller="autoCompleteController as ctrl" class="padding">
+                      <md-autocomplete required
+                          md-input-name="autocompleteField"
+                          md-selected-item="formData.destination"
+                          md-search-text="ctrl.searchText"
+                          md-items="item in ctrl.querySearch(ctrl.searchText)"
+                          md-item-text="item.display"
+                          md-floating-label="To">
+                        <md-item-template>
+                          <span md-highlight-text="ctrl.searchText">{{item.display}}</span>
+                        </md-item-template>
+                        <md-not-found>
+                             No airports matching "{{ctrl.searchText}}" were found.
+                        </md-not-found>
+                      </md-autocomplete>
+                    </div>
+                </div>
+                    <!-- Adults Count -->
+                    <div class="input-border push-up" style="float:left; width: 50%;">
+                        <i class="material-icons" style="float:left; margin-left:10px; margin-top:10px">person</i>
+                        <div class="padding">
+                            <select  ng-model="formData.adults">
 
-        <ion-tab title="View Booking" icon-on="ion-ios-pricetag" icon-off="ion-ios-pricetag-outline">
-        	<ion-nav-view name="tab-view-booking">
-        	<div style="margin-top:50px">
-          		view booking form here
-          	</div>
-            <!-- Tab 1 content -->
-          	</ion-nav-view>
+                                <option value="" disabled selected>Adults</option>
+                                <option value="1">1 adult</option>
+                                <option value="{{n}}" ng-repeat="n in searchCtrl.range">{{n}} adults</option>
+                            </select>
+                        </div>
+                    </div>
 
-        </ion-tab>
+                    <!-- Children Count -->
+                    <div class="input-border push-up" style="float:left; width: 50%">
+                        <i class="material-icons" style="float:left; margin-left:10px; margin-top:10px">child_care</i>
+                        <div class="padding">
+                            <select  ng-model="formData.children">
+                                <option value="" disabled selected>Children</option>
+                                <option value="0">no children</option>
+                                <option value="1">1 child</option>
+                                <option value="{{n}}" ng-repeat="n in searchCtrl.range">{{n}} children</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Trip Type -->
+                    <div class="input-border push-up">
+                        <i class="material-icons" style="float:left; margin-left:10px; margin-top:10px">card_travel</i>
+                        <div class="padding">
+                            <select ng-model="formData.tripType">
+                                <option value="" disabled selected>Trip Type</option>
+                                <option value="1">One-way</option>
+                                <option value="2">Roundtrip</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- Outgoing Date -->
+                    <div class="input-border push-up date-trans" ng-show="formData.tripType >= 1">
+                        <i class="material-icons" style="float:left; margin-left:10px; margin-top:13px">date_range</i>
+                        <div class="padding-date">
+                            <label>
+                                <input style="margin-bottom: 5px;" ng-model="formData.outgoingDate" placeholder="Outgoing Date" type="text" onfocus="(this.type='date')" onblur="(this.type=checkDateField(this))">
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Return Date -->
+                    <div class="input-border push-up date-trans" ng-show="formData.tripType == 2">
+                        <i class="material-icons" style="float:left; margin-left:10px; margin-top:13px">date_range</i>
+                        <div class="padding-date">
+                            <label>
+                                <input style="margin-bottom: 5px;" ng-model="formData.returnDate" placeholder="Return Date" type="text" onfocus="(this.type='date')" onblur="(this.type=checkDateField(this))">
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Flight Class -->
+                    <div class="input-border push-up">
+                        <i class="material-icons" style="float:left; margin-left:10px; margin-top:10px">class</i>
+                        <div class="padding">
+                            <select ng-model="formData.flightClass" class="padding-class">
+                                <option value="" disabled selected>Flight Class</option>
+                                <option value="economy">Economy</option>
+                                <option value="business">Business</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- All Airlines -->
+                    <div class="row input-border push-up">
+                        <div class="allAirlinesCheckbox col s7" >
+                            <input id="allAirlines" ng-model="formData.allAirlines" type="checkbox" />
+                            <label for="allAirlines" class="black-text">All airlines</label>
+                        </div>
+                    </div>
+            </div>
+            <br>
+            <!-- Search for Flights -->
+            <div class="center">
+                <a class="waves-effect waves-light btn red" ng-click="searchFlights()">FIND NOW!</a>
+            </div>
+        </div>
+      	</div>
+        <!-- Loading -->
+        <div class="loading" ng-show="loading">
+              <div class="preloader-wrapper small active" >
+                <div class="spinner-layer spinner-red" >
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                      <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                      <div class="circle"></div>
+                    </div>
+                </div>
+              </div>
+              <div id="loading-text">
+                  Loading...
+              </div>
+        </div>
+      </ion-nav-view>
+    </ion-tab>
+
+    <ion-tab title="View Booking" icon-on="ion-ios-pricetag" icon-off="ion-ios-pricetag-outline">
+    	<ion-nav-view name="tab-view-booking">
+    	<div style="margin-top:50px">
+      		view booking form here
+      	</div>
+        <!-- Tab 1 content -->
+      	</ion-nav-view>
+
+    </ion-tab>
 
 
 </ion-tabs>
