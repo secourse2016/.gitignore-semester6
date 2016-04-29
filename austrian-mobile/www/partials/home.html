@@ -121,9 +121,16 @@
                             </select>
                         </div>
                     </div>
+                    <div class="row input-border push-up">
+                        <div class="allAirlinesCheckbox col s7" >
+                            <input id="allAirlines" ng-model="formData.allAirlines" type="checkbox" />
+                            <label for="allAirlines" class="black-text">All airlines</label>
+                        </div>
+                    </div>
             </div>
-            <!-- Search for Flights -->
+            <!-- All Airlines -->
             <br>
+            <!-- Search for Flights -->
             <div class="center">
                 <a class="waves-effect waves-light btn red" ng-click="searchFlights()">FIND NOW!</a>
             </div>

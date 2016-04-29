@@ -1,6 +1,7 @@
 (function(){
 	var app = angular.module('starter');
 	var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBdXN0cmlhbiBBaXJsaW5lcyIsImlhdCI6MTQ2MDYzNTE1OCwiZXhwIjoxNDkyMTcxMTU4LCJhdWQiOiJ3d3cuYXVzdHJpYW4tYWlybGluZXMuY29tIiwic3ViIjoiYXVzdHJpYW5BaXJsaW5lcyJ9.Dilu6siLX3ouLk48rNASpYJcJSwKDTFYS2U4Na1M5k4';
+	var host = 'http://52.90.41.197:80';
 
 	/**
 	* Search Flight Controller form collecting form data
@@ -43,10 +44,10 @@
 					'allAirlines'	: allAirlines,
 				};
 
-				var postURL = 'http://52.90.41.197:80/api/flights/search/oneway?wt'+token;
+				var postURL = host+'/api/flights/search/oneway?wt='+token;
 				if(tripType == 2 && returnDate){
 					requestParameters.arrivalDate = returnDate;
-					postURL = 'http://52.90.41.197:80/api/flights/search/roundtrip?wt='+token;
+					postURL = host+'/api/flights/search/roundtrip?wt='+token;
 				}
 				// TODO:: Add loading
 				$http.post(postURL, requestParameters)
@@ -129,8 +130,7 @@
 				|| airport.iata.indexOf(uppercaseQuery) === 0);
 			};
 		}
-		//TODO:: change this route to /api/airports
-		$http.get('http://52.90.41.197:80/api/airports?wt='+token)
+		$http.get(host+'/api/airports?wt='+token)
 		.success(function(data){
 			ctrl.airports = loadAll(data);
 		})
