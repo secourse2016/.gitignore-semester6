@@ -1,11 +1,13 @@
 var http 	= require('http');
 var fs 		= require('fs');
 var moment 	= require('moment');
-
 var flight 	= require('./app/models/flight');
 var airport = require('./app/models/airport');
 var booking = require('./app/models/booking');
+var airlines= require('./app/data/airlines.json');
 var jwt 	= require('jsonwebtoken');
+var qs      = require('qs');
+var _       = require('underscore');
 var stripe 	= require('stripe')(process.env.STRIPE_KEY);
 
 
@@ -39,6 +41,15 @@ var getFlights = module.exports.getFlights
 			cb(err,{});
 		var result = {};
 		// Add outgoing flights to the result
+		// edit the values of the flights and add flight ID and remove unwanted keys
+
+		_.map(outgoingFlights, function(flight){
+			flight.flightId = flight._id;
+			delete flight._id;
+			delete flight.id;
+			delete flight.__v;
+			return flight;
+		  });
 		result.outgoingFlights = outgoingFlights;
 
 		if(arrivalDate == null){	//One way
@@ -48,6 +59,13 @@ var getFlights = module.exports.getFlights
 			getOneDirectionFlights(function(err2, returnFlights){
 				if(err2)
 					cb(err2);
+				_.map(returnFlights, function(flight){
+					flight.flightId = flight._id;
+					delete flight._id;
+					delete flight.id;
+					delete flight.__v;
+					return flight;
+				  });
 				result.returnFlights = returnFlights;
 				cb(err2, result);
 			}, destination, origin, flightClass, arrivalDate, numberOfPassengers);
@@ -56,7 +74,6 @@ var getFlights = module.exports.getFlights
 	}, origin, destination, flightClass, departureDate, numberOfPassengers);
 }
 
-var airlines = JSON.parse(fs.readFileSync('./app/data/airlines.json', 'utf8'));
 
 var jwtToken = jwt.sign({},process.env.SECRET_KEY);
 
@@ -69,6 +86,14 @@ var getAllFlights = module.exports.getAllFlights
 				  = function(cb, allAirlines, origin, destination, flightClass, departureDate, arrivalDate, numberOfPassengers){
 	// get flights from Austrian airlines
 	getFlights(function(err, austrianFlights){
+		_.map(austrianFlights.outgoingFlights, function(flight){
+			flight.airline = {name:"Austrian Airlines" , url:"ec2-52-90-41-197.compute-1.amazonaws.com", ip:"52.90.41.197"};
+			return flight;
+		  });
+		  _.map(austrianFlights.returnFlights, function(flight){
+			  flight.airline = {name:"Austrian Airlines" , url:"ec2-52-90-41-197.compute-1.amazonaws.com", ip:"52.90.41.197"};
+			  return flight;
+			});
 		if(err)
 			cb(err,{});
 		else if(allAirlines){
@@ -97,9 +122,8 @@ var getAllFlights = module.exports.getAllFlights
 var getOtherAirlines = function(cb, airlineIndex, allAirlines, origin, destination, flightClass, departureDate, arrivalDate, numberOfPassengers){
 	// Check if there are still airlines
 	if(airlineIndex < airlines.length){
-		// Get the URL of the airline
-		var targetHost = airlines[airlineIndex];
-
+		// Get the URL of the airline or the IP
+		var targetHost = airlines[airlineIndex].url?airlines[airlineIndex].url:airlines[airlineIndex].ip;
 		// Get the API route
 		var targetPath = '/api/flights/search/'+origin+'/'+destination+'/'+departureDate+'/'+flightClass+'/'+numberOfPassengers;
 		if(arrivalDate)
@@ -138,9 +162,19 @@ var getOtherAirlines = function(cb, airlineIndex, allAirlines, origin, destinati
 
 					// Add the current flights to the flights of the next airlines
 					if(flightsData.outgoingFlights && isJSON){
+						//add property airlines to all the flights
+						_.map(flightsData.outgoingFlights, function(flight){
+							flight.airline = airlines[airlineIndex];
+							return flight;
+						  });
 						otherFlights.outgoingFlights = otherFlights.outgoingFlights.concat(flightsData.outgoingFlights);
-						if(arrivalDate && flightsData.returnFlights)
-							otherFlights.returnFlights = otherFlights.returnFlights.concat(flightsData.returnFlights);
+						if(arrivalDate && flightsData.returnFlights){
+							_.map(flightsData.returnFlights, function(flight){
+								flight.airline = airlines[airlineIndex];
+								return flight;
+							  });
+							  otherFlights.returnFlights = otherFlights.returnFlights.concat(flightsData.returnFlights);
+						}
 					}
 					// Return the results
 					cb(otherFlights);
@@ -203,7 +237,8 @@ module.exports.getBooking = function(bookingNumber , passportNumber , cb){
 									myBooking = booking[0].toJSON();
 									// attach the flights info to the returning object
 									myBooking.outgoingFlightInfo = outgoingFlight[0];
-									myBooking.returnFlightInfo = returnFlight[0];
+									if(returnFlight)
+	 									myBooking.returnFlightInfo = returnFlight[0];
 									cb(errReturnFlight, myBooking);
 								});
 						});
@@ -220,8 +255,9 @@ module.exports.getBooking = function(bookingNumber , passportNumber , cb){
  * @param newBooking is instance of new booking model record .
  * @param generatedBookingNumber is a fixed value which all booking numbers begin with.
  */
-module.exports.addBooking = function(bookingInfo, cb){
-
+ var addBooking = module.exports.addBooking
+ 				= function addBooking(bookingInfo, cb){
+	bookingInfo = qs.parse(bookingInfo);
 	var newBooking = new booking();
 	var generatedBookingNumber = "6D4B97";
 	/* counting all the records in the booking collection */
@@ -281,3 +317,111 @@ module.exports.addBooking = function(bookingInfo, cb){
    			update = { $dec: { availableSeats: numberOfPassengers }};
 		Model.update(conditions, update);
 	};
+/*
+ * [send post request with booking info if it is not
+ * from our airlines else call server function]
+ * @type {[type]}
+ */
+var postBooking = module.exports.postBookingRequests
+			    = function postBookingRequests(airline, booking, cb){
+				   if(airline  && airline.ip === "52.90.41.197"){
+					   addBooking(booking,function(error , refNum){
+						   if(error)
+							   cb(1,airline);
+						   else {
+							  airline.refNum = refNum;
+							  cb(0,airline);
+						   }
+					   });
+				   }else{
+					   if(airline){
+						   var targetHost = airline.url?airline.url:airline.ip;
+						   var targetPath = '/Booking';
+						   var port = 80;
+						   var postData = qs.stringify(booking);
+						   if(process.env.DEV==="1"){
+							   targetPath = '/Booking';
+							   targetHost = "127.0.0.1";
+							   port = process.env.PORT;
+						   }
+
+						   // Assign the HTTP request options: host and path
+						   var options = {
+							   host: targetHost,
+							   path: targetPath+'?wt='+jwtToken, //just for test
+							   method: 'POST',
+							   port: port,
+							   headers: {
+								   			'x-access-token': jwtToken,
+							   				'Content-Type': 'application/x-www-form-urlencoded',
+											'Content-Length': postData.length
+						   		    	}
+						   };
+		   				var postReq = http.request(options, function(res){
+							var bookingRes ;
+							res.setEncoding('utf8');
+							res.on('data', function(data){
+								bookingRes = data;
+							});
+							res.on('end',function(end){
+								try{
+									bookingRes = JSON.parse(bookingRes);
+									if(bookingRes.errorMessage){
+										error.errorMessage = bookingRes.errorMessage;
+										error.airline = airline;
+										airline.errorMessage = bookingRes.errorMessage;
+										cb(error,airline);
+									}else{
+										airline.refNum = bookingRes.refNum;
+										cb(0,airline);
+									}
+								}
+								catch(e) {
+									cb(1,airline);
+								}
+							});
+		   				});
+					postReq.on('error', function(e){
+						cb(1,airline);
+					});
+					postReq.write(postData);
+					postReq.setTimeout(4000);
+					postReq.end();
+				   }else{
+					   cb(0,{});
+				   }
+
+			   }
+		   };
+
+
+/**
+ * [Function send the Post requests to the airlines ]
+ * @param  {[object with airline and Booking]}   requestParameters [description]
+ * @param  {Function} cb                [description]
+ * @return {[type]}                     [description]
+ */
+ module.exports.handleBooking = function(requestParameters, cb){
+	var airline1 = requestParameters.airline1;
+	var airline2 = requestParameters.airline2;
+	var booking1 = requestParameters.booking1;
+	var booking2 = requestParameters.booking2;
+	var status 	 = {};
+	postBooking(airline1, booking1, function(error1, airline1Status){
+		status.airline1 = airline1Status;
+		if(!error1){
+
+			if(airline2){
+				postBooking(airline2, booking2, function(error2, airline2Status){
+					status.airline2 = airline2Status;
+					cb(error1, error2, status);
+				});
+			}else{
+				cb(error1, null, status);
+			}
+		}else{
+			cb(error1, null,status);
+		}
+
+	});
+};
