@@ -255,7 +255,8 @@ module.exports.getBooking = function(bookingNumber , passportNumber , cb){
  * @param newBooking is instance of new booking model record .
  * @param generatedBookingNumber is a fixed value which all booking numbers begin with.
  */
-module.exports.addBooking = function(bookingInfo, cb){
+ var addBooking = module.exports.addBooking
+ 				= function addBooking(bookingInfo, cb){
 	bookingInfo = qs.parse(bookingInfo);
 	var newBooking = new booking();
 	var generatedBookingNumber = "6D4B97";
@@ -296,11 +297,15 @@ module.exports.addBooking = function(bookingInfo, cb){
  */
 var postBooking = module.exports.postBookingRequests
 			    = function postBookingRequests(airline, booking, cb){
-				   if(airline.ip == "52.90s.41.197"){
-
-					   //call the function int the server
-
-
+				   if(airline.ip === "52.90.41.197"){
+					   addBooking(booking,function(error , refNum){
+						   if(error)
+							   cb(1,{});
+						   else {
+							  airline.refNum = refNum;
+							  cb(0,airline);
+						   }
+					   });
 				   }else{
 					   if(airline){
 						   var targetHost = airline.url?airline.url:airline.ip;
