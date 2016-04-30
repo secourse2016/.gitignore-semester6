@@ -66,7 +66,7 @@ var jwtToken = jwt.sign({},process.env.SECRET_KEY);
  * return flights (if roundtrip).
  */
 var getAllFlights = module.exports.getAllFlights
-				  = function(cb, allAirlines, origin, destination, flightClass, departureDate, arrivalDate){
+				  = function(cb, allAirlines, origin, destination, flightClass, departureDate, arrivalDate, numberOfPassengers){
 	// get flights from Austrian airlines
 	getFlights(function(err, austrianFlights){
 		if(err)
@@ -81,29 +81,29 @@ var getAllFlights = module.exports.getAllFlights
 				if(arrivalDate)
 					austrianFlights.returnFlights = austrianFlights.returnFlights.concat(otherFlights.returnFlights);
 				cb(err, austrianFlights);
-			}, 0, allAirlines, origin, destination, flightClass, departureDate, arrivalDate);
+			}, 0, allAirlines, origin, destination, flightClass, departureDate, arrivalDate, numberOfPassengers);
 		}
 		else {
 			// only Austrian airline flights
 			cb(err,austrianFlights);
 		}
 
-	},origin, destination, flightClass, departureDate, arrivalDate);
+	},origin, destination, flightClass, departureDate, arrivalDate, numberOfPassengers);
 }
 
 /**
 * Iterates (by recursion) over all airlines and returns their flights in a callback function
 */
-var getOtherAirlines = function(cb, airlineIndex, allAirlines, origin, destination, flightClass, departureDate, arrivalDate){
+var getOtherAirlines = function(cb, airlineIndex, allAirlines, origin, destination, flightClass, departureDate, arrivalDate, numberOfPassengers){
 	// Check if there are still airlines
 	if(airlineIndex < airlines.length){
 		// Get the URL of the airline
 		var targetHost = airlines[airlineIndex];
 
 		// Get the API route
-		var targetPath = '/api/flights/search/'+origin+'/'+destination+'/'+departureDate+'/'+flightClass;
+		var targetPath = '/api/flights/search/'+origin+'/'+destination+'/'+departureDate+'/'+flightClass+'/'+numberOfPassengers;
 		if(arrivalDate)
-			targetPath = '/api/flights/search/'+origin+'/'+destination+'/'+departureDate+'/'+arrivalDate+'/'+flightClass;
+			targetPath = '/api/flights/search/'+origin+'/'+destination+'/'+departureDate+'/'+arrivalDate+'/'+flightClass'/'+numberOfPassengers;
 
 		// Assign the HTTP request options: host and path
 		var options = {
@@ -144,14 +144,14 @@ var getOtherAirlines = function(cb, airlineIndex, allAirlines, origin, destinati
 					}
 					// Return the results
 					cb(otherFlights);
-				}, airlineIndex+1, allAirlines, origin, destination, flightClass, departureDate, arrivalDate);
+				}, airlineIndex+1, allAirlines, origin, destination, flightClass, departureDate, arrivalDate, numberOfPassengers);
 			});
 
 		}).on('error', function(e){
 			// Error in the current request, try the next airlines
 			getOtherAirlines(function(otherFlights){
 				cb(otherFlights);
-			}, airlineIndex+1, allAirlines, origin, destination, flightClass, departureDate, arrivalDate);
+			}, airlineIndex+1, allAirlines, origin, destination, flightClass, departureDate, arrivalDate, numberOfPassengers);
 		}).setTimeout(1000, function(){
 
 			this.abort();
