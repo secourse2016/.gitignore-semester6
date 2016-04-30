@@ -311,11 +311,13 @@ var postBooking = module.exports.postBookingRequests
 						   var targetHost = airline.url?airline.url:airline.ip;
 						   var targetPath = '/Booking';
 						   var Port = 80;
+						   var postData = qs.stringify(booking);
 						   if(process.env.DEV==="1"){
 							   targetPath = '/api/Booking';
 							   targetHost = "127.0.0.1";
 							   port = process.env.PORT;
 						   }
+
 						   // Assign the HTTP request options: host and path
 						   var options = {
 							   host: targetHost,
@@ -324,8 +326,9 @@ var postBooking = module.exports.postBookingRequests
 							   port: port,
 							   headers: {
 								   			'x-access-token': jwtToken,
-							   				'Content-Type': 'application/x-www-form-urlencoded'
-						   			}
+							   				'Content-Type': 'application/x-www-form-urlencoded',
+											'Content-Length': postData.length
+						   		    	}
 						   };
 		   				var postReq = http.request(options, function(res){
 							var bookingRes ;
@@ -353,7 +356,7 @@ var postBooking = module.exports.postBookingRequests
 					postReq.on('error', function(e){
 						cb(1,{});
 					});
-					postReq.write(qs.stringify(booking));
+					postReq.write(postData);
 					postReq.end();
 				   }else{
 					   cb(0,{});
