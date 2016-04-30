@@ -3,7 +3,7 @@
 
 
 <!--container div-->
-<div class="container bar" ng-controller="PaymentController as payment">
+<div class="container bar" ng-controller="PaymentController">
     <link href="css/stepper.css" rel="stylesheet">
 
   <!--progress bar-->
@@ -62,13 +62,14 @@
 
           <div>
             <!--Form-->
-            <form name="paymentForm" class="col s12" ng-submit="paymentForm.$valid && payment.addBoking()">
+            <form name="paymentForm" class="col s12" ng-submit="payForBooking()">
               <!--cardNo-->
               <div class="row">
                 <div class="input-field col s12">
                 <i class="material-icons prefix">payment</i>
-                  <input  ng-model="payment.cardNo" id="cardNo" type="text" class="validate" required>
+                  <input  ng-model="cardNo" id="cardNo" type="text" class="validate">
                   <label for="cardNo">Card No.</label>
+                  <div class="paymentError" ng-show="error.number"><i class="tiny material-icons">error</i> {{error.message}}</div>
                 </div>
               </div>
 
@@ -76,26 +77,24 @@
               <div class="row">
                 <div class="input-field col s6">
                 <i class="material-icons prefix">payment</i>
-                  <input  ng-model="payment.cvv" id="cvv" type="text" class="validate" required>
+                  <input  ng-model="cvv" id="cvv" type="text" class="validate">
                   <label for="cvv">CVV</label>
+                  <div class="paymentError" ng-show="error.cvv"><i class="tiny material-icons">error</i> {{error.message}}</div>
                 </div>
 
                 <!--Expiry date-->
                 <div class="input-field col s6">
                   <i class="material-icons prefix">date_range</i>
-                  <input id="expirydate" name="expirydate" ng-model="payment.expiryDate" input-date type="text"  select-years="15"required>
+                  <input id="expirydate" name="expirydate" ng-model="expiryDate" input-date type="text"  select-years="15"required>
                   <label for="expirydate">Expiry Date</label>
+                  <div class="paymentError" ng-show="error.date"><i class="tiny material-icons">error</i> {{error.message}}</div>
                 </div>
               </div>
 
               <!--Submition button-->
               <div class="row">
                 <div class="input-field col s12">
-                  <a ng-href="{{ paymentForm.$valid ?'/successful' : '/payment'}}"
-                  class="btn waves-effect waves-light red book-button"
-                  name="buy">Book Now
-                  <i class="material-icons right">send</i>
-                  </a>
+                  <input class="btn waves-effect waves-light red book-button" type="submit" value="Book Now">
                 </div>
               </div>
             </form>

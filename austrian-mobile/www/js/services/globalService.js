@@ -9,11 +9,20 @@ angular.module('starter').service('global', function() {
 	 * outgoingDate, returnDate	["date"]
 	 * flightClass				["economy", "business"]
 	 */
-	this.searchFlight = {};
+
+	this.searchFlight = {
+		'origin': 'CAI',
+		'destination': 'JED',
+		'flightClass': 'economy',
+		'tripType': 2,
+		'outgoingDate':1460478300000,
+		'returnDate':1460478400000
+	};
 
 	this.totalCost = 0;
 	this.bookingNumber = 0;
 	this.passengers = [];
+
 	this.outGoingTrip = {
     origin:"CAI",
     destination:"JED",
@@ -32,6 +41,7 @@ angular.module('starter').service('global', function() {
     cost:"700",
     currency:"USD"
   };
+
 
 	/**
 	 * Set the search flight information from the landing-page search form.

@@ -1,11 +1,11 @@
 (function(){
-	angular.module('austrianAirlinesApp')
-	.controller('PaymentController', function($scope , global, $location, $http){
+	angular.module('starter')
+	.controller('PaymentController', function($scope , global, $state, $http){
 		$scope.totalCost = global.getTotalCost();
 		$scope.currency = global.outGoingTrip.currency;
 		$scope.step = 4; // View number in the stepper
-		
-	
+
+
 		/**
 		*	Handle paying for the booking using stripe
 		*/
@@ -61,14 +61,14 @@
 					exp_year: expiryDate.getFullYear(),
 					cvc : $scope.cvv
 				}
-				
+
 				// Create the stripe token
 				Stripe.card.createToken(card, function(status,response){
-					
+
 					// Display the error message in the view in the appropriate place
 					if(response.error){
 
-						
+
 						$scope.error.message = response.error.message;
 
 						if(response.error.param == 'number')
@@ -80,8 +80,8 @@
 						else if(response.error.param == 'cvc')
 							$scope.error.cvv = true;
 						if(!$scope.$$phase)
-							$scope.$apply();	
-					
+							$scope.$apply();
+
 					}
 					else {
 						booking1.paymentToken = response.id;
@@ -98,16 +98,16 @@
 								}
 								else {
 									booking2.paymentToken = responseToken2.id;
-									
+
 									requestParameters.booking2 = booking2;
 									requestParameters.airline2 = airline2;
-									// Send post request with two bookings 
+									// Send post request with two bookings
 									console.log(requestParameters);
 									$http.post('/api/addBooking',requestParameters).success(function(data){
 
 										// TODO add the booking reference(s) to the global service
 
-										$location.path('/successful');
+										$state.go('successful');
 										if(!$scope.$$phase)
 											$scope.$apply();
 									})
@@ -116,7 +116,7 @@
 										console.log('Error: Couldn\'t insert in the dataBase.');
 									});
 
-									
+
 								}
 							});
 						}
@@ -128,7 +128,7 @@
 
 								// TODO add the booking reference(s) to the global service
 
-								$location.path('/successful');
+								$state.go('successful');
 								if(!$scope.$$phase)
 									$scope.$apply();
 							})
@@ -139,15 +139,15 @@
 
 						}
 
-						
+
 					}
 
 				});
 			}
-			
+
 		};
 	})
-	.controller('successController' , function($scope , global){
+	.controller('successController' , function($scope, global, $state){
 		$scope.bookingNumber = global.getBookingNumber();
 		/* check if Austrian is involved in any of the trips.
 			 If not, show the other airline*/
@@ -158,5 +158,16 @@
 					$scope.airline = "Austrian";
 			}
 		}
+
+		$scope.redirect = function(){
+			$state.go('index');
+		}
 	});
 })();
+
+function checkField(field) {
+	if (field.value == '')
+			return 'text';
+	else
+			return 'date';
+}

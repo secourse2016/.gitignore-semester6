@@ -29,11 +29,11 @@
 
 .congratulations {
 
-	margin-top: 10%;
+	margin-top: 30%;
 	margin-left:auto;
 	margin-right:auto;
 	min-width:300px;
-	width: 40%;
+	width: 80%;
 	border: 1.5px solid #eeeeee;
 }
 
@@ -56,7 +56,7 @@
   color : #b71c1c;
   font-style: italic;
   vertical-align: middle;
-
+	margin-left: 16px;
   -webkit-transition:all linear 0.5s !important;
   transition:all linear 0.5s;
 }

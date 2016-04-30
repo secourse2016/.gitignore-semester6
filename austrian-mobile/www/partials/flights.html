@@ -1,0 +1,131 @@
+<div style="margin-top: 50px" ng-controller="flightsController">
+  <link href="../css/flights.css" rel="stylesheet">
+
+  <ion-content>
+
+  <div class="errorContainer">
+    <div class="errorToast" ng-show="error.message">
+      {{error.message}}
+    </div>
+  </div>
+  <div class="card" ng-controller="flightsController">
+    <div class="item item-divider red lighten-1">
+      <h3 class="white-text infoBar">{{origin}}-{{destination}} ({{departureDate}})</h3>
+    </div>
+  </div>
+  <div class="card" ng-controller="flightsController" ng-hide="outgoingFlights.length>0">
+    <div class="item item-divider grey">
+      <h3 class="white-text infoBar">No outgoing flights</h3>
+    </div>
+  </div>
+
+      <ion-list ng-controller="collapsableController" ng-show="outgoingFlights.length>0">
+        <div ng-repeat="flight in outgoingFlights track by $index">
+           <ul class="collection with-header ">
+          <li class="collection-header item item-stable grey lighten-3"
+                    ng-click="toggleGroup({{$index}})"
+                    ng-class="{active: isGroupShown({{$index}})}">
+            <div class="flight-time">{{flight.departureDateTime}} - {{flight.arrivalDateTime}}</div>
+            <div class="flight-cost">{{flight.cost}} {{flight.currency}}  
+              
+                  <input  class="check red info_icon" name="group1" type="radio" id="test6/{{$index}}"  value="{{$index}}" ng-model="info[0]">
+                  <label for="test6/{{$index}}"></label>
+              
+               <i class="flightCollapseIcon icon ion-ios-arrow-down tiny"></i> </div>
+
+          </li>
+          <li class="collection-item item item-accordion"
+                    ng-show="isGroupShown({{$index}})">
+            <table class="flightInfoTable">
+              <tr>
+                <td>Flight number:</td>
+                <td>{{flight.flightNumber}}</td>
+              </tr>
+              <tr>
+                <td>Departs at:</td>
+                <td>{{flight.departureDateTime}}</td>
+              </tr>
+              <tr>
+                <td>Arrives at:</td>
+                <td>{{flight.arrivalDateTime}}</td>
+              </tr>
+              <tr>
+                <td>Aircraft:</td>
+                <td>{{flight.aircraftType}} ({{flight.aircraftModel}})</td>
+              </tr>
+              <tr>
+                <td>Operated by:</td>
+                <td>{{flight.Airline}}</td>
+              </tr>
+            </table>
+
+          </li>
+        </ul>
+        </div>
+      </ion-list>
+
+      <div class="card" ng-controller="flightsController" ng-show = "tripType==2">
+        <div class="item item-divider red lighten-1">
+      <h3 class="white-text infoBar">{{destination}}-{{origin}} ({{arrivalDate}})</h3>
+    </div>
+  </div>
+
+   <div class="card" ng-controller="flightsController" ng-hide="returnFlights.length>0">
+    <div class="item item-divider grey">
+      <h3 class="white-text infoBar">No return flights</h3>
+    </div>
+  </div>
+
+      <ion-list ng-controller="collapsableController" ng-show = "tripType==2 && returnFlights.length>0">
+        <div ng-repeat="flight in returnFlights track by $index">
+           <ul class="collection with-header ">
+          <li class="collection-header item item-stable grey lighten-3"
+                    ng-click="toggleGroup({{$index}})"
+                    ng-class="{active: isGroupShown({{$index}})}">
+            <div class="flight-time">{{flight.departureDateTime}} - {{flight.arrivalDateTime}}</div>
+            <div class="flight-cost">{{flight.cost}} {{flight.currency}}  
+              
+                  <input  class="check red info_icon" name="group2" type="radio" id="test7/{{$index}}"  value="{{$index}}" ng-model="info[1]">
+                  <label for="test7/{{$index}}"></label>
+              
+               <i class="flightCollapseIcon icon ion-ios-arrow-down tiny"></i> 
+               </div>
+
+          </li>
+          <li class="collection-item item item-accordion"
+                    ng-show="isGroupShown({{$index}})">
+            <table class="flightInfoTable">
+              <tr>
+                <td>Flight number:</td>
+                <td>{{flight.flightNumber}}</td>
+              </tr>
+              <tr>
+                <td>Departs at:</td>
+                <td>{{flight.departureDateTime}}</td>
+              </tr>
+              <tr>
+                <td>Arrives at:</td>
+                <td>{{flight.arrivalDateTime}}</td>
+              </tr>
+              <tr>
+                <td>Aircraft:</td>
+                <td>{{flight.aircraftType}} ({{flight.aircraftModel}})</td>
+              </tr>
+              <tr>
+                <td>Operated by:</td>
+                <td>{{flight.Airline}}</td>
+              </tr>
+            </table>
+
+          </li>
+        </ul>
+        </div>
+      </ion-list>
+      <div class="center">
+        <button  class="button  button-positive red lighten-1" ng-click="moveForward()">Resrve</button>
+
+        <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+      </div>
+
+  </ion-content>
+</div>
