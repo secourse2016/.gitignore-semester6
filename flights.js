@@ -94,7 +94,6 @@ var getAllFlights = module.exports.getAllFlights
 			  flight.airline = {name:"Austrian Airlines" , url:"ec2-52-90-41-197.compute-1.amazonaws.com", ip:"52.90.41.197"};
 			  return flight;
 			});
-			// console.log(austrianFlights.outgoingFlights);
 		if(err)
 			cb(err,{});
 		else if(allAirlines){
@@ -125,7 +124,6 @@ var getOtherAirlines = function(cb, airlineIndex, allAirlines, origin, destinati
 	if(airlineIndex < airlines.length){
 		// Get the URL of the airline or the IP
 		var targetHost = airlines[airlineIndex].url?airlines[airlineIndex].url:airlines[airlineIndex].ip;
-		//console.log(targetHost);
 		// Get the API route
 		var targetPath = '/api/flights/search/'+origin+'/'+destination+'/'+departureDate+'/'+flightClass;
 		if(arrivalDate)
@@ -298,8 +296,8 @@ module.exports.addBooking = function(bookingInfo, cb){
  */
 var postBooking = module.exports.postBookingRequests
 			    = function postBookingRequests(airline, booking, cb){
-					// console.log(querystring.stringify(booking.toString()));
 				   if(airline.ip == "52.90s.41.197"){
+
 					   //call the function int the server
 
 
@@ -334,8 +332,6 @@ var postBooking = module.exports.postBookingRequests
 										cb(error,{});
 									}else{
 										airline.refNum = bookingRes.refNum;
-										// console.log("test in post body");
-										// console.log(airline);
 										cb(0,airline);
 									}
 								}
@@ -345,10 +341,6 @@ var postBooking = module.exports.postBookingRequests
 							});
 		   				});
 					postReq.on('error', function(e){
-						// 		console.log('problem with request: ${e.message}');
-						// console.log(e);
-						// console.log("\n");
-						// console.log(e.message);
 						cb(1,{});
 					});
 					postReq.write(qs.stringify(booking));
