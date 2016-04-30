@@ -14,17 +14,17 @@ var booking = require('../app/models/booking');
      var passenger = [
             {firstName:"Omar",
             lastName:"Radwan",
-            emailAddress:"omarradwan213@gmail.com",
-            passportNumber:12345678,
+            email:"omarradwan213@gmail.com",
+            passportNum:12345678,
             nationality:"Egyptian",
-            birthDate:10-7-1995
+            dateOfBirth:10-7-1995
           }
         ];
      var bookingInfo = {
-            passengers:passenger,
-            outgoingFlight:2,
-            returnFlight:5,
-            totalCost:1400
+            passengerDetails:passenger,
+            outgoingFlightId:2,
+            returnFlightId:5,
+            cost:1400
           };
       var getBooking = flights.getBooking;
      flights.addBooking(bookingInfo , function(){
@@ -36,16 +36,16 @@ var booking = require('../app/models/booking');
            if(!err){
              // testing the passengers info
              for (var i = 0; i < res.passengerDetails.length; i++) {
-               assert.equal(res.passengerDetails[i].firstName,bookingInfo.passengers[i].firstName,"firstNames are equal");
-               assert.equal(res.passengerDetails[i].lastName,bookingInfo.passengers[i].lastName,"lastNames are equal");
-               assert.equal(res.passengerDetails[i].email,bookingInfo.passengers[i].emailAddress,"Emails are equal");
-               assert.equal(res.passengerDetails[i].passportNum,bookingInfo.passengers[i].passportNumber,"passportNumbers are equal");
-               assert.equal(res.passengerDetails[i].nationality,bookingInfo.passengers[i].nationality,"nationalities is equal");
+               assert.equal(res.passengerDetails[i].firstName,bookingInfo.passengerDetails[i].firstName,"firstNames are equal");
+               assert.equal(res.passengerDetails[i].lastName,bookingInfo.passengerDetails[i].lastName,"lastNames are equal");
+               assert.equal(res.passengerDetails[i].email,bookingInfo.passengerDetails[i].email,"Emails are equal");
+               assert.equal(res.passengerDetails[i].passportNum,bookingInfo.passengerDetails[i].passportNum,"passportNumbers are equal");
+               assert.equal(res.passengerDetails[i].nationality,bookingInfo.passengerDetails[i].nationality,"nationalities is equal");
              }
              // testing the rest of booking info
-             assert.equal(res.cost,bookingInfo.totalCost,"totalPrices are equal");
-             assert.equal(res.outgoingFlightId,bookingInfo.outgoingFlight,"outgoing flights are equal");
-             assert.equal(res.returnFlightId,bookingInfo.returnFlight,"returnFlight are equal");
+             assert.equal(res.cost,bookingInfo.cost,"totalPrices are equal");
+             assert.equal(res.outgoingFlightId,bookingInfo.outgoingFlightId,"outgoing flights are equal");
+             assert.equal(res.returnFlightId,bookingInfo.returnFlightId,"returnFlight are equal");
              done();
            }
          });
