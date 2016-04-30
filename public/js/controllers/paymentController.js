@@ -125,9 +125,11 @@
 							// Send post request with one booking.
 							console.log(requestParameters);
 							$http.post('/api/addBooking',requestParameters).success(function(data){
-
-								// TODO add the booking reference(s) to the global service
-
+								console.log(data);
+								global.getOutGoingTrip().airline = data.airline1;
+								if(global.getReturnTrip()){
+									global.getReturnTrip().airline = data.airline2;
+								}
 								$location.path('/successful');
 								if(!$scope.$$phase)
 									$scope.$apply();
@@ -148,15 +150,11 @@
 		};
 	})
 	.controller('successController' , function($scope , global){
-		$scope.bookingNumber = global.getBookingNumber();
-		/* check if Austrian is involved in any of the trips.
-			 If not, show the other airline*/
-		$scope.airline = "Austrian";
-		if(global.getOutGoingTrip().Airline != "Austrian"){
-			$scope.airline = global.getOutGoingTrip().Airline;
-			if(global.getReturnTrip() && global.getReturnTrip().Airline == "Austrian"){
-					$scope.airline = "Austrian";
-			}
+		$scope.airline1 = global.getOutGoingTrip().airline;
+		console.log($scope.airline1);
+		if(global.getReturnTrip()){
+			$scope.airline1 = global.getReturnTrip().airline;
 		}
+
 	});
 })();
