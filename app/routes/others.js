@@ -28,7 +28,10 @@ router.post('/Booking',function(req, res){
 	flights.addBooking(req.body,function(err,bookingNumber){
         // if there is no error send booking Number
         if(!err)
-            res.send({refNum: bookingNumber ,errorMessage:""});
+            res.send({refNum: bookingNumber});
+        else
+        	res.send({errorMessage: err});
+
 
     });
 });

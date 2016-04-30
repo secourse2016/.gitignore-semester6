@@ -282,8 +282,9 @@ module.exports.getBooking = function(bookingNumber , passportNumber , cb){
  							totalCost += parseInt(returnFlight.cost)*bookingInfo.passengerDetails.length;
  							// charge the two flights
  							chargeBooking(totalCost, bookingInfo.paymentToken, function(paymentError, charge){
- 								if(paymentError)
+ 								if(paymentError){
  									cb(paymentError, null);
+ 								}
  								else {
  									// save the booking if everything is successful
  									saveBooking(bookingInfo, function(err, bookingNumber){
@@ -301,8 +302,9 @@ module.exports.getBooking = function(bookingNumber , passportNumber , cb){
  				else {
  					// oneway flight, charge the outgoing only
  					chargeBooking(totalCost, bookingInfo.paymentToken, function(paymentError, charge){
-						if(paymentError)
+						if(paymentError){
 							cb(paymentError, null);
+						}
 						else {
 							// save the booking if everything is successful
 							saveBooking(bookingInfo, function(err, bookingNumber){
@@ -320,6 +322,8 @@ module.exports.getBooking = function(bookingNumber , passportNumber , cb){
 
 
  	}
+ 	else
+ 		cb("INVALID REQUEST", null)
 	
 	
 	
@@ -390,8 +394,8 @@ var postBooking = module.exports.postBookingRequests
 				   if(airline  && airline.ip === "52.90.41.197"){
 					   addBooking(booking,function(error , refNum){
 						   if(error){
-						   		airline.errorPayment = error.message;
-							 	cb(1,airline);
+						   		airline.errorMessage = error.message;
+							 	cb(0,airline);
 						   }
 						   else {
 							  airline.refNum = refNum;
@@ -404,7 +408,8 @@ var postBooking = module.exports.postBookingRequests
 						   var targetPath = '/Booking';
 						   var port = 80;
 						   var postData = qs.stringify(booking);
-						   if(process.env.DEV){
+						   if(process.env.DEV === "1"){
+
 							   targetPath = '/Booking';
 							   targetHost = "127.0.0.1";
 							   port = process.env.PORT;
@@ -424,6 +429,7 @@ var postBooking = module.exports.postBookingRequests
 						   };
 						   
 		   				var postReq = http.request(options, function(res){
+
 							var bookingRes ;
 							res.setEncoding('utf8');
 							res.on('data', function(data){

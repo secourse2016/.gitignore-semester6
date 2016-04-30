@@ -10,7 +10,7 @@ var app           = express();
 require('dotenv').config();
 
 
-if(process.env.DEV)
+if(process.env.DEV == "1")
 	app.use(morgan('dev'));
 
 // functions ==============================================================
