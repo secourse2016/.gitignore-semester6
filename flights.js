@@ -304,14 +304,19 @@ var postBooking = module.exports.postBookingRequests
 				   }else{
 					   if(airline){
 						   var targetHost = airline.url?airline.url:airline.ip;
-						   var targetHost = "127.0.0.1";
-
+						   var targetPath = '/Booking';
+						   var Port = 80;
+						   if(process.env.DEV==="1"){
+							   targetPath = '/api/Booking';
+							   targetHost = "127.0.0.1";
+							   port = process.env.PORT;
+						   }
 						   // Assign the HTTP request options: host and path
 						   var options = {
 							   host: targetHost,
-							   path: '/api/Booking'+'?wt='+jwtToken, //just for test
+							   path: targetPath+'?wt='+jwtToken, //just for test
 							   method: 'POST',
-							   port: 8080,
+							   port: port,
 							   headers: {
 								   			'x-access-token': jwtToken,
 							   				'Content-Type': 'application/x-www-form-urlencoded'
