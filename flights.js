@@ -14,13 +14,13 @@ var stripe 	= require('stripe')(process.env.STRIPE_KEY);
  * date with the specified class given in the arguments.
  */
 var getOneDirectionFlights	= module.exports.getOneDirectionFlights
-							= function(cb, origin, destination, flightClass, date){
+							= function(cb, origin, destination, flightClass, date, numberOfPassengers){
 	var startDate 	= moment(date, "x").toDate().getTime();
 	var endDate		= moment(date, "x").add(1, "days").toDate().getTime();
 
 	// Find documents in flights collection
 	flight.find({"origin": origin, "destination": destination, "class": flightClass,
-				 "departureDateTime" : {"$gte" : startDate, "$lt": endDate}}, {},
+				 "departureDateTime" : {"$gte" : startDate, "$lt": endDate}, "availableSeats" : {"$gte" : numberOfPassengers}}, {},
 				 function(err, resultFlights){
 		cb(err, resultFlights);
 	});
@@ -32,7 +32,7 @@ var getOneDirectionFlights	= module.exports.getOneDirectionFlights
  * (in case of round trips) with the specified class given in the arguments.
  */
 var getFlights = module.exports.getFlights
-			   = function(cb, origin, destination, flightClass, departureDate, arrivalDate){
+			   = function(cb, origin, destination, flightClass, departureDate, arrivalDate, numberOfPassengers){
 	// Get the outgoing flights
 	getOneDirectionFlights(function(err, outgoingFlights){
 		if(err)
@@ -50,10 +50,10 @@ var getFlights = module.exports.getFlights
 					cb(err2);
 				result.returnFlights = returnFlights;
 				cb(err2, result);
-			}, destination, origin, flightClass, arrivalDate);
+			}, destination, origin, flightClass, arrivalDate, numberOfPassengers);
 
 		}
-	}, origin, destination, flightClass, departureDate);
+	}, origin, destination, flightClass, departureDate, numberOfPassengers);
 }
 
 var airlines = JSON.parse(fs.readFileSync('./app/data/airlines.json', 'utf8'));
@@ -228,12 +228,12 @@ module.exports.addBooking = function(bookingInfo, cb){
 	booking.count({},function(err,c){
 		/* check if the passenger is child or not */
   		var currentDate= new Date();
-    	var currentYear = currentDate.getFullYear();		
+    	var currentYear = currentDate.getFullYear();
     	for (var i = 0 ; i < bookingInfo.passengerDetails.length ; i++){
     		/* get the birth year of  the passenger with correct foramat */
     		var passengerBirthDate = new Date(bookingInfo.passengerDetails[i].dateOfBirth);
     		var passengerBirthYear = passengerBirthDate.getFullYear();
-			if (currentYear-passengerBirthYear < 12) 
+			if (currentYear-passengerBirthYear < 12)
 				bookingInfo.passengerDetails[i].isChild = true ;
 			else
 				bookingInfo.passengerDetails[i].isChild = false ;
