@@ -133,11 +133,11 @@ describe('API Add Booking POST Route ', function(){
          // Test data for booking.
         var passenger = [{firstName:"mohamed",
                           lastName:"khaled",
-                          emailAddress:"mohamed@gmail.com",
-                          passportNumber:212,
+                          email:"mohamed@gmail.com",
+                          passportNum:212,
                           nationality:"Egyptian",
-                          birthDate:30-4-1995}];
-        var bookingInfo = {passengers:passenger,outgoingFlight:2,returnFlight:5,totalCost:200};
+                          dateOfBirth:30-4-1995}];
+        var bookingInfo = {passengerDetails:passenger,outgoingFlightId:2,returnFlightId:5,cost:200};
         request.post('/api/addBooking').set('x-access-token', token).send(bookingInfo).expect(200, done);
     });
 });
