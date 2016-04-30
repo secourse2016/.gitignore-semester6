@@ -103,7 +103,7 @@ var getOtherAirlines = function(cb, airlineIndex, allAirlines, origin, destinati
 		// Get the API route
 		var targetPath = '/api/flights/search/'+origin+'/'+destination+'/'+departureDate+'/'+flightClass+'/'+numberOfPassengers;
 		if(arrivalDate)
-			targetPath = '/api/flights/search/'+origin+'/'+destination+'/'+departureDate+'/'+arrivalDate+'/'+flightClass'/'+numberOfPassengers;
+			targetPath = '/api/flights/search/'+origin+'/'+destination+'/'+departureDate+'/'+arrivalDate+'/'+flightClass+'/'+numberOfPassengers;
 
 		// Assign the HTTP request options: host and path
 		var options = {

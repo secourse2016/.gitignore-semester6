@@ -41,6 +41,11 @@ router.get('/flights/search/:origin/:destination/:departingDate/:returningDate/:
 	var returningDate      =  req.params.returningDate;
 	var flightClass        =  req.params.class;
   var numberOfPassengers =  req.params.seats;
+  if(numberOfPassengers < 0)
+  {
+    res.send("ERROR");
+    return;
+  }
 	flights.getFlights(function(err, resultFlights){
     if(!err)
 		  res.json(resultFlights);
@@ -61,6 +66,11 @@ router.get('/flights/search/:origin/:destination/:departingDate/:class/:seats', 
     var departingDate 	   =  req.params.departingDate;
     var flightClass 	     =  req.params.class;
     var numberOfPassengers =  req.params.seats;
+    if(numberOfPassengers < 0)
+    {
+      res.send("ERROR");
+      return;
+    }
 	flights.getFlights(function(err, resultFlights){
     if(!err)
 		  res.json(resultFlights);
@@ -88,6 +98,11 @@ router.post('/flights/search/roundtrip', function(req, res){
     var flightClass         =  req.body.flightClass;
     var allAirlines         =  req.body.allAirlines;
     var numberOfPassengers  =  req.body.numberOfPassengers;
+    if(numberOfPassengers < 0)
+    {
+      res.send("ERROR");
+      return;
+    }
     // Get all the flights
     flights.getAllFlights(function(err, resultFlights){
         res.json(resultFlights);
@@ -113,8 +128,11 @@ router.post('/flights/search/oneway', function(req, res){
     var flightClass         =  req.body.flightClass;
     var allAirlines         =  req.body.allAirlines;
     var numberOfPassengers  =  req.body.numberOfPassengers;
-
-
+    if(numberOfPassengers < 0)
+    {
+      res.send("ERROR");
+      return;
+    }
     // get all the flights
     flights.getAllFlights(function(err, resultFlights){
       if(!err)
