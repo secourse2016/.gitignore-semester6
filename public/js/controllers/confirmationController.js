@@ -45,7 +45,7 @@ angular.module('austrianAirlinesApp')
 
 	var outGoingTripCost = infoFlow.outGoingTrip.cost ;
 	var returnFlightCost = 0;
-	if(infoFlow.returnTrip.cost)
+	if(infoFlow.returnTrip && infoFlow.returnTrip.cost)
 		returnFlightCost = infoFlow.returnTrip.cost ;
 
 	var totalCost = (adultNumber + childNumber)*(parseInt(outGoingTripCost)+parseInt(returnFlightCost));
