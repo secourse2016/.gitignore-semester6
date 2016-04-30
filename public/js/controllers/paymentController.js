@@ -103,10 +103,12 @@
 									requestParameters.airline2 = airline2;
 									// Send post request with two bookings
 									$http.post('/api/addBooking',requestParameters).success(function(data){
-
+										
 										global.getOutGoingTrip().airline = data.airline1;
 										global.getReturnTrip().airline = data.airline2;
-										$location.path('/successful');
+										global.getOutGoingTrip().error1 = data.error1;
+										global.getReturnTrip().error2 = data.error2;
+										$location.path('/complete');
 										if(!$scope.$$phase)
 											$scope.$apply();
 									})
@@ -124,7 +126,9 @@
 							// Send post request with one booking.
 							$http.post('/api/addBooking',requestParameters).success(function(data){
 								global.getOutGoingTrip().airline = data.airline1;
-								$location.path('/successful');
+								global.getOutGoingTrip().error1 = data.error1;
+
+								$location.path('/complete');
 								if(!$scope.$$phase)
 									$scope.$apply();
 							})
@@ -144,9 +148,15 @@
 		};
 	})
 	.controller('successController' , function($scope , global){
+		
+		$scope.error = {};
+		$scope.error.error1 = global.getOutGoingTrip().error1;
+			
 		$scope.airline1 = global.getOutGoingTrip().airline;
+
 		if(global.getReturnTrip()){
-			$scope.airline1 = global.getReturnTrip().airline;
+			$scope.airline2 = global.getReturnTrip().airline;
+			$scope.error.error2 = global.getReturnTrip().error2;
 		}
 
 	});

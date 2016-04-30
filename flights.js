@@ -297,10 +297,10 @@ module.exports.getBooking = function(bookingNumber , passportNumber , cb){
  */
 var postBooking = module.exports.postBookingRequests
 			    = function postBookingRequests(airline, booking, cb){
-				   if(airline.ip === "52.90.41.197"){
+				   if(airline  && airline.ip === "52.90.41.197"){
 					   addBooking(booking,function(error , refNum){
 						   if(error)
-							   cb(1,{});
+							   cb(1,airline);
 						   else {
 							  airline.refNum = refNum;
 							  cb(0,airline);
@@ -310,10 +310,10 @@ var postBooking = module.exports.postBookingRequests
 					   if(airline){
 						   var targetHost = airline.url?airline.url:airline.ip;
 						   var targetPath = '/Booking';
-						   var Port = 80;
+						   var port = 80;
 						   var postData = qs.stringify(booking);
 						   if(process.env.DEV==="1"){
-							   targetPath = '/api/Booking';
+							   targetPath = '/Booking';
 							   targetHost = "127.0.0.1";
 							   port = process.env.PORT;
 						   }
@@ -342,21 +342,23 @@ var postBooking = module.exports.postBookingRequests
 									if(bookingRes.errorMessage){
 										error.errorMessage = bookingRes.errorMessage;
 										error.airline = airline;
-										cb(error,{});
+										airline.errorMessage = bookingRes.errorMessage;
+										cb(error,airline);
 									}else{
 										airline.refNum = bookingRes.refNum;
 										cb(0,airline);
 									}
 								}
 								catch(e) {
-									cb(1,{});
+									cb(1,airline);
 								}
 							});
 		   				});
 					postReq.on('error', function(e){
-						cb(1,{});
+						cb(1,airline);
 					});
 					postReq.write(postData);
+					postReq.setTimeout(4000);
 					postReq.end();
 				   }else{
 					   cb(0,{});
@@ -378,23 +380,20 @@ var postBooking = module.exports.postBookingRequests
 	var booking1 = requestParameters.booking1;
 	var booking2 = requestParameters.booking2;
 	var status 	 = {};
-	postBooking(airline1, booking1, function(error, airline1Status){
-		if(!error){
-			status.airline1 = airline1Status;
+	postBooking(airline1, booking1, function(error1, airline1Status){
+		status.airline1 = airline1Status;
+		if(!error1){
+			
 			if(airline2){
-				postBooking(airline2, booking2, function(error, airline2Status){
+				postBooking(airline2, booking2, function(error2, airline2Status){
 					status.airline2 = airline2Status;
-					if(!error){
-						cb(error, status);
-					}else{
-						cb(error, {});
-					}
+					cb(error1, error2, status);
 				});
 			}else{
-				cb(error, status);
+				cb(error1, null, status);
 			}
 		}else{
-			cb(error,{});
+			cb(error1, null,status);
 		}
 
 	});
