@@ -33,18 +33,18 @@ router.get('/airports', function(req, res){
 * @param class - economy or business only
 * @returns {Array}
 */
-router.get('/flights/search/:origin/:destination/:departingDate/:returningDate/:class', function(req, res) {
+router.get('/flights/search/:origin/:destination/:departingDate/:returningDate/:class/:seats', function(req, res) {
 	// retrieve params
-	var origin =  req.params.origin;
-	var destination =  req.params.destination;
-	var departingDate =  req.params.departingDate;
-	var returningDate =  req.params.returningDate;
-	var flightClass =  req.params.class;
-
+	var origin             =  req.params.origin;
+	var destination        =  req.params.destination;
+	var departingDate      =  req.params.departingDate;
+	var returningDate      =  req.params.returningDate;
+	var flightClass        =  req.params.class;
+  var numberOfPassengers =  req.params.seats;
 	flights.getFlights(function(err, resultFlights){
     if(!err)
 		  res.json(resultFlights);
-	}, origin, destination, flightClass, moment(departingDate,"x"), moment(returningDate,"x"));
+	}, origin, destination, flightClass, moment(departingDate,"x"), moment(returningDate,"x"), numberOfPassengers);
 });
 
 /**
@@ -54,17 +54,17 @@ router.get('/flights/search/:origin/:destination/:departingDate/:returningDate/:
 * @param class - economy or business only
 * @returns {Array}
 */
-router.get('/flights/search/:origin/:destination/:departingDate/:class', function(req, res) {
+router.get('/flights/search/:origin/:destination/:departingDate/:class/:seats', function(req, res) {
     // retrieve params
-    var origin 			=  req.params.origin;
-    var destination 	=  req.params.destination;
-    var departingDate 	=  req.params.departingDate;
-    var flightClass 	=  req.params.class;
-
+    var origin 			       =  req.params.origin;
+    var destination 	     =  req.params.destination;
+    var departingDate 	   =  req.params.departingDate;
+    var flightClass 	     =  req.params.class;
+    var numberOfPassengers =  req.params.seats;
 	flights.getFlights(function(err, resultFlights){
     if(!err)
 		  res.json(resultFlights);
-	}, origin, destination, flightClass, moment(departingDate,"x"));
+	}, origin, destination, flightClass, moment(departingDate,"x"), null, numberOfPassengers);
 
 });
 
