@@ -156,10 +156,11 @@ router.post('/getBooking', function(req, res){
  * @return {[ refNum: String,errorMessage: String]}  [description]
  */
 router.post('/addBooking',function(req, res){
-	flights.handleBooking(req.body,function(err,status){
+	flights.handleBooking(req.body,function(err1, err2,status){
         // if there is no error send status of booking
-        if(!err)
-            res.send(status);
+        status.error1 = err1;
+        status.error2 = err2;
+        res.send(status);
     });
 });
 
