@@ -132,7 +132,7 @@ router.post('/Booking',function(req, res){
 	flights.addBooking(req.body,function(err,bookingNumber){
         // if there is no error send booking Number
         if(!err)
-            res.send(bookingNumber);
+            res.send({refNum: bookingNumber ,errorMessage:""});
 
     });
 });
@@ -157,7 +157,7 @@ router.post('/getBooking', function(req, res){
  */
 router.post('/addBooking',function(req, res){
 	flights.handleBooking(req.body,function(err,status){
-        // if there is no error send booking Number
+        // if there is no error send status of booking
         if(!err)
             res.send(status);
     });
