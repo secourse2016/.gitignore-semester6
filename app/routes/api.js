@@ -81,17 +81,17 @@ router.get('/flights/search/:origin/:destination/:departingDate/:class', functio
 router.post('/flights/search/roundtrip', function(req, res){
 
     // Get the request parameters
-    var origin        =  req.body.origin;
-    var destination   =  req.body.destination;
-    var departureDate =  moment(req.body.departureDate,['D MMMM, YYYY','LLLL','L','l','x','X','YYYY-MM-DD']).format('x');
-    var arrivalDate   =  moment(req.body.arrivalDate,['D MMMM, YYYY','LLLL','L','l','x','X','YYYY-MM-DD']).format('x');
-    var flightClass   =  req.body.flightClass;
-    var allAirlines   =  req.body.allAirlines;
-
+    var origin              =  req.body.origin;
+    var destination         =  req.body.destination;
+    var departureDate       =  moment(req.body.departureDate,['D MMMM, YYYY','LLLL','L','l','x','X','YYYY-MM-DD']).format('x');
+    var arrivalDate         =  moment(req.body.arrivalDate,['D MMMM, YYYY','LLLL','L','l','x','X','YYYY-MM-DD']).format('x');
+    var flightClass         =  req.body.flightClass;
+    var allAirlines         =  req.body.allAirlines;
+    var numberOfPassengers  =  req.body.numberOfPassengers;
     // Get all the flights
     flights.getAllFlights(function(err, resultFlights){
         res.json(resultFlights);
-    }, allAirlines, origin, destination, flightClass, departureDate, arrivalDate);
+    }, allAirlines, origin, destination, flightClass, departureDate, arrivalDate, numberOfPassengers);
 });
 
 /**
@@ -107,18 +107,19 @@ router.post('/flights/search/roundtrip', function(req, res){
 router.post('/flights/search/oneway', function(req, res){
 
     // get the request parameters
-    var origin        =  req.body.origin;
-    var destination   =  req.body.destination;
-    var departureDate =  moment(req.body.departureDate,['D MMMM, YYYY','LLLL','L','l','x','X','YYYY-MM-DD']).format('x');
-    var flightClass   =  req.body.flightClass;
-    var allAirlines   =  req.body.allAirlines;
+    var origin              =  req.body.origin;
+    var destination         =  req.body.destination;
+    var departureDate       =  moment(req.body.departureDate,['D MMMM, YYYY','LLLL','L','l','x','X','YYYY-MM-DD']).format('x');
+    var flightClass         =  req.body.flightClass;
+    var allAirlines         =  req.body.allAirlines;
+    var numberOfPassengers  =  req.body.numberOfPassengers;
 
 
     // get all the flights
     flights.getAllFlights(function(err, resultFlights){
       if(!err)
         res.json(resultFlights);
-    }, allAirlines, origin, destination, flightClass, departureDate);
+    }, allAirlines, origin, destination, flightClass, departureDate, null, numberOfPassengers);
 });
 
 
