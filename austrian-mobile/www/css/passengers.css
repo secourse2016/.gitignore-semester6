@@ -1,0 +1,55 @@
+.item.item-stable.active{
+  background-color: #CAC9C9 !important;
+}
+.validationError {
+  color : #b71c1c;
+  font-style: italic;
+  vertical-align: middle;
+
+  -webkit-transition:all linear 0.5s !important;
+  transition:all linear 0.5s;
+}
+
+.validationError.ng-hide {
+  opacity:0;
+}
+
+.flight-date{
+	margin-top: 0%;
+	float:right;
+	font-size: 18px;
+}
+
+.orginDestination{
+  margin-top: 0%;
+  float:left;
+  font-size: 18px;
+}
+
+.flightCollapseIcon{
+  margin-left: 15px;
+}
+
+h2.infoBar{
+  margin-top: 5px;
+  font-size: 20px;
+  text-align: center;
+  font-style: bold;
+}
+
+.formIcons{
+  margin-top:12px;
+}
+
+.fromInput:focus{
+  border-bottom: 1px solid #ef5350 !important;
+  box-shadow: 0 1px 0 0 #ef5350 !important;
+}
+
+.passengerCollapseIcon{
+  float: right;
+}
+
+.alert{
+  color: #b71c1c;
+}

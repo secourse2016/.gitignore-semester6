@@ -53,11 +53,13 @@ app.controller('flightsController', function($scope, flights, global, $location)
 		for(entry = 0; entry < Math.min(5, allOutgoing.length - (page-1)*5); entry++) {
 			$scope.outgoingFlights[entry] = allOutgoing[(page-1)*5 + entry];
 		}
+		if($scope.info[0])
+			$scope.info[0] = null;
 		// resize the scope if last page is less than 5 entries
 		$scope.outgoingFlights.length = Math.min(5, allOutgoing.length - (page-1)*5);
 	}
 
-
+	$scope.info   = [];
 	/**
 	*	Change the page of the outgoing trips list
 	*/
@@ -66,6 +68,8 @@ app.controller('flightsController', function($scope, flights, global, $location)
 		for(entry = 0; entry<Math.min(5,allReturn.length - (page-1)*5); entry++) {
 			$scope.returnFlights[entry] = allReturn[(page-1)*5 + entry];
 		}
+		if($scope.info[1])
+			$scope.info[1] = null;
 		// resize the scope if last page is less than 5 entries
 		$scope.returnFlights.length = Math.min(5, allReturn.length - (page-1)*5);
 	}
@@ -79,7 +83,7 @@ app.controller('flightsController', function($scope, flights, global, $location)
 		
 
 	// Array to store indexes of selected flights
-	$scope.info   = [];
+	
 
 	// Model to represent which flight to show its information
 	$scope.trans  = {id: -1};
@@ -90,20 +94,36 @@ app.controller('flightsController', function($scope, flights, global, $location)
 	// Function will be performed when submitting reserve button
 	$scope.moveForward = function(){
 
-		if(!$scope.info[0] || ($scope.tripType == 2 && !$scope.info[1] && $scope.returnFlights.length > 0)) {
-			Materialize.toast('Please select the flight.',3000);
-		}
-		else{
-			// Passing selected outgoing flight to the global service
-			global.outGoingTrip = $scope.outgoingFlights[$scope.info[0]];
-			if ($scope.tripType == 2){
-				// Passing selected return flight to the global service
-				global.returnTrip = $scope.returnFlights[$scope.info[1]];
-			}
-			if($scope.tripType == 2 &&  $scope.returnFlights.length==0)
-				global.searchFlight.tripType = 1;
-			$location.path('/passengers');
-		}
+		if(($scope.tripType==2 && $scope.outgoingFlights.length == 0 && $scope.returnFlights.length == 0)||
+						($scope.tripType==1 && $scope.outgoingFlights.length == 0))
+					Materialize.toast('There are no flights',3000);
+				else
+				if((!$scope.info[0] && $scope.outgoingFlights.length>0)||($scope.tripType == 2 && !$scope.info[1] && $scope.returnFlights.length > 0)) {
+					Materialize.toast('Please select the flight.',3000);
+				}
+				else{
+					
+					if($scope.outgoingFlights.length == 0){
+						// changing trip tipe when outgoing flights doesn't exist
+						$scope.tmpSearch = angular.copy(global.searchFlight);
+						global.searchFlight.tripType = 1;
+						global.outGoingTrip = $scope.returnFlights[$scope.info[1]];
+						global.origin = $scope.tmpSearch.destination;
+						global.destination = $scope.tmpSearch.origin;
+						global.outgoingDate = $scope.tmpSearch.returnDate;
+
+					}else{
+						
+					// Passing selected outgoing flight to the global service
+					global.outGoingTrip = $scope.outgoingFlights[$scope.info[0]];
+					if ($scope.tripType == 2){
+						// Passing selected return flight to the global service
+						global.returnTrip = $scope.returnFlights[$scope.info[1]];
+					}
+					}
+
+					 $location.path('/passengers');
+				}
 
 	};
 });

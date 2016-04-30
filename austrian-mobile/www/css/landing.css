@@ -1,0 +1,209 @@
+
+.list-fields{
+   box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18),0 4px 15px 0 rgba(0,0,0,0.15);
+}
+/* Header of the search form */
+#search-header{
+    text-align: center;
+    color: black;
+}
+
+
+.md-input-focused label.ng-binding, .md-input-has-value label.ng-binding{
+  margin-bottom: -5px;
+}
+
+label.ng-binding{
+  margin-bottom: 3px;
+}
+/* Field underline color */
+input[type=text]{
+  border-bottom: 1px solid transparent;
+  box-shadow: 0 1px 0 0 transparent;
+}
+
+input[type=text]:focus, input[type=text]:focus:not([readonly])  {
+  border-bottom: 1px solid transparent;
+  box-shadow: 0 1px 0 0 transparent;
+}
+
+input[type=date]{
+  border-bottom: 1px solid transparent;
+  box-shadow: 0 1px 0 0 transparent;
+}
+
+.platform-ios input[type="date"], .platform-android input[type="date"]{
+  padding-top: 2px;
+}
+
+input[type=date]:focus, input[type=date]:focus:not([readonly])  {
+  border-bottom: 1px solid transparent;
+  box-shadow: 0 1px 0 0 transparent;
+}
+
+/* Input field color */
+input[type=text]{
+  color: black;
+}
+
+/* Field Label Color */
+.input-label{
+  color: black;
+}
+input[type=text]::-webkit-input-placeholder {
+   color: black;
+}
+
+.list .item.item-floating-label, .item-floating-label{
+  border-bottom: 0px;
+}
+.item-select{
+  margin-top: 10px;
+}
+.item-select .input-label{
+  margin-left: -10px;
+  color: black;
+}
+
+select{
+  display: block;
+  border: 0px;
+}
+
+/* FIND NOW button */
+.btn{
+  width: 100%;
+}
+
+/*  Auto-complete Styling  */
+/* =|=|=|=|=|=|=|=|=|=|=|= */
+
+md-input-container input[type=search] {
+  border-bottom: 1px solid transparent;
+  box-shadow: 0 1px 0 0 transparent;
+}
+
+md-input-container input[type=search]:focus{
+  border-bottom: 1px solid transparent !important;
+  box-shadow: 0 1px 0 0 transparent !important;
+  border-color: transparent !important;
+}
+
+
+md-input-container label,  md-input-container .md-input {
+  font-size: 14px;
+  color: black !important;
+}
+
+md-input-container .md-input{
+  margin-top: 7px;
+}
+md-input-container label{
+  margin-left: 8px;
+}
+
+md-autocomplete{
+  min-width: inherit;
+}
+
+md-input-container{
+  margin: auto;
+  padding: 0px;
+}
+
+md-autocomplete[md-floating-label] md-input-container{
+  padding-bottom: 0px;
+}
+
+.md-errors-spacer{
+  display: none;
+}
+
+.padding{
+  padding: 0px 10px 0px 40px !important;
+}
+
+.padding-date{
+  padding: 7px 20px 0px 50px !important;
+}
+
+.padding-class{
+  padding: 0px 20px 0px 7px !important;
+}
+
+.input-border{
+  border: 1px solid grey;
+}
+
+.push-up{
+  margin-top: -1px;
+}
+
+md-input-container label:not(.md-container-ignore){
+  bottom: 80%;
+}
+
+md-input-container input[type=search]{
+  margin-bottom: 5px;
+}
+
+.errorToast {
+  background: black;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+  height: 40px;
+  opacity: 0.7;
+  color: white;
+  text-align: center;
+  font-size: 16px;
+  padding: 10px 0 5px 0;
+  transition:all cubic-bezier(0, 1, 0.5, 1) 0.5s;
+}
+
+.errorToast.ng-hide {
+  margin-top: -30px;
+  opacity: 0;
+}
+
+/* All airlines checkbox styling */
+
+.allAirlinesCheckbox{
+  margin-top: 5px;
+  height: 30px;
+}
+
+.allAirlinesCheckbox input[type="checkbox"]+label:before {
+  border-color: black;
+}
+.allAirlinesCheckbox input[type="checkbox"]:checked+label:before {
+  border-top: none;
+  border-left: none;
+}
+
+/* Landing view */
+.loading{
+  height: 100%;
+  vertical-align: middle;
+}
+
+.preloader-wrapper.small.active{
+  margin-top: 50%;
+  margin-left: 45%;
+}
+
+#loading-text{
+  margin-top: 20px;
+  text-align: center;
+  font-size: 20px;
+}
+
+.date-trans {
+  opacity: 1;
+  transition:all cubic-bezier(0, 1, 0.5, 1) 3.5s;
+}
+
+.date-trans.ng-hide {
+  opacity: 0;
+}

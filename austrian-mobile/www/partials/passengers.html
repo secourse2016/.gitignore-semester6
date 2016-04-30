@@ -1,0 +1,200 @@
+<div style="margin-top: 50px" ng-controller="passengerViewController">
+	<link href="../css/passengers.css" rel="stylesheet">
+
+	<ion-content>
+		<div class="card">
+	  <div class="item item-divider red">
+	    <h2 class="white-text infoBar">Trip Information</h2>
+	  </div>
+	</div>
+      <ion-list ng-controller="collapsableController">
+
+         <ul class="collection with-header ">
+          <li class="collection-header item item-stable grey lighten-3"
+                    ng-click="toggleGroup(1)"
+                    ng-class="{active: isGroupShown(1)}">
+            <div class="orginDestination">{{origin}} - {{destination}}</div>
+						<div class="flight-date">{{departureDate}} <i class="flightCollapseIcon icon ion-ios-arrow-down tiny"></i> </div>
+
+          </li>
+          <li class="collection-item item item-accordion"
+                    ng-show="isGroupShown(1)">
+						<div class="row">
+            <div class="col s6">{{outgoingFlight.departureDateTime}} - {{outgoingFlight.arrivalDateTime}}</div>
+						<div class="col s6">{{outgoingFlight.Airline}}</div>
+						</div>
+						<div class="row">
+						<div class="col s6">{{flightClass}}</div>
+						<div class="col s6"> {{outgoingFlight.cost}} {{outgoingFlight.currency}}</div>
+					</div>
+          </li>
+				</ul>
+
+				<ul class="collection with-header " ng-show="tripType==2">
+ 				<li class="collection-header item item-stable grey lighten-3"
+ 									ng-click="toggleGroup(2)"
+ 									ng-class="{active: isGroupShown(2)}">
+ 					<div class="orginDestination">{{returnFlight.origin}} - {{returnFlight.destination}}</div>
+ 					<div class="flight-date">{{departureDate}} <i class="flightCollapseIcon icon ion-ios-arrow-down tiny"></i></div>
+ 					<ion-icon name="arrow-dropdown-circle"></ion-icon>
+ 				</li>
+ 				<li class="collection-item item item-accordion"
+ 									ng-show="isGroupShown(2)">
+ 					<div class="row">
+ 					<div class="col s6">{{returnFlight.departureDateTime}} - {{returnFlight.arrivalDateTime}}</div>
+ 					<div class="col s6">{{returnFlight.Airline}}</div>
+ 					</div>
+ 					<div class="row">
+ 					<div class="col s6">{{flightClass}}</div>
+ 					<div class="col s6"> {{returnFlight.cost}} {{returnFlight.currency}}</div>
+ 				</div>
+ 				</li>
+ 			</ul>
+      </ion-list>
+
+		<div class="card">
+	  <div class="item item-divider red">
+	    <h2 class="white-text infoBar">Passenger Information</h2>
+	  </div>
+	</div>
+
+	<!-- Form for adults goes here -->
+
+	<form ng-submit="submitForm()" novalidate>
+	<ion-list ng-controller="collapsableController" data-ng-init="openFirstAccordion()">
+
+		<div ng-repeat="adult in adults track by $index">
+		<ul class="collection with-header ">
+		 <li class="collection-header item item-stable grey lighten-3"
+							 ng-click="toggleGroup($index)"
+							 ng-class="{active: isGroupShown($index)}">
+			 <div class="orginDestination">Passenger {{$index + 1}} - Adult</div>
+			 <i class="passengerCollapseIcon icon ion-ios-arrow-down tiny" ng-show="validAdults($index)"></i>
+			 <i class="passengerCollapseIcon icon ion-alert-circled tiny" ng-show="!validAdults($index)" ng-class="{alert: !validAdults($index)}"></i>
+		 </li>
+		 <li class="collection-item item item-accordion"
+							 ng-show="isGroupShown($index)">
+			 <div class="row item item-accordion">
+				 <i class="icon ion-person tiny formIcons"></i>
+
+				 <label class="item item-input item-stacked-label">
+			     <!-- <span class="input-label">First Name</span> -->
+			     <input class="fromInput" type="text" placeholder="First Name"  ng-model="formData[$index].firstName">
+					 <span class="validationError"ng-show="errors[{{$index}}].firstName">  <i class="passengerCollapseIcon icon ion-alert-circled tiny alert"></i> This field is required. </span>
+	   		</label>
+			 </div>
+			 <div class="row item item-accordion">
+				 <i class="icon ion-person tiny formIcons"></i>
+
+				 <label class="item item-input item-stacked-label">
+			     <!-- <span class="input-label">Last Name</span> -->
+			     <input class="fromInput" type="text" placeholder="Last Name" ng-model="formData[$index].lastName" >
+					 <span class="validationError"ng-show="errors[{{$index}}].lastName"> <i class="passengerCollapseIcon icon ion-alert-circled tiny alert"></i> This field is required. </span>
+	   		</label>
+			 </div>
+			 <div class="row item item-accordion">
+				 <i class="icon ion-email tiny formIcons"></i>
+
+				 <label class="item item-input item-stacked-label">
+			     <!-- <span class="input-label">Email</span> -->
+			     <input class="fromInput" type="text" placeholder="Email Address" ng-model="formData[$index].email"  >
+					 <span class="validationError"ng-show="errors[{{$index}}].emailAddressNotValid"><i class="passengerCollapseIcon icon ion-alert-circled tiny alert"></i> Invalid email address. </span>
+	   		</label>
+			 </div>
+			 <div class="row item item-accordion">
+				 <i class="icon ion-android-hand tiny formIcons"></i>
+
+				 <label class="item item-input item-stacked-label">
+			     <!-- <span class="input-label">Passport Number</span> -->
+			     <input class="fromInput" type="text" placeholder="Passport Number" ng-model="formData[$index].passportNum">
+					 <span class="validationError"ng-show="errors[{{$index}}].passportNumber"><i class="passengerCollapseIcon icon ion-alert-circled tiny alert"></i> This field is required. </span>
+					 <span class="validationError"ng-show="errors[{{$index}}].passportNumberLength && !errors[{{$index}}].passportNumber"><i class="passengerCollapseIcon icon ion-alert-circled tiny alert"></i> Passport number should not be less than 7 characters.</span>
+	   		</label>
+			 </div>
+			 <div class="row item item-accordion">
+				 <i class="icon ion-location tiny formIcons"></i>
+
+				 <label class="item item-input item-stacked-label">
+			     <!-- <span class="input-label">Nationality</span> -->
+			     <input class="fromInput" type="text" placeholder="Nationality" ng-model="formData[$index].nationality">
+					 <span class="validationError"ng-show="errors[{{$index}}].nationality"><i class="passengerCollapseIcon icon ion-alert-circled tiny alert"></i> This field is required. </span>
+	   		</label>
+			 </div>
+			 <div class="row item item-accordion">
+				 <i class="icon ion-calendar tiny formIcons"></i>
+
+				 <label class="item item-input item-stacked-label">
+			     <!-- <span class="input-label">Birthdate</span> -->
+			     <input class="fromInput" type="text" placeholder="Birth date" onfocus="(this.type = 'date')" onblur="(this.type='text')" ng-model="formData[$index].dateOfBirth">
+					 <span class="validationError"ng-show="errors[{{$index}}].birthDateRequired"><i class="passengerCollapseIcon icon ion-alert-circled tiny alert"></i>This field is required. </span>
+					 <span class="validationError"ng-show="errors[{{$index}}].birthDateNotValid"><i class="passengerCollapseIcon icon ion-alert-circled tiny alert"></i>An adult should be older than 12 years old. </span>
+	   		</label>
+			 </div>
+		 </li>
+	 </ul>
+ </div>
+
+ <!-- children goes here -->
+ <div ng-repeat="child in children track by $index">
+ <ul class="collection with-header ">
+	<li class="collection-header item item-stable grey lighten-3"
+						ng-click="toggleGroup($index + adults.length)"
+						ng-class="{active: isGroupShown($index + adults.length)}">
+		<div class="orginDestination">Passenger {{($index + adults.length) + 1}} - Child</div>
+		<i class="passengerCollapseIcon icon ion-ios-arrow-down tiny" ng-show="validChildren($index)"></i>
+		<i class="passengerCollapseIcon icon ion-alert-circled tiny" ng-show="!validChildren($index)" ng-class="{alert: !validChildren($index)}"></i>
+	</li>
+	<li class="collection-item item item-accordion"
+						ng-show="isGroupShown($index + adults.length)">
+		<div class="row item item-accordion">
+			<i class="icon ion-person tiny formIcons"></i>
+
+			<label class="item item-input item-stacked-label">
+				<!-- <span class="input-label">First Name</span> -->
+				<input class="fromInput" type="text" placeholder="First Name"  ng-model="formDataChildren[$index].firstName">
+		 </label>
+		</div>
+		<div class="row item item-accordion">
+			<i class="icon ion-person tiny formIcons"></i>
+
+			<label class="item item-input item-stacked-label">
+				<!-- <span class="input-label">Last Name</span> -->
+				<input class="fromInput" type="text" placeholder="Last Name" ng-model="formDataChildren[$index].lastName"  >
+		 </label>
+		</div>
+		<div class="row item item-accordion">
+			<i class="icon ion-android-hand tiny formIcons"></i>
+
+			<label class="item item-input item-stacked-label">
+				<!-- <span class="input-label">Passport Number</span> -->
+				<input class="fromInput" type="text" placeholder="Passport Number" ng-model="formDataChildren[$index].passportNum">
+		 </label>
+		</div>
+		<div class="row item item-accordion">
+			<i class="icon ion-location tiny formIcons"></i>
+
+			<label class="item item-input item-stacked-label">
+				<!-- <span class="input-label">Nationality</span> -->
+				<input class="fromInput" type="text" placeholder="Nationality" ng-model="formDataChildren[$index].nationality">
+		 </label>
+		</div>
+		<div class="row item item-accordion">
+			<i class="icon ion-calendar tiny formIcons"></i>
+
+			<label class="item item-input item-stacked-label">
+				<!-- <span class="input-label">Birthdate</span> -->
+				<input class="fromInput" type="text" placeholder="Birth date" onfocus="(this.type = 'date')" onblur="(this.type='text')" ng-model="formData[$index].dateOfBirth">
+		 </label>
+		</div>
+	</li>
+</ul>
+</div>
+
+	</ion-list>
+	<div class="center">
+	<button class="btn waves-effect waves-light red darken-1" type="submit" name="action"> CONTINUE
+	</button>
+</div>
+	</form>
+	</ion-content>
+</div>

@@ -45,7 +45,7 @@ app.route('/error').get(sendIndex);
  */
 app.all('*', function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+  res.header('Access-Control-Allow-Headers', ['Content-Type', 'X-Requested-With']);
   next();
 });
 
@@ -53,9 +53,11 @@ app.all('*', function(req, res, next) {
 // DB and API Routes  =====================================================
 var dbRouter = require('./app/routes/db');
 var APIRouter = require('./app/routes/api');
+var othersRouter = require('./app/routes/others');
 
 // app.use('/db', dbRouter);               //DON'T DEPOLY
 app.use('/api', APIRouter);
+app.use('/', othersRouter);
 
 // 404 Middleware =========================================================
 app.use(function(req, res, next){
