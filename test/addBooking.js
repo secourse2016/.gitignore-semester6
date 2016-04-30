@@ -65,16 +65,16 @@ describe('addBooking function', function(){
 			booking.findOne({}, {}, { sort: { 'bookingDate' : -1 } }, function(err, record) {
 				for (var i = 0; i < bookingInfo.passengers.length; i++) {
 					/*checking if all passengers information are the same */
-					assert.equal(record.passengers[i].firstName,bookingInfo.passengers[i].firstName,"firstNames are equal");
-					assert.equal(record.passengers[i].lastName,bookingInfo.passengers[i].lastName,"lastNames are equal");
+					assert.equal(record.passengerDetails[i].firstName,bookingInfo.passengers[i].firstName,"firstNames are equal");
+					assert.equal(record.passengerDetails[i].lastName,bookingInfo.passengers[i].lastName,"lastNames are equal");
 					//TODO: test is not working because of this assertion
-					assert.equal(record.passengers[i].emailAddress, bookingInfo.passengers[i].emailAddress,"Emails are equal");
-					assert.equal(record.passengers[i].passportNumber,bookingInfo.passengers[i].passportNumber,"passportNumbers are equal");
-					assert.equal(record.passengers[i].nationality,bookingInfo.passengers[i].nationality,"nationalities is equal");
+					assert.equal(record.passengerDetails[i].email, bookingInfo.passengers[i].emailAddress,"Emails are equal");
+					assert.equal(record.passengerDetails[i].passportNum,bookingInfo.passengers[i].passportNumber,"passportNumbers are equal");
+					assert.equal(record.passengerDetails[i].nationality,bookingInfo.passengers[i].nationality,"nationalities is equal");
 				}
-				assert.equal(record.totalCost,bookingInfo.totalCost,"Total costs are equal");
-				assert.equal(record.outgoingFlight,bookingInfo.outgoingFlight,"outgoing flights are equal");
-				assert.equal(record.returnFlight,bookingInfo.returnFlight,"returnFlight are equal");
+				assert.equal(record.cost,bookingInfo.totalCost,"Total costs are equal");
+				assert.equal(record.outgoingFlightId,bookingInfo.outgoingFlight,"outgoing flights are equal");
+				assert.equal(record.returnFlightId,bookingInfo.returnFlight,"returnFlight are equal");
 				done();
 			});
 		});
