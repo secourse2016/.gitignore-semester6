@@ -297,29 +297,33 @@ module.exports.addBooking = function(bookingInfo, cb){
  * @type {[type]}
  */
 var postBooking = module.exports.postBookingRequests
-			    = function postBookingRequests(airline , booking , cb){
+			    = function postBookingRequests(airline, booking, cb){
 					// console.log(querystring.stringify(booking.toString()));
-
-				   if(airline.ip == "52.s90.41.197"){
+				   if(airline.ip == "52.90s.41.197"){
 					   //call the function int the server
+
+
 				   }else{
 					   if(airline){
-						//    var targetHost = airline.url?airline.url:airline.ip;
+						   var targetHost = airline.url?airline.url:airline.ip;
 						   var targetHost = "127.0.0.1";
+
 						   // Assign the HTTP request options: host and path
 						   var options = {
 							   host: targetHost,
-							   path: '/api/Booking', //just for test
+							   path: '/api/Booking'+'?wt='+jwtToken, //just for test
 							   method: 'POST',
-							   port: 8080, //just for testing
+							   port: 8080,
 							   headers: {
 								   			'x-access-token': jwtToken,
 							   				'Content-Type': 'application/x-www-form-urlencoded'
 						   			}
 						   };
 		   				var postReq = http.request(options, function(res){
+							var bookingRes ;
+							res.setEncoding('utf8');
 							res.on('data', function(data){
-								var bookingRes = data;
+								bookingRes = data;
 							});
 							res.on('end',function(end){
 								try{
@@ -330,6 +334,8 @@ var postBooking = module.exports.postBookingRequests
 										cb(error,{});
 									}else{
 										airline.refNum = bookingRes.refNum;
+										// console.log("test in post body");
+										// console.log(airline);
 										cb(0,airline);
 									}
 								}
@@ -339,10 +345,11 @@ var postBooking = module.exports.postBookingRequests
 							});
 		   				});
 					postReq.on('error', function(e){
-	  					console.log('problem with request: ${e.message}');
-						console.log(e);
-						console.log("\n");
-						console.log(e.message);
+						// 		console.log('problem with request: ${e.message}');
+						// console.log(e);
+						// console.log("\n");
+						// console.log(e.message);
+						cb(1,{});
 					});
 					postReq.write(qs.stringify(booking));
 					postReq.end();
@@ -367,19 +374,22 @@ var postBooking = module.exports.postBookingRequests
 	var booking2 = requestParameters.booking2;
 	var status 	 = {};
 	postBooking(airline1, booking1, function(error, airline1Status){
-		console.log(airline1Status);
 		if(!error){
 			status.airline1 = airline1Status;
-			postBooking(airline2, booking2, function(error, airline2Status){
-				status.airline2 = airline2Status;
-				if(!error){
-					cb(status, error);
-				}else{
-					cb({},error);
-				}
-			});
+			if(airline2){
+				postBooking(airline2, booking2, function(error, airline2Status){
+					status.airline2 = airline2Status;
+					if(!error){
+						cb(error, status);
+					}else{
+						cb(error, {});
+					}
+				});
+			}else{
+				cb(error, status);
+			}
 		}else{
-			cb({},error);
+			cb(error,{});
 		}
 
 	});
