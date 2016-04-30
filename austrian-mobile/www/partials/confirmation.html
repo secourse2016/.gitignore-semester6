@@ -1,0 +1,223 @@
+<div style="margin-top: 50px" ng-controller="confirmationController">
+	<link href="../css/passengers.css" rel="stylesheet">
+
+	<ion-content>
+		<div class="card">
+	  <div class="item item-divider red lighten-1">
+	    <h2 class="white-text infoBar">Trip Information</h2>
+	  </div>
+	</div>
+      <ion-list ng-controller="collapsableController">
+
+         <ul class="collection with-header ">
+          <li class="collection-header item item-stable grey lighten-3"
+                    ng-click="toggleGroup(1)"
+                    ng-class="{active: isGroupShown(1)}">
+            <div class="orginDestination">{{origin}} - {{destination}}</div>
+						<div class="flight-date">{{departureDate}} <i class="flightCollapseIcon icon ion-ios-arrow-down tiny"></i> </div>
+
+          </li>
+          <li class="collection-item item item-accordion"
+                    ng-show="isGroupShown(1)">
+						<div class="row">
+            <div class="col s6">{{outgoingFlight.departureDateTime}} - {{outgoingFlight.arrivalDateTime}}</div>
+						<div class="col s6">{{outgoingFlight.Airline}}</div>
+						</div>
+						<div class="row">
+						<div class="col s6">{{flightClass}}</div>
+						<div class="col s6"> {{outgoingFlight.cost}} {{outgoingFlight.currency}}</div>
+					</div>
+          </li>
+				</ul>
+
+				<ul class="collection with-header ">
+ 				<li class="collection-header item item-stable grey lighten-3"
+ 									ng-click="toggleGroup(2)"
+ 									ng-class="{active: isGroupShown(2)}">
+ 					<div class="orginDestination">{{returnFlight.origin}} - {{returnFlight.destination}}</div>
+ 					<div class="flight-date">{{departureDate}} <i class="flightCollapseIcon icon ion-ios-arrow-down tiny"></i></div>
+ 					<ion-icon name="arrow-dropdown-circle"></ion-icon>
+ 				</li>
+ 				<li class="collection-item item item-accordion"
+ 									ng-show="isGroupShown(2)">
+ 					<div class="row">
+ 					<div class="col s6">{{returnFlight.departureDateTime}} - {{returnFlight.arrivalDateTime}}</div>
+ 					<div class="col s6">{{returnFlight.Airline}}</div>
+ 					</div>
+ 					<div class="row">
+ 					<div class="col s6">{{flightClass}}</div>
+ 					<div class="col s6"> {{returnFlight.cost}} {{returnFlight.currency}}</div>
+ 				</div>
+ 				</li>
+ 			</ul>
+      </ion-list>
+
+		<div class="card">
+	  <div class="item item-divider red lighten-1">
+	    <h2 class="white-text infoBar">Passenger Information</h2>
+	  </div>
+	</div>
+
+	<!-- Form for adults goes here -->
+
+	<ion-list ng-controller="collapsableController" data-ng-init="openFirstAccordion()">
+		<!-- do not forget ng repeat -->
+		<div ng-repeat="passenger in infoFlow.getPassengers()" ng-hide = "passenger.isChild">
+		<ul class="collection with-header ">
+		 <li class="collection-header item item-stable grey lighten-3"
+							 ng-click="toggleGroup($index)"
+							 ng-class="{active: isGroupShown($index)}">
+			 <div class="orginDestination">Passenger {{$index + 1}} - Adult</div>
+			 <i class="passengerCollapseIcon icon ion-ios-arrow-down tiny" style="float:right"></i>
+		 </li>
+		 <li class="collection-item item item-accordion"
+							 ng-show="isGroupShown($index)">
+			 <div class="row item item-accordion">
+				 <i class="icon ion-person tiny formIcons"></i>
+
+				 <label class="item item-input item-stacked-label">
+			     <!-- <span class="input-label">First Name</span> -->
+			     <h4>First Name</h4>
+			     <p style="">
+                {{passenger.firstName}}
+              </p>
+	   		</label>
+			 </div>
+			 <div class="row item item-accordion">
+				 <i class="icon ion-person tiny formIcons"></i>
+
+				 <label class="item item-input item-stacked-label">
+			     <!-- <span class="input-label">Last Name</span> -->
+			  	 <h4>Last Name</h4>
+   				 <p style="">
+                {{passenger.lastName}}
+             	 </p>
+	   		</label>
+			 </div>
+			 <div class="row item item-accordion">
+				 <i class="icon ion-email tiny formIcons"></i>
+
+				 <label class="item item-input item-stacked-label">
+			     <!-- <span class="input-label">Email</span> -->
+			      <h4>Email</h4>
+				<p style="">
+                {{passenger.email}}
+              	</p>
+	   		</label>
+			 </div>
+			 <div class="row item item-accordion">
+				 <i class="icon ion-earth tiny formIcons"></i>
+
+				 <label class="item item-input item-stacked-label">
+			     <!-- <span class="input-label">Passport Number</span> -->
+			     <h4>Passport Number</h4>
+			     <p style="">
+                {{passenger.passportNum}}
+              	</p>
+	   		</label>
+			 </div>
+			 <div class="row item item-accordion">
+				 <i class="icon ion-location tiny formIcons"></i>
+
+				 <label class="item item-input item-stacked-label">
+			     <!-- <span class="input-label">Nationality</span> -->
+			     <h4>Nationality</h4>
+			     <p style="">
+                {{passenger.nationality}}
+              </p>
+	   		</label>
+			 </div>
+			 <div class="row item item-accordion">
+				 <i class="icon ion-calendar tiny formIcons"></i>
+
+				 <label class="item item-input item-stacked-label">
+				 <h4>Birth Date</h4>
+			     <!-- <span class="input-label">Birthdate</span> -->
+			   <p style="">
+                {{passenger.dateOfBirth}}
+              </p>
+	   		</label>
+			 </div>
+		 </li>
+	 </ul>
+ </div>
+	
+	<!-- Form for adults goes here -->
+
+
+		<!-- do not forget ng repeat -->
+		<div ng-repeat="passenger in infoFlow.getPassengers()" ng-show = "passenger.isChild" >
+		<ul class="collection with-header ">
+		 <li class="collection-header item item-stable grey lighten-3"
+							 ng-click="toggleGroup($index)"
+							 ng-class="{active: isGroupShown($index)}">
+			 <div class="orginDestination">Passenger {{$index + 1}} - Child</div>
+			 <i class="passengerCollapseIcon icon ion-ios-arrow-down tiny" style="float: right"></i>
+		 </li>
+		 <li class="collection-item item item-accordion"
+							 ng-show="isGroupShown($index)">
+			 <div class="row item item-accordion">
+				 <i class="icon ion-person tiny formIcons"></i>
+
+				 <label class="item item-input item-stacked-label">
+			     <!-- <span class="input-label">First Name</span> -->
+			     <h4>First Name</h4>
+			     <p style="">
+                {{passenger.firstName}}
+              </p>
+	   		</label>
+			 </div>
+			 <div class="row item item-accordion">
+				 <i class="icon ion-person tiny formIcons"></i>
+
+				 <label class="item item-input item-stacked-label">
+			     <!-- <span class="input-label">Last Name</span> -->
+			  	 <h4>Last Name</h4>
+   				 <p style="">
+                {{passenger.lastName}}
+             	 </p>
+	   		</label>
+			 </div>
+			 <div class="row item item-accordion">
+				 <i class="icon ion-earth tiny formIcons"></i>
+
+				 <label class="item item-input item-stacked-label">
+			     <!-- <span class="input-label">Passport Number</span> -->
+			     <h4>Passport Number</h4>
+			     <p style="">
+                {{passenger.passportNum}}
+              	</p>
+	   		</label>
+			 </div>
+			 <div class="row item item-accordion">
+				 <i class="icon ion-location tiny formIcons"></i>
+
+				 <label class="item item-input item-stacked-label">
+			     <!-- <span class="input-label">Nationality</span> -->
+			     <h4>Nationality</h4>
+			     <p style="">
+                {{passenger.nationality}}
+              </p>
+	   		</label>
+			 </div>
+			 <div class="row item item-accordion">
+				 <i class="icon ion-calendar tiny formIcons"></i>
+
+				 <label class="item item-input item-stacked-label">
+				 <h4>Birth Date</h4>
+			     <!-- <span class="input-label">Birthdate</span> -->
+			   <p style="">
+                {{passenger.dateOfBirth}}
+              </p>
+	   		</label>
+			 </div>
+		 </li>
+	 </ul>
+ </div>
+  	</ion-list>
+  	<div class="center">
+	 <button ng-click="confirm()" id="confirmInfo"class="btn waves-effect waves-light red lighten-1" type="submit" name="action"> Confirm
+  </button>
+  </div>
+	</ion-content>
+</div>
