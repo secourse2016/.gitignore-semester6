@@ -31,21 +31,21 @@ var booking = require('../app/models/booking');
        // retrieve the inserted booking to get its bookingNumber and passportNumber
        booking.findOne({}, {}, {sort:{'bookingDate':-1}}, function(err, record){
          var bookingNumber = record.bookingNumber;
-         var passportNumber = record.passengers[0].passportNumber;
+         var passportNumber = record.passengerDetails[0].passportNum;
          getBooking(bookingNumber, passportNumber, function(err, res){
            if(!err){
              // testing the passengers info
              for (var i = 0; i < res.passengers.length; i++) {
-               assert.equal(res.passengers[i].firstName,bookingInfo.passengers[i].firstName,"firstNames are equal");
-               assert.equal(res.passengers[i].lastName,bookingInfo.passengers[i].lastName,"lastNames are equal");
-               assert.equal(res.passengers[i].emailAddress,bookingInfo.passengers[i].emailAddress,"Emails are equal");
-               assert.equal(res.passengers[i].passportNumber,bookingInfo.passengers[i].passportNumber,"passportNumbers are equal");
-               assert.equal(res.passengers[i].nationality,bookingInfo.passengers[i].nationality,"nationalities is equal");
+               assert.equal(res.passengerDetails[i].firstName,bookingInfo.passengers[i].firstName,"firstNames are equal");
+               assert.equal(res.passengerDetails[i].lastName,bookingInfo.passengers[i].lastName,"lastNames are equal");
+               assert.equal(res.passengerDetails[i].email,bookingInfo.passengers[i].emailAddress,"Emails are equal");
+               assert.equal(res.passengerDetails[i].passportNum,bookingInfo.passengers[i].passportNumber,"passportNumbers are equal");
+               assert.equal(res.passengerDetails[i].nationality,bookingInfo.passengers[i].nationality,"nationalities is equal");
              }
              // testing the rest of booking info
-             assert.equal(res.totalCost,bookingInfo.totalCost,"totalPrices are equal");
-             assert.equal(res.outgoingFlight,bookingInfo.outgoingFlight,"outgoing flights are equal");
-             assert.equal(res.returnFlight,bookingInfo.returnFlight,"returnFlight are equal");
+             assert.equal(res.cost,bookingInfo.totalCost,"totalPrices are equal");
+             assert.equal(res.outgoingFlightId,bookingInfo.outgoingFlight,"outgoing flights are equal");
+             assert.equal(res.returnFlightId,bookingInfo.returnFlight,"returnFlight are equal");
              done();
            }
          });
