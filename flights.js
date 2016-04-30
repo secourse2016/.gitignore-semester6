@@ -313,7 +313,7 @@ var postBooking = module.exports.postBookingRequests
 						   var port = 80;
 						   var postData = qs.stringify(booking);
 						   if(process.env.DEV==="1"){
-							   targetPath = '/api/Booking';
+							   targetPath = '/Booking';
 							   targetHost = "127.0.0.1";
 							   port = process.env.PORT;
 						   }

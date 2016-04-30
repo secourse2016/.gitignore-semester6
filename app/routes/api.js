@@ -122,20 +122,6 @@ router.post('/flights/search/oneway', function(req, res){
 });
 
 
-/**
-* User-BOOK FLIGHT
-* This is the route used by the client side angular, to book flight.
-* @param req.body is the booking Info which was sent from confirmation Controller.
-* @param flights.addBooking is the function in flights.js which insert the booking into the data base .
-*/
-router.post('/Booking',function(req, res){
-	flights.addBooking(req.body,function(err,bookingNumber){
-        // if there is no error send booking Number
-        if(!err)
-            res.send({refNum: bookingNumber ,errorMessage:""});
-
-    });
-});
 
 /*
 * API route to get a certain booking from the database
