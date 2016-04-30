@@ -30,7 +30,7 @@
 
             <div class="col s10 m6 l3">
               <p class="flight-info-data">
-                  {{flightClass}}
+                  {{outgoingFlight.class}}
               </p>
             </div>
             <div class="col s10 m6 l3">
@@ -62,7 +62,7 @@
 
             <div class="col s10 m6 l3">
               <p class="flight-info-data">
-                 {{flightClass}}
+                 {{returnFlight.class}}
               </p>
             </div>
             <div class="col s10 m6 l3">
@@ -121,7 +121,7 @@
                    <i class="material-icons">email</i>
                    Email Address</h4>
                    <p>
-                    {{passenger.emailAddress}}
+                    {{passenger.email}}
                   </p>
                 </div>
                 <!--PassportNumber-->
@@ -130,7 +130,7 @@
                    <i class="material-icons">pan_tool</i>
                    Passport Number</h4>
                    <p>
-                    {{passenger.passportNumber}}
+                    {{passenger.passportNum}}
                   </p>
                 </div>
               </div>
@@ -153,7 +153,7 @@
                    <i class="material-icons">today</i>
                    Birth Date</h4>
                    <p>
-                    {{passenger.birthDate}}
+                    {{passenger.dateOfBirth}}
                   </p>
                 </div>
               </div>
@@ -198,7 +198,7 @@
                  <i class="material-icons">pan_tool</i>
                  Passport Number</h4>
                  <p style="margin-left: 30px">
-                  {{passenger.passportNumber}}
+                  {{passenger.passportNum}}
                 </p>
               </div>
             </div>
@@ -221,7 +221,7 @@
                  <i class="material-icons">today</i>
                  Birth Date</h4>
                  <p style="margin-left: 30px">
-                  {{passenger.birthDate}}
+                  {{passenger.dateOfBirth}}
                 </p>
               </div>
             </div>

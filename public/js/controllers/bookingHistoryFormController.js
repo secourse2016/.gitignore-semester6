@@ -20,11 +20,11 @@
 				valid = false;
 				var message = "please enter the booking number";
 			}
-			else if(!request.passportNum){
+			else if(!request.passportNumber){
 					valid = false;
 					var message = "please enter the passportNumber";
 			}
-			else if(request.passportNum.length < 7){
+			else if(request.passportNumber.length < 7){
 				valid = false;
 				var message = "Passport number should be more than 7 characters";
 			}
