@@ -151,21 +151,21 @@ describe('API get booking POST route', function(){
     var passenger = [{
              firstName:"Omar",
              lastName:"Radwan",
-             emailAddress:"omarradwan213@gmail.com",
-             passportNumber:12345678,
+             email:"omarradwan213@gmail.com",
+             passportNum:12345678,
              nationality:"Egyptian",
-             birthDate:10-7-1995
+             dateOfBirth:10-7-1995
          }];
     var bookingInfo = {
-           passengers:passenger,
-           outgoingFlight:2,
-           returnFlight:5,
-           totalCost:1400
+           passengerDetails:passenger,
+           outgoingFlightId:2,
+           returnFlightId:5,
+           cost:1400
          };
     request.post('/api/addBooking').set('x-access-token', token).send(bookingInfo).expect(200);
     booking.findOne({}, {}, { sort: { 'bookingDate' : -1 } }, function(err, record) {
       var bookingNumber = record.bookingNumber;
-      var passportNumber = record.passengers[0].passportNumber;
+      var passportNumber = record.passengerDetails[0].passportNum;
       var req = {};
       req.bookingNumber = bookingNumber;
       req.passportNumber = passportNumber;
