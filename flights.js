@@ -1,12 +1,12 @@
 var http 	= require('http');
 var fs 		= require('fs');
 var moment 	= require('moment');
-
 var flight 	= require('./app/models/flight');
 var airport = require('./app/models/airport');
 var booking = require('./app/models/booking');
 var airlines= require('./app/data/airlines.json');
 var jwt 	= require('jsonwebtoken');
+var qs      = require('qs');
 var _       = require('underscore');
 var stripe 	= require('stripe')(process.env.STRIPE_KEY);
 
@@ -240,7 +240,7 @@ module.exports.getBooking = function(bookingNumber , passportNumber , cb){
 									// attach the flights info to the returning object
 									myBooking.outgoingFlightInfo = outgoingFlight[0];
 									if(returnFlight)
-										myBooking.returnFlightInfo = returnFlight[0];
+	 									myBooking.returnFlightInfo = returnFlight[0];
 									cb(errReturnFlight, myBooking);
 								});
 						});
@@ -258,6 +258,7 @@ module.exports.getBooking = function(bookingNumber , passportNumber , cb){
  * @param generatedBookingNumber is a fixed value which all booking numbers begin with.
  */
 module.exports.addBooking = function(bookingInfo, cb){
+	console.log(bookingInfo);
 
 	var newBooking = new booking();
 	var generatedBookingNumber = "6D4B97";
@@ -298,33 +299,58 @@ module.exports.addBooking = function(bookingInfo, cb){
  */
 var postBooking = module.exports.postBookingRequests
 			    = function postBookingRequests(airline , booking , cb){
-				   if(airline.ip == "52.90.41.197"){
+					console.log(booking);
+					console.log(qs.stringify(booking));
+					// console.log(querystring.stringify(booking.toString()));
+
+				   if(airline.ip == "52.s90.41.197"){
 					   //call the function int the server
 				   }else{
 					   if(airline){
-						   var targetHost = airline.url?airline.url:airline.ip;
+						//    var targetHost = airline.url?airline.url:airline.ip;
+						   var targetHost = "127.0.0.1";
 						   // Assign the HTTP request options: host and path
 						   var options = {
 							   host: targetHost,
-							   path: 'api/Booking?wt='+jwtToken,
-							   headers: { 'x-access-token': jwtToken }
+							   path: '/api/Booking', //just for test
+							   method: 'POST',
+							   port: 8080, //just for testing
+							   headers: {
+								   			'x-access-token': jwtToken,
+							   				'Content-Type': 'application/x-www-form-urlencoded'
+						   			}
 						   };
-		   				http.post(options, function(req,res){
-		   					bookingRes = res.body;
-		   					if(bookingRes.errorMessage){
-		   						error.errorMessage = bookingRes.errorMessage;
-		   						error.airline = airline;
-		   						cb(error,{});
-		   					}else{
-		   						airline.refNum = bookingRes.refNum;
-								cb(0,airline);
-		   					}
-		   				}).on('error', function(e){
-		   					cb(1,{});
-		   				}).setTimeout(1000, function(){
-		   					this.abort();
-		   				}).write(booking);
-
+		   				var postReq = http.request(options, function(res){
+							res.on('data', function(data){
+								var bookingRes = data;
+								console.log(data);
+							});
+							res.on('end',function(end){
+								try{
+									bookingRes = JSON.parse(bookingRes);
+									console.log(bookingRes);
+									if(bookingRes.errorMessage){
+										error.errorMessage = bookingRes.errorMessage;
+										error.airline = airline;
+										cb(error,{});
+									}else{
+										airline.refNum = bookingRes.refNum;
+										cb(0,airline);
+									}
+								}
+								catch(e) {
+									cb(1,{});
+								}
+							});
+		   				});
+					postReq.on('error', function(e){
+	  					console.log('problem with request: ${e.message}');
+						console.log(e);
+						console.log("\n");
+						console.log(e.message);
+					});
+					postReq.write(qs.stringify(booking));
+					postReq.end();
 				   }else{
 					   cb(0,{});
 				   }
@@ -344,7 +370,7 @@ var postBooking = module.exports.postBookingRequests
 	var airline2 = requestParameters.airline2;
 	var booking1 = requestParameters.booking1;
 	var booking2 = requestParameters.booking2;
-	var status   ;
+	var status 	 = {};
 	postBooking(airline1, booking1, function(error, airline1Status){
 		console.log(airline1Status);
 		if(!error){
