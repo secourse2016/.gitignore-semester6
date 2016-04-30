@@ -258,8 +258,7 @@ module.exports.getBooking = function(bookingNumber , passportNumber , cb){
  * @param generatedBookingNumber is a fixed value which all booking numbers begin with.
  */
 module.exports.addBooking = function(bookingInfo, cb){
-	console.log(bookingInfo);
-
+	bookingInfo = qs.parse(bookingInfo);
 	var newBooking = new booking();
 	var generatedBookingNumber = "6D4B97";
 	/* counting all the records in the booking collection */
@@ -299,8 +298,6 @@ module.exports.addBooking = function(bookingInfo, cb){
  */
 var postBooking = module.exports.postBookingRequests
 			    = function postBookingRequests(airline , booking , cb){
-					console.log(booking);
-					console.log(qs.stringify(booking));
 					// console.log(querystring.stringify(booking.toString()));
 
 				   if(airline.ip == "52.s90.41.197"){
@@ -323,12 +320,10 @@ var postBooking = module.exports.postBookingRequests
 		   				var postReq = http.request(options, function(res){
 							res.on('data', function(data){
 								var bookingRes = data;
-								console.log(data);
 							});
 							res.on('end',function(end){
 								try{
 									bookingRes = JSON.parse(bookingRes);
-									console.log(bookingRes);
 									if(bookingRes.errorMessage){
 										error.errorMessage = bookingRes.errorMessage;
 										error.airline = airline;
