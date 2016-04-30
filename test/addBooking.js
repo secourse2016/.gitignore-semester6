@@ -35,7 +35,7 @@ var booking = require('../app/models/booking');
          getBooking(bookingNumber, passportNumber, function(err, res){
            if(!err){
              // testing the passengers info
-             for (var i = 0; i < res.passengers.length; i++) {
+             for (var i = 0; i < res.passengerDetails.length; i++) {
                assert.equal(res.passengerDetails[i].firstName,bookingInfo.passengers[i].firstName,"firstNames are equal");
                assert.equal(res.passengerDetails[i].lastName,bookingInfo.passengers[i].lastName,"lastNames are equal");
                assert.equal(res.passengerDetails[i].email,bookingInfo.passengers[i].emailAddress,"Emails are equal");
