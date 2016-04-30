@@ -4,8 +4,14 @@ var mongoose      = require('mongoose');
 var bodyParser    = require('body-parser');
 var moment	   	  = require('moment');
 var compression   = require('compression');
+var morgan		  = require('morgan');
 var app           = express();
+
 require('dotenv').config();
+
+
+if(process.env.DEV)
+	app.use(morgan('dev'));
 
 // functions ==============================================================
 app.use(compression());
