@@ -102,11 +102,10 @@
 									requestParameters.booking2 = booking2;
 									requestParameters.airline2 = airline2;
 									// Send post request with two bookings
-									console.log(requestParameters);
 									$http.post('/api/addBooking',requestParameters).success(function(data){
 
-										// TODO add the booking reference(s) to the global service
-										console.log(data);
+										global.getOutGoingTrip().airline = data.airline1;
+										global.getReturnTrip().airline = data.airline2;
 										$location.path('/successful');
 										if(!$scope.$$phase)
 											$scope.$apply();
@@ -123,13 +122,8 @@
 						else {
 
 							// Send post request with one booking.
-							console.log(requestParameters);
 							$http.post('/api/addBooking',requestParameters).success(function(data){
-								console.log(data);
 								global.getOutGoingTrip().airline = data.airline1;
-								if(global.getReturnTrip()){
-									global.getReturnTrip().airline = data.airline2;
-								}
 								$location.path('/successful');
 								if(!$scope.$$phase)
 									$scope.$apply();
@@ -151,7 +145,6 @@
 	})
 	.controller('successController' , function($scope , global){
 		$scope.airline1 = global.getOutGoingTrip().airline;
-		console.log($scope.airline1);
 		if(global.getReturnTrip()){
 			$scope.airline1 = global.getReturnTrip().airline;
 		}
