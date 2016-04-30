@@ -229,7 +229,8 @@ module.exports.addBooking = function(bookingInfo, cb){
 		/* check if the passenger is child or not */
   		var currentDate= new Date();
     	var currentYear = currentDate.getFullYear();
-    	for (var i = 0 ; i < bookingInfo.passengerDetails.length ; i++){
+			var numberOfPassengers = bookingInfo.passengerDetails.length;
+    	for (var i = 0 ; i < numberOfPassengers ; i++){
     		/* get the birth year of  the passenger with correct foramat */
     		var passengerBirthDate = new Date(bookingInfo.passengerDetails[i].dateOfBirth);
     		var passengerBirthYear = passengerBirthDate.getFullYear();
@@ -249,8 +250,34 @@ module.exports.addBooking = function(bookingInfo, cb){
 		newBooking.cost = bookingInfo.cost;
 		newBooking.bookingDate = Date.now();
 		newBooking.save(function (err) {
+			if(!err)
+				updateAvailableSeats(bookingInfo.outgoingFlightId, bookingInfo.returnFlightId, numberOfPassengers);
 			cb(err,newBooking.bookingNumber);
 		});
 
 	});
 };
+/**
+ * update availableSeats in flights by decrementing number of available seats with number of passengers
+ * by calling updateFlightSeats with id and number of passengers.
+ * @param outgoingFlightId is the id of the outgoind flight selected.
+ * @param returnFlightId is the id of the outgoind flight selected.
+ * @param numberOfPassengers is the number of passengers selected.
+ */
+	function updateAvailableSeats(outgoingFlightId, returnFlightId, numberOfPassengers){
+		if(outgoingFlightId)
+			updateFlightSeats(outgoingFlightId, numberOfPassengers);
+		if(returnFlightId)
+			updateFlightSeats(returnFlightId, numberOfPassengers);
+	};
+
+	/**
+	 * update availableSeats in flights by decrementing number of available seats with number of passengers.
+	 * @param flightId is the id of the flight selected (outgoing or return).
+	 * @param numberOfPassengers is the number of passengers selected.
+	 */
+	function updateFlightSeats(flightId, numberOfPassengers){
+		var conditions = { _id: flightId },
+   			update = { $dec: { availableSeats: numberOfPassengers }};
+		Model.update(conditions, update);
+	};
