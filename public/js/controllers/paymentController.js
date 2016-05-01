@@ -83,7 +83,7 @@
 									$scope.error.date = true;
 								else if(errStripe.param == 'exp_year')
 									$scope.error.date = true;
-								else if(rerrStripe.param == 'cvc')
+								else if(errStripe.param == 'cvc')
 									$scope.error.cvv = true;
 								if(!$scope.$$phase)
 									$scope.$apply();
