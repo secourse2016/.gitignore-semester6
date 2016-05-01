@@ -30,7 +30,7 @@
 
             <div class="col s10 m6 l3">
               <p class="flight-info-data">
-                  {{flightClass}}
+                  {{outgoingFlight.class}}
               </p>
             </div>
             <div class="col s10 m6 l3">
@@ -62,7 +62,7 @@
 
             <div class="col s10 m6 l3">
               <p class="flight-info-data">
-                 {{flightClass}}
+                 {{returnFlight.class}}
               </p>
             </div>
             <div class="col s10 m6 l3">
@@ -82,7 +82,7 @@
       <div class="row">
 
         <!--Repeated Passenger Info-->
-        <ul class="collection with-header" ng-repeat="passenger in booking.passengers" ng-hide = "passenger.isChild">
+        <ul class="collection with-header" ng-repeat="passenger in booking.passengerDetails" ng-hide = "passenger.isChild">
          <li class="collection-header  grey lighten-3 "><h4>Passenger- Adult</h4></li>
 
          <!--Actual data-->
@@ -121,7 +121,7 @@
                    <i class="material-icons">email</i>
                    Email Address</h4>
                    <p>
-                    {{passenger.emailAddress}}
+                    {{passenger.email}}
                   </p>
                 </div>
                 <!--PassportNumber-->
@@ -130,7 +130,7 @@
                    <i class="material-icons">pan_tool</i>
                    Passport Number</h4>
                    <p>
-                    {{passenger.passportNumber}}
+                    {{passenger.passportNum}}
                   </p>
                 </div>
               </div>
@@ -148,12 +148,12 @@
                   </p>
                 </div>
                 <!--BirthDate-->
-                <div class="col s12 m6" ng-show = "passenger.birthDate">
+                <div class="col s12 m6">
                  <h4>
                    <i class="material-icons">today</i>
                    Birth Date</h4>
                    <p>
-                    {{passenger.birthDate}}
+                    {{passenger.dateOfBirth}}
                   </p>
                 </div>
               </div>
@@ -164,7 +164,7 @@
       </div>
 
       <!--Child Passenger Information-->
-      <ul class="collection with-header" ng-repeat="passenger in booking.passengers" ng-show = "passenger.isChild" >
+      <ul class="collection with-header" ng-repeat="passenger in booking.passengerDetails" ng-show = "passenger.isChild" >
        <li class="collection-header  grey lighten-3 " ><h4>Passenger- Child</h4></li>
        <li  class="collection-item">
          <div class="container">
@@ -198,7 +198,7 @@
                  <i class="material-icons">pan_tool</i>
                  Passport Number</h4>
                  <p style="margin-left: 30px">
-                  {{passenger.passportNumber}}
+                  {{passenger.passportNum}}
                 </p>
               </div>
             </div>
@@ -216,12 +216,12 @@
 
 
               <!--BirthDate-->
-              <div class="col s12 m6" ng-show = "passenger.birthDate">
+              <div class="col s12 m6" >
                <h4>
                  <i class="material-icons">today</i>
                  Birth Date</h4>
                  <p style="margin-left: 30px">
-                  {{passenger.birthDate}}
+                  {{passenger.dateOfBirth}}
                 </p>
               </div>
             </div>

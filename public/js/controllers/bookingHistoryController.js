@@ -8,9 +8,9 @@ controller('bookingHistoryController',function($scope, bookingHistoryService){
 
 
 	if($scope.booking){
-		for(i = 0; i<$scope.booking.passengers.length; i++) {
-			$scope.booking.passengers[i].birthDate = new Date($scope.booking.passengers[i].birthDate);
-			$scope.booking.passengers[i].birthDate = $scope.booking.passengers[i].birthDate.toDateString();
+		for(i = 0; i<$scope.booking.passengerDetails.length; i++) {
+			$scope.booking.passengerDetails[i].dateOfBirth = new Date($scope.booking.passengerDetails[i].dateOfBirth);
+			$scope.booking.passengerDetails[i].dateOfBirth = $scope.booking.passengerDetails[i].dateOfBirth.toDateString();
 		}
 		// variable with value of the name of the airline
 	  $scope.airline          = "Austrian";
@@ -18,7 +18,7 @@ controller('bookingHistoryController',function($scope, bookingHistoryService){
 		if($scope.booking.returnFlightInfo)
 	  	$scope.tripType = 2; // both airlines are austrian
 		else
-			$scope.tripType = 1; // One way trip, Or the outgoing flight is Austrian and the return is not.
+		$scope.tripType = 1; // One way trip, Or the outgoing flight is Austrian and the return is not.
 
 		/**
 		*	In case of the airline of the outgoing flight is not Austrian but the return flight is.
@@ -36,7 +36,7 @@ controller('bookingHistoryController',function($scope, bookingHistoryService){
 		if($scope.tripType != 3)
 	  	$scope.departureDate    = outgoingDate.toDateString();
 		if($scope.tripType != 1)
-		  $scope.arrivalDate      = returnDate.toDateString();
+		  $scope.arrivalDate    = returnDate.toDateString();
 
 	  // search flightt origin and destination
 		if($scope.tripType != 3){
@@ -61,22 +61,22 @@ controller('bookingHistoryController',function($scope, bookingHistoryService){
 
 			$scope.outgoingFlight  = angular.copy($scope.booking.outgoingFlightInfo);
 
-			var departureTime                           = new Date($scope.outgoingFlight.departureDateTime);
+			var departureTime      = new Date($scope.outgoingFlight.departureDateTime);
     	$scope.outgoingFlight.departureDateTime = departureTime.getUTCHours()+":"+departureTime.getUTCMinutes();
 
     //arrival time
-    	var arrivalTime                             = new Date($scope.outgoingFlight.arrivalDateTime);
+    	var arrivalTime                         = new Date($scope.outgoingFlight.arrivalDateTime);
     	$scope.outgoingFlight.arrivalDateTime   = arrivalTime.getUTCHours()+":"+arrivalTime.getUTCMinutes();
 		}
 	    // arrival time
 
 	  if($scope.tripType != 1){
 	    $scope.returnFlight    = angular.copy($scope.booking.returnFlightInfo);
-			var departureTime                           = new Date($scope.returnFlight.departureDateTime);
+			var departureTime  = new Date($scope.returnFlight.departureDateTime);
 	    $scope.returnFlight.departureDateTime = departureTime.getUTCHours()+":"+departureTime.getUTCMinutes();
 
 	    //arrival time
-	    var arrivalTime                             = new Date($scope.returnFlight.arrivalDateTime);
+	    var arrivalTime                       = new Date($scope.returnFlight.arrivalDateTime);
 	    $scope.returnFlight.arrivalDateTime   = arrivalTime.getUTCHours()+":"+arrivalTime.getUTCMinutes();
 
 	  }
