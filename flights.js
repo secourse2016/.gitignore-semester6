@@ -16,13 +16,13 @@ var stripe 	= require('stripe')(process.env.STRIPE_KEY);
  * date with the specified class given in the arguments.
  */
 var getOneDirectionFlights	= module.exports.getOneDirectionFlights
-							= function(cb, origin, destination, flightClass, date){
+							= function(cb, origin, destination, flightClass, date, numberOfPassengers){
 	var startDate 	= moment(date, "x").toDate().getTime();
 	var endDate		= moment(date, "x").add(1, "days").toDate().getTime();
 
 	// Find documents in flights collection
 	flight.find({"origin": origin, "destination": destination, "class": flightClass,
-				 "departureDateTime" : {"$gte" : startDate, "$lt": endDate}}).lean().exec(
+				 "departureDateTime" : {"$gte" : startDate, "$lt": endDate}, "availableSeats" : {"$gte" : numberOfPassengers}}, {},
 				 function(err, resultFlights){
 		cb(err, resultFlights);
 	});
@@ -34,7 +34,7 @@ var getOneDirectionFlights	= module.exports.getOneDirectionFlights
  * (in case of round trips) with the specified class given in the arguments.
  */
 var getFlights = module.exports.getFlights
-			   = function(cb, origin, destination, flightClass, departureDate, arrivalDate){
+			   = function(cb, origin, destination, flightClass, departureDate, arrivalDate, numberOfPassengers){
 	// Get the outgoing flights
 	getOneDirectionFlights(function(err, outgoingFlights){
 		if(err)
@@ -68,10 +68,10 @@ var getFlights = module.exports.getFlights
 				  });
 				result.returnFlights = returnFlights;
 				cb(err2, result);
-			}, destination, origin, flightClass, arrivalDate);
+			}, destination, origin, flightClass, arrivalDate, numberOfPassengers);
 
 		}
-	}, origin, destination, flightClass, departureDate);
+	}, origin, destination, flightClass, departureDate, numberOfPassengers);
 }
 
 
@@ -83,7 +83,7 @@ var jwtToken = jwt.sign({},process.env.SECRET_KEY);
  * return flights (if roundtrip).
  */
 var getAllFlights = module.exports.getAllFlights
-				  = function(cb, allAirlines, origin, destination, flightClass, departureDate, arrivalDate){
+				  = function(cb, allAirlines, origin, destination, flightClass, departureDate, arrivalDate, numberOfPassengers){
 	// get flights from Austrian airlines
 	getFlights(function(err, austrianFlights){
 		_.map(austrianFlights.outgoingFlights, function(flight){
@@ -106,28 +106,28 @@ var getAllFlights = module.exports.getAllFlights
 				if(arrivalDate)
 					austrianFlights.returnFlights = austrianFlights.returnFlights.concat(otherFlights.returnFlights);
 				cb(err, austrianFlights);
-			}, 0, allAirlines, origin, destination, flightClass, departureDate, arrivalDate);
+			}, 0, allAirlines, origin, destination, flightClass, departureDate, arrivalDate, numberOfPassengers);
 		}
 		else {
 			// only Austrian airline flights
 			cb(err,austrianFlights);
 		}
 
-	},origin, destination, flightClass, departureDate, arrivalDate);
+	},origin, destination, flightClass, departureDate, arrivalDate, numberOfPassengers);
 }
 
 /**
 * Iterates (by recursion) over all airlines and returns their flights in a callback function
 */
-var getOtherAirlines = function(cb, airlineIndex, allAirlines, origin, destination, flightClass, departureDate, arrivalDate){
+var getOtherAirlines = function(cb, airlineIndex, allAirlines, origin, destination, flightClass, departureDate, arrivalDate, numberOfPassengers){
 	// Check if there are still airlines
 	if(airlineIndex < airlines.length){
 		// Get the URL of the airline or the IP
 		var targetHost = airlines[airlineIndex].url?airlines[airlineIndex].url:airlines[airlineIndex].ip;
 		// Get the API route
-		var targetPath = '/api/flights/search/'+origin+'/'+destination+'/'+departureDate+'/'+flightClass;
+		var targetPath = '/api/flights/search/'+origin+'/'+destination+'/'+departureDate+'/'+flightClass+'/'+numberOfPassengers;
 		if(arrivalDate)
-			targetPath = '/api/flights/search/'+origin+'/'+destination+'/'+departureDate+'/'+arrivalDate+'/'+flightClass;
+			targetPath = '/api/flights/search/'+origin+'/'+destination+'/'+departureDate+'/'+arrivalDate+'/'+flightClass+'/'+numberOfPassengers;
 
 		// Assign the HTTP request options: host and path
 		var options = {
@@ -178,14 +178,14 @@ var getOtherAirlines = function(cb, airlineIndex, allAirlines, origin, destinati
 					}
 					// Return the results
 					cb(otherFlights);
-				}, airlineIndex+1, allAirlines, origin, destination, flightClass, departureDate, arrivalDate);
+				}, airlineIndex+1, allAirlines, origin, destination, flightClass, departureDate, arrivalDate, numberOfPassengers);
 			});
 
 		}).on('error', function(e){
 			// Error in the current request, try the next airlines
 			getOtherAirlines(function(otherFlights){
 				cb(otherFlights);
-			}, airlineIndex+1, allAirlines, origin, destination, flightClass, departureDate, arrivalDate);
+			}, airlineIndex+1, allAirlines, origin, destination, flightClass, departureDate, arrivalDate, numberOfPassengers);
 		}).setTimeout(1000, function(){
 
 			this.abort();
@@ -265,7 +265,8 @@ module.exports.getBooking = function(bookingNumber , passportNumber , cb){
 		/* check if the passenger is child or not */
   		var currentDate= new Date();
     	var currentYear = currentDate.getFullYear();
-    	for (var i = 0 ; i < bookingInfo.passengerDetails.length ; i++){
+			var numberOfPassengers = bookingInfo.passengerDetails.length;
+    	for (var i = 0 ; i < numberOfPassengers ; i++){
     		/* get the birth year of  the passenger with correct foramat */
     		var passengerBirthDate = new Date(bookingInfo.passengerDetails[i].dateOfBirth);
     		var passengerBirthYear = passengerBirthDate.getFullYear();
@@ -284,13 +285,39 @@ module.exports.getBooking = function(bookingNumber , passportNumber , cb){
 		newBooking.returnFlightId = bookingInfo.returnFlightId;
 		newBooking.cost = bookingInfo.cost;
 		newBooking.bookingDate = Date.now();
-		newBooking.save(function (err){
+		newBooking.save(function (err) {
+			if(!err)
+				updateAvailableSeats(bookingInfo.outgoingFlightId, bookingInfo.returnFlightId, numberOfPassengers);
 			cb(err,newBooking.bookingNumber);
 		});
 
 	});
 };
 /**
+ * update availableSeats in flights by decrementing number of available seats with number of passengers
+ * by calling updateFlightSeats with id and number of passengers.
+ * @param outgoingFlightId is the id of the outgoind flight selected.
+ * @param returnFlightId is the id of the outgoind flight selected.
+ * @param numberOfPassengers is the number of passengers selected.
+ */
+	function updateAvailableSeats(outgoingFlightId, returnFlightId, numberOfPassengers){
+		if(outgoingFlightId)
+			updateFlightSeats(outgoingFlightId, numberOfPassengers);
+		if(returnFlightId)
+			updateFlightSeats(returnFlightId, numberOfPassengers);
+	};
+
+	/**
+	 * update availableSeats in flights by decrementing number of available seats with number of passengers.
+	 * @param flightId is the id of the flight selected (outgoing or return).
+	 * @param numberOfPassengers is the number of passengers selected.
+	 */
+	function updateFlightSeats(flightId, numberOfPassengers){
+		var conditions = { _id: flightId },
+   			update = { $inc: { availableSeats: - numberOfPassengers }};
+		Model.update(conditions, update);
+	};
+/*
  * [send post request with booking info if it is not
  * from our airlines else call server function]
  * @type {[type]}
@@ -383,7 +410,7 @@ var postBooking = module.exports.postBookingRequests
 	postBooking(airline1, booking1, function(error1, airline1Status){
 		status.airline1 = airline1Status;
 		if(!error1){
-			
+
 			if(airline2){
 				postBooking(airline2, booking2, function(error2, airline2Status){
 					status.airline2 = airline2Status;

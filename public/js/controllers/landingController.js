@@ -45,6 +45,8 @@
 			var origin 			= $scope.formData.origin;
 			var destination 	= $scope.formData.destination;
 			var outgoingDate	= $scope.formData.outgoingDate;
+			var adults 				= $scope.formData.adults;
+			var children			= $scope.formData.children;
 			var returnDate		= $scope.formData.returnDate;
 			var tripType		= $scope.formData.tripType;
 			var allAirlines		= $scope.formData.allAirlines;
@@ -63,6 +65,7 @@
 					'departureDate'	: outgoingDate,
 					'flightClass'	: flightClass,
 					'allAirlines'	: allAirlines,
+					'numberOfPassengers' : adults + children
 				}
 
 				var postURL = 'api/flights/search/oneway';
