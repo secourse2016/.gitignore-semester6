@@ -33,18 +33,23 @@ router.get('/airports', function(req, res){
 * @param class - economy or business only
 * @returns {Array}
 */
-router.get('/flights/search/:origin/:destination/:departingDate/:returningDate/:class', function(req, res) {
+router.get('/flights/search/:origin/:destination/:departingDate/:returningDate/:class/:seats', function(req, res) {
 	// retrieve params
-	var origin =  req.params.origin;
-	var destination =  req.params.destination;
-	var departingDate =  req.params.departingDate;
-	var returningDate =  req.params.returningDate;
-	var flightClass =  req.params.class;
-
+	var origin             =  req.params.origin;
+	var destination        =  req.params.destination;
+	var departingDate      =  req.params.departingDate;
+	var returningDate      =  req.params.returningDate;
+	var flightClass        =  req.params.class;
+  var numberOfPassengers =  req.params.seats;
+  if(numberOfPassengers < 0)
+  {
+    res.send("ERROR");
+    return;
+  }
 	flights.getFlights(function(err, resultFlights){
     if(!err)
 		  res.json(resultFlights);
-	}, origin, destination, flightClass, moment(departingDate,"x"), moment(returningDate,"x"));
+	}, origin, destination, flightClass, moment(departingDate,"x"), moment(returningDate,"x"), numberOfPassengers);
 });
 
 /**
@@ -54,17 +59,22 @@ router.get('/flights/search/:origin/:destination/:departingDate/:returningDate/:
 * @param class - economy or business only
 * @returns {Array}
 */
-router.get('/flights/search/:origin/:destination/:departingDate/:class', function(req, res) {
+router.get('/flights/search/:origin/:destination/:departingDate/:class/:seats', function(req, res) {
     // retrieve params
-    var origin 			=  req.params.origin;
-    var destination 	=  req.params.destination;
-    var departingDate 	=  req.params.departingDate;
-    var flightClass 	=  req.params.class;
-
+    var origin 			       =  req.params.origin;
+    var destination 	     =  req.params.destination;
+    var departingDate 	   =  req.params.departingDate;
+    var flightClass 	     =  req.params.class;
+    var numberOfPassengers =  req.params.seats;
+    if(numberOfPassengers < 0)
+    {
+      res.send("ERROR");
+      return;
+    }
 	flights.getFlights(function(err, resultFlights){
     if(!err)
 		  res.json(resultFlights);
-	}, origin, destination, flightClass, moment(departingDate,"x"));
+	}, origin, destination, flightClass, moment(departingDate,"x"), null, numberOfPassengers);
 
 });
 
@@ -81,17 +91,22 @@ router.get('/flights/search/:origin/:destination/:departingDate/:class', functio
 router.post('/flights/search/roundtrip', function(req, res){
 
     // Get the request parameters
-    var origin        =  req.body.origin;
-    var destination   =  req.body.destination;
-    var departureDate =  moment(req.body.departureDate,['D MMMM, YYYY','LLLL','L','l','x','X','YYYY-MM-DD']).format('x');
-    var arrivalDate   =  moment(req.body.arrivalDate,['D MMMM, YYYY','LLLL','L','l','x','X','YYYY-MM-DD']).format('x');
-    var flightClass   =  req.body.flightClass;
-    var allAirlines   =  req.body.allAirlines;
-
+    var origin              =  req.body.origin;
+    var destination         =  req.body.destination;
+    var departureDate       =  moment(req.body.departureDate,['D MMMM, YYYY','LLLL','L','l','x','X','YYYY-MM-DD']).format('x');
+    var arrivalDate         =  moment(req.body.arrivalDate,['D MMMM, YYYY','LLLL','L','l','x','X','YYYY-MM-DD']).format('x');
+    var flightClass         =  req.body.flightClass;
+    var allAirlines         =  req.body.allAirlines;
+    var numberOfPassengers  =  req.body.numberOfPassengers;
+    if(numberOfPassengers < 0)
+    {
+      res.send("ERROR");
+      return;
+    }
     // Get all the flights
     flights.getAllFlights(function(err, resultFlights){
         res.json(resultFlights);
-    }, allAirlines, origin, destination, flightClass, departureDate, arrivalDate);
+    }, allAirlines, origin, destination, flightClass, departureDate, arrivalDate, numberOfPassengers);
 });
 
 /**
@@ -107,35 +122,25 @@ router.post('/flights/search/roundtrip', function(req, res){
 router.post('/flights/search/oneway', function(req, res){
 
     // get the request parameters
-    var origin        =  req.body.origin;
-    var destination   =  req.body.destination;
-    var departureDate =  moment(req.body.departureDate,['D MMMM, YYYY','LLLL','L','l','x','X','YYYY-MM-DD']).format('x');
-    var flightClass   =  req.body.flightClass;
-    var allAirlines   =  req.body.allAirlines;
-
-
+    var origin              =  req.body.origin;
+    var destination         =  req.body.destination;
+    var departureDate       =  moment(req.body.departureDate,['D MMMM, YYYY','LLLL','L','l','x','X','YYYY-MM-DD']).format('x');
+    var flightClass         =  req.body.flightClass;
+    var allAirlines         =  req.body.allAirlines;
+    var numberOfPassengers  =  req.body.numberOfPassengers;
+    if(numberOfPassengers < 0)
+    {
+      res.send("ERROR");
+      return;
+    }
     // get all the flights
     flights.getAllFlights(function(err, resultFlights){
       if(!err)
         res.json(resultFlights);
-    }, allAirlines, origin, destination, flightClass, departureDate);
+    }, allAirlines, origin, destination, flightClass, departureDate, null, numberOfPassengers);
 });
 
 
-/**
-* User-BOOK FLIGHT
-* This is the route used by the client side angular, to book flight.
-* @param req.body is the booking Info which was sent from confirmation Controller.
-* @param flights.addBooking is the function in flights.js which insert the booking into the data base .
-*/
-router.post('/addBooking',function(req, res){
-	flights.addBooking(req.body,function(err,bookingNumber){
-        // if there is no error send booking Number
-        if(!err)
-            res.send(bookingNumber);
-
-    });
-});
 
 /*
 * API route to get a certain booking from the database
@@ -148,5 +153,21 @@ router.post('/getBooking', function(req, res){
 	      	res.json(booking);
 	});
 });
+
+/**
+ * [post request is responsible for handling booking requests from the website]
+ * @param  {[route url]} '/addBooking' [description]
+ * @param  {[function]} function(req, res           [description]
+ * @return {[ refNum: String,errorMessage: String]}  [description]
+ */
+router.post('/addBooking',function(req, res){
+	flights.handleBooking(req.body,function(err1, err2,status){
+        // if there is no error send status of booking
+        status.error1 = err1;
+        status.error2 = err2;
+        res.send(status);
+    });
+});
+
 
 module.exports = router;

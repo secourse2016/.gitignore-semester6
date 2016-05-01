@@ -53,9 +53,11 @@ app.all('*', function(req, res, next) {
 // DB and API Routes  =====================================================
 var dbRouter = require('./app/routes/db');
 var APIRouter = require('./app/routes/api');
+var othersRouter = require('./app/routes/others');
 
 // app.use('/db', dbRouter);               //DON'T DEPOLY
 app.use('/api', APIRouter);
+app.use('/', othersRouter);
 
 // 404 Middleware =========================================================
 app.use(function(req, res, next){

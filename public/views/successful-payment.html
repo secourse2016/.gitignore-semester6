@@ -3,9 +3,11 @@
 
 
 <div class="card-panel grey lighten-3 congratulations" ng-controller="successController as successCtrl">
-	<p class="paragraph">You have successfully booked your ticket, Have a nice trip!</p>
-	<p ng-if="bookingNumber != 0" class="paragraph">Your booking number is {{bookingNumber}}</p>
-	<p ng-if="airline != 'Austrian'" class="paragraph">To check your booking Information, please refere to {{airline}} Airlines. </p>
+	<p ng-hide="error.error1 || error.error2" class="paragraph">You have successfully booked your ticket, Have a nice trip!</p>
+	<p ng-if="airline1.refNum" class="paragraph">Your booking number is {{airline1.refNum}} in <a href="{{airline1.ip?airline1.ip:airline1.url}}">{{airline1.name}}</a></p>
+    <p ng-if="error.error1" class="paragraph">Connection to airline <a href="{{airline1.ip?airline1.ip:airline1.url}}">{{airline1.name}}</a> failed, please try to book this flight later.</p>
+	<p ng-if="airline2.refNum" class="paragraph">Your booking number is {{airline2.refNum}} in <a href="http://{{airline2.url?airline1.url:airline2.ip}}">{{airline2.name}}</a> </p>
+    <p ng-if="error.error2" class="paragraph">Connection to airline <a href="{{airline2.ip?airline2.ip:airline2.url}}">{{airline2.name}}</a> failed, please try to book this flight later.</p>
 	<div class="row">
         <div class="input-field col s12">
             <a ng-href="{{ '/'}}"

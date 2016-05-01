@@ -70,7 +70,7 @@ app.config(function($routeProvider , $locationProvider, $httpProvider) {
         })
 
         // Successful payment page route
-        .when('/successful', {
+        .when('/complete', {
             templateUrl : 'views/successful-payment.html'
         })
 

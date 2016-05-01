@@ -12,7 +12,21 @@ var flightSchema = new schema({
     cost              :  Number,
     currency          :  { type: String, maxlength: 3,uppercase: true ,default: 'USD' },
     class             :  {type: String, enum: ['economy','business'], default: 'economy' },
-    Airline           :  {type: String, default: 'Austrian'}
+    Airline           :  {type: String, default: 'Austrian'},
+    availableSeats    :  {type: Number, default: 200}
+});
+/**
+ * create virtual field flightId which has value of _id
+ */
+flightSchema.virtual('flightId').get(function(){
+    return this._id.toHexString();
+});
+
+/**
+ * Make sure that every time we call toJSON include virtuals fields 
+ */
+flightSchema.set('toJSON', {
+    virtuals: true
 });
 
 module.exports = mongoose.model('Flight', flightSchema);
