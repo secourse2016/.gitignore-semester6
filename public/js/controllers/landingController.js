@@ -37,6 +37,10 @@
 		$scope.formData = {tripType:2};
 		$scope.errors = {};
 
+
+		global.setOutGoingTrip(null);
+		global.setReturnTrip(null);
+
 		$scope.searchFlights = function(){
 
 			global.setSearchFlight($scope.formData);
@@ -65,7 +69,7 @@
 					'departureDate'	: outgoingDate,
 					'flightClass'	: flightClass,
 					'allAirlines'	: allAirlines,
-					'numberOfPassengers' : adults + children
+					'numberOfPassengers' : parseInt(adults) + parseInt(children || 0)
 				}
 
 				var postURL = 'api/flights/search/oneway';

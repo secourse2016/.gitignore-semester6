@@ -4,8 +4,14 @@ var mongoose      = require('mongoose');
 var bodyParser    = require('body-parser');
 var moment	   	  = require('moment');
 var compression   = require('compression');
+var morgan		  = require('morgan');
 var app           = express();
+
 require('dotenv').config();
+
+
+if(process.env.DEV == "1")
+	app.use(morgan('dev'));
 
 // functions ==============================================================
 app.use(compression());
@@ -45,7 +51,7 @@ app.route('/error').get(sendIndex);
  */
 app.all('*', function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', ['Content-Type', 'X-Requested-With']);
+  res.header('Access-Control-Allow-Headers', ['Content-Type', 'X-Requested-With','x-access-token']);
   next();
 });
 

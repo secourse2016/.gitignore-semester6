@@ -38,8 +38,8 @@ var a = [{
 ];
 
 var id = 1024;
-var startDate = moment('2016-04-12',x);
-var endDate = moment('2016-05-31').toDate().getTime();
+var startDate = moment('2016-04-12','YYYY-MM-DD');
+var endDate = moment('2016-05-31','YYYY-MM-DD').toDate().getTime();
 var data = [];
 for(;startDate.toDate().getTime() <= endDate;startDate.add(1, 'days')){
   for(var i = 0 ; i<10 ; i++){
@@ -53,9 +53,13 @@ for(;startDate.toDate().getTime() <= endDate;startDate.add(1, 'days')){
     var flightNumber2 = a[i].destination.substring(0,2)+id.toString(16);
     id++;
     data.push({flightNumber:flightNumber1, departureDateTime:startDate.toDate().getTime(), arrivalDateTime:
-    endFlight,origin:a[i].origin,destination:a[i].destination,cost: 700});
+    endFlight,origin:a[i].origin,destination:a[i].destination,cost: Math.floor((Math.random() * 500) + 400)});
     data.push({flightNumber:flightNumber2, departureDateTime:startDate.toDate().getTime(), arrivalDateTime:
-    endFlight,origin:a[i].destination,destination:a[i].origin,cost: 700});
+    endFlight,origin:a[i].destination,destination:a[i].origin,cost: Math.floor((Math.random() * 500) + 400)});
+    data.push({flightNumber:flightNumber1, departureDateTime:startDate.toDate().getTime(), arrivalDateTime:
+    endFlight,origin:a[i].origin,destination:a[i].destination,cost: Math.floor((Math.random() * 700) + 900), class:'business'});
+    data.push({flightNumber:flightNumber2, departureDateTime:startDate.toDate().getTime(), arrivalDateTime:
+    endFlight,origin:a[i].destination,destination:a[i].origin,cost: Math.floor((Math.random() * 700) + 900), class: 'business'});
 
   }
 }
