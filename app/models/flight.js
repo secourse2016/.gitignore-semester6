@@ -12,7 +12,8 @@ var flightSchema = new schema({
     cost              :  Number,
     currency          :  { type: String, maxlength: 3,uppercase: true ,default: 'USD' },
     class             :  {type: String, enum: ['economy','business'], default: 'economy' },
-    Airline           :  {type: String, default: 'Austrian'}
+    Airline           :  {type: String, default: 'Austrian'},
+    availableSeats    :  {type: Number, default: 200}
 });
 /**
  * create virtual field flightId which has value of _id
