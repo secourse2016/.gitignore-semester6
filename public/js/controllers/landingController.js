@@ -65,7 +65,7 @@
 					'departureDate'	: outgoingDate,
 					'flightClass'	: flightClass,
 					'allAirlines'	: allAirlines,
-					'numberOfPassengers' : adults + children
+					'numberOfPassengers' : parseInt(adults) + parseInt(children || 0)
 				}
 
 				var postURL = 'api/flights/search/oneway';
