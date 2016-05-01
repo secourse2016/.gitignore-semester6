@@ -21,7 +21,7 @@ angular.module('starter', ['ionic', 'ngMaterial'])
       StatusBar.styleDefault();
     }
   });
-}).config(function($stateProvider) {
+}).config(function($stateProvider, $locationProvider) {
   $stateProvider
   .state('index', {
     url: '/',
@@ -29,8 +29,16 @@ angular.module('starter', ['ionic', 'ngMaterial'])
 
       'main-view' : {
         templateUrl: 'partials/home.html'
-      },
-      'tab-book' : {
+      }
+    }
+
+  })
+  .state('search', {
+
+    url: '/search',
+    views : {
+
+      'main-view' : {
         templateUrl: 'partials/search.html'
       }
     }
@@ -81,7 +89,7 @@ angular.module('starter', ['ionic', 'ngMaterial'])
       }
     }
   })
-  .state('successful', {
+  .state('index.successful', {
     url: '/successful',
     views : {
       'main-view' : {
@@ -89,6 +97,8 @@ angular.module('starter', ['ionic', 'ngMaterial'])
       }
     }
   });
+  $locationProvider.html5Mode(true);
+
 
   /*
    * Set the public key for stripe
@@ -96,7 +106,9 @@ angular.module('starter', ['ionic', 'ngMaterial'])
    Stripe.setPublishableKey('pk_test_GLghvbf0O1mNsV4T8nECOC1u');
 })
 .controller('masterController',function($scope, $ionicSideMenuDelegate){
+  
   $scope.toggleLeft = function() {
     $ionicSideMenuDelegate.toggleLeft();
+
   };
 });
