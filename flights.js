@@ -237,12 +237,8 @@ module.exports.getBooking = function(bookingNumber , passportNumber , cb){
 									myBooking = booking[0].toJSON();
 									// attach the flights info to the returning object
 									myBooking.outgoingFlightInfo = outgoingFlight[0];
-<<<<<<< HEAD
-									myBooking.returnFlightInfo 	= returnFlight[0];
-=======
 									if(returnFlight)
 	 									myBooking.returnFlightInfo = returnFlight[0];
->>>>>>> 971dc2f35e7ccbc9147485ec77a9e2dd7073f72c
 									cb(errReturnFlight, myBooking);
 								});
 						});
