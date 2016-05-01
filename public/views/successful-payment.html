@@ -3,7 +3,7 @@
 
 
 <div class="card-panel grey lighten-3 congratulations" ng-controller="successController as successCtrl">
-	<p ng-hide="airline1 && airline1.refNum || airline2 && airline2.refNum || error.error1 || error.error2" class="paragraph">You have successfully booked your ticket, Have a nice trip!</p>
+	<p ng-hide="(airline1 && !airline1.errorMessage && (!airline2 || airline2 && !airline2.errorMessage) && !error.error1 && !error.error2" class="paragraph">You have successfully booked your ticket, Have a nice trip!</p>
 	
     <p ng-if="airline1.refNum" class="paragraph">Your booking number is {{airline1.refNum}} in <a href="{{airline1.ip?airline1.ip:airline1.url}}">{{airline1.name}}</a></p>
 

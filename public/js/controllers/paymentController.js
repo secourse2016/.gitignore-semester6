@@ -19,13 +19,13 @@
 
 			// Add the booking details to the booking(s)
 			booking1.passengerDetails = global.getPassengers();
-			booking1.outgoingFlightId = global.getOutGoingTrip().flightId;
+			booking1.outgoingFlightId = global.getOutGoingTrip().flightId || global.getOutGoingTrip()._id;
 			airline1 = global.getOutGoingTrip().airline;
 
 			if(global.getReturnTrip() && global.getOutGoingTrip().Airline != global.getReturnTrip().Airline) {
 				booking2 = {};
 				booking2.passengerDetails = global.getPassengers();
-				booking2.outgoingFlightId = global.getReturnTrip().flightId;
+				booking2.outgoingFlightId = global.getReturnTrip().flightId || global.getReturnTrip()._id;
 				airline2 = global.getReturnTrip().airline;
 			}
 			else if(global.getReturnTrip()) {

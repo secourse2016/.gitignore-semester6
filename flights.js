@@ -439,22 +439,20 @@ var postBooking = module.exports.postBookingRequests
 								try{
 									bookingRes = JSON.parse(bookingRes);
 									if(bookingRes.errorMessage){
-										error.errorMessage = bookingRes.errorMessage;
-										error.airline = airline;
 										airline.errorMessage = bookingRes.errorMessage;
-										cb(error,airline);
+										cb(0,airline);
 									}else{
 										airline.refNum = bookingRes.refNum;
 										cb(0,airline);
 									}
 								}
 								catch(e) {
-									cb(1,airline);
+									cb(e,airline);
 								}
 							});
 		   				});
 					postReq.on('error', function(e){
-						cb(1,airline);
+						cb(e,airline);
 					});
 					postReq.write(postData);
 					postReq.setTimeout(4000);

@@ -25,6 +25,7 @@ router.use(verifyToken);
 * @param flights.addBooking is the function in flights.js which insert the booking into the data base .
 */
 router.post('/Booking',function(req, res){
+	
 	flights.addBooking(req.body,function(err,bookingNumber){
         // if there is no error send booking Number
         if(!err)
