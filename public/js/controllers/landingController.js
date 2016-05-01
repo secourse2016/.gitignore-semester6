@@ -37,6 +37,10 @@
 		$scope.formData = {tripType:2};
 		$scope.errors = {};
 
+
+		global.setOutGoingTrip(null);
+		global.setReturnTrip(null);
+
 		$scope.searchFlights = function(){
 
 			global.setSearchFlight($scope.formData);

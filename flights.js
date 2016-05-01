@@ -22,10 +22,10 @@ var getOneDirectionFlights	= module.exports.getOneDirectionFlights
 
 	// Find documents in flights collection
 	flight.find({"origin": origin, "destination": destination, "class": flightClass,
-				 "departureDateTime" : {"$gte" : startDate, "$lt": endDate}, "availableSeats" : {"$gte" : numberOfPassengers}}, {},
-				 function(err, resultFlights){
-		cb(err, resultFlights);
-	});
+				 "departureDateTime" : {"$gte" : startDate, "$lt": endDate}, "availableSeats" : {"$gte" : numberOfPassengers}})
+	.lean().exec( function(err, resultFlights){
+				cb(err, resultFlights);});
+	
 }
 
 /**
@@ -409,7 +409,7 @@ var chargeBooking = function(totalCost, paymentToken, cb){
 	function updateFlightSeats(flightId, numberOfPassengers){
 		var conditions = { _id: flightId },
    			update = { $inc: { availableSeats: - numberOfPassengers }};
-		Model.update(conditions, update);
+		flight.update(conditions, update);
 	};
 /*
  * [send post request with booking info if it is not
