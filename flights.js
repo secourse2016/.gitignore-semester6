@@ -22,10 +22,10 @@ var getOneDirectionFlights	= module.exports.getOneDirectionFlights
 
 	// Find documents in flights collection
 	flight.find({"origin": origin, "destination": destination, "class": flightClass,
-				 "departureDateTime" : {"$gte" : startDate, "$lt": endDate}, "availableSeats" : {"$gte" : numberOfPassengers}}, {},
-				 function(err, resultFlights){
-		cb(err, resultFlights);
-	});
+				 "departureDateTime" : {"$gte" : startDate, "$lt": endDate}, "availableSeats" : {"$gte" : numberOfPassengers}})
+	.lean().exec( function(err, resultFlights){
+				cb(err, resultFlights);});
+	
 }
 
 /**
@@ -251,13 +251,88 @@ module.exports.getBooking = function(bookingNumber , passportNumber , cb){
 };
 
 /**
- * Add-Booking is a function which takes booking information and inserting it intothe data base.
+ * Add-Booking is a function which takes booking information, charges the customer
+ * and inserting it into the database.
  * @param newBooking is instance of new booking model record .
  * @param generatedBookingNumber is a fixed value which all booking numbers begin with.
  */
- var addBooking = module.exports.addBooking
- 				= function addBooking(bookingInfo, cb){
-	bookingInfo = qs.parse(bookingInfo);
+ var addBooking = module.exports.addBooking = function addBooking(bookingInfo, cb){
+
+ 	// Parse the booking information into JSON
+ 	bookingInfo = qs.parse(bookingInfo);
+ 	
+ 	if(bookingInfo.outgoingFlightId) {
+ 		// Charge the outgoing flight
+ 		var totalCost = 0;
+ 		flight.find({"_id" : bookingInfo.outgoingFlightId},{}, function(error, flights){
+ 			// Get the outgoing flight
+ 			if(!error && flights[0]) {
+ 				var outgoingFlight = flights[0];
+
+ 				// Calculate the flight cost, with respect to number of passengers
+ 				totalCost += parseInt(outgoingFlight.cost)*bookingInfo.passengerDetails.length;
+
+ 				// Check if there is a return flight in the booking
+ 				if(bookingInfo.returnFlightId) {
+ 					flight.find({"_id" : bookingInfo.returnFlightId}, {}, function(error2, flights){
+ 						// Get the return flight
+ 						if(!error2 && flights[0]) {
+ 							var returnFlight = flights[0];
+ 							// increment the cost
+ 							totalCost += parseInt(returnFlight.cost)*bookingInfo.passengerDetails.length;
+ 							// charge the two flights
+ 							chargeBooking(totalCost, bookingInfo.paymentToken, function(paymentError, charge){
+ 								if(paymentError){
+ 									cb(paymentError, null);
+ 								}
+ 								else {
+ 									// save the booking if everything is successful
+ 									saveBooking(bookingInfo, function(err, bookingNumber){
+ 										cb(err, bookingNumber);
+ 									});
+ 								}
+ 							});
+ 						}
+ 						else
+ 						{
+ 							cb(error,null);
+ 						}
+ 					});
+ 				}
+ 				else {
+ 					// oneway flight, charge the outgoing only
+ 					chargeBooking(totalCost, bookingInfo.paymentToken, function(paymentError, charge){
+						if(paymentError){
+							cb(paymentError, null);
+						}
+						else {
+							// save the booking if everything is successful
+							saveBooking(bookingInfo, function(err, bookingNumber){
+								cb(err, bookingNumber);
+							});
+						}
+					});
+ 				}
+ 			}
+ 			else {
+ 				cb(error, null);
+ 			}
+
+ 		});
+
+
+ 	}
+ 	else
+ 		cb("INVALID REQUEST", null)
+	
+	
+	
+};
+
+/**
+*	Save a successful booking in the database
+*/
+var saveBooking = function(bookingInfo, cb) {
 	var newBooking = new booking();
 	var generatedBookingNumber = "6D4B97";
 	/* counting all the records in the booking collection */
@@ -292,7 +367,26 @@ module.exports.getBooking = function(bookingNumber , passportNumber , cb){
 		});
 
 	});
-};
+}
+
+
+
+/**
+* Charge a customer with a certain cost
+*/
+var chargeBooking = function(totalCost, paymentToken, cb){
+	
+	stripe.charges.create({
+	  	amount: totalCost*100, // amount in cents
+	  	currency: "usd",
+	  	source: paymentToken,
+	  	description: "Charge booking by austrian airlines"
+	}, function(err, charge) {
+	  	cb(err, charge);
+	});
+
+ 	
+}
 /**
  * update availableSeats in flights by decrementing number of available seats with number of passengers
  * by calling updateFlightSeats with id and number of passengers.
@@ -315,7 +409,7 @@ module.exports.getBooking = function(bookingNumber , passportNumber , cb){
 	function updateFlightSeats(flightId, numberOfPassengers){
 		var conditions = { _id: flightId },
    			update = { $inc: { availableSeats: - numberOfPassengers }};
-		Model.update(conditions, update);
+		flight.update(conditions, update);
 	};
 /*
  * [send post request with booking info if it is not
@@ -326,8 +420,10 @@ var postBooking = module.exports.postBookingRequests
 			    = function postBookingRequests(airline, booking, cb){
 				   if(airline  && airline.ip === "52.90.41.197"){
 					   addBooking(booking,function(error , refNum){
-						   if(error)
-							   cb(1,airline);
+						   if(error){
+						   		airline.errorMessage = error.message;
+							 	cb(0,airline);
+						   }
 						   else {
 							  airline.refNum = refNum;
 							  cb(0,airline);
@@ -339,7 +435,8 @@ var postBooking = module.exports.postBookingRequests
 						   var targetPath = '/Booking';
 						   var port = 80;
 						   var postData = qs.stringify(booking);
-						   if(process.env.DEV==="1"){
+						   if(process.env.DEV === "1"){
+
 							   targetPath = '/Booking';
 							   targetHost = "127.0.0.1";
 							   port = process.env.PORT;
@@ -357,7 +454,9 @@ var postBooking = module.exports.postBookingRequests
 											'Content-Length': postData.length
 						   		    	}
 						   };
+						   
 		   				var postReq = http.request(options, function(res){
+
 							var bookingRes ;
 							res.setEncoding('utf8');
 							res.on('data', function(data){
@@ -367,22 +466,20 @@ var postBooking = module.exports.postBookingRequests
 								try{
 									bookingRes = JSON.parse(bookingRes);
 									if(bookingRes.errorMessage){
-										error.errorMessage = bookingRes.errorMessage;
-										error.airline = airline;
 										airline.errorMessage = bookingRes.errorMessage;
-										cb(error,airline);
+										cb(0,airline);
 									}else{
 										airline.refNum = bookingRes.refNum;
 										cb(0,airline);
 									}
 								}
 								catch(e) {
-									cb(1,airline);
+									cb(e,airline);
 								}
 							});
 		   				});
 					postReq.on('error', function(e){
-						cb(1,airline);
+						cb(e,airline);
 					});
 					postReq.write(postData);
 					postReq.setTimeout(4000);
