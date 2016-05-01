@@ -314,7 +314,7 @@ module.exports.getBooking = function(bookingNumber , passportNumber , cb){
 	 */
 	function updateFlightSeats(flightId, numberOfPassengers){
 		var conditions = { _id: flightId },
-   			update = { $dec: { availableSeats: numberOfPassengers }};
+   			update = { $inc: { availableSeats: - numberOfPassengers }};
 		Model.update(conditions, update);
 	};
 /*
