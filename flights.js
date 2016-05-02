@@ -324,7 +324,7 @@ module.exports.getBooking = function(bookingNumber , passportNumber , cb){
 
  	}
  	else
- 		cb("INVALID REQUEST", null)
+ 		cb(new Error("INVALID REQUEST"), null)
 	
 	
 	
