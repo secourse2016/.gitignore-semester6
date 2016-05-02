@@ -5,7 +5,7 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title></title>
     <base href="/">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material%20Icons" rel="stylesheet">
     <link href="lib/materialize/materialize.min.css" rel="stylesheet">
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <link href="lib/ionic/css/ionic.material.css" rel="stylesheet">
@@ -49,18 +49,18 @@
     <script type="text/javascript" src="js/controllers/collapsableController.js"></script>
     <script type="text/javascript" src="js/services/globalService.js"></script>
   </head>
-  <body >
+  <body>
 
 
 
 
 
-   <ion-side-menus ng-controller = "masterController">
+   <ion-side-menus ng-controller="masterController">
 
 
 
-    <ion-pane ion-side-menu-content>
-    <ion-nav-bar class = "bar-assertive">
+    <ion-pane ion-side-menu-content="">
+    <ion-nav-bar class="bar-assertive">
       <ion-nav-back-button></ion-nav-back-button>
       <ion-nav-buttons side="left">
           <button menu-toggle="left" class="button button-clear button-icon icon ion-navicon"></button>
@@ -76,7 +76,7 @@
       
       
         
-    <ion-nav-view name="main-view" >
+    <ion-nav-view name="main-view">
     </ion-nav-view>
       
 
@@ -90,18 +90,18 @@
           <ion-content class="has-expanded-header scroll-content ionic-scroll">
           <ion-list class="disable-user-behavior">
             <div class="side-menu-list">
-              <ion-item nav-clear="" menu-close="" href="/" class="item item-complex">
-                <a class="item-content" href="/">
+              <ion-item nav-clear="" menu-close="" href="#/" class="item item-complex">
+                <a class="item-content" href="#/">
                     Home
                 </a>
               </ion-item>
-              <ion-item nav-clear="" menu-close="" href="about" class="item item-complex">
-                <a class="item-content" href="about">
+              <ion-item nav-clear="" menu-close="" href="#/about" class="item item-complex">
+                <a class="item-content" href="#/about">
                     About
                 </a>
               </ion-item>
-              <ion-item nav-clear="" menu-close="" href="faq" class="item item-complex">
-                <a class="item-content" href="faq">
+              <ion-item nav-clear="" menu-close="" href="#/faq" class="item item-complex">
+                <a class="item-content" href="#/faq">
                     FAQs
                 </a>
               </ion-item>

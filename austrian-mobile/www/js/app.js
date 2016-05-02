@@ -21,7 +21,7 @@ angular.module('starter', ['ionic', 'ngMaterial'])
       StatusBar.styleDefault();
     }
   });
-}).config(function($stateProvider, $locationProvider) {
+}).config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
   .state('index', {
     url: '/',
@@ -97,7 +97,8 @@ angular.module('starter', ['ionic', 'ngMaterial'])
       }
     }
   });
-  $locationProvider.html5Mode(true);
+  $urlRouterProvider.otherwise('/');
+
 
 
   /*
