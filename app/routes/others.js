@@ -30,7 +30,7 @@ router.post('/Booking',function(req, res){
         if(!err)
             res.send({refNum: bookingNumber});
         else
-        	res.send({errorMessage: err});
+        	res.send({errorMessage: err.message});
 
 
     });
