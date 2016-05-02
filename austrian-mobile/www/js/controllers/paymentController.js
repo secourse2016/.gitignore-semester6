@@ -165,20 +165,18 @@
 		};
 	})
 	.controller('successController' , function($scope, global, $state){
-		$scope.bookingNumber = global.getBookingNumber();
-		/* check if Austrian is involved in any of the trips.
-			 If not, show the other airline*/
-		$scope.airline = "Austrian";
-		if(global.getOutGoingTrip().Airline != "Austrian"){
-			$scope.airline = global.getOutGoingTrip().Airline;
-			if(global.getReturnTrip() && global.getReturnTrip().Airline == "Austrian"){
-					$scope.airline = "Austrian";
-			}
-		}
+		$scope.error = {};
+		$scope.error.error1 = global.getOutGoingTrip().error1;
+			
+		$scope.airline1 = global.getOutGoingTrip().airline;
 
-		$scope.redirect = function(){
-			$state.go('index');
+
+
+		if(global.getReturnTrip()){
+			$scope.airline2 = global.getReturnTrip().airline;
+			$scope.error.error2 = global.getReturnTrip().error2;
 		}
+		
 	});
 })();
 
