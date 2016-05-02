@@ -18,18 +18,21 @@
 			var airline2 = null;
 
 			// Add the booking details to the booking(s)
-			booking1.passengerDetails = global.getPassengers();
-			booking1.outgoingFlightId = global.getOutGoingTrip().flightId || global.getOutGoingTrip()._id;
+			booking1.passengerDetails 	= global.getPassengers();
+			booking1.outgoingFlightId 	= global.getOutGoingTrip().flightId || global.getOutGoingTrip()._id;
+			booking1.cost 				= global.getOutGoingTrip().cost;
 			airline1 = global.getOutGoingTrip().airline;
 
 			if(global.getReturnTrip() && global.getOutGoingTrip().Airline != global.getReturnTrip().Airline) {
 				booking2 = {};
-				booking2.passengerDetails = global.getPassengers();
-				booking2.outgoingFlightId = global.getReturnTrip().flightId || global.getReturnTrip()._id;
+				booking2.passengerDetails 	= global.getPassengers();
+				booking2.outgoingFlightId 	= global.getReturnTrip().flightId || global.getReturnTrip()._id;
+				booking2.cost 				= global.getReturnTrip().cost;
 				airline2 = global.getReturnTrip().airline;
 			}
 			else if(global.getReturnTrip()) {
 				booking1.returnFlightId = global.getReturnTrip().flightId;
+				booking1.cost 			+= global.getReturnTrip().cost;
 			}
 
 
@@ -106,18 +109,19 @@
 
 												}
 												else {
-													booking2.paymentToken = responseToken2.id;
+													booking2.paymentToken = token2;
 													requestParameters.booking2 = booking2;
 													requestParameters.airline2 = airline2;
 
 													//Send http POST request with the two bookings
+													console.log(requestParameters);
 													sendBookingPOST(requestParameters, $http, function(err, data){
 														if(!err) {
 															global.getOutGoingTrip().airline = data.airline1;
 															global.getReturnTrip().airline = data.airline2;
 															global.getOutGoingTrip().error1 = data.error1;
 															global.getReturnTrip().error2 = data.error2;
-															// $location.path('/complete');
+															$location.path('/complete');
 															if(!$scope.$$phase)
 																$scope.$apply();
 														}
