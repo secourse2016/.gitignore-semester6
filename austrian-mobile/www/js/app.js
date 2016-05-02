@@ -88,6 +88,22 @@ angular.module('starter', ['ionic', 'ngMaterial'])
         templateUrl: 'partials/successful.html'
       }
     }
+  })
+  .state('booking-find', {
+    url: '/booking/find',
+    views : {
+      'main-view' : {
+        templateUrl: 'partials/booking-find.html'
+      }
+    }
+  })
+  .state('booking-history', {
+    url: '/booking',
+    views : {
+      'main-view' : {
+        templateUrl: 'partials/booking-history.html'
+      }
+    }
   });
 
   /*

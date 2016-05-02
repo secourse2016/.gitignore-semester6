@@ -1,0 +1,34 @@
+<link href="css/landing.css" rel="stylesheet">
+<ion-nav-view name="tab-view-booking">
+<div ng-controller="bookingHistoryFormController">
+    <div class="errorContainer">
+        <div class="errorToast" ng-show="error">{{error}}</div>
+    </div>
+    <div class="list" >
+        <h3 id="search-header" class="padding-normal condensed light card-panel grey lighten-3">Booking History</h3>
+        <br><br>
+        <label class="item item-input">
+            <i class="material-icons prefix">payment</i>
+            <div style="margin-right:20px;  margin-left:10px">
+                <input ng-model="request.bookingNumber" type="text" placeholder="Booking No.">
+            </div>
+        </label>
+        <br>
+        <label class="item item-input">
+            <i class="material-icons prefix">payment</i>
+            <div style="margin-right:20px; margin-left:10px">
+                <input ng-model="request.passportNumber" type="text" placeholder="Passport No.">
+            </div>
+        </label>
+        <br><br>
+
+        <!-- Find Booking button-->
+        <div class="modal-footer padding-normal">
+            <a ng-click="searchBooking()"
+                class="modal-action modal-close btn waves-effect waves-light red book-button"
+                name="showHistory">View Booking <i class="material-icons right">send</i>
+            </a>
+        </div>
+    </div>
+</div>
+</ion-nav-view>
