@@ -8,7 +8,6 @@
 	* and redirecting to the flights view.
 	*/
 	app.controller('searchFlightController', function($scope, global, $state, $http, flights){
-
 		this.range = [];
 		for(var i = 2; i <= 7; ++i)
 			this.range.push(i);
@@ -26,6 +25,8 @@
 			var outgoingDate	= $scope.formData.outgoingDate;
 			var returnDate		= $scope.formData.returnDate;
 			var tripType		= $scope.formData.tripType;
+			var adults			= $scope.formData.adults;
+			var children		= $scope.formData.children;
 			var allAirlines		= $scope.formData.allAirlines;
 			var flightClass		= $scope.formData.flightClass;
 			$scope.error		= validateSearchFlights(origin, destination, outgoingDate,
@@ -42,6 +43,7 @@
 					'departureDate'	: outgoingDate,
 					'flightClass'	: flightClass,
 					'allAirlines'	: allAirlines,
+					'numberOfPassengers' : parseInt(adults || 1) + parseInt(children || 0)
 				};
 
 				var postURL = host+'/api/flights/search/oneway?wt='+token;
@@ -56,7 +58,8 @@
 					flights.outgoingFlights = resultFlights.outgoingFlights;
 					if(tripType == 2)
 						flights.returnFlights = resultFlights.returnFlights;
-						$state.go('flights');
+					$scope.loading = false;
+					$state.go('flights');
 				})
 				.error(function(data){
 					console.log('Error: Couldn\'t fetch flights.');

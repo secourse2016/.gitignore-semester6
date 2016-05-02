@@ -7,6 +7,7 @@ var booking = require('./app/models/booking');
 var airlines= require('./app/data/airlines.json');
 var jwt 	= require('jsonwebtoken');
 var qs      = require('qs');
+var request = require('request');
 var _       = require('underscore');
 var stripe 	= require('stripe')(process.env.STRIPE_KEY);
 
@@ -416,80 +417,52 @@ var chargeBooking = function(totalCost, paymentToken, cb){
  * from our airlines else call server function]
  * @type {[type]}
  */
-var postBooking = module.exports.postBookingRequests
-			    = function postBookingRequests(airline, booking, cb){
-				   if(airline  && airline.ip === "52.90.41.197"){
-					   addBooking(booking,function(error , refNum){
-						   if(error){
-						   		airline.errorMessage = error.message;
-							 	cb(0,airline);
-						   }
-						   else {
-							  airline.refNum = refNum;
-							  cb(0,airline);
-						   }
-					   });
-				   }else{
-					   if(airline){
-						   var targetHost = airline.url?airline.url:airline.ip;
-						   var targetPath = '/Booking';
-						   var port = 80;
-						   var postData = qs.stringify(booking);
-						   if(process.env.DEV === "1"){
+var postBooking = module.exports.postBookingRequests = function postBookingRequests(airline, booking, cb){
+	if(airline  && airline.ip === "52.90.41.197"){
+	   addBooking(booking,function(error , refNum){
+		   if(error){
+		   		airline.errorMessage = error.message;
+			 	cb(0,airline);
+		   }
+		   else {
+			  airline.refNum = refNum;
+			  cb(0,airline);
+		   }
+	   });
+	}
+	else { 
+		if(airline){
+				// Determine the target URI of the request
+		   var target = 'http://'+(airline.url?airline.url:airline.ip)+'/booking?wt='+jwtToken;
+		   var postData = booking;
 
-							   targetPath = '/Booking';
-							   targetHost = "127.0.0.1";
-							   port = process.env.PORT;
-						   }
 
-						   // Assign the HTTP request options: host and path
-						   var options = {
-							   host: targetHost,
-							   path: targetPath+'?wt='+jwtToken, //just for test
-							   method: 'POST',
-							   port: port,
-							   headers: {
-								   			'x-access-token': jwtToken,
-							   				'Content-Type': 'application/x-www-form-urlencoded',
-											'Content-Length': postData.length
-						   		    	}
-						   };
-						   
-		   				var postReq = http.request(options, function(res){
+		   // Send the HTTP request
+		   request({
+		   	uri : target,
+		   	method: 'POST',
+		   	body: booking,
+		   	json: true,
+		   	timeout: 5000
+		   }
+		   ,function(err, response, body){
 
-							var bookingRes ;
-							res.setEncoding('utf8');
-							res.on('data', function(data){
-								bookingRes = data;
-							});
-							res.on('end',function(end){
-								try{
-									bookingRes = JSON.parse(bookingRes);
-									if(bookingRes.errorMessage){
-										airline.errorMessage = bookingRes.errorMessage;
-										cb(0,airline);
-									}else{
-										airline.refNum = bookingRes.refNum;
-										cb(0,airline);
-									}
-								}
-								catch(e) {
-									cb(e,airline);
-								}
-							});
-		   				});
-					postReq.on('error', function(e){
-						cb(e,airline);
-					});
-					postReq.write(postData);
-					postReq.setTimeout(4000);
-					postReq.end();
-				   }else{
-					   cb(0,{});
-				   }
+			   	if(!err){
+			   		// No connection error, assign the results
+			   		airline.errorMessage = response.body.errorMessage;
+			   		airline.refNum = response.body.refNum;
+				}
+		   		cb(err, airline);
+		   });
+		   
 
-			   }
-		   };
+	}
+	else{
+	   cb(0,{});
+	}
+
+	}
+};
 
 
 /**

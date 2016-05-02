@@ -1,5 +1,5 @@
 <div style="margin-top: 50px" ng-controller="confirmationController">
-	<link href="../css/passengers.css" rel="stylesheet">
+	<link href="css/passengers.css" rel="stylesheet">
 
 	<ion-content>
 		<div class="card">
@@ -35,7 +35,7 @@
  									ng-click="toggleGroup(2)"
  									ng-class="{active: isGroupShown(2)}">
  					<div class="orginDestination">{{returnFlight.origin}} - {{returnFlight.destination}}</div>
- 					<div class="flight-date">{{departureDate}} <i class="flightCollapseIcon icon ion-ios-arrow-down tiny"></i></div>
+ 					<div class="flight-date">{{arrivalDate}} <i class="flightCollapseIcon icon ion-ios-arrow-down tiny"></i></div>
  					<ion-icon name="arrow-dropdown-circle"></ion-icon>
  				</li>
  				<li class="collection-item item item-accordion"
@@ -141,7 +141,7 @@
 		 </li>
 	 </ul>
  </div>
-	
+
 	<!-- Form for adults goes here -->
 
 

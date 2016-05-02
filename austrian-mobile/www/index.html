@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title></title>
+    <base href="/">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="lib/materialize/materialize.min.css" rel="stylesheet">
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
@@ -35,10 +36,13 @@
 
     <script type="text/javascript" src="js/services/flightsService.js"></script>
     <script type="text/javascript" src="js/services/globalService.js"></script>
+    <script type="text/javascript" src="js/services/bookingHistoryService.js"></script>
     <script type="text/javascript" src="js/controllers/landingController.js"></script>
     <script type="text/javascript" src="js/controllers/flightsController.js"></script>
     <script type="text/javascript" src="js/controllers/confirmationController.js"></script>
     <script type="text/javascript" src="js/controllers/paymentController.js"></script>
+    <script type="text/javascript" src="js/controllers/bookingHistoryFormController.js"></script>
+    <script type="text/javascript" src="js/controllers/bookingHistoryController.js"></script>
 
 
     <!-- CSS -->
@@ -46,7 +50,7 @@
     <!-- controllers -->
     <script type="text/javascript" src="js/controllers/passengerViewController.js"></script>
     <script type="text/javascript" src="js/controllers/collapsableController.js"></script>
-    <script type="text/javascript" src="js/services/globalService.js"></script>
+
   </head>
   <body >
 
@@ -58,30 +62,30 @@
 
 
 
-    <ion-side-menu-content>
-
-      <ion-nav-bar class="bar-assertive">
-
-        <ion-nav-buttons side="primary">
-          <button ng-click="toggleLeft()" class="button button-clear button-icon icon ion-navicon"></button>
-        </ion-nav-buttons>
-        <ion-nav-title>
+    <ion-pane ion-side-menu-content>
+    <ion-nav-bar class = "bar-assertive">
+      <ion-nav-back-button></ion-nav-back-button>
+      <ion-nav-buttons side="left">
+          <button menu-toggle="left" class="button button-clear button-icon icon ion-navicon"></button>
+      </ion-nav-buttons>
+    
+  
+    
+      <ion-nav-title>
           <img src="img/flight-logo.png" style="height: 40px;">
         </ion-nav-title>
-          <ion-nav-back-button class="button button-assertive">
-            <i class="ion-arrow-left-c"></i> Back
-          </ion-nav-back-button>
+    </ion-nav-bar>
+     
+      
+      
+        
+    <ion-nav-view name="main-view" >
+    </ion-nav-view>
+      
 
 
 
-      </ion-nav-bar>
-      <br><br>
-       <ion-nav-view name="main-view" >
-      </ion-nav-view>
-
-
-
-    </ion-side-menu-content>
+    </ion-pane>
     <ion-side-menu side="left">
           <div class="side-menu-logo">
             <img style="position: absolute; margin-left: auto; margin-right: auto; left: 0px; right: 0px;" src="img/flight-logo.png" class="avatar motion spin fade">
@@ -89,18 +93,18 @@
           <ion-content class="has-expanded-header scroll-content ionic-scroll">
           <ion-list class="disable-user-behavior">
             <div class="side-menu-list">
-              <ion-item nav-clear="" menu-close="" href="#/" class="item item-complex">
-                <a class="item-content" ng-href="#/" target="_self" href="#/">
+              <ion-item nav-clear="" menu-close="" href="/" class="item item-complex">
+                <a class="item-content" href="/">
                     Home
                 </a>
               </ion-item>
-              <ion-item nav-clear="" menu-close="" href="#/about" class="item item-complex">
-                <a class="item-content" ng-href="#/about" target="_self" href="#/about">
+              <ion-item nav-clear="" menu-close="" href="about" class="item item-complex">
+                <a class="item-content" href="about">
                     About
                 </a>
               </ion-item>
-              <ion-item nav-clear="" menu-close="" href="#/faq" class="item item-complex">
-                <a class="item-content" ng-href="#/faq" target="_self" href="#/faq">
+              <ion-item nav-clear="" menu-close="" href="faq" class="item item-complex">
+                <a class="item-content" href="faq">
                     FAQs
                 </a>
               </ion-item>
