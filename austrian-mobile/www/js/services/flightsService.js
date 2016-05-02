@@ -11,7 +11,12 @@ angular.module('starter').service('flights',function(){
                 "cost"              : "750",
                 "currency"          : "USD",
                 "class"             : "economy",
-                "Airline"           : "United"
+                "Airline"           : "Austrian",
+                "airline"           : {
+                "name":"Austrian Airlines",
+                "url":"",
+                "ip":"52.90.41.197"
+    }
             },
             {
                 "flightNumber"      : "SE2804",
@@ -52,7 +57,12 @@ angular.module('starter').service('flights',function(){
                 "cost"              : "750",
                 "currency"          : "USD",
                 "class"             : "economy",
-                "Airline"           : "United"
+                "Airline"           : "Austrian",
+                "airline"           : {
+                "name":"Austrian Airlines",
+                "url":"",
+                "ip":"52.90.41.197"
+    }
             },
             {
                 "flightNumber"      : "SE2804",
