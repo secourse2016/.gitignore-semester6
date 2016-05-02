@@ -19,17 +19,17 @@
 
 			// Add the booking details to the booking(s)
 			booking1.passengerDetails = global.getPassengers();
-			booking1.outgoingFlightId = global.getOutGoingTrip().flightId;
+			booking1.outgoingFlightId = global.getOutGoingTrip().flightId || global.getOutGoingTrip()._id;
 			airline1 = global.getOutGoingTrip().airline;
 
-			if(global.getReturnTrip() && global.getOutGoingTrip().Airline != global.getReturnTrip().Airline) {
+			if(global.getReturnTrip() && global.getOutGoingTrip().Airline != global.getOutGoingTrip().Airline) {
 				booking2 = {};
 				booking2.passengerDetails = global.getPassengers();
-				booking2.outgoingFlightId = global.getReturnTrip().flightId;
+				booking2.outgoingFlightId = global.getReturnTrip().flightId || global.getReturnTrip()._id;
 				airline2 = global.getReturnTrip().airline;
 			}
 			else if(global.getReturnTrip()) {
-				booking1.returnFlightId = global.getReturnTrip().flightId;
+				booking1.returnFlightId = global.getReturnTrip().flightId || global.getReturnTrip()._id;
 			}
 
 
@@ -62,106 +62,121 @@
 					cvc : $scope.cvv
 				}
 
-				// Create the stripe token
-				Stripe.card.createToken(card, function(status,response){
+				var IP1 = airline1.ip? airline1.ip : airline1.url;
+				var IP2 = null;
+				if(airline2)
+					IP2 = airline2.ip? airline2.ip : airline2.url;
 
-					// Display the error message in the view in the appropriate place
-					if(response.error){
+				
+				// Get the publishable key of the involved airline in the outgoing flight
+				getPublishableKey(IP1, $http, function(errKey, pubKey){
+					if(!errKey && pubKey) {
 
-
-						$scope.error.message = response.error.message;
-
-						if(response.error.param == 'number')
-							$scope.error.number = true;
-						else if(response.error.param == 'exp_month')
-							$scope.error.date = true;
-						else if(response.error.param == 'exp_year')
-							$scope.error.date = true;
-						else if(response.error.param == 'cvc')
-							$scope.error.cvv = true;
-						if(!$scope.$$phase)
-							$scope.$apply();
-
-					}
-					else {
-						booking1.paymentToken = response.id;
-
-						var requestParameters = {};
-						requestParameters.booking1 = booking1;
-						requestParameters.airline1 = airline1;
-
-						if(global.getReturnTrip() && global.getOutGoingTrip().Airline != global.getReturnTrip().Airline) {
-							// Two different airlines, generate another token.
-							Stripe.card.createToken(card, function(status2, responseToken2){
-								if(responseToken2.error) {
-
-								}
-								else {
-									booking2.paymentToken = responseToken2.id;
-
-									requestParameters.booking2 = booking2;
-									requestParameters.airline2 = airline2;
-									// Send post request with two bookings
-									console.log(requestParameters);
-									$http.post('/api/addBooking',requestParameters).success(function(data){
-
-										// TODO add the booking reference(s) to the global service
-
-										$state.go('successful');
-										if(!$scope.$$phase)
-											$scope.$apply();
-									})
-									.error(function(data){
-										/*if there is an err throw it otherWise go to payement page */
-										console.log('Error: Couldn\'t insert in the dataBase.');
-									});
-
-
-								}
-							});
-						}
-						else {
-
-							// Send post request with one booking.
-							console.log(requestParameters);
-							$http.post('/api/addBooking',requestParameters).success(function(data){
-
-								// TODO add the booking reference(s) to the global service
-
-								$state.go('successful');
+						// Create the stripe token with the fetched key
+						createStripeToken(pubKey, card, function(errStripe, token){
+							if(errStripe) {
+								// The entered card information is invalid
+								$scope.error.message = errStripe.message;
+								if(errStripe.param == 'number')
+									$scope.error.number = true;
+								else if(errStripe.param == 'exp_month')
+									$scope.error.date = true;
+								else if(errStripe.param == 'exp_year')
+									$scope.error.date = true;
+								else if(errStripe.param == 'cvc')
+									$scope.error.cvv = true;
 								if(!$scope.$$phase)
 									$scope.$apply();
-							})
-							.error(function(data){
-								/*if there is an err throw it otherWise go to payement page */
-								console.log('Error: Couldn\'t insert in the dataBase.');
-							});
+							}
+							else {
 
-						}
+								// Card is valid
+								booking1.paymentToken = token;
+								var requestParameters = {};
+								requestParameters.booking1 = booking1;
+								requestParameters.airline1 = airline1;
 
+								// Check if there is return trip from different airline
+								if(airline2 && IP2) {
+									// Two different airlines, generate another token.
+									getPublishableKey(IP2, $http, function(errKey2, pubKey2){
+										if(!errKey2 && pubKey2) {
+											createStripeToken(pubKey2, card, function(errStripe2, token2){
+												if(errStripe2) {
 
+												}
+												else {
+													booking2.paymentToken = token2;
+													requestParameters.booking2 = booking2;
+													requestParameters.airline2 = airline2;
+
+													//Send http POST request with the two bookings
+													sendBookingPOST(requestParameters, $http, function(err, data){
+														if(!err) {
+															global.getOutGoingTrip().airline = data.airline1;
+															global.getReturnTrip().airline = data.airline2;
+															global.getOutGoingTrip().error1 = data.error1;
+															global.getReturnTrip().error2 = data.error2;
+															$state.go('complete');
+															if(!$scope.$$phase)
+																$scope.$apply();
+														}
+													});
+												}
+											});
+										}
+										else {
+											// Couldn't fetch airline publishable key, DON'T BOOK
+											global.getReturnTrip().error2 = 1;
+											$state.go('complete');
+												if(!$scope.$$phase)
+													$scope.$apply();
+										}
+									});
+								}
+								else {
+									// One booking, send the HTTP request
+									console.log(requestParameters);
+									sendBookingPOST(requestParameters, $http, function(err, data){
+										if(!err) {
+											console.log(data);
+											global.getOutGoingTrip().airline = data.airline1;
+											global.getOutGoingTrip().error1 = data.error1;
+
+											$state.go('complete');
+											if(!$scope.$$phase)
+												$scope.$apply();
+										}
+									});
+								}
+							}
+						});
 					}
-
+					else {
+						// Couldn't get the publishable key of the first airline. DON'T BOOK
+						global.getOutGoingTrip().error1 = 1;
+						$state.go('complete');
+							if(!$scope.$$phase)
+								$scope.$apply();
+					}
 				});
 			}
 
 		};
 	})
 	.controller('successController' , function($scope, global, $state){
-		$scope.bookingNumber = global.getBookingNumber();
-		/* check if Austrian is involved in any of the trips.
-			 If not, show the other airline*/
-		$scope.airline = "Austrian";
-		if(global.getOutGoingTrip().Airline != "Austrian"){
-			$scope.airline = global.getOutGoingTrip().Airline;
-			if(global.getReturnTrip() && global.getReturnTrip().Airline == "Austrian"){
-					$scope.airline = "Austrian";
-			}
-		}
+		$scope.error = {};
+		$scope.error.error1 = global.getOutGoingTrip().error1;
+			
+		$scope.airline1 = global.getOutGoingTrip().airline;
 
-		$scope.redirect = function(){
-			$state.go('index');
+
+
+		if(global.getReturnTrip()){
+			$scope.airline2 = global.getReturnTrip().airline;
+			$scope.error.error2 = global.getReturnTrip().error2;
 		}
+		
 	});
 })();
 
@@ -170,4 +185,51 @@ function checkField(field) {
 			return 'text';
 	else
 			return 'date';
+}
+
+/**
+* Send a GET reqest to an airline to get its publishable key
+*
+*/
+var getPublishableKey = function(IPaddress, $http, cb) {
+	var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBdXN0cmlhbiBBaXJsaW5lcyIsImlhdCI6MTQ2MDYzNTE1OCwiZXhwIjoxNDkyMTcxMTU4LCJhdWQiOiJ3d3cuYXVzdHJpYW4tYWlybGluZXMuY29tIiwic3ViIjoiYXVzdHJpYW5BaXJsaW5lcyJ9.Dilu6siLX3ouLk48rNASpYJcJSwKDTFYS2U4Na1M5k4';
+	$http.get('http://'+IPaddress+'/stripe/pubkey?wt='+token, {headers: {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}})
+		.success(function(key){
+			if(key)
+				cb(null, key)
+			else
+				cb(1,null);
+		})
+		.error(function(e){
+			if(e){
+				console.log('Error: couldn\'t fetch publishable key from '+IPaddress+'. '+e);
+			}
+			cb(e, null);
+		});
+}
+
+
+
+/**
+* Create a Stripe token with the fetched key
+*/
+var createStripeToken = function(pubKey, card, cb) {
+	Stripe.setPublishableKey(pubKey);
+	Stripe.card.createToken(card, function(status, response){
+		Stripe.setPublishableKey("pk_test_GLghvbf0O1mNsV4T8nECOC1u");
+		cb(response.error, response.id);
+	});
+}
+
+
+/**
+* Send POST request to process the booking
+*/
+var sendBookingPOST = function(requestParameters, $http, cb) {
+	var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBdXN0cmlhbiBBaXJsaW5lcyIsImlhdCI6MTQ2MDYzNTE1OCwiZXhwIjoxNDkyMTcxMTU4LCJhdWQiOiJ3d3cuYXVzdHJpYW4tYWlybGluZXMuY29tIiwic3ViIjoiYXVzdHJpYW5BaXJsaW5lcyJ9.Dilu6siLX3ouLk48rNASpYJcJSwKDTFYS2U4Na1M5k4';
+	$http.post('http://52.90.41.197:80/api/addBooking?wt='+token, requestParameters).success(function(data){
+		cb(null, data);
+	}).error(function(e){
+		cb(e, null);
+	});
 }
