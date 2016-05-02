@@ -1,8 +1,8 @@
 
 	
-<ion-view>
+<ion-view >
 <ion-nav-title>Confirm</ion-nav-title>
-	<ion-content>
+	<ion-content ng-controller="confirmationController">
 	<link href="css/passengers.css" rel="stylesheet">
 		<div class="card">
 	  <div class="item item-divider red lighten-1">
@@ -32,7 +32,7 @@
           </li>
 				</ul>
 
-				<ul class="collection with-header ">
+				<ul class="collection with-header "ng-show="tripType==2">
  				<li class="collection-header item item-stable grey lighten-3"
  									ng-click="toggleGroup(2)"
  									ng-class="{active: isGroupShown(2)}">
