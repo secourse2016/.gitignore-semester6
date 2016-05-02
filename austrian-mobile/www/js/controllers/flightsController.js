@@ -115,12 +115,9 @@
 
 					// Passing selected outgoing flight to the global service
 					global.outGoingTrip = $scope.outgoingFlights[$scope.info[0]];
-					console.log($scope.tripType);
 					if ($scope.tripType == 2){
 						// Passing selected return flight to the global service
-						console.log($scope.tripType);
 						global.returnTrip = $scope.returnFlights[$scope.info[1]];
-						console.log(global.returnTrip);
 					}
 					}
 
