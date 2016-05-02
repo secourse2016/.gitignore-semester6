@@ -1,6 +1,11 @@
 
+
+<ion-view >
+ <ion-nav-title>
+        Find Flights
+</ion-nav-title>
+<ion-content ng-controller="searchFlightController as searchCtrl">
 <link href="css/landing.css" rel="stylesheet">
-<ion-nav-view name="tab-book" ng-controller="searchFlightController as searchCtrl">
       <div class="errorContainer">
           <div class="errorToast" ng-show="error">
               {{error}}
@@ -153,4 +158,5 @@
                   Loading...
               </div>
         </div>
-</ion-nav-view>
+        </ion-content>
+</ion-view>

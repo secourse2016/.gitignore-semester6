@@ -1,7 +1,12 @@
-<div style="margin-top: 50px" ng-controller="passengerViewController">
-	<link href="css/passengers.css" rel="stylesheet">
 
-	<ion-content>
+	
+<ion-view cache-view="false">
+<ion-nav-title>
+        Passengers
+</ion-nav-title>
+
+<ion-content ng-controller="passengerViewController">
+	<link href="css/passengers.css" rel="stylesheet">
 		<div class="card">
 	  <div class="item item-divider red">
 	    <h2 class="white-text infoBar">Trip Information</h2>
@@ -183,7 +188,7 @@
 
 			<label class="item item-input item-stacked-label">
 				<!-- <span class="input-label">Birthdate</span> -->
-				<input class="fromInput" type="text" placeholder="Birth date" onfocus="(this.type = 'date')" onblur="(this.type='text')" ng-model="formData[$index].dateOfBirth">
+				<input class="fromInput" type="text" placeholder="Birth date" onfocus="(this.type = 'date')" onblur="(this.type='text')" ng-model="formDataChildren[$index].dateOfBirth">
 		 </label>
 		</div>
 	</li>

@@ -164,7 +164,7 @@
 
 		};
 	})
-	.controller('successController' , function($scope, global, $state){
+	.controller('successController' , function($scope, global, $state, $ionicHistory){
 		$scope.error = {};
 		$scope.error.error1 = global.getOutGoingTrip().error1;
 			
@@ -175,6 +175,10 @@
 		if(global.getReturnTrip()){
 			$scope.airline2 = global.getReturnTrip().airline;
 			$scope.error.error2 = global.getReturnTrip().error2;
+		}
+
+		$scope.redirect = function(){
+			$ionicHistory.goBack(-6);
 		}
 		
 	});
