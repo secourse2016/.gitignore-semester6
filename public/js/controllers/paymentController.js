@@ -186,8 +186,7 @@
 *
 */
 var getPublishableKey = function(IPaddress, $http, cb) {
-	var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBdXN0cmlhbiBBaXJsaW5lcyIsImlhdCI6MTQ2MDYzNTE1OCwiZXhwIjoxNDkyMTcxMTU4LCJhdWQiOiJ3d3cuYXVzdHJpYW4tYWlybGluZXMuY29tIiwic3ViIjoiYXVzdHJpYW5BaXJsaW5lcyJ9.Dilu6siLX3ouLk48rNASpYJcJSwKDTFYS2U4Na1M5k4';
-	$http.get('http://'+IPaddress+'/stripe/pubkey?wt='+token, {headers: {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}})
+	$http.get('http://'+IPaddress+'/stripe/pubkey')
 		.success(function(key){
 			if(key)
 				cb(null, key)

@@ -99,8 +99,7 @@ app.config(function($routeProvider , $locationProvider, $httpProvider) {
     $httpProvider.interceptors.push(['$q', '$location', function($q, $location){
         return {
            'request': function(config){
-               config.headers = config.headers || {};
-               config.headers['x-access-token'] = token;
+               config.url = config.url+"?wt=" + token;
                return config;
            },
            'responseError': function(response){
