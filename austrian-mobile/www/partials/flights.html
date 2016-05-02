@@ -23,8 +23,8 @@
         <div ng-repeat="flight in outgoingFlights track by $index">
            <ul class="collection with-header ">
           <li class="collection-header item item-stable grey lighten-3"
-                    ng-click="toggleGroup({{$index}})"
-                    ng-class="{active: isGroupShown({{$index}})}">
+                    ng-click="toggleGroup($index)"
+                    ng-class="{active: isGroupShown($index)}">
             <div class="flight-time">{{flight.departureDateTime}} - {{flight.arrivalDateTime}}</div>
             <div class="flight-cost">{{flight.cost}} {{flight.currency}}  
               
@@ -35,7 +35,7 @@
 
           </li>
           <li class="collection-item item item-accordion"
-                    ng-show="isGroupShown({{$index}})">
+                    ng-show="isGroupShown($index)">
             <table class="flightInfoTable">
               <tr>
                 <td>Flight number:</td>
@@ -80,8 +80,8 @@
         <div ng-repeat="flight in returnFlights track by $index">
            <ul class="collection with-header ">
           <li class="collection-header item item-stable grey lighten-3"
-                    ng-click="toggleGroup({{$index}})"
-                    ng-class="{active: isGroupShown({{$index}})}">
+                    ng-click="toggleGroup($index)"
+                    ng-class="{active: isGroupShown($index)}">
             <div class="flight-time">{{flight.departureDateTime}} - {{flight.arrivalDateTime}}</div>
             <div class="flight-cost">{{flight.cost}} {{flight.currency}}  
               
@@ -93,7 +93,7 @@
 
           </li>
           <li class="collection-item item item-accordion"
-                    ng-show="isGroupShown({{$index}})">
+                    ng-show="isGroupShown($index)">
             <table class="flightInfoTable">
               <tr>
                 <td>Flight number:</td>
