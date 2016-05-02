@@ -15,8 +15,9 @@ app.controller('passengerViewController' , function($scope, $state,  global) {
 	$scope.tripType         = global.searchFlight.tripType;
 	$scope.outgoingFlight   = angular.copy(global.outGoingTrip);
 
-	if($scope.tripType == 2)
+	if($scope.tripType == 2){
 		$scope.returnFlight = angular.copy(global.returnTrip);
+	}
 
 	$scope.formData =[];
 	$scope.formDataChildren =[];

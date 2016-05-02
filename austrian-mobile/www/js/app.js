@@ -89,8 +89,8 @@ angular.module('starter', ['ionic', 'ngMaterial'])
       }
     }
   })
-  .state('index.successful', {
-    url: '/successful',
+  .state('complete', {
+    url: '/complete',
     views : {
       'main-view' : {
         templateUrl: 'partials/successful.html'

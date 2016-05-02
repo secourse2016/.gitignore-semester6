@@ -31,8 +31,10 @@
 				airline2 = global.getReturnTrip().airline;
 			}
 			else if(global.getReturnTrip()) {
-				booking1.returnFlightId = global.getReturnTrip().flightId;
+
+				booking1.returnFlightId = global.getReturnTrip().flightId || global.getReturnTrip()._id;
 				booking1.cost 			+= global.getReturnTrip().cost;
+
 			}
 
 
