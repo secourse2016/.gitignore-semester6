@@ -75,10 +75,10 @@
 		var today = new Date();
 		today.setHours(0,0,0,0);
 
-		if(!origin.iata)
+		if(!origin || !origin.iata)
 			return 'Please select a valid origin airport.';
 
-		if(!destination.iata)
+		if(!destination || !destination.iata)
 			return 'Please select a valid destiation airport.';
 
 

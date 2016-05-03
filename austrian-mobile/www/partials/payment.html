@@ -3,12 +3,12 @@
 <ion-nav-title>
 Payment
 </ion-nav-title>
-<ion-content>
+<ion-content ng-controller="PaymentController as paymentCtrl">
 <link href="css/payment.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 <link href="css/formColors.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-
+<div style="position: absolute; left: 0px; right: 0px; margin: auto; width: 90%; padding: 10px; padding-top: 30px;">
 <!--Payment block-->
-<div style="padding:20px;" ng-controller="PaymentController as paymentCtrl">
+<div ng-hide="loading" style="padding:20px;" >
   </br>
   </br>
   </br>
@@ -52,8 +52,8 @@ Payment
         </div>
 
       <!--Submition button-->
-        <div class="input-field col s12" style="padding:30px">
-          <input class="btn waves-effect waves-light red book-button"
+        <div class="input-field col s12 center" style="padding:30px">
+          <input style="width:200px" class="btn waves-effect waves-light red book-button"
           value="Book Now" type="submit">
         </div>
     </form>
@@ -64,6 +64,28 @@ Payment
       Total Cost: {{totalCost}} {{currency}}
     </h5>
   </div>
+
+
+</div>
+<!-- Loading -->
+<div class="loading" ng-show="loading">
+      <div class="preloader-wrapper small active" >
+        <div class="spinner-layer spinner-red" >
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+              <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+        </div>
+      </div>
+      <div id="loading-text">
+          Loading...
+      </div>
+</div>
 </div>
 </ion-content>
 </ion-view>

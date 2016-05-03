@@ -5,10 +5,10 @@
 </ion-nav-title>
 
 <ion-content>
-
+    
     <link href="css/payment.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 
-
+    <div style="position: absolute; left: 0px; right: 0px; margin: auto; width: 90%; padding: 10px; padding-top: 30px;">
     <div class="card-panel grey lighten-3 congratulations" style="" ng-controller="successController as successCtrl">
     	<p ng-show="airline1 && !airline1.errorMessage && (!airline2 || airline2 && !airline2.errorMessage) && !error.error1 && !error.error2" class="paragraph">You have successfully booked your ticket, Have a nice trip!</p>
         
@@ -25,12 +25,13 @@
         <p ng-if="error.error2" class="paragraph">Connection to airline <a href="http://{{airline2.ip?airline2.ip:airline2.url}}">{{airline2.name}}</a> failed, please try to book this flight later.</p>
     	<div class="row">
             <div class="input-field col s12">
-                <buttoon ng-click="redirect()"
+                <button ng-click="redirect()"
                  class="btn waves-effect waves-light red home-button"
                  name="buy">Back to Home
                </button>
             </div>
         </div>
+    </div>
     </div>
 </ion-content>
 </ion-view>
