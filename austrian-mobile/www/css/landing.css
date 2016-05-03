@@ -1,6 +1,10 @@
 
-.list-fields{
-   box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18),0 4px 15px 0 rgba(0,0,0,0.15);
+.list-fields, .list-fields label, md-input-container input[type=search], .padding-date label input {
+   color :#B31C10 !important;
+}
+
+#allAirlines+label:before {
+  border-color :#B31C10 !important;
 }
 /* Header of the search form */
 #search-header{
@@ -51,7 +55,7 @@ input[type=text]{
   color: black;
 }
 input[type=text]::-webkit-input-placeholder {
-   color: black;
+   color :#B31C10 !important;
 }
 
 .list .item.item-floating-label, .item-floating-label{
@@ -132,7 +136,12 @@ md-autocomplete[md-floating-label] md-input-container{
 }
 
 .input-border{
-  border: 1px solid grey;
+  /*border: 1px solid grey;*/
+  box-shadow: 0 0px 0px 0 rgba(0,0,0,0.18),0 1px 10px 0 rgba(0,0,0,0.15);
+  margin: 15px;
+  margin-left: 0px;
+  margin-right: 0px;
+  padding: 5px;
 }
 
 .push-up{
@@ -205,5 +214,5 @@ md-input-container input[type=search]{
 }
 
 .date-trans.ng-hide {
-  opacity: 0;
+  /*opacity: 0;*/
 }

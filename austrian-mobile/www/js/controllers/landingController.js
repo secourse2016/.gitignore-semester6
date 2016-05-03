@@ -34,9 +34,9 @@
 
 			if(!$scope.error){
 				if($scope.formData.origin)
-					origin = $scope.formData.origin.iata;
+					$scope.formData.origin = origin = $scope.formData.origin.iata;
 				if($scope.formData.destination)
-					destination = $scope.formData.destination.iata;
+					$scope.formData.destination = destination = $scope.formData.destination.iata;
 				var requestParameters = {
 					'origin' 		: origin,
 					'destination'	: destination,
@@ -75,10 +75,10 @@
 		var today = new Date();
 		today.setHours(0,0,0,0);
 
-		if(!origin)
+		if(!origin || !origin.iata)
 			return 'Please select a valid origin airport.';
 
-		if(!destination)
+		if(!destination || !destination.iata)
 			return 'Please select a valid destiation airport.';
 
 

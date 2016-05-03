@@ -1,7 +1,10 @@
-<div style="margin-top: 50px" ng-controller="confirmationController">
-	<link href="css/passengers.css" rel="stylesheet">
 
-	<ion-content>
+	
+<ion-view >
+<ion-nav-title>Confirm</ion-nav-title>
+	<ion-content ng-controller="confirmationController">
+	<link href="css/passengers.css" rel="stylesheet">
+	<div style="position: absolute; left: 0px; right: 0px; margin: auto; width: 90%; padding: 10px; padding-top: 30px;">
 		<div class="card">
 	  <div class="item item-divider red lighten-1">
 	    <h2 class="white-text infoBar">Trip Information</h2>
@@ -30,7 +33,7 @@
           </li>
 				</ul>
 
-				<ul class="collection with-header ">
+				<ul class="collection with-header "ng-show="tripType==2">
  				<li class="collection-header item item-stable grey lighten-3"
  									ng-click="toggleGroup(2)"
  									ng-class="{active: isGroupShown(2)}">
@@ -216,8 +219,9 @@
  </div>
   	</ion-list>
   	<div class="center">
-	 <button ng-click="confirm()" id="confirmInfo"class="btn waves-effect waves-light red lighten-1" type="submit" name="action"> Confirm
+	 <button ng-click="confirm()" style="width:200px" id="confirmInfo"class="btn waves-effect waves-light red lighten-1" type="submit" name="action"> Confirm
   </button>
+  </div>
   </div>
 	</ion-content>
 </div>

@@ -1,6 +1,8 @@
-<div style="margin-top: 50px" ng-controller="bookingHistoryController">
+<ion-view>
+<ion-nav-title>Booking</ion-nav-title>
+<ion-content>
+<div style="position: absolute; left: 0px; right: 0px; margin: auto; width: 90%; padding: 10px; padding-top: 30px;" ng-controller="bookingHistoryController">
 	<link href="../css/passengers.css" rel="stylesheet">
-    <ion-content>
     <div ng-hide="notFound">
         <!-- Flight Information  -->
         <div class="card">
@@ -30,7 +32,7 @@
                 </li>
             </ul>
             <!--  Return Flight Information -->
-            <ul class="collection with-header ">
+            <ul class="collection with-header " ng-show="tripType==2">
                 <li class="collection-header item item-stable grey lighten-3"
                     ng-click="toggleGroup(2)"
                     ng-class="{active: isGroupShown(2)}">
@@ -182,5 +184,6 @@
               </div>
           </div>
         </div>
-	</ion-content>
 </div>
+</ion-content>
+</ion-view>

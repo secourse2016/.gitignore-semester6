@@ -187,7 +187,7 @@ var getOtherAirlines = function(cb, airlineIndex, allAirlines, origin, destinati
 			getOtherAirlines(function(otherFlights){
 				cb(otherFlights);
 			}, airlineIndex+1, allAirlines, origin, destination, flightClass, departureDate, arrivalDate, numberOfPassengers);
-		}).setTimeout(1000, function(){
+		}).setTimeout(2000, function(){
 
 			this.abort();
 		});
@@ -324,7 +324,7 @@ module.exports.getBooking = function(bookingNumber , passportNumber , cb){
 
  	}
  	else
- 		cb("INVALID REQUEST", null)
+ 		cb(new Error("INVALID REQUEST"), null)
 	
 	
 	
@@ -436,17 +436,15 @@ var postBooking = module.exports.postBookingRequests = function postBookingReque
 		   var target = 'http://'+(airline.url?airline.url:airline.ip)+'/booking?wt='+jwtToken;
 		   var postData = booking;
 
-
 		   // Send the HTTP request
 		   request({
 		   	uri : target,
 		   	method: 'POST',
 		   	body: booking,
 		   	json: true,
-		   	timeout: 5000
+		   	timeout: 7000
 		   }
 		   ,function(err, response, body){
-
 			   	if(!err){
 			   		// No connection error, assign the results
 			   		airline.errorMessage = response.body.errorMessage;

@@ -1,3 +1,96 @@
-<div style="margin-top: 50px">
-	This is faq page
+
+<ion-view>
+<ion-nav-title>FAQs</ion-nav-title>
+<ion-content>
+<div style="position: absolute; left: 0px; right: 0px; margin: auto; width: 90%; padding: 10px; padding-top: 30px;">
+	<ion-list ng-controller="collapsableController">
+
+         <ul class="collection with-header ">
+          <li class="faq-item collection-header item-stable grey lighten-3"
+                    ng-click="toggleGroup(1)"
+                    ng-class="{active: isGroupShown(1)}">
+            	What costs apply when changing a booking?
+            
+						
+
+          </li>
+          <li class="faq-item collection-item item-accordion"
+                    ng-show="isGroupShown(1)">
+
+				To change your booking details you pay a rebooking fee and a handling charge, depending on the type of ticket. If you rebook in a higher booking class you will also have to pay the difference between the original fare and the new one. As a general rule, you may rebook your ticket in the same booking class or a higher one – provided there are still seats available.
+            
+          </li>
+		</ul>
+		<ul class="collection with-header ">
+          <li class="faq-item collection-header item-stable grey lighten-3"
+                    ng-click="toggleGroup(2)"
+                    ng-class="{active: isGroupShown(2)}">
+            	What could be the problem if web check-in doesn't work for me?
+            
+						
+
+          </li>
+          <li class="faq-item collection-item item-accordion"
+                    ng-show="isGroupShown(2)">
+
+				Please check the data you have entered for any typing errors, and try again. If there are problems when checking in with your Miles and More number, please insert your ticketnumber or bookingcode instead.
+            
+          </li>
+		</ul>
+
+		<ul class="collection with-header ">
+          <li class="faq-item collection-header item-stable grey lighten-3"
+                    ng-click="toggleGroup(3)"
+                    ng-class="{active: isGroupShown(3)}">
+            	How long before departure can I check in online
+            
+						
+
+          </li>
+          <li class="faq-item collection-item item-accordion"
+                    ng-show="isGroupShown(3)">
+
+				You can check in online as much as 47 hours before departure.
+            
+          </li>
+		</ul>
+
+		<ul class="collection with-header ">
+          <li class="faq-item collection-header item-stable grey lighten-3"
+                    ng-click="toggleGroup(4)"
+                    ng-class="{active: isGroupShown(4)}">
+            	Do I receive a booking acknowledgement after completing a booking?
+            
+						
+
+          </li>
+          <li class="faq-item collection-item item-accordion"
+                    ng-show="isGroupShown(4)">
+
+				After completing the booking you will see a booking confirmation on your screen and a confirmation has been sent to you by e-mail.
+            
+          </li>
+		</ul>
+
+
+				
+      </ion-list>
 </div>
+
+<style>
+
+	.list .faq-item.item-accordion {
+
+	  transition: 0.09s all linear;
+	}
+	.list .faq-item.item-accordion.ng-hide {
+	  line-height: 0px;
+	}
+	.list .faq-item.item-accordion.ng-hide-add,
+	.list .faq-item.item-accordion.ng-hide-remove {
+	  display: block !important;
+	}
+
+</style>
+</ion-content>
+</ion-view>

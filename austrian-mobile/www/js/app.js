@@ -21,7 +21,8 @@ angular.module('starter', ['ionic', 'ngMaterial'])
       StatusBar.styleDefault();
     }
   });
-}).config(function($stateProvider, $locationProvider) {
+}).config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+ $ionicConfigProvider.backButton.text('');
   $stateProvider
   .state('index', {
     url: '/',
@@ -79,7 +80,11 @@ angular.module('starter', ['ionic', 'ngMaterial'])
   })
   .state('faq', {
     url: '/faq',
-    templateUrl: 'partials/faq.html'
+      views : {
+        'main-view' : {
+          templateUrl: 'partials/faq.html'
+        }
+      }
   })
   .state('payment', {
     url: '/payment',
@@ -89,8 +94,8 @@ angular.module('starter', ['ionic', 'ngMaterial'])
       }
     }
   })
-  .state('index.successful', {
-    url: '/successful',
+  .state('complete', {
+    url: '/complete',
     views : {
       'main-view' : {
         templateUrl: 'partials/successful.html'
@@ -113,7 +118,8 @@ angular.module('starter', ['ionic', 'ngMaterial'])
       }
     }
   });
-  $locationProvider.html5Mode(true);
+  $urlRouterProvider.otherwise('/');
+
 
 
   /*
@@ -121,10 +127,17 @@ angular.module('starter', ['ionic', 'ngMaterial'])
    */
    Stripe.setPublishableKey('pk_test_GLghvbf0O1mNsV4T8nECOC1u');
 })
-.controller('masterController',function($scope, $ionicSideMenuDelegate){
+.controller('masterController',function($scope, $ionicSideMenuDelegate,$ionicHistory){
   
   $scope.toggleLeft = function() {
     $ionicSideMenuDelegate.toggleLeft();
 
   };
+  $scope.$on('$ionicView.beforeEnter', function (e, data) {
+    if (data.enableBack) {
+        $scope.$root.showMenuIcon = false;
+    } else {
+        $scope.$root.showMenuIcon = true;
+    }
+});
 });

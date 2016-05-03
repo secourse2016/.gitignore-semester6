@@ -29,7 +29,7 @@
 
 .congratulations {
 
-	margin-top: 30%;
+	margin-top: 20%;
 	margin-left:auto;
 	margin-right:auto;
 	min-width:300px;
@@ -63,4 +63,20 @@
 
 .paymentError.ng-hide {
   opacity:0;
+}
+
+.loading{
+  height: 100%;
+  vertical-align: middle;
+}
+
+.preloader-wrapper.small.active{
+  margin-top: 50%;
+  margin-left: 45%;
+}
+
+#loading-text{
+  margin-top: 20px;
+  text-align: center;
+  font-size: 20px;
 }
