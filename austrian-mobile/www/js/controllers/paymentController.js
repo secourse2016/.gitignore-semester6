@@ -18,18 +18,23 @@
 			var airline2 = null;
 
 			// Add the booking details to the booking(s)
-			booking1.passengerDetails = global.getPassengers();
-			booking1.outgoingFlightId = global.getOutGoingTrip().flightId || global.getOutGoingTrip()._id;
+			booking1.passengerDetails 	= global.getPassengers();
+			booking1.outgoingFlightId 	= global.getOutGoingTrip().flightId || global.getOutGoingTrip()._id;
+			booking1.cost 				= global.getOutGoingTrip().cost;
+			booking1.class				= global.getOutGoingTrip().class;
 			airline1 = global.getOutGoingTrip().airline;
 
 			if(global.getReturnTrip() && global.getOutGoingTrip().Airline != global.getOutGoingTrip().Airline) {
 				booking2 = {};
 				booking2.passengerDetails = global.getPassengers();
 				booking2.outgoingFlightId = global.getReturnTrip().flightId || global.getReturnTrip()._id;
+				booking2.cost 				= global.getReturnTrip().cost;
+				booking2.class				= global.getReturnTrip().class;
 				airline2 = global.getReturnTrip().airline;
 			}
 			else if(global.getReturnTrip()) {
 				booking1.returnFlightId = global.getReturnTrip().flightId || global.getReturnTrip()._id;
+				booking1.cost 			= parseInt(booking.cost) + parseInt(global.getReturnTrip().cost);
 			}
 
 
@@ -136,10 +141,10 @@
 								}
 								else {
 									// One booking, send the HTTP request
-									console.log(requestParameters);
+									
 									sendBookingPOST(requestParameters, $http, function(err, data){
 										if(!err) {
-											console.log(data);
+											
 											global.getOutGoingTrip().airline = data.airline1;
 											global.getOutGoingTrip().error1 = data.error1;
 

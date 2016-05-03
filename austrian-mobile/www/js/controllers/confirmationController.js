@@ -44,11 +44,10 @@ app.controller('confirmationController' , function($scope, $http, global, $state
 
 	var outGoingTripCost = infoFlow.outGoingTrip.cost ;
 	var returnFlightCost = 0;
-	if(infoFlow.returnTrip.cost)
+	if(infoFlow.returnTrip && infoFlow.returnTrip.cost)
 		returnFlightCost = infoFlow.returnTrip.cost ;
 
 	var totalCost = (adultNumber + childNumber)*(parseInt(outGoingTripCost)+parseInt(returnFlightCost));
-
 	global.setTotalCost(totalCost)
 	/* after confirming the booking INFO redirect to the payment view */
 	$scope.confirm = function(){
