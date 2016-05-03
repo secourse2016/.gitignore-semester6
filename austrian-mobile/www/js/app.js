@@ -80,7 +80,11 @@ angular.module('starter', ['ionic', 'ngMaterial'])
   })
   .state('faq', {
     url: '/faq',
-    templateUrl: 'partials/faq.html'
+      views : {
+        'main-view' : {
+          templateUrl: 'partials/faq.html'
+        }
+      }
   })
   .state('payment', {
     url: '/payment',

@@ -55,7 +55,7 @@ input[type=text]{
   color: black;
 }
 input[type=text]::-webkit-input-placeholder {
-   color: black;
+   color :#B31C10 !important;
 }
 
 .list .item.item-floating-label, .item-floating-label{
@@ -214,5 +214,5 @@ md-input-container input[type=search]{
 }
 
 .date-trans.ng-hide {
-  opacity: 0;
+  /*opacity: 0;*/
 }
