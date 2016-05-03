@@ -4,7 +4,7 @@
 		$scope.totalCost = global.getTotalCost();
 		$scope.currency = global.outGoingTrip.currency;
 		$scope.step = 4; // View number in the stepper
-
+		$scope.loading = false;
 
 		/**
 		*	Handle paying for the booking using stripe
@@ -57,6 +57,7 @@
 			if(errored)
 				$scope.error.message = 'This field is required.';
 			else {
+				$scope.loading = true;
 				var expiryDate = new Date($scope.expiryDate);
 
 				// Get the entered credit card information
@@ -75,11 +76,13 @@
 				
 				// Get the publishable key of the involved airline in the outgoing flight
 				getPublishableKey(IP1, $http, function(errKey, pubKey){
+
 					if(!errKey && pubKey) {
 
 						// Create the stripe token with the fetched key
 						createStripeToken(pubKey, card, function(errStripe, token){
 							if(errStripe) {
+								$scope.loading = false;
 								// The entered card information is invalid
 								$scope.error.message = errStripe.message;
 								if(errStripe.param == 'number')
@@ -117,20 +120,26 @@
 
 													//Send http POST request with the two bookings
 													sendBookingPOST(requestParameters, $http, function(err, data){
+														$scope.loading = false;
 														if(!err) {
 															global.getOutGoingTrip().airline = data.airline1;
 															global.getReturnTrip().airline = data.airline2;
 															global.getOutGoingTrip().error1 = data.error1;
 															global.getReturnTrip().error2 = data.error2;
-															$state.go('complete');
-															if(!$scope.$$phase)
-																$scope.$apply();
+															
 														}
+														else {
+															global.getReturnTrip().error2 = err;
+														}
+														$state.go('complete');
+														if(!$scope.$$phase)
+															$scope.$apply();
 													});
 												}
 											});
 										}
 										else {
+											$scope.loading = false;
 											// Couldn't fetch airline publishable key, DON'T BOOK
 											global.getReturnTrip().error2 = 1;
 											$state.go('complete');
@@ -143,21 +152,27 @@
 									// One booking, send the HTTP request
 									
 									sendBookingPOST(requestParameters, $http, function(err, data){
+										$scope.loading = false;
 										if(!err) {
 											
 											global.getOutGoingTrip().airline = data.airline1;
 											global.getOutGoingTrip().error1 = data.error1;
 
-											$state.go('complete');
-											if(!$scope.$$phase)
-												$scope.$apply();
+											
 										}
+										else {
+											global.getOutGoingTrip().error1 = err;
+										}
+										$state.go('complete');
+										if(!$scope.$$phase)
+											$scope.$apply();
 									});
 								}
 							}
 						});
 					}
 					else {
+						$scope.loading = false;
 						// Couldn't get the publishable key of the first airline. DON'T BOOK
 						global.getOutGoingTrip().error1 = 1;
 						$state.go('complete');

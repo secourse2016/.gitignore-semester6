@@ -3,12 +3,12 @@
 <ion-nav-title>
 Payment
 </ion-nav-title>
-<ion-content>
+<ion-content ng-controller="PaymentController as paymentCtrl">
 <link href="css/payment.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 <link href="css/formColors.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 
 <!--Payment block-->
-<div style="padding:20px;" ng-controller="PaymentController as paymentCtrl">
+<div ng-hide="loading" style="padding:20px;" >
   </br>
   </br>
   </br>
@@ -64,6 +64,27 @@ Payment
       Total Cost: {{totalCost}} {{currency}}
     </h5>
   </div>
+
+
+</div>
+<!-- Loading -->
+<div class="loading" ng-show="loading">
+      <div class="preloader-wrapper small active" >
+        <div class="spinner-layer spinner-red" >
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+              <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+        </div>
+      </div>
+      <div id="loading-text">
+          Loading...
+      </div>
 </div>
 </ion-content>
 </ion-view>

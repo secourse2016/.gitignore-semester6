@@ -1,5 +1,5 @@
 
-.list-fields, .list-fields label {
+.list-fields, .list-fields label, md-input-container input[type=search], .padding-date label input {
    color :#B31C10 !important;
 }
 
