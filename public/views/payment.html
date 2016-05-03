@@ -5,7 +5,7 @@
 <!--container div-->
 <div class="container bar" ng-controller="PaymentController">
     <link href="css/stepper.css" rel="stylesheet">
-
+<div >
   <!--progress bar-->
   <div class="mdl-card mdl-shadow--2dp">
 
@@ -50,7 +50,7 @@
   <br/>
 
         <!--Payment block-->
-        <div class="card-panel grey lighten-3 payment-block" id="form" >
+        <div class="card-panel grey lighten-3 payment-block" id="form" ng-hide="loading" >
 
           <div class="form-header">
             <h5 class="red-text text-darken-2">Payment Form</h5>
@@ -102,10 +102,27 @@
         </div>
         <br/>
         <!--Total price-->
-        <div>
+        <div ng-hide="loading">
           <h5 class="center-align red-text text-darken-2">
             Total Cost: {{totalCost}} {{currency}}
           </h5>
         </div>
+        </div>
+         <div class="loading" ng-show="loading">
+      <div class="paymentLoader preloader-wrapper small active" >
+        <div class="spinner-layer spinner-red" >
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+              <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+        </div>
+      </div>
+  </div>
     </div>
+   
     <br/>

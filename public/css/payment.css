@@ -64,3 +64,16 @@
 .paymentError.ng-hide {
   opacity:0;
 }
+
+
+
+.paymentLoader.preloader-wrapper.small.active{
+	width: 60px;
+	height: 60px;
+	position: absolute;
+  margin: auto;
+  top:0px;
+  bottom:0px;
+  left:0px;
+  right:0px;
+}
