@@ -21,6 +21,7 @@
 			booking1.passengerDetails 	= global.getPassengers();
 			booking1.outgoingFlightId 	= global.getOutGoingTrip().flightId || global.getOutGoingTrip()._id;
 			booking1.cost 				= global.getOutGoingTrip().cost;
+			booking1.class				= global.getOutGoingTrip().class;
 			airline1 = global.getOutGoingTrip().airline;
 
 			if(global.getReturnTrip() && global.getOutGoingTrip().Airline != global.getReturnTrip().Airline) {
@@ -28,12 +29,13 @@
 				booking2.passengerDetails 	= global.getPassengers();
 				booking2.outgoingFlightId 	= global.getReturnTrip().flightId || global.getReturnTrip()._id;
 				booking2.cost 				= global.getReturnTrip().cost;
+				booking2.class				= global.getReturnTrip().class;
 				airline2 = global.getReturnTrip().airline;
 			}
 			else if(global.getReturnTrip()) {
 
 				booking1.returnFlightId = global.getReturnTrip().flightId || global.getReturnTrip()._id;
-				booking1.cost 			+= global.getReturnTrip().cost;
+				booking1.cost 			= parseInt(booking1.cost) + parseInt(global.getReturnTrip().cost);
 
 			}
 

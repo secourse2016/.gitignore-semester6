@@ -1,6 +1,10 @@
 		var app=angular.module('starter');
 
 		app.controller('flightsController', function($scope, $state, flights, global){
+
+			global.outGoingTrip	= null;
+			global.returnTrip	= null;
+
 			$scope.error 			= {};
 			$scope.airline          = "Austrian";
 

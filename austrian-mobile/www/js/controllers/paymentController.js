@@ -24,7 +24,7 @@
 			booking1.class				= global.getOutGoingTrip().class;
 			airline1 = global.getOutGoingTrip().airline;
 
-			if(global.getReturnTrip() && global.getOutGoingTrip().Airline != global.getOutGoingTrip().Airline) {
+			if(global.getReturnTrip() && global.getOutGoingTrip().Airline != global.getReturnTrip().Airline) {
 				booking2 = {};
 				booking2.passengerDetails = global.getPassengers();
 				booking2.outgoingFlightId = global.getReturnTrip().flightId || global.getReturnTrip()._id;
@@ -34,7 +34,7 @@
 			}
 			else if(global.getReturnTrip()) {
 				booking1.returnFlightId = global.getReturnTrip().flightId || global.getReturnTrip()._id;
-				booking1.cost 			= parseInt(booking.cost) + parseInt(global.getReturnTrip().cost);
+				booking1.cost 			= parseInt(booking1.cost) + parseInt(global.getReturnTrip().cost);
 			}
 
 
@@ -175,7 +175,7 @@
 			
 		$scope.airline1 = global.getOutGoingTrip().airline;
 
-
+		$ionicHistory.clearHistory();
 
 		if(global.getReturnTrip()){
 			$scope.airline2 = global.getReturnTrip().airline;
