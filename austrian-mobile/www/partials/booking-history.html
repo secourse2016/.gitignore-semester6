@@ -1,4 +1,4 @@
-<ion-view>
+<ion-view cache-view="false">
 <ion-nav-title>Booking</ion-nav-title>
 <ion-content>
 <div style="position: absolute; left: 0px; right: 0px; margin: auto; width: 90%; padding: 10px; padding-top: 30px;" ng-controller="bookingHistoryController">
@@ -114,6 +114,13 @@
                                 <p>{{passenger.dateOfBirth}}</p>
                             </label>
                         </div>
+                        <div class="row item item-accordion">
+                            <i class="icon ion-android-walk tiny formIcons"></i>
+                            <label class="item item-input item-stacked-label">
+                                <h4>Seat</h4>
+                                <p>{{passenger.seat}}</p>
+                            </label>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -162,6 +169,13 @@
                             <label class="item item-input item-stacked-label">
                                 <h4>Birth Date</h4>
                                 <p>{{passenger.dateOfBirth}}</p>
+                            </label>
+                        </div>
+                        <div class="row item item-accordion">
+                            <i class="icon ion-android-walk tiny formIcons"></i>
+                            <label class="item item-input item-stacked-label">
+                                <h4>Seat</h4>
+                                <p>{{passenger.seat}}</p>
                             </label>
                         </div>
                     </li>

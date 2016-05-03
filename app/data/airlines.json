@@ -22,7 +22,7 @@
     {
         "name":"Air France",
         "url":"",
-        "ip":"52.34.160.140"
+        "ip":"52.26.173.245"
     },
     {
         "name":"British Airways",
@@ -51,8 +51,8 @@
     },
     {
         "name":"Singapore Airlines",
-        "url":"sebitsplease.com.s3-website-us-east-1.amazonaws.com",
-        "ip":""
+        "url":"",
+        "ip":"52.38.234.54"
     },
     {
         "name":"DragonAir Airlines",
@@ -103,5 +103,15 @@
         "name":"Cathay Pacific Airlines",
         "url":"ec2-52-91-94-227.compute-1.amazonaws.com",
         "ip":"52.91.94.227"
+    },
+    {
+        "name":"United Airlines",
+        "url":"",
+        "ip":"54.187.103.196"
+    },
+    {
+        "name":"Alitalia Airlines",
+        "url":"",
+        "ip":"54.93.74.125"
     }
 ]
