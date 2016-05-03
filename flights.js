@@ -411,9 +411,11 @@ var chargeBooking = function(totalCost, paymentToken, cb){
 	 * @param numberOfPassengers is the number of passengers selected.
 	 */
 	function updateFlightSeats(flightId, numberOfPassengers){
-		var conditions = { _id: flightId },
+		var conditions = { "_id": flightId },
    			update = { $inc: { availableSeats: - numberOfPassengers }};
-		flight.update(conditions, update);
+		flight.update(conditions, update, {}, function(err, affectedRows){
+			
+		});
 	};
 /*
  * [send post request with booking info if it is not
