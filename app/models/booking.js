@@ -15,7 +15,8 @@ var booking 	 = new schema ({
 				passportNum 	: String,
 				nationality 	: String,
 				dateOfBirth 	: Number,
-				isChild 		: Boolean
+				isChild 		: Boolean,
+				seat			: String
 			}
 		],
 	outgoingFlightId 	: { type:String, ref: 'Flight' },	//reference id to the outGoingFlight number .

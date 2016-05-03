@@ -353,6 +353,9 @@ var saveBooking = function(bookingInfo, cb) {
 				/* changing the time format to match the schema */
 	    		bookingInfo.passengerDetails[i].dateOfBirth = passengerBirthDate.getTime();
 
+	    		var seatLetter = String.fromCharCode(Math.floor(Math.random()*6)+ 65);
+	    		bookingInfo.passengerDetails[i].seat = (Math.floor(Math.random()*33) + 1) + seatLetter;
+
 		}
 		/* Concatenate the number of records of the booking collection to the generatedBooking Number to get unique number*/
 		newBooking.bookingNumber = generatedBookingNumber+c;
