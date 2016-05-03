@@ -17,7 +17,9 @@
 			$scope.returnFlights    = angular.copy(flights.returnFlights);
 
 			var allOutgoing  		= angular.copy(flights.outgoingFlights);
-			var allReturn		    = angular.copy(flights.returnFlights);	
+			var allReturn		    = angular.copy(flights.returnFlights);
+			$scope.outgoingFlights 	= allOutgoing;
+			$scope.returnFlights 	= allReturn;	
 
 
 			// The number of flights, to be used in pagination
@@ -45,41 +47,41 @@
 			}
 
 
-			/**
-			*	Change the page of the outgoing trips list
-			*/
-			$scope.changePageOutgoing = function(page) {
+			// /**
+			// *	Change the page of the outgoing trips list
+			// */
+			// $scope.changePageOutgoing = function(page) {
 				
-				for(entry = 0; entry < Math.min(5, allOutgoing.length - (page-1)*5); entry++) {
-					$scope.outgoingFlights[entry] = allOutgoing[(page-1)*5 + entry];
-				}
-				if($scope.info[0])
-					$scope.info[0] = null;
-				// resize the scope if last page is less than 5 entries
-				$scope.outgoingFlights.length = Math.min(5, allOutgoing.length - (page-1)*5);
-			}
+			// 	for(entry = 0; entry < Math.min(5, allOutgoing.length - (page-1)*5); entry++) {
+			// 		$scope.outgoingFlights[entry] = allOutgoing[(page-1)*5 + entry];
+			// 	}
+			// 	if($scope.info[0])
+			// 		$scope.info[0] = null;
+			// 	// resize the scope if last page is less than 5 entries
+			// 	$scope.outgoingFlights.length = Math.min(5, allOutgoing.length - (page-1)*5);
+			// }
 
 			$scope.info   = [];
 			/**
 			*	Change the page of the outgoing trips list
 			*/
-			$scope.changePageReturn = function(page) {
+			// $scope.changePageReturn = function(page) {
 				
-				for(entry = 0; entry<Math.min(5,allReturn.length - (page-1)*5); entry++) {
-					$scope.returnFlights[entry] = allReturn[(page-1)*5 + entry];
-				}
-				if($scope.info[1])
-					$scope.info[1] = null;
-				// resize the scope if last page is less than 5 entries
-				$scope.returnFlights.length = Math.min(5, allReturn.length - (page-1)*5);
-			}
+			// 	for(entry = 0; entry<Math.min(5,allReturn.length - (page-1)*5); entry++) {
+			// 		$scope.returnFlights[entry] = allReturn[(page-1)*5 + entry];
+			// 	}
+			// 	if($scope.info[1])
+			// 		$scope.info[1] = null;
+			// 	// resize the scope if last page is less than 5 entries
+			// 	$scope.returnFlights.length = Math.min(5, allReturn.length - (page-1)*5);
+			// }
 
-			$scope.outgoingFlights 	= new Array(Math.min(5,allOutgoing.length));
-			$scope.returnFlights 	= new Array(Math.min(5,allReturn.length));
+			// $scope.outgoingFlights 	= new Array(Math.min(5,allOutgoing.length));
+			// $scope.returnFlights 	= new Array(Math.min(5,allReturn.length));
 
-			// load the first page of flights
-			$scope.changePageOutgoing(1);
-			$scope.changePageReturn(1);
+			// // load the first page of flights
+			// $scope.changePageOutgoing(1);
+			// $scope.changePageReturn(1);
 				
 
 			// Array to store indexes of selected flights
