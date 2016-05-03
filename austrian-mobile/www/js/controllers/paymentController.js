@@ -175,7 +175,6 @@
 			
 		$scope.airline1 = global.getOutGoingTrip().airline;
 
-		$ionicHistory.clearHistory();
 
 		if(global.getReturnTrip()){
 			$scope.airline2 = global.getReturnTrip().airline;
