@@ -6,7 +6,6 @@ controller('bookingHistoryController',function($scope, bookingHistoryService){
 	else
 		$scope.notFound = false;
 
-
 	if($scope.booking){
 		for(i = 0; i<$scope.booking.passengerDetails.length; i++) {
 			$scope.booking.passengerDetails[i].dateOfBirth = new Date($scope.booking.passengerDetails[i].dateOfBirth);

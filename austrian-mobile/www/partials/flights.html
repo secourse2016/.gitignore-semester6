@@ -9,7 +9,7 @@
 
   <ion-content ng-controller="flightsController">
 <link href="css/flights.css" rel="stylesheet">
-  
+  <div style="position: absolute; left: 0px; right: 0px; margin: auto; width: 90%; padding: 10px; padding-top: 30px;">
   <div class="card">
     <div class="item item-divider red lighten-1">
       <h3 class="white-text infoBar">{{origin}}-{{destination}} ({{departureDate}})</h3>
@@ -131,7 +131,7 @@
       <div class="center">
         <button  class="button  button-positive red lighten-1" ng-click="moveForward()">Resrve</button>
       </div>
-
+</div>
   </ion-content>
 
 </ion-view>
