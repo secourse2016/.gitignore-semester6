@@ -157,6 +157,7 @@
 			<label class="item item-input item-stacked-label">
 				<!-- <span class="input-label">First Name</span> -->
 				<input class="fromInput" type="text" placeholder="First Name"  ng-model="formDataChildren[$index].firstName">
+				<span class="validationError"ng-show="errorsChildren[{{$index}}].firstName"><i class="passengerCollapseIcon icon ion-alert-circled tiny alert"></i> This field is required. </span>
 		 </label>
 		</div>
 		<div class="row item item-accordion">
@@ -165,6 +166,7 @@
 			<label class="item item-input item-stacked-label">
 				<!-- <span class="input-label">Last Name</span> -->
 				<input class="fromInput" type="text" placeholder="Last Name" ng-model="formDataChildren[$index].lastName"  >
+				<span class="validationError"ng-show="errorsChildren[{{$index}}].lastName"><i class="passengerCollapseIcon icon ion-alert-circled tiny alert"></i> This field is required. </span>
 		 </label>
 		</div>
 		<div class="row item item-accordion">
@@ -173,6 +175,8 @@
 			<label class="item item-input item-stacked-label">
 				<!-- <span class="input-label">Passport Number</span> -->
 				<input class="fromInput" type="text" placeholder="Passport Number" ng-model="formDataChildren[$index].passportNum">
+				<span class="validationError"ng-show="errorsChildren[{{$index}}].passportNumber"><i class="passengerCollapseIcon icon ion-alert-circled tiny alert"></i> This field is required. </span>
+            <span class="validationError"ng-show="errorsChildren[{{$index}}].passportNumberLength && !errorsChildren[{{$index}}].passportNumber"><i class="passengerCollapseIcon icon ion-alert-circled tiny alert"></i> Passport number should not be less than 7 characters. </span>
 		 </label>
 		</div>
 		<div class="row item item-accordion">
@@ -181,6 +185,7 @@
 			<label class="item item-input item-stacked-label">
 				<!-- <span class="input-label">Nationality</span> -->
 				<input class="fromInput" type="text" placeholder="Nationality" ng-model="formDataChildren[$index].nationality">
+				<span class="validationError"ng-show="errorsChildren[{{$index}}].nationality"><i class="passengerCollapseIcon icon ion-alert-circled tiny alert"></i> This field is required. </span>
 		 </label>
 		</div>
 		<div class="row item item-accordion">
@@ -189,6 +194,8 @@
 			<label class="item item-input item-stacked-label">
 				<!-- <span class="input-label">Birthdate</span> -->
 				<input class="fromInput" type="text" placeholder="Birth date" onfocus="(this.type = 'date')" onblur="(this.type='text')" ng-model="formDataChildren[$index].dateOfBirth">
+				<span class="validationError"ng-show="errorsChildren[{{$index}}].birthDateRequired"><i class="passengerCollapseIcon icon ion-alert-circled tiny alert"></i> This field is required. </span>
+                  <span class="validationError"ng-show="errorsChildren[{{$index}}].birthDateNotValid"><i class="passengerCollapseIcon icon ion-alert-circled tiny alert"></i> A child should be younger than 12 years old. </span>
 		 </label>
 		</div>
 	</li>
