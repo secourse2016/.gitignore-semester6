@@ -1,10 +1,16 @@
 angular.module('starter').
-controller('bookingHistoryController',function($scope, bookingHistoryService){
+controller('bookingHistoryController',function($scope, bookingHistoryService, $ionicHistory){
 	$scope.booking = bookingHistoryService.getBooking();
 	if(!$scope.booking)
 		$scope.notFound = true;
 	else
 		$scope.notFound = false;
+
+	$scope.goToHome = function() {
+		$ionicHistory.goBack(-2); 
+		
+
+	}
 
 	if($scope.booking){
 		for(i = 0; i<$scope.booking.passengerDetails.length; i++) {
@@ -67,6 +73,8 @@ controller('bookingHistoryController',function($scope, bookingHistoryService){
     		var arrivalTime                         = new Date($scope.outgoingFlight.arrivalDateTime);
     		$scope.outgoingFlight.arrivalDateTime   = arrivalTime.getUTCHours()+":"+arrivalTime.getUTCMinutes();
 		}
+
+		
 
 	  	if($scope.tripType != 1){
 	    	$scope.returnFlight    = angular.copy($scope.booking.returnFlightInfo);
