@@ -15,12 +15,12 @@
 5. Run `server.js` file.
 
 ### How to run the Ionic app:
-1. Use the app_id in Ionic view: 76069f6d
+1. Use the app_id in Ionic view: `76069f6d`
 2. Or install Ionic and Cordova on your machine, pull the project, navigate into `austrian-mobile`, and run `ionic serve`
 
 ### Notes on Ionic:
-There is a bug on android devices, the Select input disappears instantly once opened, you need to keep holding for less that half a second to keep it open.
-We found that this is a common issue in ionic with android, and several issues are submitted on Ionic github page, here is one of them https://github.com/driftyco/ionic/issues/836
-The select input works perfectly on iOS.
+- There is a bug on android devices, the `select` input disappears instantly once opened, you need to keep holding for less than half a second to keep it open.
+- We found that this is a common issue in ionic with android, and several issues are submitted on Ionic github page, here is one of them https://github.com/driftyco/ionic/issues/836
+- The `select` input works perfectly on iOS.
 
 
