@@ -7,11 +7,11 @@
 2. Run `npm install`
 3. Create a MongoDB with name `austrian`
 4. Create a `.env` file containing the following values:
-..* `PORT`, the port number to run the project on
-..* `mongoUrl`, the connection url to MongoDB
-..* `SECRET_KEY`, the JWT secret key, get it from the sprint description.
-..* `STRIPE_KEY`, Stripe secret key, put your own to test the functionaly.
-..* `DEV`, a boolean variable to enable some debugging utilities if you are in development mode. Put `1` to enable it.
+  * `PORT`, the port number to run the project on
+  * `mongoUrl`, the connection url to MongoDB
+  * `SECRET_KEY`, the JWT secret key, get it from the sprint description.
+  * `STRIPE_KEY`, Stripe secret key, put your own to test the functionaly.
+  * `DEV`, a boolean variable to enable some debugging utilities if you are in development mode. Put `1` to enable it.
 5. Run `server.js` file.
 
 ### How to run the Ionic app:
