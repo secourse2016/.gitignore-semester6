@@ -1,6 +1,7 @@
 # .gitignore-semester6
 
 # Austrian Airlines
+A mock web app for Austrian Airlines, supporting reserving fake flights online.
 
 ### How to run the web app:
 1. Clone the repo
@@ -22,5 +23,10 @@
 - There is a bug on android devices, the `select` input disappears instantly once opened, you need to keep holding for less than half a second to keep it open.
 - We found that this is a common issue in ionic with android, and several issues are submitted on Ionic github page, here is one of them https://github.com/driftyco/ionic/issues/836
 - The `select` input works perfectly on iOS.
+
+### Disclaimer:
+- This app is made only for academic purposes. It is not related by any means to Austrian Airlines company.
+- For the payment, all payments are done in test mode, so no real cards are charged.
+- Any copyright material used where only to mock the experience, and are not meant to interpersonate Austrian Airlines company.
 
 
